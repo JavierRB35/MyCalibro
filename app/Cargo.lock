@@ -327,6 +327,7 @@ dependencies = [
  "eframe",
  "image",
  "keyring",
+ "quick-xml",
  "reqwest",
  "rfd",
  "rusqlite",
