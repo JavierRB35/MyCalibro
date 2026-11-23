@@ -93,7 +93,7 @@ pub enum ConsentStatus {
     Authorized(Consent),
 }
 
-#[derive(Clone, Debug, Default, Serialize, Deserialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ConsentManager {
     #[serde(default)]
     consents: BTreeMap<u64, Consent>,

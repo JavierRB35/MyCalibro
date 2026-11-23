@@ -161,6 +161,8 @@ pub fn create(
         "next-book-id.json",
         "library.previous.json",
         "reader.json",
+        crate::reading_positions::FILE_NAME,
+        crate::CONSENTS_FILE,
     ] {
         let path = storage::safe_join(&root, Path::new(name))?;
         if path.is_file() {
@@ -424,6 +426,12 @@ pub fn restore(backup: &Path, destination_parent: &Path) -> Result<BackupReport,
         {
             return Err("Entrada reservada en el manifiesto".into());
         }
+        // A historical backup must never revive permissions revoked since it was created.
+        if relative == Path::new(crate::CONSENTS_FILE)
+            || relative == Path::new("state/ai-consent.json")
+        {
+            continue;
+        }
         let target = storage::safe_join(stage.path(), relative)?;
         fs::create_dir_all(target.parent().ok_or("Destino sin carpeta")?)
             .map_err(|e| e.to_string())?;
@@ -493,6 +501,34 @@ pub fn restore(backup: &Path, destination_parent: &Path) -> Result<BackupReport,
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn restores_reading_positions_but_never_revives_old_ai_permissions() {
+        let root = tempfile::tempdir().unwrap();
+        let output = tempfile::tempdir().unwrap();
+        let mut positions = crate::reading_positions::ReadingPositions::default();
+        positions.set_pdf(1, 7);
+        let bytes = serde_json::to_vec(&positions).unwrap();
+        fs::write(
+            root.path().join(crate::reading_positions::FILE_NAME),
+            &bytes,
+        )
+        .unwrap();
+        let mut grants = crate::ai_consent::ConsentManager::new();
+        grants.grant_text_consent(1, &[crate::ai_consent::Provider::Gemini], 6000);
+        fs::write(
+            root.path().join(crate::CONSENTS_FILE),
+            serde_json::to_vec(&grants).unwrap(),
+        )
+        .unwrap();
+        let snapshot = create(root.path(), b"[]", output.path(), false).unwrap();
+        let restored = restore(&snapshot.path, output.path()).unwrap();
+        assert_eq!(
+            fs::read(restored.path.join(crate::reading_positions::FILE_NAME)).unwrap(),
+            bytes
+        );
+        assert!(!restored.path.join(crate::CONSENTS_FILE).exists());
+        assert!(root.path().join(crate::CONSENTS_FILE).exists());
+    }
     #[test]
     fn unrelated_files_and_excluded_links_inside_library_are_not_copied() {
         let root = tempfile::tempdir().unwrap();

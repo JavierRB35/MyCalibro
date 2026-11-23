@@ -129,13 +129,17 @@ fn parse_result(
         AnalysisSource::MetadataOnly
     };
     let context_note = if use_content {
-        format!("Basado en {} fragmentos ({} caracteres), no en el libro completo. Las citas se contrastaron con el texto extraído localmente.",fragments.len(),fragments.iter().map(|f|f.text.chars().count()).sum::<usize>())
+        format!("Basado en {} fragmentos ({} caracteres), no en el libro completo. Las citas se contrastaron literalmente con el texto extraído; esto no verifica que cada interpretación de la IA sea correcta.",fragments.len(),fragments.iter().map(|f|f.text.chars().count()).sum::<usize>())
     } else {
         "Solo metadatos: no se abrió ni se envió el archivo del libro.".into()
     };
     Ok(AnalysisResult {
-        answer: if use_content && !response.supported {
-            "No hay evidencia suficiente en los fragmentos seleccionados para responder. Pruebe una pregunta más concreta.".into()
+        answer: if !response.supported {
+            if use_content {
+                "No hay evidencia suficiente en los fragmentos seleccionados para responder. Pruebe una pregunta más concreta.".into()
+            } else {
+                "Los metadatos disponibles no permiten responder a esta consulta. No se ha leído el contenido del libro.".into()
+            }
         } else {
             response.answer
         },
@@ -266,6 +270,19 @@ mod tests {
             gemini: "fixture-gemini".into(),
             groq: "fixture-groq".into(),
         }
+    }
+    #[test]
+    fn metadata_insufficient_response_never_displays_invented_story() {
+        let result = parse_result(
+            r#"{"answer":"La trama completa inventada es ...","supported":false,"citations":[]}"#,
+            Provider::Gemini,
+            false,
+            &[],
+        )
+        .unwrap();
+        assert_eq!(result.source, AnalysisSource::MetadataOnly);
+        assert!(result.answer.contains("metadatos disponibles"));
+        assert!(!result.answer.contains("trama completa"));
     }
     #[test]
     fn metadata_analysis_never_opens_the_book_and_is_labelled_honestly() {

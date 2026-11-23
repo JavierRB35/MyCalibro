@@ -158,8 +158,8 @@ pub fn extract(path: &Path, converter: Option<&Path>) -> Result<Vec<Fragment>, S
 
 pub fn select(fragments: &[Fragment], question: &str) -> Result<Vec<Fragment>, String> {
     let total: usize = fragments.iter().map(|f| f.text.chars().count()).sum();
-    // Always retain a local remainder; the API receives excerpts, never the whole text.
-    let mut remaining = MAX_SEND_CHARS.min(total.saturating_sub(1));
+    // Retain at least half locally, including short books; a one-character remainder is not meaningful minimization.
+    let mut remaining = MAX_SEND_CHARS.min(total / 2);
     if remaining == 0 {
         return Err("No hay texto suficiente para seleccionar fragmentos".into());
     }
@@ -211,6 +211,19 @@ pub fn select(fragments: &[Fragment], question: &str) -> Result<Vec<Fragment>, S
 mod tests {
     use super::*;
     #[test]
+    fn short_books_keep_at_least_half_their_text_local() {
+        for length in [1500, 6001] {
+            let fragments = vec![Fragment {
+                id: "F1".into(),
+                location: "Test".into(),
+                text: "á".repeat(length),
+            }];
+            let selected = select(&fragments, "").unwrap();
+            let sent: usize = selected.iter().map(|f| f.text.chars().count()).sum();
+            assert!(sent > 0 && sent <= length / 2 && sent <= MAX_SEND_CHARS);
+        }
+    }
+    #[test]
     fn unicode_excerpts_are_bounded_relevant_and_never_include_the_whole_book() {
         let fragments = (0..12)
             .map(|i| Fragment {
@@ -238,7 +251,7 @@ mod tests {
             location: "p1".into(),
             text: "áéíóú".into(),
         }];
-        assert_eq!(select(&tiny, "").unwrap()[0].text, "áéíó");
+        assert_eq!(select(&tiny, "").unwrap()[0].text, "áé");
     }
     #[test]
     fn local_text_extraction_preserves_original_and_reports_missing_converter() {

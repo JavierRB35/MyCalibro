@@ -38,3 +38,8 @@ metadatos sin lectura de archivo, citas inválidas, ausencia de permiso y revoca
 entre proveedor principal y respaldo. Antes de conectar los módulos a main:
 `cargo test --test analysis_pipeline analysis_`. El pequeño harness temporal debe
 retirarse al declararlos en main para no duplicar sus pruebas unitarias.
+
+## Integración de la ficha y revisión de continuidad
+El panel «Analizar este libro» ofrece Resumen, Análisis y Pregunta; por defecto usa solo metadatos. El modo de contenido exige autorización explícita; consulta el mismo gestor compartido antes de cada envío y fallback. Cambiar de biblioteca, borrar la ficha o cerrar/cancelar el panel invalida el trabajo pendiente. Una petición ya transmitida no se puede retirar. Los errores de guardado conservan posiciones/permisos en memoria, muestran reintento y bloquean el cambio de biblioteca. La restauración recupera posiciones, pero exige nuevas autorizaciones de contenido.
+
+Correcciones de la revisión de B: `supported=false` muestra insuficiencia también en metadatos; cada consulta envía como máximo la mitad del texto legible y 6000 caracteres. La verificación literal de citas no certifica la interpretación semántica. No se han usado claves reales ni realizado llamadas pagadas en las pruebas.
