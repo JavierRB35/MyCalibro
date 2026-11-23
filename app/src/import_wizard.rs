@@ -12,9 +12,7 @@
 
 use std::path::PathBuf;
 
-use crate::import_scan::{
-    Certainty, CatalogItem, DuplicateMatch, MatchKind, ScanError, ScanOutcome, SuggestedAction,
-};
+use crate::import_scan::{CatalogItem, DuplicateMatch, ScanError, ScanOutcome, SuggestedAction};
 
 /// Fase actual del asistente.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -118,10 +116,27 @@ impl ImportWizard {
         self.decisions.clear();
     }
 
+    /// Cancela un escaneo en curso y vuelve al punto de partida. El hilo
+    /// trabajador detectará el canal cerrado y terminará por su cuenta.
+    pub fn cancel_scan(&mut self) {
+        if self.phase == Phase::Scanning {
+            self.phase = Phase::Idle;
+            self.progress = ScanProgress::default();
+        }
+    }
+
+    /// Decisión actual del candidato en la posición dada, si existe.
+    pub fn decision(&self, index: usize) -> Option<Decision> {
+        self.decisions.get(index).copied().flatten()
+    }
+
     /// Progreso incremental comunicado desde el hilo trabajador.
     pub fn record_progress(&mut self, files_seen: usize, candidates_found: usize) {
         if self.phase == Phase::Scanning {
-            self.progress = ScanProgress { files_seen, candidates_found };
+            self.progress = ScanProgress {
+                files_seen,
+                candidates_found,
+            };
         }
     }
 
@@ -176,7 +191,9 @@ impl ImportWizard {
                     .reviews
                     .iter()
                     .enumerate()
-                    .filter(|(index, review)| !review.matches.is_empty() && self.decisions[*index].is_none())
+                    .filter(|(index, review)| {
+                        !review.matches.is_empty() && self.decisions[*index].is_none()
+                    })
                     .map(|(index, _)| index)
                     .collect()
             })
@@ -205,7 +222,10 @@ impl ImportWizard {
 
     /// Errores puntuales del escaneo (rutas ilegibles, etc.).
     pub fn scan_errors(&self) -> &[ScanError] {
-        self.outcome.as_ref().map(|outcome| outcome.errors.as_slice()).unwrap_or(&[])
+        self.outcome
+            .as_ref()
+            .map(|outcome| outcome.errors.as_slice())
+            .unwrap_or(&[])
     }
 
     /// Construye el plan si el usuario ha revisado todos los duplicados y hay
@@ -286,7 +306,7 @@ pub fn catalog_entry(id: u64, title: &str, author: &str, path: Option<String>) -
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::import_scan::scan_paths;
+    use crate::import_scan::{scan_paths, Certainty, MatchKind};
     use std::path::Path;
 
     /// Lote temporal único por llamada: cargo test ejecuta los tests en
@@ -296,11 +316,20 @@ mod tests {
         use std::sync::atomic::{AtomicU32, Ordering};
         static SECUENCIA: AtomicU32 = AtomicU32::new(0);
         let numero = SECUENCIA.fetch_add(1, Ordering::Relaxed);
-        let base = std::env::temp_dir().join(format!("mycalibro_wizard_{}_{}", std::process::id(), numero));
+        let base = std::env::temp_dir().join(format!(
+            "mycalibro_wizard_{}_{}",
+            std::process::id(),
+            numero
+        ));
         std::fs::create_dir_all(&base).unwrap();
         std::fs::write(base.join("1984.epub"), b"x").unwrap();
         std::fs::write(base.join("nuevo.epub"), b"y").unwrap();
-        let catalog = vec![CatalogItem::new(1, "1984", "George Orwell", Some(format!("{}", base.join("1984.epub").display())))];
+        let catalog = vec![CatalogItem::new(
+            1,
+            "1984",
+            "George Orwell",
+            Some(format!("{}", base.join("1984.epub").display())),
+        )];
         let outcome = scan_paths(&[base.clone()], &catalog);
         (base, outcome)
     }
@@ -313,7 +342,13 @@ mod tests {
         wizard.start_scan(vec![base.clone()]);
         assert_eq!(wizard.phase, Phase::Scanning);
         wizard.record_progress(5, 2);
-        assert_eq!(wizard.progress, ScanProgress { files_seen: 5, candidates_found: 2 });
+        assert_eq!(
+            wizard.progress,
+            ScanProgress {
+                files_seen: 5,
+                candidates_found: 2
+            }
+        );
         wizard.finish_scan(outcome);
         assert_eq!(wizard.phase, Phase::Reviewing);
 
@@ -323,7 +358,10 @@ mod tests {
         assert_eq!(summary.to_import, 1);
         assert_eq!(summary.undecided, 1);
         assert_eq!(summary.with_warnings, 1);
-        assert!(wizard.build_plan().is_err(), "duplicado sin revisar bloquea el plan");
+        assert!(
+            wizard.build_plan().is_err(),
+            "duplicado sin revisar bloquea el plan"
+        );
         std::fs::remove_dir_all(&base).unwrap();
     }
 
@@ -337,7 +375,13 @@ mod tests {
             .iter()
             .map(|index| {
                 let review = &wizard.outcome.as_ref().unwrap().reviews[*index];
-                review.candidate.path.file_name().unwrap().to_string_lossy().to_string()
+                review
+                    .candidate
+                    .path
+                    .file_name()
+                    .unwrap()
+                    .to_string_lossy()
+                    .to_string()
             })
             .find(|name| name == "1984.epub")
             .expect("debe existir el duplicado 1984.epub");
@@ -350,10 +394,15 @@ mod tests {
             .position(|r| r.candidate.path.file_name().unwrap().to_string_lossy() == duplicado)
             .unwrap();
         assert!(wizard.set_decision(index, Decision::Skip));
-        let plan = wizard.build_plan().expect("con duplicados decididos el plan es válido");
+        let plan = wizard
+            .build_plan()
+            .expect("con duplicados decididos el plan es válido");
         assert_eq!(plan.to_import, 1);
         assert_eq!(plan.to_skip, 1);
-        assert!(plan.entries.iter().all(|entry| entry.decision == Decision::Import));
+        assert!(plan
+            .entries
+            .iter()
+            .all(|entry| entry.decision == Decision::Import));
         std::fs::remove_dir_all(&base).unwrap();
     }
 
@@ -374,7 +423,11 @@ mod tests {
         // Sugerencia para duplicado de ruta exacta… la ruta del lote coincide
         // con la registrada en el catálogo, así que debe sugerir omitir;
         // probamos además la decisión explícita de asociar formato.
-        assert_eq!(wizard.summary().undecided, 0, "apply_suggestions resuelve todo");
+        assert_eq!(
+            wizard.summary().undecided,
+            0,
+            "apply_suggestions resuelve todo"
+        );
         assert!(wizard.set_decision(index, Decision::AssociateFormat));
         let plan = wizard.build_plan().unwrap();
         let entry = plan
@@ -410,10 +463,16 @@ mod tests {
     #[test]
     fn decision_fuera_de_rango_o_en_fase_incorrecta_se_rechaza() {
         let mut wizard = ImportWizard::new();
-        assert!(!wizard.set_decision(0, Decision::Import), "sin escaneo no se decide");
+        assert!(
+            !wizard.set_decision(0, Decision::Import),
+            "sin escaneo no se decide"
+        );
         let (base, outcome) = scan_temp_lote();
         wizard.finish_scan(outcome);
-        assert!(!wizard.set_decision(999, Decision::Import), "índice fuera de rango");
+        assert!(
+            !wizard.set_decision(999, Decision::Import),
+            "índice fuera de rango"
+        );
         assert!(wizard.set_decision(0, Decision::Import));
         std::fs::remove_dir_all(&base).unwrap();
     }
@@ -429,6 +488,33 @@ mod tests {
         assert!(wizard.outcome.is_none());
         assert!(wizard.decisions.is_empty());
         assert_eq!(wizard.progress, ScanProgress::default());
+        std::fs::remove_dir_all(&base).unwrap();
+    }
+
+    #[test]
+    fn cancelar_escaneo_vuelve_a_idle_y_decision_accesible_por_indice() {
+        let mut wizard = ImportWizard::new();
+        let (base, outcome) = scan_temp_lote();
+        wizard.finish_scan(outcome);
+        // «1984.epub» es duplicado exacto y queda sin decidir; «nuevo.epub»
+        // se prefilló como Importar.
+        let indice_nuevo = wizard
+            .outcome
+            .as_ref()
+            .unwrap()
+            .reviews
+            .iter()
+            .position(|r| r.candidate.path.file_name().unwrap().to_string_lossy() == "nuevo.epub")
+            .unwrap();
+        assert_eq!(wizard.decision(indice_nuevo), Some(Decision::Import));
+        assert_eq!(wizard.decision(999), None, "índice fuera de rango");
+        wizard.start_scan(vec![Path::new("C:\\algo").to_path_buf()]);
+        wizard.cancel_scan();
+        assert_eq!(wizard.phase, Phase::Idle);
+        assert_eq!(wizard.progress, ScanProgress::default());
+        // Cancelar sin escaneo en curso no rompe nada.
+        wizard.cancel_scan();
+        assert_eq!(wizard.phase, Phase::Idle);
         std::fs::remove_dir_all(&base).unwrap();
     }
 

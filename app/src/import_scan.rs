@@ -126,10 +126,21 @@ pub enum SuggestedAction {
 /// los candidatos con el catálogo. Solo lectura; los errores puntuales se
 /// registran y no abortan el lote.
 pub fn scan_paths(inputs: &[PathBuf], catalog: &[CatalogItem]) -> ScanOutcome {
+    scan_paths_with_progress(inputs, catalog, &mut |_, _| {})
+}
+
+/// Igual que [`scan_paths`], notificando progreso real durante el recorrido:
+/// `(archivos_vistos, candidatos_encontrados)`. Pensado para llamarse desde
+/// un hilo trabajador y no bloquear la interfaz (PROD-010).
+pub fn scan_paths_with_progress(
+    inputs: &[PathBuf],
+    catalog: &[CatalogItem],
+    progress: &mut dyn FnMut(usize, usize),
+) -> ScanOutcome {
     let mut outcome = ScanOutcome::default();
     let mut seen: BTreeSet<String> = BTreeSet::new();
     for input in inputs {
-        collect_candidates(input, &mut outcome, &mut seen);
+        collect_candidates(input, &mut outcome, &mut seen, progress);
     }
     outcome
         .reviews
@@ -198,7 +209,13 @@ fn catalog_refs(catalog: &[CatalogItem]) -> Vec<CatalogRef<'_>> {
 /// No sigue enlaces simbólicos de directorio (evita ciclos) y no repite
 /// archivos ya vistos en el mismo lote, aunque se alcancen por rutas
 /// equivalentes (relativas, mayúsculas distintas o segmentos «..»).
-fn collect_candidates(input: &Path, outcome: &mut ScanOutcome, seen: &mut BTreeSet<String>) {
+/// Notifica progreso tras cada archivo procesado.
+fn collect_candidates(
+    input: &Path,
+    outcome: &mut ScanOutcome,
+    seen: &mut BTreeSet<String>,
+    progress: &mut dyn FnMut(usize, usize),
+) {
     let key = path_key(input);
     if !seen.insert(key) {
         return;
@@ -228,6 +245,7 @@ fn collect_candidates(input: &Path, outcome: &mut ScanOutcome, seen: &mut BTreeS
                 suggested_action: SuggestedAction::Import,
             });
         }
+        progress(outcome.files_seen, outcome.reviews.len());
         return;
     }
     if meta.is_dir() {
@@ -243,7 +261,7 @@ fn collect_candidates(input: &Path, outcome: &mut ScanOutcome, seen: &mut BTreeS
         };
         for entry in entries {
             match entry {
-                Ok(entry) => collect_candidates(&entry.path(), outcome, seen),
+                Ok(entry) => collect_candidates(&entry.path(), outcome, seen, progress),
                 Err(error) => outcome.errors.push(ScanError {
                     path: input.to_path_buf(),
                     message: error.to_string(),
@@ -486,6 +504,32 @@ mod tests {
             "un solo candidato aunque haya tres rutas equivalentes"
         );
         assert_eq!(outcome.errors.len(), 0);
+        std::fs::remove_dir_all(&base).unwrap();
+    }
+
+    #[test]
+    fn el_progreso_se_notifica_incrementalmente_y_coincide_con_el_resultado() {
+        let base = std::env::temp_dir().join(format!("mycalibro_prog_{}", std::process::id()));
+        std::fs::create_dir_all(&base).unwrap();
+        std::fs::write(base.join("a.epub"), b"x").unwrap();
+        std::fs::write(base.join("b.pdf"), b"y").unwrap();
+        std::fs::write(base.join("c.txt"), b"z").unwrap();
+        std::fs::write(base.join("d.png"), b"w").unwrap();
+        let mut eventos: Vec<(usize, usize)> = Vec::new();
+        let outcome = scan_paths_with_progress(&[base.clone()], &[], &mut |files, candidates| {
+            eventos.push((files, candidates));
+        });
+        assert!(
+            !eventos.is_empty(),
+            "debe haber al menos un evento de progreso"
+        );
+        let (ultimo_files, ultimo_candidatos) = *eventos.last().unwrap();
+        assert_eq!(ultimo_files, outcome.files_seen);
+        assert_eq!(ultimo_candidatos, outcome.reviews.len());
+        // Monótono no decreciente en ambas componentes.
+        assert!(eventos
+            .windows(2)
+            .all(|ventana| ventana[0].0 <= ventana[1].0 && ventana[0].1 <= ventana[1].1));
         std::fs::remove_dir_all(&base).unwrap();
     }
 
