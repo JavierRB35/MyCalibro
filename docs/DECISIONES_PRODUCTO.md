@@ -24,23 +24,33 @@
 - **Estado de implementación:** no implementado todavía como sistema híbrido: el código actual conserva únicamente referencias a rutas absolutas de archivos externos (véase auditoría). Esta aprobación solo actualiza documentación.
 
 ## PROD-003 — Integración con bibliotecas de Calibre
+- **Fecha de apertura y aprobación:** 2026-11-23.
+- **Estado:** APROBADA por el propietario.
+- **Alternativa seleccionada:** **A: importación puntual desde Calibre**.
+- **Comportamiento vinculante:** permitir importar a MyCalibro libros y metadatos de una biblioteca de Calibre existente. Una vez importados, las modificaciones posteriores en cualquiera de las aplicaciones se gestionarán **independientemente**, sin sincronización automática ni bidireccional entre los catálogos.
+- **Protección de origen:** la importación no debe escribir ni borrar archivos ni registros de la biblioteca de Calibre. La estructura e integridad de la biblioteca de origen deben preservarse.
+- **Compatibilidad con PROD-002:** el modelo híbrido de MyCalibro se mantiene: al importar una biblioteca de Calibre se podrán incorporar los libros como archivos administrados o referencias externas, conforme a una política de importación que queda por concretar. Una referencia externa **no** implica sincronización de metadatos ni seguimiento automático de modificaciones.
+- **Límites de la decisión:** aún no están fijados los campos precisos a importar (portadas, series, etiquetas, múltiples formatos, etc.), tratamiento de duplicados, modo por defecto, errores, migración parcial y experiencia del asistente de importación. La importación repetida será otra operación puntual, no una sincronización permanente.
+- **Estado de implementación:** pendiente; el código existente importa ebooks sueltos por arrastrar y soltar, pero no incorpora una biblioteca completa de Calibre.
+
+## PROD-004 — Alcance del lector integrado
 - **Fecha de apertura:** 2026-11-23.
 - **Estado:** PENDIENTE DE ELECCIÓN.
-- **Pregunta:** ¿Hasta qué grado debe interoperar MyCalibro con las bibliotecas existentes de Calibre?
+- **Pregunta:** ¿Qué nivel de experiencia de lectura debe ofrecer MyCalibro, dentro de la visión integral con IA ya aprobada en PROD-001?
 
-| Opción | Comportamiento propuesto | Principal ventaja | Riesgos y limitaciones |
-| --- | --- | --- | --- |
-| A. Importación puntual | Importar libros y metadatos desde Calibre a MyCalibro; futuras modificaciones se gestionan separadamente | Menor complejidad y menor riesgo de cambios en bibliotecas Calibre | Los cambios posteriores no se sincronizan |
-| B. Vinculación y consulta continua | Mostrar la biblioteca Calibre vinculada y actualizar su información de forma controlada, con acceso de solo lectura para la biblioteca de origen; gestionar cambios propios en MyCalibro | Respeta Calibre como propietario de sus datos y muestra sus actualizaciones | Las ediciones en MyCalibro no retornan automáticamente a Calibre |
-| C. Importación más sincronización bidireccional controlada | Combinar importación inicial y conexión posterior, pudiendo propagar cambios entre ambos catálogos mediante operaciones verificadas, conflictos explícitos y procedimientos de recuperación | Máxima interoperabilidad si se implementa de forma fiable | Mayor complejidad; riesgo alto de sobrescribir metadatos, perder cambios o corromper bibliotecas ante escrituras simultáneas |
+| Opción | Alcance previsto | Implicaciones |
+| --- | --- | --- |
+| A. Lector básico | Apertura y lectura de EPUB/PDF, navegación, preferencias de visualización y progreso | Menor complejidad inicial; quedan fuera anotaciones avanzadas y OCR |
+| B. Lector premium | Todo A, además de marcadores, subrayados, notas, búsqueda en el texto, índice, progreso y personalización avanzada | Más valor de lectura; exige un modelo sólido de ubicaciones y persistencia |
+| C. Lector avanzado + IA | Todo B, además de OCR para PDF escaneados, consultas y resúmenes contextuales con IA, referencias al contenido y accesibilidad reforzada | Máxima capacidad, pero exige separar claramente lectura, extracción de texto, OCR e IA y probar formatos/errores |
 
-**Criterio técnico para el debate (no aprobado):** C aporta el máximo alcance, pero deberá implantarse por fases: importación y consulta de solo lectura primero; las escrituras hacia Calibre solo tras verificar mecanismos compatibles y estrategia de reconciliación, copias y recuperación. Nunca escribir directamente en una base de datos de Calibre de forma especulativa.
+**Recomendación para el debate (no aprobada):** C, desarrollada incrementalmente: EPUB/PDF fiables, anotaciones persistentes, después OCR y capacidades IA. El acceso a archivos y el tratamiento de datos deberán respetar PROD-002, y las operaciones de IA no deben inventar citas o contenido de libros no procesados.
 
-**Aspectos aún no resueltos:** tratamiento de categorías/etiquetas/series/portadas, múltiples formatos, duplicados, detección de cambios, conflictos, permisos, compatibilidad de versiones y qué biblioteca es la fuente de verdad para cada dato.
+**Pendiente:** seleccionar A, B o C. Ninguna funcionalidad nueva de lector se declara implementada por esta elección pendiente.
 
 ## Pendientes de debates posteriores
-- Integración con Calibre y migración de bibliotecas existentes (PROD-003, abierta).
-- Experiencia de lectura, PDF/EPUB, anotaciones y OCR.
+- Detalle de importación puntual desde Calibre: campos, duplicados, política de copia/vínculo y recuperación (PROD-003, aprobada).
+- Experiencia de lectura, PDF/EPUB, anotaciones y OCR (PROD-004, abierta).
 - IA sobre metadatos frente a contenido y controles de privacidad.
 - Plataformas (Windows / otras), instalación y actualizaciones.
 - Copia y restauración, sincronización y dispositivos.
@@ -50,4 +60,5 @@
 | --- | --- | --- | --- |
 | PROD-001 | 2026-11-23 | Aprobada | Opción C: plataforma integral de biblioteca, lectura e IA |
 | PROD-002 | 2026-11-23 | Aprobada | Opción C: almacenamiento híbrido (archivos administrados y vinculados) |
-| PROD-003 | 2026-11-23 | Pendiente | Modalidad de integración con bibliotecas de Calibre |
+| PROD-003 | 2026-11-23 | Aprobada | Opción A: importación puntual sin sincronización posterior con Calibre |
+| PROD-004 | 2026-11-23 | Pendiente | Alcance y profundidad del lector integrado |
