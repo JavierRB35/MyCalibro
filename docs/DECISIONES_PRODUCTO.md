@@ -80,26 +80,37 @@
 - **Estado de implementación:** la elección Windows está alineada con el código actual; la selección y traslado seguro de ubicación de biblioteca, incluido el uso de una carpeta sincronizada, están pendientes de implementar y verificar.
 
 ## PROD-008 — Alcance de las copias de seguridad y restauración
+- **Fecha de apertura y aprobación:** 2026-11-23.
+- **Estado:** APROBADA por el propietario.
+- **Alternativa seleccionada:** **C: copia de seguridad completa y configurable**.
+- **Contenido vinculante:** incluir en el respaldo el catálogo, fichas bibliográficas, metadatos, etiquetas, colecciones, preferencias, posiciones de lectura y demás datos persistidos relevantes. Incluir los archivos de libros administrados por MyCalibro y permitir al usuario **optar también por copiar los libros vinculados externos que sean accesibles**.
+- **Control del alcance:** el usuario deberá conocer y configurar qué categorías y ubicaciones se incluyen. Una copia que omita archivos externos no deberá anunciarse como copia completa de todos los libros. Registrar claramente exclusiones, archivos inaccesibles y errores parciales.
+- **Integridad y recuperación:** usar un manifiesto de contenido e identificadores, verificar la integridad de datos y archivos respaldados, detectar archivos faltantes o corruptos y ofrecer restauración segura y verificable. No sobrescribir ni borrar archivos originales, ni sustituir un catálogo válido con uno incompleto o ilegible, sin un procedimiento explícito y seguro.
+- **Modelo híbrido y Drive:** preservar la diferencia entre libros administrados y referencias externas (PROD-002), y contemplar restauración a ubicaciones distintas y recuperación de rutas. Una carpeta sincronizada mediante Drive (PROD-007) **no equivale** por sí sola a una copia de seguridad verificada.
+- **Aspectos técnicos no cerrados:** formato del contenedor (ZIP u otro), frecuencia y automatización, destino por defecto, retención/versiones, cifrado, política exacta de sustitución, espacio requerido, deduplicación y tratamiento de respaldos simultáneos. No inferirlos de la aprobación de la opción C.
+- **Estado de implementación:** pendiente; la aplicación actual carece de una función operativa de backup/restauración. Esta decisión es exclusivamente documental.
+
+## PROD-009 — Organización física de los libros administrados
 - **Fecha de apertura:** 2026-11-23.
 - **Estado:** PENDIENTE DE ELECCIÓN.
-- **Pregunta:** ¿Qué deberá incluir una copia de seguridad de MyCalibro y qué tendrá que ser capaz de restaurar, considerando el modelo híbrido de PROD-002 y la posible ubicación en una carpeta sincronizada con Drive?
+- **Pregunta:** ¿Cómo debe organizar MyCalibro los archivos que administra dentro de la carpeta de biblioteca seleccionada por el usuario?
 
-| Opción | Contenido y restauración | Limitaciones |
+| Opción | Funcionamiento | Ventajas y costes |
 | --- | --- | --- |
-| A. Solo catálogo | Fichas, metadatos, colecciones, etiquetas, preferencias y posiciones de lectura; restauración del catálogo | No conserva los ficheros ebook; las referencias externas pueden quedar rotas |
-| B. Catálogo + archivos administrados | Todo A, más los libros que MyCalibro administra, con restauración íntegra. Los archivos externos solo quedan referenciados | Los archivos vinculados no estarán disponibles tras una pérdida del original |
-| C. Copia completa configurable | Todo B y opción para incluir también los libros vinculados externos que sean accesibles, con manifiesto, verificación de integridad y restauración segura | Ocupa más espacio y exige decisiones explícitas sobre duplicados, permisos y rutas externas |
+| A. Conservar estructura y nombres | Mantener, dentro de la biblioteca administrada, los nombres y subcarpetas de origen cuando sea posible; el catálogo ofrece organización lógica | Menor intervención sobre archivos, pero nombres heterogéneos y potenciales conflictos |
+| B. Organización automática | Al incorporar un libro administrado, ordenarlo en carpetas por autor/obra y con nombres coherentes, preservando el original externo | Biblioteca física ordenada y navegable, pero requiere resolver colisiones, cambios de metadatos y nombres |
+| C. Organización configurable | Ofrecer una estructura administrada ordenada o conservar nombres/estructura según una política configurable; el catálogo maneja etiquetas/colecciones sin depender de la ruta física | Mayor flexibilidad y compatibilidad con bibliotecas existentes, con más reglas de migración y pruebas |
 
-**Recomendación técnica, todavía no aprobada:** C, permitiendo elegir el alcance del backup y señalando claramente qué archivos externos no se pudieron incluir. Como mínimo, la restauración debe probarse con un catálogo real de prueba y confirmar integridad de datos y archivos, sin sobrescribir originales sin autorización.
+**Recomendación técnica (no aprobada):** C con un identificador estable por libro y con carpetas configurables. Los libros solo **vinculados externamente** nunca se reorganizarán ni renombrarán de forma automática. Cualquier cambio de política o traslado deberá ofrecer previsualización, evitar colisiones y preservar datos; no comprometer las copias de seguridad de PROD-008.
 
-**Condición común:** una carpeta sincronizada con Drive es una ubicación posible de la biblioteca, **no sustituye por sí sola una política de backup y recuperación**. La implementación deberá respetar el protocolo de integridad, escritura atómica, verificaciones proporcionales y reversibilidad.
+**Nota:** esta decisión se refiere a la organización física del almacenamiento administrado, no al diseño de colecciones o filtros en la interfaz; esos aspectos se concretarán posteriormente.
 
 ## Pendientes de debates posteriores
 - Detalle de importación puntual desde Calibre: campos, duplicados, política de copia/vínculo y recuperación (PROD-003, aprobada).
 - Detalles de implementación del lector básico EPUB/PDF, navegación, visualización y última posición (PROD-004, aprobada).
 - IA para organización y análisis de cada libro (PROD-005, aprobada); consentimiento revocable por libro para envío de contenido (PROD-006, aprobada).
-- MyCalibro exclusivamente Windows y biblioteca en carpeta elegida (opcionalmente sincronizada con Drive) según PROD-007; alcance de backup/restauración pendiente en PROD-008; instalación y actualizaciones.
-- Copia y restauración de catálogo y archivos, manejo de carpetas sincronizadas por terceros y compatibilidad con dispositivos de lectura.
+- MyCalibro exclusivamente Windows y biblioteca en carpeta elegida (opcionalmente sincronizada con Drive) según PROD-007; copia completa y configurable aprobada en PROD-008; instalación y actualizaciones.
+- Organización física de libros administrados (PROD-009, abierta), políticas de respaldo y restauración, manejo de carpetas sincronizadas por terceros y compatibilidad con dispositivos de lectura.
 
 ## Historial de decisiones
 | ID | Fecha | Estado | Resultado |
@@ -111,4 +122,5 @@
 | PROD-005 | 2026-11-23 | Aprobada | Opción B: IA para organización y análisis por libro bajo demanda |
 | PROD-006 | 2026-11-23 | Aprobada | Opción B: consentimiento por libro, revocable, antes de enviar texto a IA externa |
 | PROD-007 | 2026-11-23 | Aprobada, corregida | Opción A: MyCalibro solo Windows, con biblioteca en carpeta configurable, incluso sincronizada con Drive; sin integración con otras aplicaciones |
-| PROD-008 | 2026-11-23 | Pendiente | Alcance de las copias de seguridad y la restauración |
+| PROD-008 | 2026-11-23 | Aprobada | Opción C: copia de seguridad completa y configurable con integridad y restauración segura |
+| PROD-009 | 2026-11-23 | Pendiente | Organización física de los archivos administrados en la biblioteca |
