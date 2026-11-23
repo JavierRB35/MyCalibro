@@ -25,6 +25,19 @@ pub fn render_page(path: &Path, page_index: u32, width: u32) -> Result<RenderedP
             unsafe { RoUninitialize() };
         }
     }
+    // windows-rs caches agile activation factories for process lifetime. Keep the
+    // implicit MTA alive for the same lifetime: tearing down the last apartment
+    // between page workers can invalidate factories still in that cache.
+    // This is exactly one process-owned reservation, intentionally released by
+    // Windows at process exit rather than during individual worker teardown.
+    static PROCESS_MTA: std::sync::OnceLock<Result<(), String>> = std::sync::OnceLock::new();
+    PROCESS_MTA
+        .get_or_init(|| unsafe {
+            windows::Win32::System::Com::CoIncrementMTAUsage()
+                .map(|_process_owned_cookie| ())
+                .map_err(|e| format!("No se pudo mantener el motor PDF de Windows: {e}"))
+        })
+        .clone()?;
     unsafe { RoInitialize(RO_INIT_MULTITHREADED) }
         .map_err(|e| format!("No se pudo iniciar el lector PDF de Windows: {e}"))?;
     let _apartment = Apartment;
@@ -135,6 +148,16 @@ mod tests {
         assert_eq!(last.page_index, 1);
         assert_ne!(first.png, last.png);
         assert_eq!(std::fs::read(&path).unwrap(), source);
+        // Exercise fresh worker shutdown/recreation, matching actual page navigation.
+        for _ in 0..4 {
+            let path = path.clone();
+            let rendered = std::thread::spawn(move || render_page(&path, 1, 640))
+                .join()
+                .unwrap()
+                .unwrap();
+            assert_eq!(rendered.page_index, 1);
+            assert_eq!(rendered.png, last.png);
+        }
         std::fs::write(&path, b"not a PDF").unwrap();
         assert!(render_page(&path, 0, 640).is_err());
     }
