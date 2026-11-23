@@ -112,26 +112,25 @@
 - **Estado de implementación:** pendiente; el código actual no dispone de asistente masivo con análisis y revisión bibliográfica de duplicados.
 
 ## PROD-011 — Metadatos bibliográficos y portadas
-- **Fecha de apertura:** 2026-11-23.
-- **Estado:** PENDIENTE DE ELECCIÓN.
-- **Pregunta:** ¿Cómo debe obtener, completar y actualizar MyCalibro la información bibliográfica de cada libro (autor, título, serie, ISBN, editorial, idioma, fecha, sinopsis, portada, etc.)?
+- **Fecha:** 2026-11-23.
+- **Estado:** CRITERIO PRINCIPAL APROBADO. Debate de producto cerrado para iniciar desarrollo; ampliaciones no aprobadas quedan fuera del alcance actual.
+- **Decisión explícita del propietario:** **los metadatos serán, por defecto, los que vengan incorporados en el propio libro**.
+- **Comportamiento vinculante:** al importar, extraer y usar preferentemente los metadatos incrustados en el archivo original, si existen y son legibles, sin reemplazarlos automáticamente por datos de terceros ni por resultados inferidos por IA. Respetar el título, autor, portada y restantes campos presentes; conservar procedencia cuando se pueda. Cuando falten o sean ilegibles, informar de la ausencia y aplicar únicamente valores de presentación mínimos y no destructivos que puedan distinguirse de datos reales.
+- **Compatibilidad:** mantener las capacidades actuales de edición manual de fichas. La clasificación temática/etiquetas aprobadas en PROD-005 son datos añadidos o derivados diferenciables y no autorizan a sobrescribir metadatos bibliográficos incrustados. La importación puntual de Calibre (PROD-003) puede incorporar datos que formen parte del registro importado, sin alterar la biblioteca de origen.
+- **No aprobado:** enriquecimiento externo automático o continuo de campos y portadas, reemplazo automático de datos originales, descarga automática de portadas o elección de proveedores bibliográficos. Si resultara útil, discutirlo más adelante mediante una nueva decisión concreta, sin bloquear la implementación actual.
+- **Estado de implementación:** criterio documental; verificar extracción real de metadatos y portadas por formato, fallback correcto y ausencia de sobrescrituras no autorizadas durante el desarrollo.
 
-| Opción | Funcionamiento propuesto | Balance |
-| --- | --- | --- |
-| A. Metadatos locales y edición manual | Leer metadatos incrustados en los archivos y permitir completar/corregir campos y portadas a mano | Control pleno, pero más trabajo para el usuario |
-| B. Enriquecimiento asistido con revisión | Todo A, más búsquedas en fuentes externas fiables y propuestas de portada/campos con procedencia identificable, vista comparativa y aceptación del usuario antes de reemplazar valores | Equilibrio de automatización, calidad y trazabilidad |
-| C. Enriquecimiento automático continuo | Todo B, con búsqueda y actualización por lotes en segundo plano según reglas predefinidas, sin confirmar cada coincidencia ordinaria | Agiliza colecciones extensas, pero aumenta riesgos de atribuciones incorrectas y cambios no deseados |
-
-**Recomendación técnica para el debate (no aprobada):** B. La exactitud de ISBN, autor, edición e idioma es esencial para controlar duplicados y conservar distintas ediciones. Se recomienda mantener la procedencia de cada dato y permitir deshacer cambios, diferenciar portadas originales de las descargadas y respetar licencias y límites de proveedores. No sobrescribir información existente solo porque otro proveedor ofrezca una coincidencia superficial.
-
-**Pendiente:** elegir A, B o C. El objetivo de enriquecer metadatos mediante IA (PROD-005) ya está aprobado a nivel general, pero no impone de forma implícita descarga de portadas, proveedores externos específicos ni una política de sobrescritura.
-
+## Inicio de ejecución — organización de trabajo
+- **Fecha:** 2026-11-23.
+- **Estado:** AUTORIZADO PARA PLANIFICAR EL DESARROLLO, sujeto a la definición por el propietario del equipo participante y su organización.
+- **Directriz:** no seguir abriendo debates de funcionalidades de baja criticidad. Recibir la composición del equipo, responsabilidades, coordinación y flujo de integración para preparar distribución de tareas y criterios de aceptación. La ejecución deberá priorizar integridad del catálogo, corrección del envío a dispositivos, importación fiable y pruebas proporcionales al riesgo, respetando AGENTS.md.
+- **Continuidad:** cualquier nueva decisión técnica realmente crítica se resolverá durante la planificación o implementación con justificación concreta; ninguna preferencia aún no expresada se asumirá como aprobada.
 ## Pendientes de debates posteriores
 - Detalle de importación puntual desde Calibre: campos, duplicados, política de copia/vínculo y recuperación (PROD-003, aprobada).
 - Detalles de implementación del lector básico EPUB/PDF, navegación, visualización y última posición (PROD-004, aprobada).
 - IA para organización y análisis de cada libro (PROD-005, aprobada); consentimiento revocable por libro para envío de contenido (PROD-006, aprobada).
 - MyCalibro exclusivamente Windows y biblioteca en carpeta elegida (opcionalmente sincronizada con Drive) según PROD-007; copia completa y configurable aprobada en PROD-008; instalación y actualizaciones.
-- Organización física configurable de libros administrados (PROD-009, aprobada); importación masiva con revisión de duplicados (PROD-010, aprobada); metadatos y portadas (PROD-011, abierta); políticas de respaldo/restauración y compatibilidad con dispositivos de lectura.
+- Organización física configurable de libros administrados (PROD-009, aprobada), importación masiva con revisión de duplicados (PROD-010, aprobada) y metadatos incrustados por defecto (PROD-011); pendientes técnicos de respaldo/restauración y compatibilidad con dispositivos de lectura.
 
 ## Historial de decisiones
 | ID | Fecha | Estado | Resultado |
@@ -146,4 +145,4 @@
 | PROD-008 | 2026-11-23 | Aprobada | Opción C: copia de seguridad completa y configurable con integridad y restauración segura |
 | PROD-009 | 2026-11-23 | Aprobada | Opción C: estructura física configurable y organización lógica independiente |
 | PROD-010 | 2026-11-23 | Aprobada | Opción B: importación por lotes con revisión humana de posibles duplicados |
-| PROD-011 | 2026-11-23 | Pendiente | Obtención, enriquecimiento y actualización de metadatos y portadas |
+| PROD-011 | 2026-11-23 | Criterio aprobado; debate cerrado | Metadatos incrustados en cada libro por defecto, sin enriquecimiento externo automático autorizado |
