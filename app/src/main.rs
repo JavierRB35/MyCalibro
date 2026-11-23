@@ -1138,12 +1138,7 @@ fn library_list_scroll_area() -> egui::ScrollArea {
 /// título usa Sense::drag y la ficha debe responder a un clic en toda el área.
 /// Un ID distinto y Sense::click conservan el gesto de arrastrar y evitan que
 /// el clic quede interceptado por el origen DnD.
-fn select_book_card(
-    ui: &mut egui::Ui,
-    rect: egui::Rect,
-    book_id: u64,
-    selected: &mut Option<u64>,
-) {
+fn select_book_card(ui: &mut egui::Ui, rect: egui::Rect, book_id: u64, selected: &mut Option<u64>) {
     let click_id = egui::Id::new(("library-book-select", book_id));
     if ui.interact(rect, click_id, egui::Sense::click()).clicked() {
         *selected = Some(book_id);
@@ -2281,7 +2276,11 @@ mod tests {
                 modifiers: egui::Modifiers::NONE,
             }],
         );
-        assert_eq!(selected, Some(42), "el clic en el cuerpo de la ficha selecciona el libro");
+        assert_eq!(
+            selected,
+            Some(42),
+            "el clic en el cuerpo de la ficha selecciona el libro"
+        );
     }
 
     #[test]
