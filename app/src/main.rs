@@ -1,3 +1,5 @@
+mod ai_consent;
+mod ai_consent_view;
 mod backup;
 mod book_metadata;
 mod calibre_import;
@@ -7,7 +9,12 @@ mod import_scan;
 mod import_wizard;
 mod import_wizard_view;
 mod library_tools;
+mod pdf_backend;
+mod pdf_view;
 mod persistence;
+mod reader_epub;
+mod reader_view;
+mod reading_positions;
 mod storage;
 mod transfer;
 
@@ -162,6 +169,11 @@ struct LibraryApp {
     device_view: Option<PathBuf>,
     transfer_sender: mpsc::Sender<TransferResult>,
     transfer_receiver: mpsc::Receiver<TransferResult>,
+    reader: reader_view::ReaderView,
+    pdf_view: pdf_view::PdfView,
+    consents: ai_consent::ConsentManager,
+    consent_view: ai_consent_view::AiConsentView,
+    positions: reading_positions::ReadingPositions,
 }
 
 impl LibraryApp {
@@ -176,7 +188,20 @@ impl LibraryApp {
         let selected = books.first().map(|book| book.id);
         let (task_sender, task_receiver) = mpsc::channel();
         let (transfer_sender, transfer_receiver) = mpsc::channel();
-        Self {
+        let (positions, positions_notice) = if library_folder.as_os_str().is_empty() {
+            (reading_positions::ReadingPositions::default(), None)
+        } else {
+            reading_positions::load(&library_folder)
+        };
+        let (consents, consents_notice) = load_consents(&library_folder);
+        let mut avisos_iniciales = String::new();
+        for aviso in [positions_notice, consents_notice].into_iter().flatten() {
+            if !avisos_iniciales.is_empty() {
+                avisos_iniciales.push(' ');
+            }
+            avisos_iniciales.push_str(&aviso);
+        }
+        let mut app = Self {
             books,
             search: String::new(),
             topic_filter: None,
@@ -212,7 +237,43 @@ impl LibraryApp {
             device_view: None,
             transfer_sender,
             transfer_receiver,
+            reader: reader_view::ReaderView::new(),
+            pdf_view: pdf_view::PdfView::default(),
+            consents,
+            consent_view: ai_consent_view::AiConsentView::new(),
+            positions,
+        };
+        if !avisos_iniciales.is_empty() {
+            app.notice = avisos_iniciales;
         }
+        app
+    }
+
+    /// Persiste posiciones y consentimientos de la biblioteca actual.
+    fn save_library_data(&mut self) {
+        if let Err(error) = self.positions.save(&self.library_folder) {
+            self.notice = error;
+        }
+        if let Err(error) = save_consents(&self.library_folder, &self.consents) {
+            self.notice = error;
+        }
+    }
+
+    /// Recarga posiciones y consentimientos al cambiar de biblioteca y
+    /// cierra las vistas de lectura abiertas (pertenecen a otra carpeta).
+    fn reload_library_data(&mut self) {
+        let (positions, error) = reading_positions::load(&self.library_folder);
+        if let Some(error) = error {
+            self.notice = error;
+        }
+        let (consents, error) = load_consents(&self.library_folder);
+        if let Some(error) = error {
+            self.notice = error;
+        }
+        self.positions = positions;
+        self.consents = consents;
+        self.reader.close();
+        self.pdf_view.reset();
     }
 
     fn save(&mut self) {
@@ -245,8 +306,28 @@ impl LibraryApp {
                 self.library_generation = self.library_generation.wrapping_add(1);
                 self.storage_error = None;
                 self.adding = false;
+                self.reload_library_data();
             }
             Err(error) => self.notice = error,
+        }
+    }
+
+    /// Abre el lector básico del libro: EPUB con su última posición
+    /// (capítulo+párrafo) o PDF con su última página (PROD-004).
+    fn abrir_lector(&mut self, ctx: &egui::Context, book_id: u64, ruta: PathBuf) {
+        let extension = ruta
+            .extension()
+            .map(|ext| ext.to_string_lossy().to_lowercase())
+            .unwrap_or_default();
+        if extension == "pdf" {
+            let page = self.positions.pdf_page(book_id);
+            self.pdf_view.open_path(ctx, ruta, book_id, page);
+        } else {
+            let guardada = self.positions.epub_position(book_id);
+            self.reader.open_path(&ruta, book_id, guardada);
+            if let Some(error) = &self.reader.error {
+                self.notice = error.clone();
+            }
         }
     }
 
@@ -395,6 +476,21 @@ impl LibraryApp {
 impl eframe::App for LibraryApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         self.import_ui(ctx);
+        // Lector básico y vistas de lectura: se muestran si están abiertas y
+        // capturan la última posición para persistirla por libro (PROD-004).
+        self.reader.show(ctx);
+        if let Some((book_id, position)) = self.reader.take_position() {
+            self.positions.set_epub(book_id, position);
+            self.save_library_data();
+        }
+        self.pdf_view.show(ctx);
+        if let Some((book_id, page)) = self.pdf_view.pending_position() {
+            self.positions.set_pdf(book_id, page);
+            self.save_library_data();
+            self.pdf_view.mark_saved();
+        }
+        // Consentimiento IA: solo aparece si hay una petición pendiente.
+        self.consent_view.show(ctx, &mut self.consents);
         if (self.library_tools.busy() || self.import_flow.busy())
             && ctx.input(|i| i.viewport().close_requested())
         {
@@ -726,6 +822,10 @@ fn sidebar(ui: &mut egui::Ui, app: &mut LibraryApp) {
         .show(ui, |ui| {
             ui.set_min_width(210.0);
             ui.set_max_width(230.0);
+            // NOTA (AGENTE B): la versión con ScrollArea central rompía el
+            // layout al vivir dentro de este contenedor ui.horizontal; queda
+            // como mejora pendiente post-MVP (issue #1). El pie puede quedar
+            // cortado a alturas de ventana muy pequeñas.
             ui.vertical(|ui| {
                 ui.label(RichText::new("MIS LIBROS").size(12.0).strong().color(GREEN));
                 ui.add_space(12.0);
@@ -921,8 +1021,24 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
                     app.draft = Draft::default();
                     app.adding = true;
                 }
-                if ui.add_enabled(!app.import_flow.active(), egui::Button::new("Importar libros…")).clicked() { app.begin_import(Vec::new()); }
-                if ui.add_enabled(!app.import_flow.active(), egui::Button::new("Desde Calibre…")).clicked() { app.begin_calibre_import(); }
+                if ui
+                    .add_enabled(
+                        !app.import_flow.active(),
+                        egui::Button::new("Importar libros…"),
+                    )
+                    .clicked()
+                {
+                    app.begin_import(Vec::new());
+                }
+                if ui
+                    .add_enabled(
+                        !app.import_flow.active(),
+                        egui::Button::new("Desde Calibre…"),
+                    )
+                    .clicked()
+                {
+                    app.begin_calibre_import();
+                }
                 if !app.notice.is_empty() {
                     ui.label(RichText::new(&app.notice).size(11.0).color(MUTED));
                 }
@@ -935,7 +1051,7 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
             ui.add_sized(
                 [ui.available_width() - 48.0, 38.0],
                 egui::TextEdit::singleline(&mut app.search)
-                    .hint_text("⌕   Buscar por título, autor, etiqueta…"),
+                    .hint_text("Buscar por título, autor, etiqueta…"),
             );
             ui.add_space(24.0);
         });
@@ -946,7 +1062,12 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
             .inner_margin(egui::Margin::symmetric(14, 9))
             .show(ui, |ui| {
                 ui.add_space(24.0);
-                ui.label(RichText::new("Arrastra aquí un libro electrónico para incorporarlo y etiquetarlo automáticamente").size(12.0).strong().color(GREEN));
+                ui.label(
+                    RichText::new("Arrastra aquí un libro electrónico para revisarlo e importarlo")
+                        .size(12.0)
+                        .strong()
+                        .color(GREEN),
+                );
             });
         ui.add_space(8.0);
         let filtered = app.visible_books();
@@ -1004,7 +1125,9 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
                                             book.id,
                                             |ui| ui.selectable_label(active, label),
                                         );
-                                        if drag.inner.clicked() { app.selected = Some(book.id); }
+                                        if drag.inner.clicked() {
+                                            app.selected = Some(book.id);
+                                        }
                                         ui.label(
                                             RichText::new(format!("· {}", book.author))
                                                 .size(12.0)
@@ -1068,22 +1191,49 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
                         );
                         ui.add_space(12.0);
                         let book = &mut app.books[index];
-                        egui::CollapsingHeader::new("Archivos y almacenamiento").default_open(true).show(ui, |ui| {
-                            for file in &book.files {
-                                let mode=match file.mode {storage::StorageMode::Managed=>"Administrado",storage::StorageMode::Linked=>"Vinculado"};
-                                ui.label(RichText::new(format!("{mode}: {}",file.path.display())).size(10.0));
-                                match file.resolve(&app.library_folder) {
-                                    Ok(path) if path.is_file()=>(),
-                                    Ok(_)=>{ui.colored_label(Color32::DARK_RED,"Archivo no disponible; se conserva la ficha");},
-                                    Err(error)=>{ui.colored_label(Color32::DARK_RED,error);},
+                        egui::CollapsingHeader::new("Archivos y almacenamiento")
+                            .default_open(true)
+                            .show(ui, |ui| {
+                                for file in &book.files {
+                                    let mode = match file.mode {
+                                        storage::StorageMode::Managed => "Administrado",
+                                        storage::StorageMode::Linked => "Vinculado",
+                                    };
+                                    ui.label(
+                                        RichText::new(format!("{mode}: {}", file.path.display()))
+                                            .size(10.0),
+                                    );
+                                    match file.resolve(&app.library_folder) {
+                                        Ok(path) if path.is_file() => (),
+                                        Ok(_) => {
+                                            ui.colored_label(
+                                                Color32::DARK_RED,
+                                                "Archivo no disponible; se conserva la ficha",
+                                            );
+                                        }
+                                        Err(error) => {
+                                            ui.colored_label(Color32::DARK_RED, error);
+                                        }
+                                    }
                                 }
-                            }
-                            if let Some(path)=&book.file_path {
-                                ui.label(RichText::new(format!("Vinculado (catálogo antiguo): {path}")).size(10.0));
-                                if !std::path::Path::new(path).is_file(){ui.colored_label(Color32::DARK_RED,"Archivo no disponible; se conserva la ficha");}
-                            }
-                            if book.files.is_empty() && book.file_path.is_none(){ui.label("Ficha sin archivo asociado");}
-                        });
+                                if let Some(path) = &book.file_path {
+                                    ui.label(
+                                        RichText::new(format!(
+                                            "Vinculado (catálogo antiguo): {path}"
+                                        ))
+                                        .size(10.0),
+                                    );
+                                    if !std::path::Path::new(path).is_file() {
+                                        ui.colored_label(
+                                            Color32::DARK_RED,
+                                            "Archivo no disponible; se conserva la ficha",
+                                        );
+                                    }
+                                }
+                                if book.files.is_empty() && book.file_path.is_none() {
+                                    ui.label("Ficha sin archivo asociado");
+                                }
+                            });
                         changed |= ui
                             .add(
                                 egui::TextEdit::singleline(&mut book.title)
@@ -1153,6 +1303,32 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
                                 .changed();
                         });
                         ui.add_space(18.0);
+                        // Lector básico integrado (PROD-004): EPUB/PDF con
+                        // recuperación de la última posición de lectura.
+                        let archivos = book.file_paths(&app.library_folder);
+                        let es_de = |ruta: &std::path::Path, formato: &str| {
+                            ruta.extension()
+                                .map(|ext| ext.to_string_lossy().to_lowercase() == formato)
+                                .unwrap_or(false)
+                        };
+                        let epub = archivos.iter().find(|ruta| es_de(ruta, "epub")).cloned();
+                        let pdf = archivos.iter().find(|ruta| es_de(ruta, "pdf")).cloned();
+                        if epub.is_some() || pdf.is_some() {
+                            if ui.button("📖 Leer libro").clicked() {
+                                let ruta = epub.or(pdf).expect("hay archivo de lectura");
+                                let ctx = ui.ctx().clone();
+                                app.abrir_lector(&ctx, id, ruta);
+                            }
+                        } else {
+                            ui.weak("Sin archivo EPUB/PDF asociado para leer");
+                        }
+                        ui.add_space(10.0);
+                        // Consentimiento IA por libro (PROD-006): estado y
+                        // revocación visibles en la ficha.
+                        if ai_consent_view::status_row(ui, &mut app.consents, id) {
+                            app.save_library_data();
+                        }
+                        ui.add_space(18.0);
                         if ui
                             .button(
                                 RichText::new("Eliminar libro")
@@ -1162,6 +1338,9 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
                         {
                             app.books.remove(index);
                             app.selected = app.books.first().map(|item| item.id);
+                            app.positions.forget(id);
+                            app.consents.forget(id);
+                            app.save_library_data();
                             app.save();
                         }
                     });
@@ -1287,6 +1466,36 @@ fn save_api_key(provider: &str, key: &str) -> Result<(), String> {
             .set_password(key.trim())
             .map_err(|error| error.to_string())
     }
+}
+
+/// Nombre del archivo de consentimientos IA en la carpeta de biblioteca.
+const CONSENTS_FILE: &str = "ai-consents.json";
+
+/// Carga el estado de consentimientos IA; ausente = vacío, corrupto se
+/// informa y se empieza vacío sin destruir el archivo.
+fn load_consents(folder: &std::path::Path) -> (ai_consent::ConsentManager, Option<String>) {
+    let ruta = folder.join(CONSENTS_FILE);
+    match std::fs::read(&ruta) {
+        Ok(bytes) => match serde_json::from_slice::<ai_consent::ConsentManager>(&bytes) {
+            Ok(manager) => (manager, None),
+            Err(error) => (
+                ai_consent::ConsentManager::new(),
+                Some(format!(
+                    "Consentimientos IA ilegibles, se empiezan de cero: {error}"
+                )),
+            ),
+        },
+        Err(_) => (ai_consent::ConsentManager::new(), None),
+    }
+}
+
+fn save_consents(
+    folder: &std::path::Path,
+    manager: &ai_consent::ConsentManager,
+) -> Result<(), String> {
+    let ruta = folder.join(CONSENTS_FILE);
+    let bytes = serde_json::to_vec_pretty(manager).map_err(|e| e.to_string())?;
+    persistence::atomic_write(&ruta, &bytes)
 }
 
 fn is_supported_book(path: &std::path::Path) -> bool {
@@ -1829,6 +2038,9 @@ fn main() -> eframe::Result<()> {
     eframe::run_native(
         "Mis libros",
         options,
-        Box::new(move |_cc| Ok(Box::new(LibraryApp::new(screenshot)))),
+        Box::new(move |cc| {
+            cc.egui_ctx.set_visuals(egui::Visuals::light());
+            Ok(Box::new(LibraryApp::new(screenshot)))
+        }),
     )
 }

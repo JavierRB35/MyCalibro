@@ -238,7 +238,8 @@ impl ImportWizardView {
             .map(|outcome| outcome.reviews.clone())
             .unwrap_or_default();
         egui::ScrollArea::vertical()
-            .auto_shrink(false)
+            .max_height((ui.available_height() - 110.0).max(100.0))
+            .auto_shrink([false, true])
             .show(ui, |ui| {
                 for (index, review) in reviews.iter().enumerate() {
                     ui.push_id(index, |ui| {
@@ -273,6 +274,51 @@ impl ImportWizardView {
                             );
                         });
                         self.wizard.set_decision(index, actual);
+                        // Con varias fichas empatadas a la misma certeza, el
+                        // usuario elige el destino explícitamente; sin
+                        // elección el plan se bloquea (nunca se asocia a una
+                        // ficha al azar; hallazgo del AGENTE A).
+                        if actual == Decision::AssociateFormat {
+                            let opciones = self.wizard.association_options(index);
+                            if opciones.len() > 1 {
+                                let mut destino = self.wizard.association_target(index);
+                                ui.horizontal(|ui| {
+                                    ui.label("Asociar al libro:");
+                                    let texto_actual = destino
+                                        .and_then(|id| {
+                                            opciones
+                                                .iter()
+                                                .find(|(i, _)| *i == id)
+                                                .map(|(_, etiqueta)| etiqueta.clone())
+                                        })
+                                        .unwrap_or_else(|| {
+                                            "Elige el libro destino…".to_owned()
+                                        });
+                                    egui::ComboBox::from_id_salt(format!("destino-{index}"))
+                                        .selected_text(texto_actual)
+                                        .show_ui(ui, |ui| {
+                                            for (id, etiqueta) in &opciones {
+                                                ui.selectable_value(
+                                                    &mut destino,
+                                                    Some(*id),
+                                                    etiqueta,
+                                                );
+                                            }
+                                        });
+                                });
+                                if destino.is_none() {
+                                    ui.colored_label(
+                                        egui::Color32::from_rgb(172, 106, 0),
+                                        "Indica a qué libro se añadirá este formato antes de continuar.",
+                                    );
+                                }
+                                if destino != self.wizard.association_target(index) {
+                                    let _ = self
+                                        .wizard
+                                        .set_association_target(index, destino.expect("opciones no vacías"));
+                                }
+                            }
+                        }
                     });
                 }
             });
@@ -295,7 +341,7 @@ impl ImportWizardView {
             }
         });
         ui.add_space(4.0);
-        if ui.button("Generar plan de importación").clicked() {
+        if ui.button("Confirmar importación revisada").clicked() {
             match self.wizard.build_plan() {
                 Ok(plan) => {
                     self.mensaje = None;
@@ -310,19 +356,17 @@ impl ImportWizardView {
                 "Plan listo. La aplicación lo ejecutará al cerrar este asistente.",
             );
         }
-        if let Some(errores) = self
-            .wizard
-            .outcome
-            .as_ref()
-            .filter(|outcome| !outcome.errors.is_empty())
-        {
+        let errores = self.wizard.scan_errors();
+        if !errores.is_empty() {
             ui.add_space(4.0);
-            egui::CollapsingHeader::new(format!("Errores del escaneo ({})", errores.errors.len()))
-                .show(ui, |ui| {
-                    for error in &errores.errors {
+            egui::CollapsingHeader::new(format!("Errores del escaneo ({})", errores.len())).show(
+                ui,
+                |ui| {
+                    for error in errores {
                         ui.weak(format!("{}: {}", error.path.display(), error.message));
                     }
-                });
+                },
+            );
         }
     }
 }

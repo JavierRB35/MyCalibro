@@ -13,7 +13,7 @@
 use std::collections::BTreeMap;
 use std::path::PathBuf;
 
-use crate::import_scan::{CatalogItem, DuplicateMatch, ScanError, ScanOutcome, SuggestedAction};
+use crate::import_scan::{DuplicateMatch, ScanError, ScanOutcome, SuggestedAction};
 
 /// Fase actual del asistente.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -35,16 +35,6 @@ pub enum Decision {
     Skip,
     /// Añadir el archivo como formato adicional de un libro ya registrado.
     AssociateFormat,
-}
-
-impl Decision {
-    pub fn label(self) -> &'static str {
-        match self {
-            Decision::Import => "Importar",
-            Decision::Skip => "Omitir",
-            Decision::AssociateFormat => "Asociar formato",
-        }
-    }
 }
 
 /// Progreso comunicado desde el hilo trabajador durante el escaneo.
@@ -374,15 +364,10 @@ fn ids_certeza_maxima(matches: &[DuplicateMatch]) -> Vec<u64> {
     ids
 }
 
-/// Catálogo mínimo necesario para el análisis; expuesto para la vista.
-pub fn catalog_entry(id: u64, title: &str, author: &str, path: Option<String>) -> CatalogItem {
-    CatalogItem::new(id, title, author, path)
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::import_scan::{scan_paths, Certainty, MatchKind};
+    use crate::import_scan::{scan_paths, CatalogItem, Certainty, MatchKind};
     use std::path::Path;
 
     /// Lote temporal único por llamada: cargo test ejecuta los tests en

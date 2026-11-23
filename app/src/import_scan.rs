@@ -125,6 +125,7 @@ pub enum SuggestedAction {
 /// Escanea las rutas de entrada (archivos o carpetas, recursivo) y contrasta
 /// los candidatos con el catálogo. Solo lectura; los errores puntuales se
 /// registran y no abortan el lote.
+#[allow(dead_code)] // envoltorio de conveniencia usado por pruebas de varios módulos
 pub fn scan_paths(inputs: &[PathBuf], catalog: &[CatalogItem]) -> ScanOutcome {
     scan_paths_with_progress(inputs, catalog, &mut |_, _| true)
 }
@@ -160,6 +161,7 @@ pub fn scan_paths_with_progress(
 
 /// Analiza un archivo aislado frente al catálogo (p. ej. un arrastre posterior
 /// al escaneo del lote).
+#[allow(dead_code)] // integración pendiente para arrastres de un solo archivo
 pub fn review_candidate(path: &Path, catalog: &[CatalogItem]) -> CandidateReview {
     let candidate = Candidate {
         path: path.to_path_buf(),
