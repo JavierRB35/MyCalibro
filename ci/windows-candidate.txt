@@ -1,0 +1,4 @@
+MyCalibro - Windows candidate validation
+Source commit: 58214e89158aceedce6c2494c86c1c41e44e761a
+Reason: integration of PR #10 (async EPUB reader) and main review; one full post-integration Windows verification.
+Issued: 2026-11-23
