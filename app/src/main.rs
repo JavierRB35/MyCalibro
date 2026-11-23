@@ -1134,6 +1134,25 @@ fn library_list_scroll_area() -> egui::ScrollArea {
         .auto_shrink([false, false])
 }
 
+/// El origen de arrastre no es por sí mismo un control de selección: el
+/// título usa Sense::drag y la ficha debe responder a un clic en toda el área.
+/// Un ID distinto y Sense::click conservan el gesto de arrastrar y evitan que
+/// el clic quede interceptado por el origen DnD.
+fn select_book_card(
+    ui: &mut egui::Ui,
+    rect: egui::Rect,
+    book_id: u64,
+    selected: &mut Option<u64>,
+) {
+    let click_id = egui::Id::new(("library-book-select", book_id));
+    if ui.interact(rect, click_id, egui::Sense::click()).clicked() {
+        *selected = Some(book_id);
+        // La ficha derecha se dibuja antes que el panel central: necesita
+        // un nuevo fotograma para reflejar la nueva selección.
+        ui.ctx().request_repaint();
+    }
+}
+
 fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
     ui.vertical(|ui| {
         ui.add_space(24.0);
@@ -1239,7 +1258,7 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
                     ui.set_min_width(ui.available_width());
                     for book in &filtered {
                         let active = app.selected == Some(book.id);
-                        egui::Frame::new()
+                        let card = egui::Frame::new()
                             .fill(if active {
                                 Color32::from_rgb(239, 245, 239)
                             } else {
@@ -1262,14 +1281,11 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
                                     if active {
                                         label = label.color(GREEN);
                                     }
-                                    let drag = ui.dnd_drag_source(
+                                    ui.dnd_drag_source(
                                         egui::Id::new(("library-book", book.id)),
                                         book.id,
                                         |ui| ui.selectable_label(active, label),
                                     );
-                                    if drag.inner.clicked() {
-                                        app.selected = Some(book.id);
-                                    }
                                     ui.label(
                                         RichText::new(format!("· {}", book.author))
                                             .size(12.0)
@@ -1296,6 +1312,10 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
                                     }
                                 });
                             });
+                        // La tarjeta entera selecciona, no solo el título.
+                        // Registrar el Sense::click después del origen DnD
+                        // evita que este se apropie del clic.
+                        select_book_card(ui, card.response.rect, book.id, &mut app.selected);
                         ui.add_space(7.0);
                     }
                     if filtered.is_empty() {
@@ -2188,6 +2208,80 @@ mod tests {
         let item = book("Notas", "un día tranquilo");
         let error = classify_with_fallback(&item, "", "").unwrap_err();
         assert!(error.contains("Gemini") && error.contains("Groq"));
+    }
+
+    #[test]
+    fn clicking_book_card_outside_draggable_title_updates_details_selection() {
+        // Regresión real: antes solo se miraba drag.inner.clicked() sobre
+        // el título. El clic en el fondo de la tarjeta no cambiaba la ficha.
+        let ctx = egui::Context::default();
+        let mut selected = Some(1_u64);
+        let mut card_rect = egui::Rect::NOTHING;
+        fn render(
+            ctx: &egui::Context,
+            selected: &mut Option<u64>,
+            card_rect: &mut egui::Rect,
+            events: Vec<egui::Event>,
+        ) {
+            let input = egui::RawInput {
+                screen_rect: Some(egui::Rect::from_min_size(
+                    egui::Pos2::ZERO,
+                    egui::vec2(900.0, 600.0),
+                )),
+                events,
+                ..Default::default()
+            };
+            let _ = ctx.run(input, |ctx| {
+                egui::CentralPanel::default().show(ctx, |ui| {
+                    let card = egui::Frame::new()
+                        .inner_margin(egui::Margin::symmetric(14, 11))
+                        .show(ui, |ui| {
+                            ui.set_min_width(500.0);
+                            ui.horizontal(|ui| {
+                                ui.dnd_drag_source(
+                                    egui::Id::new(("library-book", 42_u64)),
+                                    42_u64,
+                                    |ui| ui.selectable_label(false, "Título de ejemplo"),
+                                );
+                                ui.label("· Autor");
+                            });
+                        });
+                    *card_rect = card.response.rect;
+                    super::select_book_card(ui, card.response.rect, 42, selected);
+                });
+            });
+        }
+
+        // Una primera pasada establece las dimensiones y los widgets para
+        // que egui pueda resolver la interacción en fotogramas posteriores.
+        render(&ctx, &mut selected, &mut card_rect, Vec::new());
+        let click_pos = egui::pos2(card_rect.right() - 22.0, card_rect.center().y);
+        render(
+            &ctx,
+            &mut selected,
+            &mut card_rect,
+            vec![
+                egui::Event::PointerMoved(click_pos),
+                egui::Event::PointerButton {
+                    pos: click_pos,
+                    button: egui::PointerButton::Primary,
+                    pressed: true,
+                    modifiers: egui::Modifiers::NONE,
+                },
+            ],
+        );
+        render(
+            &ctx,
+            &mut selected,
+            &mut card_rect,
+            vec![egui::Event::PointerButton {
+                pos: click_pos,
+                button: egui::PointerButton::Primary,
+                pressed: false,
+                modifiers: egui::Modifiers::NONE,
+            }],
+        );
+        assert_eq!(selected, Some(42), "el clic en el cuerpo de la ficha selecciona el libro");
     }
 
     #[test]
