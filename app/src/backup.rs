@@ -163,8 +163,8 @@ pub fn create(
             &mut manifest,
         )?;
     }
-    let values: Vec<Value> = serde_json::from_slice(catalog).map_err(|e| e.to_string())?;
-    for book in values {
+    let mut values: Vec<Value> = serde_json::from_slice(catalog).map_err(|e| e.to_string())?;
+    for book in &mut values {
         let id = book["id"].as_u64().ok_or("ID de libro inválido")?;
         if let Some(path) = book["file_path"].as_str() {
             add_external(
@@ -176,10 +176,10 @@ pub fn create(
                 &mut manifest,
             )?;
         }
-        if let Some(files) = book["files"].as_array() {
-            for (index, file) in files.iter().enumerate() {
+        if let Some(files) = book.get_mut("files").and_then(Value::as_array_mut) {
+            for (index, value) in files.iter_mut().enumerate() {
                 let file: StoredFile =
-                    serde_json::from_value(file.clone()).map_err(|e| e.to_string())?;
+                    serde_json::from_value(value.clone()).map_err(|e| e.to_string())?;
                 let source = file.resolve(&root)?;
                 if file.mode == StorageMode::Linked {
                     add_external(
@@ -190,6 +190,20 @@ pub fn create(
                         stage.path(),
                         &mut manifest,
                     )?;
+                    // External files may have changed since import: the snapshot records
+                    // the hash of the bytes actually backed up, without editing the live catalog.
+                    if let Some(reference) = manifest
+                        .external
+                        .iter()
+                        .find(|e| e.book_id == id && e.file_index == Some(index))
+                    {
+                        let entry = manifest
+                            .entries
+                            .iter()
+                            .find(|e| e.path == reference.payload)
+                            .ok_or("Falta la copia externa")?;
+                        value["sha256"] = Value::String(entry.sha256.clone());
+                    }
                 } else {
                     let payload = PathBuf::from("library").join(&file.path);
                     let entry = manifest
@@ -210,7 +224,8 @@ pub fn create(
         }
     }
     let catalog_path = stage.path().join("catalog.json");
-    crate::persistence::atomic_write(&catalog_path, catalog)?;
+    let catalog = serde_json::to_vec_pretty(&values).map_err(|e| e.to_string())?;
+    crate::persistence::atomic_write(&catalog_path, &catalog)?;
     manifest.entries.push(Entry {
         path: PathBuf::from("catalog.json"),
         size: catalog.len() as u64,
@@ -438,6 +453,8 @@ mod tests {
         catalog[0]["file_path"] = Value::Null;
         catalog[0]["files"] = serde_json::to_value(vec![managed.clone(), linked]).unwrap();
         let catalog = serde_json::to_vec(&catalog).unwrap();
+        // A linked source can change independently; recover the bytes actually captured.
+        fs::write(&source, b"linked updated externally").unwrap();
         let snapshot = create(root.path(), &catalog, output.path(), true).unwrap();
         let restored = restore(&snapshot.path, output.path()).unwrap();
         let (_, books) = crate::persistence::Catalog::open(&restored.path).unwrap();
