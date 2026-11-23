@@ -37,16 +37,6 @@ pub enum Decision {
     AssociateFormat,
 }
 
-impl Decision {
-    pub fn label(self) -> &'static str {
-        match self {
-            Decision::Import => "Importar",
-            Decision::Skip => "Omitir",
-            Decision::AssociateFormat => "Asociar formato",
-        }
-    }
-}
-
 /// Progreso comunicado desde el hilo trabajador durante el escaneo.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct ScanProgress {

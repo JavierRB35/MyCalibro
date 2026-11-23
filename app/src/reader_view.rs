@@ -167,6 +167,11 @@ impl ReaderView {
         self.open = false;
     }
 
+    // Los métodos de navegación siguientes son la API de estado para los
+    // controles del lector (selector de capítulos, teclas); la vista actual
+    // dibuja con las funciones puras homónimas para que ambas rutas no
+    // diverjan. Las pruebas los ejercitan.
+    #[allow(dead_code)]
     /// La posición cambió desde la última vez que la app la persistió.
     pub fn position_dirty(&self) -> bool {
         self.position_dirty
@@ -185,112 +190,101 @@ impl ReaderView {
         }
     }
 
+    #[allow(dead_code)] // API de navegación para controles futuros
     /// Ventana de párrafos de la página actual dentro del capítulo.
     pub fn page_range(&self) -> Option<std::ops::Range<usize>> {
         let document = self.document.as_ref()?;
         let chapter = document.chapters.get(self.position.chapter)?;
-        let start = self.position.paragraph.min(chapter.paragraphs.len());
-        let end = (start + self.font_scale.page_size()).min(chapter.paragraphs.len());
-        Some(start..end)
+        Some(ventana_pagina(
+            chapter.paragraphs.len(),
+            self.position.paragraph,
+            self.font_scale.page_size(),
+        ))
     }
 
+    #[allow(dead_code)] // API de navegación para controles futuros
     /// Páginas totales del capítulo actual (para «página p de q»).
     pub fn page_count(&self) -> Option<usize> {
         let document = self.document.as_ref()?;
         let chapter = document.chapters.get(self.position.chapter)?;
-        let size = self.font_scale.page_size();
-        Some(chapter.paragraphs.len().div_ceil(size).max(1))
+        Some(paginas_totales(
+            chapter.paragraphs.len(),
+            self.font_scale.page_size(),
+        ))
     }
 
+    #[allow(dead_code)] // API de navegación para controles futuros
     /// Avanza una página; al terminar el capítulo pasa al siguiente.
     /// Devuelve false si ya estaba al final del libro.
     pub fn next_page(&mut self) -> bool {
         let Some(document) = self.document.as_ref() else {
             return false;
         };
-        let Some(chapter) = document.chapters.get(self.position.chapter) else {
-            return false;
-        };
-        let size = self.font_scale.page_size();
-        let total = chapter.paragraphs.len();
-        let nueva = self.position.paragraph + size;
-        if nueva < total.max(1) {
-            self.position.paragraph = nueva;
-            self.position_dirty = true;
-            return true;
-        }
-        if self.position.chapter + 1 < document.chapters.len() {
-            self.position.chapter += 1;
-            self.position.paragraph = 0;
-            self.position_dirty = true;
-            return true;
-        }
-        false
+        let total = document
+            .chapters
+            .get(self.position.chapter)
+            .map(|c| c.paragraphs.len())
+            .unwrap_or(0);
+        let avanzo = avanzar_pagina(
+            total,
+            document.chapters.len(),
+            &mut self.position,
+            self.font_scale.page_size(),
+        );
+        self.position_dirty |= avanzo;
+        avanzo
     }
 
+    #[allow(dead_code)] // API de navegación para controles futuros
     /// Retrocede una página; al inicio del capítulo pasa al anterior,
     /// situándose en su última página.
     pub fn previous_page(&mut self) -> bool {
-        let size = self.font_scale.page_size();
-        if self.position.paragraph >= size {
-            self.position.paragraph -= size;
-            self.position_dirty = true;
-            return true;
-        }
-        if self.position.chapter > 0 {
-            self.position.chapter -= 1;
-            let total = self
-                .document
-                .as_ref()
-                .and_then(|d| d.chapters.get(self.position.chapter))
-                .map(|c| c.paragraphs.len())
-                .unwrap_or(0);
-            self.position.paragraph = total.saturating_sub(1) / size * size;
-            self.position_dirty = true;
-            return true;
-        }
-        false
+        let Some(document) = self.document.as_ref() else {
+            return false;
+        };
+        let retrocedo = retroceder_pagina(
+            &document.chapters,
+            &mut self.position,
+            self.font_scale.page_size(),
+        );
+        self.position_dirty |= retrocedo;
+        retrocedo
     }
 
+    #[allow(dead_code)] // API de navegación para controles futuros
     /// Salta a un capítulo concreto (selector de la interfaz).
     pub fn go_to_chapter(&mut self, chapter: usize) -> bool {
         let Some(document) = self.document.as_ref() else {
             return false;
         };
-        if chapter >= document.chapters.len() {
-            return false;
-        }
-        if chapter != self.position.chapter {
-            self.position.chapter = chapter;
-            self.position.paragraph = 0;
-            self.position_dirty = true;
-        }
-        true
+        let salto = saltar_capitulo(document.chapters.len(), &mut self.position, chapter);
+        self.position_dirty |= salto;
+        salto
     }
 
+    #[allow(dead_code)] // API de navegación para controles futuros
     pub fn next_chapter(&mut self) -> bool {
         let Some(document) = self.document.as_ref() else {
             return false;
         };
-        if self.position.chapter + 1 < document.chapters.len() {
-            self.position.chapter += 1;
-            self.position.paragraph = 0;
-            self.position_dirty = true;
-            true
-        } else {
-            false
-        }
+        let destino = self.position.chapter + 1;
+        let salto = saltar_capitulo(document.chapters.len(), &mut self.position, destino);
+        self.position_dirty |= salto;
+        salto
     }
 
+    #[allow(dead_code)] // API de navegación para controles futuros
     pub fn previous_chapter(&mut self) -> bool {
-        if self.document.is_some() && self.position.chapter > 0 {
-            self.position.chapter -= 1;
-            self.position.paragraph = 0;
-            self.position_dirty = true;
-            true
-        } else {
-            false
+        let Some(document) = self.document.as_ref() else {
+            return false;
+        };
+        if self.position.chapter == 0 {
+            return false;
         }
+        let destino = self.position.chapter - 1;
+        let salto = saltar_capitulo(document.chapters.len(), &mut self.position, destino);
+        self.position_dirty |= salto;
+        salto
     }
 
     /// Dibuja la ventana del lector. Los colores del tema son locales: no se
@@ -322,7 +316,7 @@ impl ReaderView {
                 let Some(document) = document.as_ref() else {
                     return;
                 };
-                Self::draw_header(ui, document, position, font_scale, theme);
+                Self::draw_header(ui, document, position, position_dirty, font_scale, theme);
                 ui.separator();
                 Self::draw_page(ui, document, position, *font_scale, *theme);
                 ui.separator();
@@ -335,6 +329,7 @@ impl ReaderView {
         ui: &mut egui::Ui,
         document: &EpubDocument,
         position: &mut ReadingPosition,
+        position_dirty: &mut bool,
         font_scale: &mut FontScale,
         theme: &mut ReaderTheme,
     ) {
@@ -374,15 +369,16 @@ impl ReaderView {
         });
         ui.add_space(4.0);
         ui.horizontal(|ui| {
-            if ui.button("◀ Capítulo anterior").clicked() && position.chapter > 0 {
-                position.chapter -= 1;
-                position.paragraph = 0;
+            if ui.button("◀ Capítulo anterior").clicked()
+                && position.chapter > 0
+                && saltar_capitulo(document.chapters.len(), position, position.chapter - 1)
+            {
+                *position_dirty = true;
             }
             if ui.button("Capítulo siguiente ▶").clicked()
-                && position.chapter + 1 < document.chapters.len()
+                && saltar_capitulo(document.chapters.len(), position, position.chapter + 1)
             {
-                position.chapter += 1;
-                position.paragraph = 0;
+                *position_dirty = true;
             }
         });
     }
@@ -397,8 +393,11 @@ impl ReaderView {
         let Some(chapter) = document.chapters.get(position.chapter) else {
             return;
         };
-        let start = position.paragraph.min(chapter.paragraphs.len());
-        let end = (start + font_scale.page_size()).min(chapter.paragraphs.len());
+        let rango = ventana_pagina(
+            chapter.paragraphs.len(),
+            position.paragraph,
+            font_scale.page_size(),
+        );
         let factor = font_scale.factor();
         egui::Frame::new()
             .fill(theme.background())
@@ -407,7 +406,7 @@ impl ReaderView {
                 egui::ScrollArea::vertical()
                     .auto_shrink(false)
                     .show(ui, |ui| {
-                        for parrafo in chapter.paragraphs[start..end].iter() {
+                        for parrafo in chapter.paragraphs[rango.clone()].iter() {
                             ui.add_space(6.0);
                             ui.label(
                                 egui::RichText::new(parrafo)
@@ -437,33 +436,18 @@ impl ReaderView {
             return;
         };
         let total = chapter.paragraphs.len();
-        let paginas = total.div_ceil(size).max(1);
+        let paginas = paginas_totales(total, size);
         let actual = position.paragraph / size + 1;
         ui.horizontal(|ui| {
-            if ui.button("◀ Página anterior").clicked() {
-                if position.paragraph >= size {
-                    position.paragraph -= size;
-                    *position_dirty = true;
-                } else if position.chapter > 0 {
-                    position.chapter -= 1;
-                    let previa = document
-                        .chapters
-                        .get(position.chapter)
-                        .map(|c| c.paragraphs.len())
-                        .unwrap_or(0);
-                    position.paragraph = previa.saturating_sub(1) / size * size;
-                    *position_dirty = true;
-                }
+            if ui.button("◀ Página anterior").clicked()
+                && retroceder_pagina(&document.chapters, position, size)
+            {
+                *position_dirty = true;
             }
-            if ui.button("Página siguiente ▶").clicked() {
-                if position.paragraph + size < total.max(1) {
-                    position.paragraph += size;
-                    *position_dirty = true;
-                } else if position.chapter + 1 < document.chapters.len() {
-                    position.chapter += 1;
-                    position.paragraph = 0;
-                    *position_dirty = true;
-                }
+            if ui.button("Página siguiente ▶").clicked()
+                && avanzar_pagina(total, document.chapters.len(), position, size)
+            {
+                *position_dirty = true;
             }
             ui.weak(
                 egui::RichText::new(format!(
@@ -480,6 +464,75 @@ impl Default for ReaderView {
     fn default() -> Self {
         Self::new()
     }
+}
+
+// Funciones puras compartidas por el estado, la vista y las pruebas: así la
+// navegación no puede divergir entre lo probado y lo dibujado.
+
+/// Ventana de párrafos visible para una página, dentro de los límites.
+fn ventana_pagina(total: usize, paragraph: usize, size: usize) -> std::ops::Range<usize> {
+    let start = paragraph.min(total);
+    let end = (start + size).min(total);
+    start..end
+}
+
+/// Páginas en que se divide un capítulo de `total` párrafos.
+fn paginas_totales(total: usize, size: usize) -> usize {
+    total.div_ceil(size).max(1)
+}
+
+/// Avanza una página; al agotarse el capítulo pasa al siguiente. Devuelve
+/// false si ya estaba al final del libro.
+fn avanzar_pagina(
+    total: usize,
+    total_capitulos: usize,
+    position: &mut ReadingPosition,
+    size: usize,
+) -> bool {
+    let nueva = position.paragraph + size;
+    if nueva < total.max(1) {
+        position.paragraph = nueva;
+        return true;
+    }
+    if position.chapter + 1 < total_capitulos {
+        position.chapter += 1;
+        position.paragraph = 0;
+        return true;
+    }
+    false
+}
+
+/// Retrocede una página; al inicio del capítulo pasa al anterior, situándose
+/// en su última página. Devuelve false si ya estaba al inicio del libro.
+fn retroceder_pagina(
+    chapters: &[crate::reader_epub::Chapter],
+    position: &mut ReadingPosition,
+    size: usize,
+) -> bool {
+    if position.paragraph >= size {
+        position.paragraph -= size;
+        return true;
+    }
+    if position.chapter > 0 {
+        position.chapter -= 1;
+        let previa = chapters
+            .get(position.chapter)
+            .map(|c| c.paragraphs.len())
+            .unwrap_or(0);
+        position.paragraph = previa.saturating_sub(1) / size * size;
+        return true;
+    }
+    false
+}
+
+/// Salta al capítulo `destino` si existe y es distinto del actual.
+fn saltar_capitulo(total_capitulos: usize, position: &mut ReadingPosition, destino: usize) -> bool {
+    if destino >= total_capitulos || destino == position.chapter {
+        return false;
+    }
+    position.chapter = destino;
+    position.paragraph = 0;
+    true
 }
 
 /// Porcentaje leído sobre el total de párrafos del libro (aproximación

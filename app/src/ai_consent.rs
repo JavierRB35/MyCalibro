@@ -13,6 +13,12 @@
 //! persistencia corre a cargo de la capa existente mediante serde; el mapa
 //! usa el identificador estable del libro y no contiene secretos.
 
+// La API de envío (can_send_text, TextRequest, ConsentError, AnalysisSource)
+// queda a la espera del motor de análisis por libro; el estado, el aviso y
+// la fila de la ficha ya están cableados. Integración trazada en el issue
+// de coordinación #1.
+#![allow(dead_code)]
+
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet};
 
