@@ -67,27 +67,41 @@
 - **Alcance y compatibilidad:** afecta al **contenido de los libros** en las funciones de PROD-005; no equivale a prohibir la clasificación existente basada en metadatos, aunque su uso de servicios externos y su transparencia deberán verificarse. Mantener separado el lector básico establecido en PROD-004.
 - **Estado de implementación:** pendiente. Esta decisión documental no implica que los permisos o controles de privacidad ya existan en la app.
 
-## PROD-007 — Plataformas de destino
+## PROD-007 — Plataformas de destino e integración con BibliotecaAI
+- **Fecha de apertura y aprobación:** 2026-11-23.
+- **Estado:** APROBADA por el propietario.
+- **Alternativa seleccionada:** **A: MyCalibro exclusivamente para Windows**.
+- **Comportamiento vinculante:** la interfaz y distribución de MyCalibro serán de escritorio para Windows. No se aprueba portar MyCalibro a macOS, Linux, Android ni iOS en esta decisión.
+- **Objetivo de interoperabilidad comunicado expresamente:** permitir que **BibliotecaAI, aplicación independiente para Android**, se conecte a la biblioteca de MyCalibro, que el propietario desea poder alojar en **Google Drive**. Esto **no** cambia la elección de Windows: Android utilizaría BibliotecaAI como cliente de la biblioteca compartida y no una versión móvil de MyCalibro.
+- **Separación de responsabilidades:** MyCalibro administra su catálogo y archivos en Windows; BibliotecaAI tiene sus propias funcionalidades y repositorio. La interoperabilidad futura requerirá un formato de intercambio/almacenamiento estable y reglas explícitas de acceso. Las modificaciones del código Android se tratarán en su repositorio, no como cambios del código Windows.
+- **Compatibilidad con PROD-002:** el modelo híbrido debe admitir que una biblioteca administrada pueda ubicarse en una carpeta sincronizada con Drive o que existan enlaces externos, sin suponer que rutas absolutas de Windows sean utilizables en Android.
+- **Compatibilidad con PROD-003:** la importación puntual **desde Calibre** sigue sin sincronización posterior. El acceso compartido entre MyCalibro y BibliotecaAI es una integración distinta; no reabre la sincronización con Calibre.
+- **Restricción del sistema Android ya establecida por el propietario en el proyecto BibliotecaAI:** acceso a ubicaciones elegidas por el usuario mediante Android Storage Access Framework (SAF), con Google Drive como posible proveedor, **sin OAuth, registro ni inicio de sesión Gmail incorporados en BibliotecaAI**. Verificar esta compatibilidad al diseñar y probar la integración en el repositorio Android.
+- **No confundir biblioteca compartida con backup:** el respaldo ZIP de BibliotecaAI, con sustitución del mismo archivo, es un procedimiento de copia/restauración, **no** por sí mismo un catálogo vivo sincronizado con MyCalibro.
+- **Pendiente de concreción:** topología de la carpeta de Drive, funcionamiento sin conexión, política de publicación, estructura e identificadores de libros, caché, conflictos, niveles de edición y compatibilidad con SAF. No se aprueba todavía sincronización bidireccional.
+- **Estado de implementación:** decisión documental. Actualmente MyCalibro no gestiona una biblioteca compartida en Drive y la conexión entre ambas aplicaciones no se ha verificado.
+
+## PROD-008 — Nivel de acceso de BibliotecaAI a la biblioteca en Google Drive
 - **Fecha de apertura:** 2026-11-23.
 - **Estado:** PENDIENTE DE ELECCIÓN.
-- **Pregunta:** ¿En qué sistemas debe ejecutarse MyCalibro como producto final, considerando que actualmente usa Rust/egui y parte de la integración con dispositivos es específica de Windows?
+- **Contexto aprobado:** MyCalibro se ejecutará solo en Windows; BibliotecaAI Android debe poder conectarse a una biblioteca de MyCalibro ubicada en Drive. **No** usar la exportación de un ZIP de backup como sustituto de una biblioteca consultable de forma ordinaria.
 
-| Opción | Alcance | Consecuencia principal |
+| Opción | Qué haría BibliotecaAI en la biblioteca compartida | Riesgo / complejidad |
 | --- | --- | --- |
-| A. Solo Windows | Desarrollo, empaquetado, lector y dispositivos centrados en Windows | Menor complejidad y validación en un único entorno |
-| B. Escritorio multiplataforma | Windows, macOS y Linux, adaptando rutas, credenciales, instaladores y compatibilidad con dispositivos por plataforma | Mayor alcance conservando el concepto de aplicación de escritorio; más pruebas y mantenimiento |
-| C. Escritorio y móvil | Aplicación de escritorio más clientes móviles, al menos Android y potencialmente iOS, con experiencia adaptada | Amplía mucho el producto; implica nuevas decisiones sobre interfaz, datos y distribución |
+| A. Consulta y descarga | Visualizar catálogo y descargar/abrir libros de Drive, sin modificar el catálogo compartido; anotaciones y progreso propios permanecen locales en Android | Más simple y resistente a conflictos; no devuelve cambios a MyCalibro |
+| B. Consulta + progreso de lectura | Todo A, más intercambio controlado del progreso y datos de lectura acordados entre ambos clientes, sin editar o borrar el catálogo maestro desde Android | Requiere identidad estable de libros, formatos compartidos, resolución de cambios concurrentes y pruebas sin conexión |
+| C. Biblioteca editable desde ambos | Consultar, incorporar y modificar libros y metadatos desde ambas aplicaciones y reconciliar cambios sobre Drive | Máximo alcance, pero alto riesgo de conflictos, duplicados, borrados y corrupción del catálogo compartido |
 
-**Recomendación para el debate (no aprobada):** A si lo prioritario es cerrar cuanto antes una versión Windows; B si se desea crecer en escritorio con límites de complejidad razonables. C solo si existe un objetivo real de uso móvil, pues no resulta una simple recompilación del código actual.
+**Recomendación técnica, no aprobada:** empezar con A como primera entrega de una conexión real y decidir si alcanzar B después. La elección de B o C deberá incluir una estrategia comprobable de reconciliación, versionado/atomicidad, recuperación y funcionamiento offline. En todos los casos, aprovechar el acceso SAF ya fijado para BibliotecaAI y no introducir OAuth propio como requisito.
 
-**Pendiente:** elegir A, B o C. La elección no promete soporte inmediato ni implica iniciar una reescritura.
+**Cuestiones técnicas no aprobadas:** carpeta de Drive como ubicación gestionada por sincronización de escritorio, formato de catálogo portable (sin rutas absolutas dependientes de Windows), funcionamiento del lector al quedar sin conexión, selección manual de carpeta y permisos persistentes SAF, y relación con los respaldos ZIP existentes. Estas decisiones no deben inferirse de la mera elección de Drive.
 
 ## Pendientes de debates posteriores
 - Detalle de importación puntual desde Calibre: campos, duplicados, política de copia/vínculo y recuperación (PROD-003, aprobada).
 - Detalles de implementación del lector básico EPUB/PDF, navegación, visualización y última posición (PROD-004, aprobada).
 - IA para organización y análisis de cada libro (PROD-005, aprobada); consentimiento revocable por libro para envío de contenido (PROD-006, aprobada).
-- Plataformas objetivo (PROD-007, abierta), instalación y actualizaciones.
-- Copia y restauración, sincronización y dispositivos.
+- MyCalibro exclusivamente Windows y futura conexión a BibliotecaAI Android vía Drive (PROD-007, aprobada); nivel de acceso compartido pendiente (PROD-008, abierta); instalación y actualizaciones.
+- Copia y restauración, compatibilidad Drive/SAF, sincronización entre productos según PROD-008 y dispositivos.
 
 ## Historial de decisiones
 | ID | Fecha | Estado | Resultado |
@@ -98,4 +112,5 @@
 | PROD-004 | 2026-11-23 | Aprobada | Opción A: lector básico EPUB/PDF, navegación, visualización y posición |
 | PROD-005 | 2026-11-23 | Aprobada | Opción B: IA para organización y análisis por libro bajo demanda |
 | PROD-006 | 2026-11-23 | Aprobada | Opción B: consentimiento por libro, revocable, antes de enviar texto a IA externa |
-| PROD-007 | 2026-11-23 | Pendiente | Plataformas de destino: Windows, escritorio multiplataforma o escritorio+móvil |
+| PROD-007 | 2026-11-23 | Aprobada | Opción A: MyCalibro solo Windows; BibliotecaAI Android como posible cliente de biblioteca compartida en Drive |
+| PROD-008 | 2026-11-23 | Pendiente | Nivel de acceso de BibliotecaAI a la biblioteca MyCalibro alojada en Drive |
