@@ -134,8 +134,9 @@ pub fn scan_paths(inputs: &[PathBuf], catalog: &[CatalogItem]) -> ScanOutcome {
     outcome
         .reviews
         .sort_by(|a, b| a.candidate.path.cmp(&b.candidate.path));
+    let refs = catalog_refs(catalog);
     for review in &mut outcome.reviews {
-        review.matches = analyze_candidate(&review.candidate.path, catalog);
+        review.matches = analyze_candidate(&review.candidate.path, &refs);
         review.suggested_action = suggested_action(&review.candidate.path, &review.matches);
     }
     outcome
@@ -148,7 +149,8 @@ pub fn review_candidate(path: &Path, catalog: &[CatalogItem]) -> CandidateReview
         path: path.to_path_buf(),
         size_bytes: std::fs::metadata(path).map(|meta| meta.len()).unwrap_or(0),
     };
-    let matches = analyze_candidate(path, catalog);
+    let refs = catalog_refs(catalog);
+    let matches = analyze_candidate(path, &refs);
     let suggested_action = suggested_action(path, &matches);
     CandidateReview {
         candidate,
@@ -164,11 +166,40 @@ pub fn is_supported_book(path: &Path) -> bool {
         .unwrap_or(false)
 }
 
+/// Clave de comparación de rutas para Windows (PROD-007): ruta canónica
+/// cuando el archivo existe —resuelve mayúsculas reales, segmentos «.» y
+/// «..», y enlaces— y minúsculas como normalización general. Comparar en
+/// minúsculas es seguro en este producto porque NTFS no distingue mayúsculas.
+fn path_key(path: &Path) -> String {
+    match std::fs::canonicalize(path) {
+        Ok(canonical) => canonical.to_string_lossy().to_lowercase(),
+        Err(_) => path.to_string_lossy().to_lowercase(),
+    }
+}
+
+/// Elemento de catálogo con su clave de ruta calculada una sola vez por
+/// análisis, para no canonicalizar repetidamente en lotes grandes.
+struct CatalogRef<'a> {
+    item: &'a CatalogItem,
+    key: Option<String>,
+}
+
+fn catalog_refs(catalog: &[CatalogItem]) -> Vec<CatalogRef<'_>> {
+    catalog
+        .iter()
+        .map(|item| CatalogRef {
+            key: item.path.as_deref().map(|path| path_key(Path::new(path))),
+            item,
+        })
+        .collect()
+}
+
 /// Recorre recursivamente una ruta acumulando candidatos de solo lectura.
 /// No sigue enlaces simbólicos de directorio (evita ciclos) y no repite
-/// archivos ya vistos en el mismo lote (rutas solapadas).
+/// archivos ya vistos en el mismo lote, aunque se alcancen por rutas
+/// equivalentes (relativas, mayúsculas distintas o segmentos «..»).
 fn collect_candidates(input: &Path, outcome: &mut ScanOutcome, seen: &mut BTreeSet<String>) {
-    let key = input.to_string_lossy().to_lowercase();
+    let key = path_key(input);
     if !seen.insert(key) {
         return;
     }
@@ -224,9 +255,9 @@ fn collect_candidates(input: &Path, outcome: &mut ScanOutcome, seen: &mut BTreeS
 
 /// Contrasta un candidato con el catálogo y devuelve todas las coincidencias
 /// encontradas, cada una con su grado de certeza.
-fn analyze_candidate(path: &Path, catalog: &[CatalogItem]) -> Vec<DuplicateMatch> {
+fn analyze_candidate(path: &Path, catalog: &[CatalogRef]) -> Vec<DuplicateMatch> {
     let mut matches = Vec::new();
-    let candidate_path = path.to_string_lossy();
+    let candidate_key = path_key(path);
     let stem = candidate_stem(path);
     let candidate_stem_lower = stem.to_lowercase();
     // En el patrón «Título - Autor», la parte del título va antes del guion.
@@ -234,9 +265,12 @@ fn analyze_candidate(path: &Path, catalog: &[CatalogItem]) -> Vec<DuplicateMatch
         Some((title, author)) => (title.trim().to_owned(), author.trim().to_owned()),
         None => (stem.clone(), String::new()),
     };
-    for item in catalog {
+    for r in catalog {
+        let item = r.item;
         if let Some(existing) = item.path.as_deref() {
-            if existing == candidate_path.as_ref() {
+            // La igualdad de rutas es canónica e insensible a mayúsculas
+            // (path_key), no una comparación literal de cadenas.
+            if r.key.as_deref() == Some(candidate_key.as_str()) {
                 matches.push(DuplicateMatch {
                     catalog_id: item.id,
                     title: item.title.clone(),
@@ -414,6 +448,45 @@ mod tests {
         assert_eq!(review.matches[0].kind, MatchKind::ExactPath);
         assert_eq!(review.matches[0].certainty, Certainty::High);
         assert_eq!(review.suggested_action, SuggestedAction::Skip);
+    }
+
+    #[test]
+    fn coincidencia_ruta_exacta_ignora_mayusculas_y_segmentos_redundantes() {
+        // Archivo real en disco: la clave canónica debe igualar rutas que
+        // difieren solo en mayúsculas o en segmentos «.» intermedios.
+        let base = std::env::temp_dir().join(format!("mycalibro_clave_{}", std::process::id()));
+        std::fs::create_dir_all(&base).unwrap();
+        let real = base.join("1984.epub");
+        std::fs::write(&real, b"x").unwrap();
+        let catalog = vec![CatalogItem::new(
+            1,
+            "1984",
+            "George Orwell",
+            Some(real.display().to_string().to_uppercase()),
+        )];
+        let review = review_candidate(&base.join(".").join("1984.epub"), &catalog);
+        assert_eq!(review.matches.len(), 1);
+        assert_eq!(review.matches[0].kind, MatchKind::ExactPath);
+        assert_eq!(review.suggested_action, SuggestedAction::Skip);
+        std::fs::remove_dir_all(&base).unwrap();
+    }
+
+    #[test]
+    fn rutas_equivalentes_no_duplican_candidatos_en_el_lote() {
+        let base = std::env::temp_dir().join(format!("mycalibro_equiv_{}", std::process::id()));
+        std::fs::create_dir_all(base.join("sub")).unwrap();
+        std::fs::write(base.join("sub").join("libro.epub"), b"x").unwrap();
+        // La misma carpeta se pasa por tres rutas distintas: directa, con «.»
+        // y con «sub/..» de vuelta; el escaneo debe deduplicarlas.
+        let redundante = base.join("sub").join("..").join("sub");
+        let outcome = scan_paths(&[base.clone(), base.join(".").join("sub"), redundante], &[]);
+        assert_eq!(
+            outcome.reviews.len(),
+            1,
+            "un solo candidato aunque haya tres rutas equivalentes"
+        );
+        assert_eq!(outcome.errors.len(), 0);
+        std::fs::remove_dir_all(&base).unwrap();
     }
 
     #[test]
