@@ -1,0 +1,33 @@
+name: Library list layout PR checks
+on:
+  pull_request:
+    paths:
+      - 'app/src/main.rs'
+      - '.github/workflows/library-list-pr.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  library-list:
+    runs-on: windows-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: app
+          cache-on-failure: true
+      - name: Check formatting
+        working-directory: app
+        run: cargo fmt --check
+      - name: Validate scroll viewport geometry
+        working-directory: app
+        run: cargo test --locked tests::library_list_uses_available_height_instead_of_one_row -- --exact
+      - name: Check Windows integration
+        working-directory: app
+        run: cargo check --locked
