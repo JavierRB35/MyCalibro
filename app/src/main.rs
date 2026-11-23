@@ -1,5 +1,9 @@
 mod ai_consent;
 mod ai_consent_view;
+mod analysis_backend;
+mod analysis_flow;
+mod analysis_text;
+mod auxiliary_state;
 mod backup;
 mod book_metadata;
 mod calibre_import;
@@ -171,7 +175,10 @@ struct LibraryApp {
     transfer_receiver: mpsc::Receiver<TransferResult>,
     reader: reader_view::ReaderView,
     pdf_view: pdf_view::PdfView,
-    consents: ai_consent::ConsentManager,
+    consents: std::sync::Arc<std::sync::RwLock<ai_consent::ConsentManager>>,
+    analysis_flow: analysis_flow::AnalysisFlow,
+    aux_files: auxiliary_state::StateFiles,
+    aux_error: Option<String>,
     consent_view: ai_consent_view::AiConsentView,
     positions: reading_positions::ReadingPositions,
 }
@@ -188,19 +195,10 @@ impl LibraryApp {
         let selected = books.first().map(|book| book.id);
         let (task_sender, task_receiver) = mpsc::channel();
         let (transfer_sender, transfer_receiver) = mpsc::channel();
-        let (positions, positions_notice) = if library_folder.as_os_str().is_empty() {
-            (reading_positions::ReadingPositions::default(), None)
-        } else {
-            reading_positions::load(&library_folder)
-        };
-        let (consents, consents_notice) = load_consents(&library_folder);
-        let mut avisos_iniciales = String::new();
-        for aviso in [positions_notice, consents_notice].into_iter().flatten() {
-            if !avisos_iniciales.is_empty() {
-                avisos_iniciales.push(' ');
-            }
-            avisos_iniciales.push_str(&aviso);
-        }
+        let mut aux_files = auxiliary_state::StateFiles::default();
+        let positions = aux_files.load(&library_folder, reading_positions::FILE_NAME);
+        let consents = aux_files.load(&library_folder, CONSENTS_FILE);
+        let avisos_iniciales = aux_files.error.clone().unwrap_or_default();
         let mut app = Self {
             books,
             search: String::new(),
@@ -239,7 +237,10 @@ impl LibraryApp {
             transfer_receiver,
             reader: reader_view::ReaderView::new(),
             pdf_view: pdf_view::PdfView::default(),
-            consents,
+            consents: std::sync::Arc::new(std::sync::RwLock::new(consents)),
+            analysis_flow: Default::default(),
+            aux_files,
+            aux_error: None,
             consent_view: ai_consent_view::AiConsentView::new(),
             positions,
         };
@@ -250,28 +251,47 @@ impl LibraryApp {
     }
 
     /// Persiste posiciones y consentimientos de la biblioteca actual.
-    fn save_library_data(&mut self) {
-        if let Err(error) = self.positions.save(&self.library_folder) {
-            self.notice = error;
-        }
-        if let Err(error) = save_consents(&self.library_folder, &self.consents) {
-            self.notice = error;
+    fn save_library_data(&mut self) -> bool {
+        let result = (|| {
+            if self.catalog.is_none() {
+                return Err("Biblioteca no disponible para guardar estado".into());
+            }
+            self.aux_files.save(
+                &self.library_folder,
+                reading_positions::FILE_NAME,
+                &self.positions,
+            )?;
+            self.aux_files.save(
+                &self.library_folder,
+                CONSENTS_FILE,
+                &*self.consents.read().unwrap(),
+            )
+        })();
+        match result {
+            Ok(()) => {
+                self.aux_error = None;
+                true
+            }
+            Err(error) => {
+                self.notice = error.clone();
+                self.aux_error = Some(error);
+                false
+            }
         }
     }
 
-    /// Recarga posiciones y consentimientos al cambiar de biblioteca y
-    /// cierra las vistas de lectura abiertas (pertenecen a otra carpeta).
     fn reload_library_data(&mut self) {
-        let (positions, error) = reading_positions::load(&self.library_folder);
-        if let Some(error) = error {
-            self.notice = error;
+        self.analysis_flow.reset();
+        self.consent_view = ai_consent_view::AiConsentView::new();
+        self.aux_files = auxiliary_state::StateFiles::default();
+        self.positions = self
+            .aux_files
+            .load(&self.library_folder, reading_positions::FILE_NAME);
+        *self.consents.write().unwrap() = self.aux_files.load(&self.library_folder, CONSENTS_FILE);
+        self.aux_error = None;
+        if let Some(error) = &self.aux_files.error {
+            self.notice = error.clone();
         }
-        let (consents, error) = load_consents(&self.library_folder);
-        if let Some(error) = error {
-            self.notice = error;
-        }
-        self.positions = positions;
-        self.consents = consents;
         self.reader.close();
         self.pdf_view.reset();
     }
@@ -481,16 +501,26 @@ impl eframe::App for LibraryApp {
         self.reader.show(ctx);
         if let Some((book_id, position)) = self.reader.take_position() {
             self.positions.set_epub(book_id, position);
-            self.save_library_data();
+            if self.aux_error.is_none() {
+                self.save_library_data();
+            }
         }
         self.pdf_view.show(ctx);
         if let Some((book_id, page)) = self.pdf_view.pending_position() {
             self.positions.set_pdf(book_id, page);
-            self.save_library_data();
-            self.pdf_view.mark_saved();
+            if self.aux_error.is_none() && self.save_library_data() {
+                self.pdf_view.mark_saved();
+            }
         }
         // Consentimiento IA: solo aparece si hay una petición pendiente.
-        self.consent_view.show(ctx, &mut self.consents);
+        let before = self.consents.read().unwrap().clone();
+        self.consent_view
+            .show(ctx, &mut self.consents.write().unwrap());
+        let consent_changed = before != *self.consents.read().unwrap();
+        if consent_changed {
+            self.save_library_data();
+        }
+        self.analysis_ui(ctx);
         if (self.library_tools.busy() || self.import_flow.busy())
             && ctx.input(|i| i.viewport().close_requested())
         {
@@ -501,17 +531,18 @@ impl eframe::App for LibraryApp {
             ctx,
             &self.library_folder,
             &self.books,
-            self.storage_error.is_none() && !self.import_flow.active(),
+            self.storage_error.is_none() && self.aux_error.is_none() && !self.import_flow.active(),
         ) {
             let status = self.library_tools.status().to_owned();
             // A failed autosave during background restoration must not discard pending edits.
-            if self.storage_error.is_none() || self.catalog.is_none() {
+            if self.aux_error.is_none() && (self.storage_error.is_none() || self.catalog.is_none())
+            {
                 self.open_library(restored);
             }
             self.notice = status;
         }
         if ctx.input(|i| i.viewport().close_requested())
-            && self.storage_error.is_some()
+            && (self.storage_error.is_some() || self.aux_error.is_some())
             && self.catalog.is_some()
             && !self.discard_on_exit
         {
@@ -543,8 +574,12 @@ impl eframe::App for LibraryApp {
                     }
                 }
             }
+            if let Some(error)=self.aux_error.clone() {
+                ui.colored_label(Color32::DARK_RED,format!("Posiciones/permisos pendientes: {error}"));
+                if ui.button("Reintentar guardado de posiciones y permisos").clicked() {self.save_library_data();}
+            }
             // Do not abandon unsaved edits when switching libraries.
-            let can_switch = (self.storage_error.is_none() || self.catalog.is_none()) && !self.library_tools.busy() && !self.import_flow.active();
+            let can_switch = self.aux_error.is_none() && (self.storage_error.is_none() || self.catalog.is_none()) && !self.library_tools.busy() && !self.import_flow.active();
             if ui.button("Biblioteca y copias…").clicked() { self.library_tools.open=true; }
             if ui.add_enabled(can_switch, egui::Button::new("Abrir carpeta de biblioteca…")).clicked() {
                 if let Some(folder) = rfd::FileDialog::new().pick_folder() { self.open_library(folder); }
@@ -619,20 +654,23 @@ impl eframe::App for LibraryApp {
             ctx.send_viewport_cmd(egui::ViewportCommand::Close);
         }
 
+        book_details(ctx, self);
+        egui::SidePanel::left("library-navigation")
+            .exact_width(260.0)
+            .resizable(false)
+            .show(ctx, |ui| {
+                ui.add_enabled_ui(
+                    self.storage_error.is_none() && !self.import_flow.busy(),
+                    |ui| sidebar(ui, self),
+                );
+            });
         egui::CentralPanel::default()
             .frame(egui::Frame::new().fill(PAPER).inner_margin(0.0))
             .show(ctx, |ui| {
-                ui.horizontal(|ui| {
-                    ui.set_height(ui.available_height());
-                    ui.add_enabled_ui(
-                        self.storage_error.is_none() && !self.import_flow.busy(),
-                        |ui| {
-                            sidebar(ui, self);
-                            ui.separator();
-                            main_panel(ui, self);
-                        },
-                    );
-                });
+                ui.add_enabled_ui(
+                    self.storage_error.is_none() && !self.import_flow.busy(),
+                    |ui| main_panel(ui, self),
+                );
             });
 
         if self.adding && self.storage_error.is_none() {
@@ -812,148 +850,153 @@ fn sidebar(ui: &mut egui::Ui, app: &mut LibraryApp) {
         .show(ui, |ui| {
             ui.set_min_width(210.0);
             ui.set_max_width(230.0);
-            // NOTA (AGENTE B): la versión con ScrollArea central rompía el
-            // layout al vivir dentro de este contenedor ui.horizontal; queda
-            // como mejora pendiente post-MVP (issue #1). El pie puede quedar
-            // cortado a alturas de ventana muy pequeñas.
-            ui.vertical(|ui| {
-                ui.label(RichText::new("MIS LIBROS").size(12.0).strong().color(GREEN));
-                ui.add_space(12.0);
-                ui.label(
-                    RichText::new("Tu biblioteca,\nsin complicaciones")
-                        .size(21.0)
-                        .strong()
-                        .color(INK),
-                );
-                ui.add_space(30.0);
-                ui.label(RichText::new("BIBLIOTECA").size(10.0).strong().color(MUTED));
-                ui.add_space(8.0);
-                let selected = app.topic_filter.is_none() && app.tag_filter.is_none();
-                if nav_button(ui, "Todos los libros", app.books.len(), selected) {
-                    app.topic_filter = None;
-                    app.tag_filter = None;
-                }
-                ui.add_space(20.0);
-                ui.label(RichText::new("TEMAS").size(10.0).strong().color(MUTED));
-                ui.add_space(8.0);
-                for topic in topics() {
-                    let active = app.topic_filter.as_deref() == Some(topic);
-                    if nav_button(ui, topic, app.topic_count(topic), active) {
-                        app.topic_filter = if active {
-                            None
-                        } else {
-                            Some((*topic).to_owned())
-                        };
-                        app.tag_filter = None;
-                    }
-                }
-                ui.add_space(22.0);
-                ui.label(
-                    RichText::new("DISPOSITIVOS")
-                        .size(10.0)
-                        .strong()
-                        .color(MUTED),
-                );
-                ui.add_space(8.0);
-                if app.devices.is_empty() {
-                    ui.label(
-                        RichText::new("Conecta un Kindle, Kobo o NOOK por USB")
-                            .size(11.0)
-                            .color(MUTED),
-                    );
-                }
-                let mut open_device = None;
-                let devices = app.devices.clone();
-                for device in devices {
-                    let response = ui.dnd_drop_zone::<u64, _>(
-                        egui::Frame::new()
-                            .fill(Color32::WHITE)
-                            .stroke(Stroke::new(1.0_f32, BORDER))
-                            .inner_margin(egui::Margin::symmetric(8, 6)),
-                        |ui| {
+            ui.with_layout(egui::Layout::top_down(egui::Align::LEFT), |ui| {
+                egui::ScrollArea::vertical()
+                    .id_salt("sidebar-scroll")
+                    .max_width(230.0)
+                    .max_height(ui.available_height())
+                    .show(ui, |ui| {
+                        ui.label(RichText::new("MIS LIBROS").size(12.0).strong().color(GREEN));
+                        ui.add_space(12.0);
+                        ui.label(
+                            RichText::new("Tu biblioteca,\nsin complicaciones")
+                                .size(21.0)
+                                .strong()
+                                .color(INK),
+                        );
+                        ui.add_space(30.0);
+                        ui.label(RichText::new("BIBLIOTECA").size(10.0).strong().color(MUTED));
+                        ui.add_space(8.0);
+                        let selected = app.topic_filter.is_none() && app.tag_filter.is_none();
+                        if nav_button(ui, "Todos los libros", app.books.len(), selected) {
+                            app.topic_filter = None;
+                            app.tag_filter = None;
+                        }
+                        ui.add_space(20.0);
+                        ui.label(RichText::new("TEMAS").size(10.0).strong().color(MUTED));
+                        ui.add_space(8.0);
+                        for topic in topics() {
+                            let active = app.topic_filter.as_deref() == Some(topic);
+                            if nav_button(ui, topic, app.topic_count(topic), active) {
+                                app.topic_filter = if active {
+                                    None
+                                } else {
+                                    Some((*topic).to_owned())
+                                };
+                                app.tag_filter = None;
+                            }
+                        }
+                        ui.add_space(22.0);
+                        ui.label(
+                            RichText::new("DISPOSITIVOS")
+                                .size(10.0)
+                                .strong()
+                                .color(MUTED),
+                        );
+                        ui.add_space(8.0);
+                        if app.devices.is_empty() {
                             ui.label(
-                                RichText::new(format!("📚 {}", device.name))
-                                    .strong()
-                                    .color(INK),
+                                RichText::new("Conecta un Kindle, Kobo o NOOK por USB")
+                                    .size(11.0)
+                                    .color(MUTED),
                             );
+                        }
+                        let mut open_device = None;
+                        let devices = app.devices.clone();
+                        for device in devices {
+                            let response = ui.dnd_drop_zone::<u64, _>(
+                                egui::Frame::new()
+                                    .fill(Color32::WHITE)
+                                    .stroke(Stroke::new(1.0_f32, BORDER))
+                                    .inner_margin(egui::Margin::symmetric(8, 6)),
+                                |ui| {
+                                    ui.label(
+                                        RichText::new(format!("📚 {}", device.name))
+                                            .strong()
+                                            .color(INK),
+                                    );
+                                    ui.label(
+                                        RichText::new(format!(
+                                            "Formato: {}",
+                                            device.output_format.to_uppercase()
+                                        ))
+                                        .size(10.0)
+                                        .color(MUTED),
+                                    );
+                                    if ui.small_button("Abrir biblioteca").clicked() {
+                                        open_device = Some(device.root.clone());
+                                    }
+                                    ui.label(
+                                        RichText::new("Suelta aquí un libro")
+                                            .size(10.0)
+                                            .color(GREEN),
+                                    );
+                                },
+                            );
+                            if let Some(book_id) = response.1 {
+                                app.queue_device_transfer(*book_id, device);
+                            }
+                        }
+                        if let Some(root) = open_device {
+                            app.device_view = Some(root);
+                        }
+                        ui.add_space(22.0);
+                        ui.label(RichText::new("ETIQUETAS").size(10.0).strong().color(MUTED));
+                        ui.add_space(8.0);
+                        let tags: BTreeSet<String> = app
+                            .books
+                            .iter()
+                            .flat_map(|book| book.tags.iter().cloned())
+                            .collect();
+                        if tags.is_empty() {
+                            ui.label(
+                                RichText::new("Añade etiquetas a tus libros")
+                                    .size(12.0)
+                                    .color(MUTED),
+                            );
+                        }
+                        for tag in tags {
+                            let active = app.tag_filter.as_deref() == Some(tag.as_str());
+                            if ui.selectable_label(active, format!("# {tag}")).clicked() {
+                                app.tag_filter = if active { None } else { Some(tag) };
+                                app.topic_filter = None;
+                            }
+                        }
+                        ui.add_space(18.0);
+                        if ui
+                            .add_sized(
+                                [190.0, 36.0],
+                                egui::Button::new("Configurar IA")
+                                    .fill(PALE_GREEN)
+                                    .stroke(Stroke::new(1.0_f32, BORDER)),
+                            )
+                            .clicked()
+                        {
+                            app.settings_open = true;
+                        }
+                        if ui
+                            .add_sized(
+                                [190.0, 36.0],
+                                egui::Button::new("⇄  Convertir formatos")
+                                    .fill(PALE_GREEN)
+                                    .stroke(Stroke::new(1.0_f32, BORDER)),
+                            )
+                            .clicked()
+                        {
+                            app.converting = true;
+                            app.conversion_status.clear();
+                        }
+                        ui.vertical(|ui| {
                             ui.label(
                                 RichText::new(format!(
-                                    "Formato: {}",
-                                    device.output_format.to_uppercase()
+                                    "{} libros en tu colección",
+                                    app.books.len()
                                 ))
-                                .size(10.0)
+                                .size(11.0)
                                 .color(MUTED),
                             );
-                            if ui.small_button("Abrir biblioteca").clicked() {
-                                open_device = Some(device.root.clone());
-                            }
-                            ui.label(
-                                RichText::new("Suelta aquí un libro")
-                                    .size(10.0)
-                                    .color(GREEN),
-                            );
-                        },
-                    );
-                    if let Some(book_id) = response.1 {
-                        app.queue_device_transfer(*book_id, device);
-                    }
-                }
-                if let Some(root) = open_device {
-                    app.device_view = Some(root);
-                }
-                ui.add_space(22.0);
-                ui.label(RichText::new("ETIQUETAS").size(10.0).strong().color(MUTED));
-                ui.add_space(8.0);
-                let tags: BTreeSet<String> = app
-                    .books
-                    .iter()
-                    .flat_map(|book| book.tags.iter().cloned())
-                    .collect();
-                if tags.is_empty() {
-                    ui.label(
-                        RichText::new("Añade etiquetas a tus libros")
-                            .size(12.0)
-                            .color(MUTED),
-                    );
-                }
-                for tag in tags {
-                    let active = app.tag_filter.as_deref() == Some(tag.as_str());
-                    if ui.selectable_label(active, format!("# {tag}")).clicked() {
-                        app.tag_filter = if active { None } else { Some(tag) };
-                        app.topic_filter = None;
-                    }
-                }
-                ui.add_space(18.0);
-                if ui
-                    .add_sized(
-                        [190.0, 36.0],
-                        egui::Button::new("Configurar IA")
-                            .fill(PALE_GREEN)
-                            .stroke(Stroke::new(1.0_f32, BORDER)),
-                    )
-                    .clicked()
-                {
-                    app.settings_open = true;
-                }
-                if ui
-                    .add_sized(
-                        [190.0, 36.0],
-                        egui::Button::new("⇄  Convertir formatos")
-                            .fill(PALE_GREEN)
-                            .stroke(Stroke::new(1.0_f32, BORDER)),
-                    )
-                    .clicked()
-                {
-                    app.converting = true;
-                    app.conversion_status.clear();
-                }
-                ui.with_layout(egui::Layout::bottom_up(egui::Align::LEFT), |ui| {
-                    ui.label(
-                        RichText::new(format!("{} libros en tu colección", app.books.len()))
-                            .size(11.0)
-                            .color(MUTED),
-                    );
-                });
+                        });
+                    });
             });
         });
 }
@@ -1159,190 +1202,231 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
             ui.add_space(24.0);
         });
         ui.add_space(8.0);
-        if let Some(id) = app.selected {
-            if let Some(index) = app.books.iter().position(|book| book.id == id) {
-                let mut changed = false;
-                let mut request_ai = false;
-                egui::SidePanel::right("book_details")
-                    .resizable(true)
-                    .default_width(255.0)
-                    .min_width(220.0)
-                    .frame(
-                        egui::Frame::new()
-                            .fill(Color32::WHITE)
-                            .inner_margin(egui::Margin::symmetric(18, 18)),
-                    )
-                    .show_inside(ui, |ui| {
-                        ui.label(
-                            RichText::new("DETALLES DEL LIBRO")
-                                .size(10.0)
-                                .strong()
-                                .color(MUTED),
-                        );
-                        ui.add_space(12.0);
-                        let book = &mut app.books[index];
-                        egui::CollapsingHeader::new("Archivos y almacenamiento")
-                            .default_open(true)
-                            .show(ui, |ui| {
-                                for file in &book.files {
-                                    let mode = match file.mode {
-                                        storage::StorageMode::Managed => "Administrado",
-                                        storage::StorageMode::Linked => "Vinculado",
-                                    };
+    });
+}
+
+fn book_details(ctx: &egui::Context, app: &mut LibraryApp) {
+    if let Some(id) = app.selected {
+        if let Some(index) = app.books.iter().position(|book| book.id == id) {
+            let mut changed = false;
+            let mut request_ai = false;
+            egui::SidePanel::right("book_details")
+                .resizable(true)
+                .default_width(255.0)
+                .min_width(220.0)
+                .frame(
+                    egui::Frame::new()
+                        .fill(Color32::WHITE)
+                        .inner_margin(egui::Margin::symmetric(18, 18)),
+                )
+                .show(ctx, |ui| {
+                    ui.add_enabled_ui(
+                        app.storage_error.is_none() && !app.import_flow.busy(),
+                        |ui| {
+                            egui::ScrollArea::vertical()
+                                .id_salt("book-detail-scroll")
+                                .show(ui, |ui| {
                                     ui.label(
-                                        RichText::new(format!("{mode}: {}", file.path.display()))
-                                            .size(10.0),
+                                        RichText::new("DETALLES DEL LIBRO")
+                                            .size(10.0)
+                                            .strong()
+                                            .color(MUTED),
                                     );
-                                    match file.resolve(&app.library_folder) {
-                                        Ok(path) if path.is_file() => (),
-                                        Ok(_) => {
-                                            ui.colored_label(
+                                    ui.add_space(12.0);
+                                    let book = &mut app.books[index];
+                                    egui::CollapsingHeader::new("Archivos y almacenamiento")
+                                        .default_open(true)
+                                        .show(ui, |ui| {
+                                            for file in &book.files {
+                                                let mode = match file.mode {
+                                                    storage::StorageMode::Managed => "Administrado",
+                                                    storage::StorageMode::Linked => "Vinculado",
+                                                };
+                                                ui.label(
+                                                    RichText::new(format!(
+                                                        "{mode}: {}",
+                                                        file.path.display()
+                                                    ))
+                                                    .size(10.0),
+                                                );
+                                                match file.resolve(&app.library_folder) {
+                                                    Ok(path) if path.is_file() => (),
+                                                    Ok(_) => {
+                                                        ui.colored_label(
                                                 Color32::DARK_RED,
                                                 "Archivo no disponible; se conserva la ficha",
                                             );
-                                        }
-                                        Err(error) => {
-                                            ui.colored_label(Color32::DARK_RED, error);
-                                        }
-                                    }
-                                }
-                                if let Some(path) = &book.file_path {
-                                    ui.label(
-                                        RichText::new(format!(
-                                            "Vinculado (catálogo antiguo): {path}"
-                                        ))
-                                        .size(10.0),
-                                    );
-                                    if !std::path::Path::new(path).is_file() {
-                                        ui.colored_label(
+                                                    }
+                                                    Err(error) => {
+                                                        ui.colored_label(Color32::DARK_RED, error);
+                                                    }
+                                                }
+                                            }
+                                            if let Some(path) = &book.file_path {
+                                                ui.label(
+                                                    RichText::new(format!(
+                                                        "Vinculado (catálogo antiguo): {path}"
+                                                    ))
+                                                    .size(10.0),
+                                                );
+                                                if !std::path::Path::new(path).is_file() {
+                                                    ui.colored_label(
                                             Color32::DARK_RED,
                                             "Archivo no disponible; se conserva la ficha",
                                         );
+                                                }
+                                            }
+                                            if book.files.is_empty() && book.file_path.is_none() {
+                                                ui.label("Ficha sin archivo asociado");
+                                            }
+                                        });
+                                    changed |= ui
+                                        .add(
+                                            egui::TextEdit::singleline(&mut book.title)
+                                                .font(egui::TextStyle::Heading),
+                                        )
+                                        .changed();
+                                    ui.add_space(6.0);
+                                    changed |= ui
+                                        .add(
+                                            egui::TextEdit::singleline(&mut book.author)
+                                                .hint_text("Autor"),
+                                        )
+                                        .changed();
+                                    ui.add_space(14.0);
+                                    ui.label(
+                                        RichText::new("TEMA AUTOMÁTICO")
+                                            .size(10.0)
+                                            .strong()
+                                            .color(MUTED),
+                                    );
+                                    ui.label(
+                                        RichText::new(topic_for(book))
+                                            .size(14.0)
+                                            .strong()
+                                            .color(GREEN),
+                                    );
+                                    if ui.button("Clasificar y etiquetar con IA").clicked() {
+                                        request_ai = true;
                                     }
-                                }
-                                if book.files.is_empty() && book.file_path.is_none() {
-                                    ui.label("Ficha sin archivo asociado");
-                                }
-                            });
-                        changed |= ui
-                            .add(
-                                egui::TextEdit::singleline(&mut book.title)
-                                    .font(egui::TextStyle::Heading),
-                            )
-                            .changed();
-                        ui.add_space(6.0);
-                        changed |= ui
-                            .add(egui::TextEdit::singleline(&mut book.author).hint_text("Autor"))
-                            .changed();
-                        ui.add_space(14.0);
-                        ui.label(
-                            RichText::new("TEMA AUTOMÁTICO")
-                                .size(10.0)
-                                .strong()
-                                .color(MUTED),
-                        );
-                        ui.label(
-                            RichText::new(topic_for(book))
-                                .size(14.0)
-                                .strong()
-                                .color(GREEN),
-                        );
-                        if ui.button("Clasificar y etiquetar con IA").clicked() {
-                            request_ai = true;
-                        }
-                        if !app.ai_status.is_empty() {
-                            ui.label(RichText::new(&app.ai_status).size(10.0).color(MUTED));
-                        }
-                        ui.add_space(14.0);
-                        ui.label(RichText::new("ETIQUETAS").size(10.0).strong().color(MUTED));
-                        let mut tags = book.tags.join(", ");
-                        if ui
-                            .add(
-                                egui::TextEdit::singleline(&mut tags)
-                                    .hint_text("Separadas por comas"),
-                            )
-                            .changed()
-                        {
-                            book.tags = tags
-                                .split(',')
-                                .map(str::trim)
-                                .filter(|tag| !tag.is_empty())
-                                .map(str::to_owned)
-                                .collect();
-                            changed = true;
-                        }
-                        ui.add_space(14.0);
-                        ui.label(
-                            RichText::new("DESCRIPCIÓN")
-                                .size(10.0)
-                                .strong()
-                                .color(MUTED),
-                        );
-                        changed |= ui
-                            .add(
-                                egui::TextEdit::multiline(&mut book.description)
-                                    .desired_rows(5)
-                                    .hint_text("Una nota breve sobre el libro"),
-                            )
-                            .changed();
-                        ui.add_space(14.0);
-                        ui.horizontal(|ui| {
-                            ui.label(RichText::new("AÑO").size(10.0).strong().color(MUTED));
-                            changed |= ui
-                                .add(egui::TextEdit::singleline(&mut book.year).desired_width(70.0))
-                                .changed();
-                        });
-                        ui.add_space(18.0);
-                        // Lector básico integrado (PROD-004): EPUB/PDF con
-                        // recuperación de la última posición de lectura.
-                        let archivos = book.file_paths(&app.library_folder);
-                        let es_de = |ruta: &std::path::Path, formato: &str| {
-                            ruta.extension()
-                                .map(|ext| ext.to_string_lossy().to_lowercase() == formato)
-                                .unwrap_or(false)
-                        };
-                        let epub = archivos.iter().find(|ruta| es_de(ruta, "epub")).cloned();
-                        let pdf = archivos.iter().find(|ruta| es_de(ruta, "pdf")).cloned();
-                        if epub.is_some() || pdf.is_some() {
-                            if ui.button("📖 Leer libro").clicked() {
-                                let ruta = epub.or(pdf).expect("hay archivo de lectura");
-                                let ctx = ui.ctx().clone();
-                                app.abrir_lector(&ctx, id, ruta);
-                            }
-                        } else {
-                            ui.weak("Sin archivo EPUB/PDF asociado para leer");
-                        }
-                        ui.add_space(10.0);
-                        // Consentimiento IA por libro (PROD-006): estado y
-                        // revocación visibles en la ficha.
-                        if ai_consent_view::status_row(ui, &mut app.consents, id) {
-                            app.save_library_data();
-                        }
-                        ui.add_space(18.0);
-                        if ui
-                            .button(
-                                RichText::new("Eliminar libro")
-                                    .color(Color32::from_rgb(166, 73, 63)),
-                            )
-                            .clicked()
-                        {
-                            app.books.remove(index);
-                            app.selected = app.books.first().map(|item| item.id);
-                            app.positions.forget(id);
-                            app.consents.forget(id);
-                            app.save_library_data();
-                            app.save();
-                        }
-                    });
-                if request_ai {
-                    app.start_classification(id, ui.ctx().clone());
-                }
-                if changed {
-                    app.save();
-                }
+                                    if !app.ai_status.is_empty() {
+                                        ui.label(
+                                            RichText::new(&app.ai_status).size(10.0).color(MUTED),
+                                        );
+                                    }
+                                    ui.add_space(14.0);
+                                    ui.label(
+                                        RichText::new("ETIQUETAS").size(10.0).strong().color(MUTED),
+                                    );
+                                    let mut tags = book.tags.join(", ");
+                                    if ui
+                                        .add(
+                                            egui::TextEdit::singleline(&mut tags)
+                                                .hint_text("Separadas por comas"),
+                                        )
+                                        .changed()
+                                    {
+                                        book.tags = tags
+                                            .split(',')
+                                            .map(str::trim)
+                                            .filter(|tag| !tag.is_empty())
+                                            .map(str::to_owned)
+                                            .collect();
+                                        changed = true;
+                                    }
+                                    ui.add_space(14.0);
+                                    ui.label(
+                                        RichText::new("DESCRIPCIÓN")
+                                            .size(10.0)
+                                            .strong()
+                                            .color(MUTED),
+                                    );
+                                    changed |= ui
+                                        .add(
+                                            egui::TextEdit::multiline(&mut book.description)
+                                                .desired_rows(5)
+                                                .hint_text("Una nota breve sobre el libro"),
+                                        )
+                                        .changed();
+                                    ui.add_space(14.0);
+                                    ui.horizontal(|ui| {
+                                        ui.label(
+                                            RichText::new("AÑO").size(10.0).strong().color(MUTED),
+                                        );
+                                        changed |= ui
+                                            .add(
+                                                egui::TextEdit::singleline(&mut book.year)
+                                                    .desired_width(70.0),
+                                            )
+                                            .changed();
+                                    });
+                                    ui.add_space(18.0);
+                                    // Lector básico integrado (PROD-004): EPUB/PDF con
+                                    // recuperación de la última posición de lectura.
+                                    let archivos = book.file_paths(&app.library_folder);
+                                    let es_de = |ruta: &std::path::Path, formato: &str| {
+                                        ruta.extension()
+                                            .map(|ext| {
+                                                ext.to_string_lossy().to_lowercase() == formato
+                                            })
+                                            .unwrap_or(false)
+                                    };
+                                    let epub =
+                                        archivos.iter().find(|ruta| es_de(ruta, "epub")).cloned();
+                                    let pdf =
+                                        archivos.iter().find(|ruta| es_de(ruta, "pdf")).cloned();
+                                    if epub.is_some() || pdf.is_some() {
+                                        if ui.button("📖 Leer libro").clicked() {
+                                            let ruta =
+                                                epub.or(pdf).expect("hay archivo de lectura");
+                                            let ctx = ui.ctx().clone();
+                                            app.abrir_lector(&ctx, id, ruta);
+                                        }
+                                    } else {
+                                        ui.weak("Sin archivo EPUB/PDF asociado para leer");
+                                    }
+                                    ui.add_space(10.0);
+                                    if ui.button("Analizar este libro…").clicked() {
+                                        app.analysis_flow.open(id);
+                                    }
+                                    // Consentimiento IA por libro (PROD-006): estado y
+                                    // revocación visibles en la ficha.
+                                    let consent_changed = ai_consent_view::status_row(
+                                        ui,
+                                        &mut app.consents.write().unwrap(),
+                                        id,
+                                    );
+                                    if consent_changed {
+                                        app.save_library_data();
+                                    }
+                                    ui.add_space(18.0);
+                                    if ui
+                                        .button(
+                                            RichText::new("Eliminar libro")
+                                                .color(Color32::from_rgb(166, 73, 63)),
+                                        )
+                                        .clicked()
+                                    {
+                                        app.books.remove(index);
+                                        app.selected = app.books.first().map(|item| item.id);
+                                        app.positions.forget(id);
+                                        app.consents.write().unwrap().forget(id);
+                                        app.analysis_flow.reset();
+                                        app.save_library_data();
+                                        app.save();
+                                    }
+                                });
+                        },
+                    );
+                });
+            if request_ai {
+                app.start_classification(id, ctx.clone());
+            }
+            if changed {
+                app.save();
             }
         }
-    });
+    }
 }
 
 fn add_book_window(ctx: &egui::Context, app: &mut LibraryApp) {
@@ -1460,33 +1544,6 @@ fn save_api_key(provider: &str, key: &str) -> Result<(), String> {
 
 /// Nombre del archivo de consentimientos IA en la carpeta de biblioteca.
 const CONSENTS_FILE: &str = "ai-consents.json";
-
-/// Carga el estado de consentimientos IA; ausente = vacío, corrupto se
-/// informa y se empieza vacío sin destruir el archivo.
-fn load_consents(folder: &std::path::Path) -> (ai_consent::ConsentManager, Option<String>) {
-    let ruta = folder.join(CONSENTS_FILE);
-    match std::fs::read(&ruta) {
-        Ok(bytes) => match serde_json::from_slice::<ai_consent::ConsentManager>(&bytes) {
-            Ok(manager) => (manager, None),
-            Err(error) => (
-                ai_consent::ConsentManager::new(),
-                Some(format!(
-                    "Consentimientos IA ilegibles, se empiezan de cero: {error}"
-                )),
-            ),
-        },
-        Err(_) => (ai_consent::ConsentManager::new(), None),
-    }
-}
-
-fn save_consents(
-    folder: &std::path::Path,
-    manager: &ai_consent::ConsentManager,
-) -> Result<(), String> {
-    let ruta = folder.join(CONSENTS_FILE);
-    let bytes = serde_json::to_vec_pretty(manager).map_err(|e| e.to_string())?;
-    persistence::atomic_write(&ruta, &bytes)
-}
 
 fn is_supported_book(path: &std::path::Path) -> bool {
     path.extension()
@@ -1631,7 +1688,7 @@ fn classify_with_ai(
         .build()
         .map_err(|error| error.to_string())?;
     let content = if provider == "Gemini" {
-        let response = client.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent")
+        let response = client.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent")
             .header("x-goog-api-key", api_key)
             .json(&json!({"contents":[{"parts":[{"text":prompt}]}],"generationConfig":{"responseMimeType":"application/json"}}))
             .send().and_then(reqwest::blocking::Response::error_for_status).map_err(|error| error.to_string())?
@@ -1643,7 +1700,7 @@ fn classify_with_ai(
     } else {
         let response = client.post("https://api.groq.com/openai/v1/chat/completions")
             .bearer_auth(api_key)
-            .json(&json!({"model":"llama-3.3-70b-versatile","messages":[{"role":"user","content":prompt}],"response_format":{"type":"json_object"}}))
+            .json(&json!({"model":"openai/gpt-oss-20b","messages":[{"role":"user","content":prompt}],"response_format":{"type":"json_object"}}))
             .send().and_then(reqwest::blocking::Response::error_for_status).map_err(|error| error.to_string())?
             .json::<Value>().map_err(|error| error.to_string())?;
         response["choices"][0]["message"]["content"]
