@@ -10,7 +10,9 @@
 //! `take_plan()` lo devuelve una sola vez para que el backend lo ejecute
 //! (crear fichas, asociar formatos). La vista nunca escribe el catálogo.
 
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::mpsc::{channel, Receiver};
+use std::sync::Arc;
 use std::thread;
 use std::time::Duration;
 
@@ -33,6 +35,10 @@ pub struct ImportWizardView {
     rx: Option<Receiver<WorkerMsg>>,
     plan: Option<ImportPlan>,
     mensaje: Option<String>,
+    /// Bandera de cancelación cooperativa: el trabajador la consulta en cada
+    /// tick de progreso y aborta el recorrido cuanto antes (hallazgo del
+    /// AGENTE A: cerrar el canal solo hace que el resultado se descarte).
+    cancel: Arc<AtomicBool>,
 }
 
 impl ImportWizardView {
@@ -42,6 +48,7 @@ impl ImportWizardView {
             rx: None,
             plan: None,
             mensaje: None,
+            cancel: Arc::new(AtomicBool::new(false)),
         }
     }
 
@@ -90,15 +97,23 @@ impl ImportWizardView {
         let (tx, rx) = channel::<WorkerMsg>();
         self.rx = Some(rx);
         self.mensaje = None;
+        self.cancel.store(false, Ordering::Relaxed);
+        let cancel = Arc::clone(&self.cancel);
         let inputs = self.wizard.inputs.clone();
         let catalog = catalog.to_vec();
         self.wizard.start_scan(inputs.clone());
         thread::spawn(move || {
             let result = scan_paths_with_progress(&inputs, &catalog, &mut |files, candidates| {
-                // Un error al enviar solo significa que la interfaz canceló.
-                let _ = tx.send(WorkerMsg::Progress { files, candidates });
+                let cancelado = cancel.load(Ordering::Relaxed);
+                if !cancelado {
+                    // Un error al enviar solo significa que se soltó el canal.
+                    let _ = tx.send(WorkerMsg::Progress { files, candidates });
+                }
+                !cancelado // cooperativo: detiene el recorrido en cuanto marque
             });
-            let _ = tx.send(WorkerMsg::Done(Box::new(result)));
+            if !cancel.load(Ordering::Relaxed) {
+                let _ = tx.send(WorkerMsg::Done(Box::new(result)));
+            }
         });
     }
 
@@ -204,7 +219,8 @@ impl ImportWizardView {
         ui.weak("Puedes cancelar; no se importará nada sin tu revisión.");
         if ui.button("Cancelar búsqueda").clicked() {
             self.wizard.cancel_scan();
-            self.rx = None; // el trabajador termina al cerrarse el canal
+            self.cancel.store(true, Ordering::Relaxed);
+            self.rx = None; // el trabajador se detiene y descarta el resultado
         }
     }
 
