@@ -15,6 +15,7 @@
 - Datos de catálogo: app/library.json; contiene datos de ejemplo y una ruta de archivo local.
 - Documento de funcionamiento reconstruido: app/MECHANICS.md.
 - Estado y evidencias de la auditoría: docs/AUDITORIA_FUNCIONAL_2026-11-23.md.
+- Dirección de producto aprobada: plataforma integral de biblioteca, lectura e IA (PROD-001); decisiones vinculantes y debate en docs/DECISIONES_PRODUCTO.md. No confundir objetivos aprobados con funciones implementadas.
 - La aplicación depende de las utilidades externas ebook-meta y ebook-convert de Calibre para ciertas operaciones.
 - El comportamiento con lectores USB está orientado a Windows; MTP no está implementado.
 - No tratar logs o registros históricos como prueba actual de un comportamiento.
