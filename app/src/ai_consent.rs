@@ -14,7 +14,7 @@
 //! usa el identificador estable del libro y no contiene secretos.
 
 use serde::{Deserialize, Serialize};
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 
 /// Versión del alcance autorizado. Si la aplicación cambia qué categorías de
 /// datos envía o qué proveedores usan los análisis, debe aumentar esta
@@ -41,9 +41,12 @@ impl Provider {
 }
 
 /// Lo que el usuario autorizó para un libro concreto.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Consent {
-    pub provider: Provider,
+    /// Conjunto EXACTO de proveedores que el aviso mostró al autorizar
+    /// (principal y respaldo). Un envío a un destinatario fuera de este
+    /// conjunto se rechaza (hallazgo del AGENTE A sobre af2446d).
+    pub providers: BTreeSet<Provider>,
     /// Versión del alcance vigente cuando se concedió.
     pub scope_version: u32,
     /// Máximo de caracteres de texto por envío autorizado (minimización).
@@ -69,10 +72,14 @@ pub enum ConsentError {
     /// Autorizado, pero la petición excede el tamaño autorizado: reducir
     /// fragmentos o pedir consentimiento nuevo.
     FragmentTooLarge,
+    /// El destinatario concreto del envío no estaba entre los proveedores
+    /// mostrados al autorizar: prohibido (PROD-006, destinatarios
+    /// transparentes).
+    ProviderNotAuthorized,
 }
 
 /// Estado de autorización de un libro, para mostrarlo en la ficha.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub enum ConsentStatus {
     /// Solo la clasificación por metadatos existente; sin envío de contenido.
     MetadataOnly,
@@ -96,22 +103,24 @@ impl ConsentManager {
     pub fn status(&self, book_id: u64) -> ConsentStatus {
         self.consents
             .get(&book_id)
-            .map(|c| ConsentStatus::Authorized(*c))
+            .map(|c| ConsentStatus::Authorized(c.clone()))
             .unwrap_or(ConsentStatus::MetadataOnly)
     }
 
     /// Registra la autorización de texto para el libro. La vista debe haber
-    /// mostrado [`consent_notice`] antes de llegar aquí.
+    /// mostrado [`consent_notice`] con EXACTAMENTE la misma cadena de
+    /// proveedores que se registra aquí: el conjunto queda persistido y solo
+    /// esos destinatarios podrán recibir contenido.
     pub fn grant_text_consent(
         &mut self,
         book_id: u64,
-        provider: Provider,
+        providers: &[Provider],
         max_fragment_chars: usize,
     ) {
         self.consents.insert(
             book_id,
             Consent {
-                provider,
+                providers: providers.iter().copied().collect(),
                 scope_version: CONSENT_SCOPE_VERSION,
                 max_fragment_chars,
             },
@@ -130,8 +139,10 @@ impl ConsentManager {
     }
 
     /// Evalúa si un envío de texto puede proceder bajo el consentimiento
-    /// vigente. Solo se consulta para contenido del libro; la clasificación
-    /// por metadatos (título, autor, descripción, etiquetas) no pasa por aquí.
+    /// vigente. Debe consultarse antes de CADA envío, incluido el fallback
+    /// al proveedor de respaldo (la revocación debe valer para el siguiente
+    /// envío, no solo al abrir el panel). La clasificación por metadatos
+    /// (título, autor, descripción, etiquetas) no pasa por aquí.
     pub fn can_send_text(&self, book_id: u64, request: TextRequest) -> Result<(), ConsentError> {
         let Some(consent) = self.consents.get(&book_id) else {
             return Err(ConsentError::NoConsent);
@@ -139,12 +150,12 @@ impl ConsentManager {
         if consent.scope_version != request.scope_version {
             return Err(ConsentError::ScopeChanged);
         }
+        if !consent.providers.contains(&request.provider) {
+            return Err(ConsentError::ProviderNotAuthorized);
+        }
         if request.chars_to_send > consent.max_fragment_chars {
             return Err(ConsentError::FragmentTooLarge);
         }
-        // El proveedor de respaldo está cubierto por el consentimiento: el
-        // usuario lo vio en el aviso al autorizar (cadena completa).
-        let _ = request.provider;
         Ok(())
     }
 
@@ -203,6 +214,11 @@ impl AnalysisSource {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::collections::BTreeSet;
+
+    fn conjunto(proveedores: &[Provider]) -> BTreeSet<Provider> {
+        proveedores.iter().copied().collect()
+    }
 
     #[test]
     fn sin_consentimiento_se_bloquea_y_con_el_se_permite() {
@@ -218,9 +234,9 @@ mod tests {
         );
         assert_eq!(manager.status(1), ConsentStatus::MetadataOnly);
 
-        manager.grant_text_consent(1, Provider::Gemini, 8000);
+        manager.grant_text_consent(1, &[Provider::Gemini, Provider::Groq], 8000);
         assert_eq!(manager.can_send_text(1, request), Ok(()));
-        // El proveedor de respaldo queda cubierto por la cadena mostrada.
+        // El respaldo está autorizado porque el aviso mostró la cadena entera.
         assert_eq!(
             manager.can_send_text(
                 1,
@@ -231,10 +247,13 @@ mod tests {
             ),
             Ok(())
         );
+        let mut esperado = BTreeSet::new();
+        esperado.insert(Provider::Gemini);
+        esperado.insert(Provider::Groq);
         assert_eq!(
             manager.status(1),
             ConsentStatus::Authorized(Consent {
-                provider: Provider::Gemini,
+                providers: esperado,
                 scope_version: CONSENT_SCOPE_VERSION,
                 max_fragment_chars: 8000,
             })
@@ -242,9 +261,53 @@ mod tests {
     }
 
     #[test]
+    fn destinatario_fuera_del_conjunto_autorizado_se_bloquea() {
+        // Hallazgo del AGENTE A sobre af2446d: autorizar viendo solo Groq y
+        // enviar después a Gemini no puede colar.
+        let mut manager = ConsentManager::new();
+        manager.grant_text_consent(5, &[Provider::Groq], 6000);
+        assert_eq!(
+            manager.can_send_text(
+                5,
+                TextRequest {
+                    provider: Provider::Groq,
+                    chars_to_send: 4000,
+                    scope_version: CONSENT_SCOPE_VERSION,
+                }
+            ),
+            Ok(())
+        );
+        assert_eq!(
+            manager.can_send_text(
+                5,
+                TextRequest {
+                    provider: Provider::Gemini,
+                    chars_to_send: 4000,
+                    scope_version: CONSENT_SCOPE_VERSION,
+                }
+            ),
+            Err(ConsentError::ProviderNotAuthorized)
+        );
+        // Y a la inversa: autorizando solo Gemini, Groq queda bloqueado.
+        let mut solo_gemini = ConsentManager::new();
+        solo_gemini.grant_text_consent(6, &[Provider::Gemini], 6000);
+        assert_eq!(
+            solo_gemini.can_send_text(
+                6,
+                TextRequest {
+                    provider: Provider::Groq,
+                    chars_to_send: 1000,
+                    scope_version: CONSENT_SCOPE_VERSION,
+                }
+            ),
+            Err(ConsentError::ProviderNotAuthorized)
+        );
+    }
+
+    #[test]
     fn revocar_bloquea_los_envios_posteriores() {
         let mut manager = ConsentManager::new();
-        manager.grant_text_consent(2, Provider::Groq, 5000);
+        manager.grant_text_consent(2, &[Provider::Groq], 5000);
         let request = TextRequest {
             provider: Provider::Groq,
             chars_to_send: 4000,
@@ -264,7 +327,7 @@ mod tests {
     #[test]
     fn cambio_de_alcance_exige_consentimiento_nuevo() {
         let mut manager = ConsentManager::new();
-        manager.grant_text_consent(3, Provider::Gemini, 8000);
+        manager.grant_text_consent(3, &[Provider::Gemini], 8000);
         let version_nueva = CONSENT_SCOPE_VERSION + 1;
         let request = TextRequest {
             provider: Provider::Gemini,
@@ -292,7 +355,7 @@ mod tests {
     #[test]
     fn borrado_del_libro_olvida_la_autorizacion() {
         let mut manager = ConsentManager::new();
-        manager.grant_text_consent(4, Provider::Gemini, 6000);
+        manager.grant_text_consent(4, &[Provider::Gemini], 6000);
         manager.forget(4);
         assert_eq!(manager.status(4), ConsentStatus::MetadataOnly);
         assert!(manager.authorized_book_ids().is_empty());
@@ -322,7 +385,7 @@ mod tests {
     #[test]
     fn el_estado_persiste_por_serde_sin_secretos() {
         let mut manager = ConsentManager::new();
-        manager.grant_text_consent(9, Provider::Groq, 7000);
+        manager.grant_text_consent(9, &[Provider::Groq], 7000);
         let json = serde_json::to_string(&manager).unwrap();
         assert!(
             !json.to_lowercase().contains("key"),
@@ -333,6 +396,33 @@ mod tests {
             recuperado.status(9),
             manager.status(9),
             "autorización sobrevive al ciclo de persistencia"
+        );
+        // La cadena exacta persistida conserva ambos destinatarios.
+        let mut ambos = ConsentManager::new();
+        ambos.grant_text_consent(10, &[Provider::Gemini, Provider::Groq], 7000);
+        let json_ambos = serde_json::to_string(&ambos).unwrap();
+        let vuelta: ConsentManager = serde_json::from_str(&json_ambos).unwrap();
+        assert_eq!(
+            vuelta.can_send_text(
+                10,
+                TextRequest {
+                    provider: Provider::Groq,
+                    chars_to_send: 1000,
+                    scope_version: CONSENT_SCOPE_VERSION,
+                }
+            ),
+            Ok(())
+        );
+        assert_eq!(
+            vuelta.can_send_text(
+                10,
+                TextRequest {
+                    provider: Provider::Gemini,
+                    chars_to_send: 1000,
+                    scope_version: CONSENT_SCOPE_VERSION,
+                }
+            ),
+            Ok(())
         );
     }
 }
