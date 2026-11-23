@@ -372,9 +372,9 @@ fn parse_opf(opf: &str) -> Result<(String, String, Vec<String>), String> {
                 if current.as_ref().is_some_and(|(tag, _)| tag == &name) {
                     let (tag, value) = current.take().expect("tag estaba activo");
                     let value = value.trim().to_owned();
-                    if tag == b"title" && title.is_empty() {
+                    if tag.as_slice() == b"title" && title.is_empty() {
                         title = value;
-                    } else if tag == b"creator" && author.is_empty() {
+                    } else if tag.as_slice() == b"creator" && author.is_empty() {
                         author = value;
                     }
                 }
