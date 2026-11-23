@@ -51,6 +51,51 @@ fn strings(connection: &Connection, sql: &str, id: i64) -> Result<Vec<String>, S
         .map_err(|e| e.to_string())
 }
 
+/// Resolve a format within the selected Calibre library without leaving its root.
+/// Calibre can retain a file name with different letter case after a library copy
+/// from a case-insensitive filesystem. Never guess between ambiguous matches.
+fn resolve_format(root: &Path, relative: &Path) -> Result<Option<PathBuf>, String> {
+    let exact = storage::safe_join(root, relative)?;
+    if exact.is_file() {
+        return Ok(Some(exact));
+    }
+
+    let mut resolved = PathBuf::new();
+    for component in relative.components() {
+        let std::path::Component::Normal(name) = component else {
+            return Err("Ruta de formato Calibre no válida".into());
+        };
+        let directory = if resolved.as_os_str().is_empty() {
+            root.to_path_buf()
+        } else {
+            storage::safe_join(root, &resolved)?
+        };
+        let entries = match fs::read_dir(&directory) {
+            Ok(entries) => entries,
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound => return Ok(None),
+            Err(error) => return Err(error.to_string()),
+        };
+        let mut matches = Vec::new();
+        for entry in entries {
+            let entry = entry.map_err(|error| error.to_string())?;
+            if entry
+                .file_name()
+                .to_string_lossy()
+                .eq_ignore_ascii_case(&name.to_string_lossy())
+            {
+                matches.push(entry.file_name());
+            }
+        }
+        match matches.len() {
+            0 => return Ok(None),
+            1 => resolved.push(&matches[0]),
+            _ => return Err("Nombre ambiguo: varios archivos coinciden ignorando mayúsculas".into()),
+        }
+    }
+    let candidate = storage::safe_join(root, &resolved)?;
+    Ok(candidate.is_file().then_some(candidate))
+}
+
 pub fn read_library(root: &Path) -> Result<CalibreScan, String> {
     let root = fs::canonicalize(root).map_err(|e| e.to_string())?;
     no_active_journal(&root)?;
@@ -83,6 +128,9 @@ pub fn read_library(root: &Path) -> Result<CalibreScan, String> {
         })
         .map_err(|e| e.to_string())?;
     let mut result = CalibreScan::default();
+    let mut declared_formats = 0usize;
+    let mut accessible_formats = 0usize;
+    let mut sample_expected = None;
     for row in rows {
         let (id, title, relative, published) = row.map_err(|e| e.to_string())?;
         let authors=strings(&database,"SELECT a.name FROM authors a JOIN books_authors_link l ON a.id=l.author WHERE l.book=? ORDER BY l.id",id)?;
@@ -125,6 +173,7 @@ pub fn read_library(root: &Path) -> Result<CalibreScan, String> {
             .map_err(|e| e.to_string())?
         {
             let (name, extension) = format.map_err(|e| e.to_string())?;
+            declared_formats += 1;
             if !extension.chars().all(|c| c.is_ascii_alphanumeric()) || extension.is_empty() {
                 result
                     .warnings
@@ -133,11 +182,24 @@ pub fn read_library(root: &Path) -> Result<CalibreScan, String> {
             }
             let relative =
                 PathBuf::from(&relative).join(format!("{name}.{}", extension.to_ascii_lowercase()));
-            match storage::safe_join(&root, &relative) {
-                Ok(path) if path.is_file() => record.formats.push(path),
-                Ok(path) => result
-                    .warnings
-                    .push(format!("Libro {id}: falta {}", path.display())),
+            if sample_expected.is_none() {
+                sample_expected = Some(root.join(&relative).display().to_string());
+            }
+            match resolve_format(&root, &relative) {
+                Ok(Some(path)) => {
+                    if path != root.join(&relative) {
+                        result.warnings.push(format!(
+                            "Libro {id}: archivo localizado con diferencias de mayúsculas: {}",
+                            path.display()
+                        ));
+                    }
+                    record.formats.push(path);
+                    accessible_formats += 1;
+                }
+                Ok(None) => result.warnings.push(format!(
+                    "Libro {id}: no existe el archivo esperado {}",
+                    root.join(&relative).display()
+                )),
                 Err(e) => result.warnings.push(format!("Libro {id}: {e}")),
             }
         }
@@ -153,6 +215,20 @@ pub fn read_library(root: &Path) -> Result<CalibreScan, String> {
             ));
         }
         result.records.push(record);
+    }
+    if !result.records.is_empty() && accessible_formats == 0 {
+        if declared_formats == 0 {
+            return Err(format!(
+                "La biblioteca seleccionada contiene {} registros Calibre, pero metadata.db no registra ningún archivo en la tabla data. Compruebe que es la biblioteca correcta y que sus libros están disponibles; no se ha importado nada.",
+                result.records.len()
+            ));
+        }
+        return Err(format!(
+            "Calibre registra {} libros y {declared_formats} formatos, pero ninguno es accesible desde la carpeta seleccionada {}. Ejemplo de ruta esperada: {}. Compruebe que la carpeta contiene también las subcarpetas de autores y los archivos de los libros, que están descargados y que no ha seleccionado una copia aislada de metadata.db. No se ha modificado Calibre ni importado una biblioteca vacía.",
+            result.records.len(),
+            root.display(),
+            sample_expected.unwrap_or_default()
+        ));
     }
     Ok(result)
 }
@@ -232,8 +308,49 @@ mod tests {
             .execute("UPDATE books SET path='../outside'", [])
             .unwrap();
         drop(database);
+        let error = read_library(dir.path()).unwrap_err();
+        assert!(error.contains("ninguno es accesible"));
+    }
+
+    #[test]
+    fn resolves_differently_cased_names_without_changing_calibre() {
+        let dir = library();
+        let database = Connection::open(dir.path().join("metadata.db")).unwrap();
+        database
+            .execute("UPDATE data SET name='titulo' WHERE format='EPUB'", [])
+            .unwrap();
+        drop(database);
+        let before = storage::hash_file(&dir.path().join("metadata.db")).unwrap();
         let scan = read_library(dir.path()).unwrap();
-        assert!(scan.records[0].formats.is_empty());
-        assert!(!scan.warnings.is_empty());
+        assert_eq!(scan.records[0].formats.len(), 1);
+        assert_eq!(
+            scan.records[0].formats[0],
+            dir.path().join("Autor/Titulo (1)/Titulo.epub")
+        );
+        assert_eq!(
+            storage::hash_file(&dir.path().join("metadata.db")).unwrap(),
+            before
+        );
+    }
+
+    #[test]
+    fn reports_missing_ebook_files_with_actionable_path() {
+        let dir = library();
+        fs::remove_file(dir.path().join("Autor/Titulo (1)/Titulo.epub")).unwrap();
+        let error = read_library(dir.path()).unwrap_err();
+        assert!(error.contains("ninguno es accesible"));
+        assert!(error.contains("Autor"));
+        assert!(error.contains("Titulo.epub"));
+        assert!(error.contains("No se ha modificado Calibre"));
+    }
+
+    #[test]
+    fn reports_database_without_registered_formats() {
+        let dir = library();
+        let database = Connection::open(dir.path().join("metadata.db")).unwrap();
+        database.execute("DELETE FROM data", []).unwrap();
+        drop(database);
+        let error = read_library(dir.path()).unwrap_err();
+        assert!(error.contains("no registra ningún archivo"));
     }
 }
