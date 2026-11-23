@@ -40,7 +40,7 @@ Section "MyCalibro"
   CreateShortcut "$SMPROGRAMS\MyCalibro\Desinstalar.lnk" "$INSTDIR\Uninstall.exe"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\MyCalibro" "DisplayName" "MyCalibro"
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\MyCalibro" "DisplayVersion" "${VERSION}"
-  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\MyCalibro" "UninstallString" '$"$INSTDIR\Uninstall.exe$"'
+  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\MyCalibro" "UninstallString" '"$INSTDIR\Uninstall.exe"'
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\MyCalibro" "InstallLocation" "$INSTDIR"
   WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\MyCalibro" "NoModify" 1
   WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\MyCalibro" "NoRepair" 1

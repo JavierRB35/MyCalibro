@@ -1695,6 +1695,30 @@ fn screenshot_argument() -> Result<Option<PathBuf>, String> {
 mod tests {
     use super::{automatic_topic, classify_with_fallback, device_profile, is_supported_book, Book};
 
+    #[cfg(windows)]
+    #[test]
+    fn windows_credential_store_persists_across_entries_and_can_delete_test_value() {
+        let unique = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let service = format!("mycalibro-test-{}-{unique}", std::process::id());
+        let first = keyring::Entry::new(&service, "fixture").unwrap();
+        first.set_password("fixture-value").unwrap();
+        let readback = keyring::Entry::new(&service, "fixture")
+            .unwrap()
+            .get_password();
+        let deletion = first.delete_credential();
+        assert_eq!(readback.unwrap(), "fixture-value");
+        deletion.unwrap();
+        assert!(matches!(
+            keyring::Entry::new(&service, "fixture")
+                .unwrap()
+                .get_password(),
+            Err(keyring::Error::NoEntry)
+        ));
+    }
+
     fn book(title: &str, description: &str) -> Book {
         Book {
             id: 1,
@@ -1773,6 +1797,8 @@ fn main() -> eframe::Result<()> {
     }
     let options = eframe::NativeOptions {
         viewport,
+        #[cfg(windows)]
+        renderer: eframe::Renderer::Wgpu,
         ..Default::default()
     };
     eframe::run_native(
