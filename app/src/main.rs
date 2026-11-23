@@ -1,5 +1,6 @@
 mod backup;
 mod calibre_import;
+mod import_jobs;
 mod library_tools;
 mod persistence;
 mod storage;
