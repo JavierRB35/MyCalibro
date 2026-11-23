@@ -2038,6 +2038,9 @@ fn main() -> eframe::Result<()> {
     eframe::run_native(
         "Mis libros",
         options,
-        Box::new(move |_cc| Ok(Box::new(LibraryApp::new(screenshot)))),
+        Box::new(move |cc| {
+            cc.egui_ctx.set_visuals(egui::Visuals::light());
+            Ok(Box::new(LibraryApp::new(screenshot)))
+        }),
     )
 }
