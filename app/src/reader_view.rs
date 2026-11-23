@@ -404,7 +404,12 @@ impl ReaderView {
                 Self::draw_footer(ui, document, position, *font_scale, *theme, position_dirty);
             });
         if !open {
-            self.close();
+            // Un cierre manual no debe perder una posición recién cambiada:
+            // main llama a take_position() después de show() en este fotograma.
+            self.open = false;
+            self.load_job = self.load_job.wrapping_add(1);
+            self.load_rx = None;
+            // Conservar documento/book_id/position_dirty hasta take_position().
         }
     }
 
@@ -789,6 +794,18 @@ mod tests {
         assert!(view.position.paragraph < libro.chapters[ultimo].paragraphs.len().max(1));
         assert!(!view.position_dirty(), "cargar no guarda posición innecesariamente");
         let _ = std::fs::remove_file(&ruta_epub);
+    }
+
+    #[test]
+    fn cerrar_ventana_no_invalida_una_posicion_aun_pendiente_de_guardado() {
+        let mut view = lector_abierto();
+        assert!(view.next_page());
+        view.open = false; // equivalente al cierre con X sin cambiar biblioteca
+        assert_eq!(view.take_position().map(|x| x.0), Some(7));
+        assert!(view.take_position().is_none());
+        view.close(); // el cambio real de biblioteca descarta el documento
+        assert!(view.book_id.is_none());
+        assert!(view.document.is_none());
     }
 
     #[test]
