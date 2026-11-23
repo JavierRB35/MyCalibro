@@ -1181,86 +1181,76 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
         let list_size = library_list_size(ui.available_size());
         ui.horizontal(|ui| {
             ui.add_space(24.0);
-            ui.allocate_ui_with_layout(
-                list_size,
-                egui::Layout::top_down(egui::Align::Min),
-                |ui| {
-                    library_list_scroll_area().show(ui, |ui| {
-                        ui.set_min_width(ui.available_width());
-                        for book in &filtered {
-                            let active = app.selected == Some(book.id);
-                            egui::Frame::new()
-                                .fill(if active {
-                                    Color32::from_rgb(239, 245, 239)
+            ui.allocate_ui_with_layout(list_size, egui::Layout::top_down(egui::Align::Min), |ui| {
+                library_list_scroll_area().show(ui, |ui| {
+                    ui.set_min_width(ui.available_width());
+                    for book in &filtered {
+                        let active = app.selected == Some(book.id);
+                        egui::Frame::new()
+                            .fill(if active {
+                                Color32::from_rgb(239, 245, 239)
+                            } else {
+                                Color32::WHITE
+                            })
+                            .stroke(Stroke::new(
+                                1.0_f32,
+                                if active {
+                                    Color32::from_rgb(190, 216, 198)
                                 } else {
-                                    Color32::WHITE
-                                })
-                                .stroke(Stroke::new(
-                                    1.0_f32,
+                                    BORDER
+                                },
+                            ))
+                            .inner_margin(egui::Margin::symmetric(14, 11))
+                            .show(ui, |ui| {
+                                ui.set_min_width(ui.available_width());
+                                ui.horizontal(|ui| {
+                                    let mut label =
+                                        RichText::new(&book.title).size(14.0).strong().color(INK);
                                     if active {
-                                        Color32::from_rgb(190, 216, 198)
-                                    } else {
-                                        BORDER
-                                    },
-                                ))
-                                .inner_margin(egui::Margin::symmetric(14, 11))
-                                .show(ui, |ui| {
-                                    ui.set_min_width(ui.available_width());
-                                    ui.horizontal(|ui| {
-                                        let mut label = RichText::new(&book.title)
-                                            .size(14.0)
-                                            .strong()
-                                            .color(INK);
-                                        if active {
-                                            label = label.color(GREEN);
-                                        }
-                                        let drag = ui.dnd_drag_source(
-                                            egui::Id::new(("library-book", book.id)),
-                                            book.id,
-                                            |ui| ui.selectable_label(active, label),
-                                        );
-                                        if drag.inner.clicked() {
-                                            app.selected = Some(book.id);
-                                        }
-                                        ui.label(
-                                            RichText::new(format!("· {}", book.author))
-                                                .size(12.0)
-                                                .color(MUTED),
-                                        );
-                                        ui.with_layout(
-                                            egui::Layout::right_to_left(egui::Align::Center),
-                                            |ui| {
-                                                ui.label(
-                                                    RichText::new(topic_for(book))
-                                                        .size(10.0)
-                                                        .color(GREEN),
-                                                );
-                                            },
-                                        );
-                                    });
-                                    ui.horizontal_wrapped(|ui| {
-                                        ui.add_space(4.0);
-                                        for tag in &book.tags {
-                                            tag_chip(ui, tag);
-                                        }
-                                        if !book.year.is_empty() {
+                                        label = label.color(GREEN);
+                                    }
+                                    let drag = ui.dnd_drag_source(
+                                        egui::Id::new(("library-book", book.id)),
+                                        book.id,
+                                        |ui| ui.selectable_label(active, label),
+                                    );
+                                    if drag.inner.clicked() {
+                                        app.selected = Some(book.id);
+                                    }
+                                    ui.label(
+                                        RichText::new(format!("· {}", book.author))
+                                            .size(12.0)
+                                            .color(MUTED),
+                                    );
+                                    ui.with_layout(
+                                        egui::Layout::right_to_left(egui::Align::Center),
+                                        |ui| {
                                             ui.label(
-                                                RichText::new(&book.year).size(10.0).color(MUTED),
+                                                RichText::new(topic_for(book))
+                                                    .size(10.0)
+                                                    .color(GREEN),
                                             );
-                                        }
-                                    });
+                                        },
+                                    );
                                 });
-                            ui.add_space(7.0);
-                        }
-                        if filtered.is_empty() {
-                            ui.add_space(28.0);
-                            ui.label(
-                                RichText::new("No hay libros con estos filtros.").color(MUTED),
-                            );
-                        }
-                    });
-                },
-            );
+                                ui.horizontal_wrapped(|ui| {
+                                    ui.add_space(4.0);
+                                    for tag in &book.tags {
+                                        tag_chip(ui, tag);
+                                    }
+                                    if !book.year.is_empty() {
+                                        ui.label(RichText::new(&book.year).size(10.0).color(MUTED));
+                                    }
+                                });
+                            });
+                        ui.add_space(7.0);
+                    }
+                    if filtered.is_empty() {
+                        ui.add_space(28.0);
+                        ui.label(RichText::new("No hay libros con estos filtros.").color(MUTED));
+                    }
+                });
+            });
             ui.add_space(24.0);
         });
         ui.add_space(8.0);
