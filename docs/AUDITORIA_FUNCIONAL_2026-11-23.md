@@ -77,9 +77,11 @@ No se encontraron: lectura integrada de EPUB/PDF; miniaturas de portadas; visual
 
 **Registro canónico de decisiones:** [docs/DECISIONES_PRODUCTO.md](DECISIONES_PRODUCTO.md). Las futuras decisiones aprobadas se registrarán allí y deberán respetar el protocolo recogido en AGENTS.md.
 
-**Siguiente decisión abierta (PROD-002):** modelo de almacenamiento de los ebooks: copias administradas, referencias externas o enfoque híbrido. Condiciona importación, integridad, duplicados, lectura, integración con Calibre, portabilidad y copias de seguridad.
+**PROD-002 APROBADA (2026-11-23):** sistema híbrido de almacenamiento. MyCalibro deberá admitir libros administrados y libros referenciados externamente, distinguiendo ambos casos y preservando archivos y datos existentes. **Todavía no está implementado**: el inventario anterior describe el estado real del código.
 
-**Siguientes ejes posteriores, sin aprobar:** importación desde Calibre; lectura/anotaciones; alcance de IA y privacidad; Windows o multiplataforma; sincronización/backup; instalación y actualizaciones.
+**Siguiente decisión abierta (PROD-003):** modalidad de integración con bibliotecas Calibre: importación puntual, consulta vinculada o sincronización bidireccional controlada.
+
+**Siguientes ejes posteriores, sin aprobar:** lectura/anotaciones; alcance de IA y privacidad; Windows o multiplataforma; sincronización/backup; instalación y actualizaciones.
 
 ## 8. Continuidad
 Toda propuesta futura se comparará con este inventario. Una decisión aceptada actualizará la documentación; un cambio de código exigirá pruebas proporcionales al riesgo y evidencia verificable. Mantener main como rama normal y evitar ramas salvo cambios críticos. No tocar archivos reales ni datos del usuario sin una estrategia de preservación.
