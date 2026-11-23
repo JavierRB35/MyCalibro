@@ -36,3 +36,8 @@ En «Biblioteca y copias» se configura la importación vinculada (predeterminad
 «Verificar copia» comprueba manifiesto, tamaños, huellas y referencias. «Restaurar» crea siempre una subcarpeta nueva en el destino, valida antes de abrirla y conserva tanto la biblioteca actual como los originales. Los externos incluidos se recuperan bajo `external/` y sus vínculos apuntan a las copias recuperadas; los excluidos mantienen sus rutas anteriores. La distinción administrado/vinculado se conserva.
 
 Las copias son manuales y no se eliminan automáticamente. No hay todavía programador ni política automática de retención. La biblioteca debe permanecer disponible durante la operación. El respaldo no es una sincronización entre equipos.
+
+
+El respaldo copia solo formatos administrados referenciados y recursos propios: `library-settings.json`, `next-book-id.json`, `library.previous.json`, `reader.json` y directorios `state/`, `covers/`, `resources/`. Los archivos ajenos de la carpeta seleccionada no se incluyen. Los vínculos siguen sujetos a la opción de externos aunque residan bajo esa carpeta. El estado auxiliar nuevo debe guardarse en `state/` o registrarse explícitamente en el respaldo.
+
+Los detalles de ficha identifican cada archivo como administrado o vinculado y avisan si no está accesible. Si las preferencias son ilegibles, su restablecimiento conserva antes una copia de los bytes originales bajo `state/`.

@@ -30,6 +30,29 @@ pub struct Preferences {
 }
 
 impl Preferences {
+    pub fn reset_preserving(root: &Path) -> Result<Option<PathBuf>, String> {
+        let original = match fs::read(root.join("library-settings.json")) {
+            Ok(bytes) => Some(bytes),
+            Err(e) if e.kind() == std::io::ErrorKind::NotFound => None,
+            Err(e) => return Err(e.to_string()),
+        };
+        let preserved = if let Some(bytes) = original {
+            let state = safe_join(root, Path::new("state"))?;
+            fs::create_dir_all(&state).map_err(|e| e.to_string())?;
+            let mut file = tempfile::Builder::new()
+                .prefix("settings-recovery-")
+                .suffix(".json")
+                .tempfile_in(state)
+                .map_err(|e| e.to_string())?;
+            file.write_all(&bytes).map_err(|e| e.to_string())?;
+            file.as_file().sync_all().map_err(|e| e.to_string())?;
+            Some(file.keep().map_err(|e| e.to_string())?.1)
+        } else {
+            None
+        };
+        Self::default().save(root)?;
+        Ok(preserved)
+    }
     pub fn load(root: &Path) -> Result<Self, String> {
         match fs::read(root.join("library-settings.json")) {
             Ok(bytes) => {
@@ -248,6 +271,22 @@ pub fn import_file(
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn resetting_invalid_preferences_keeps_original_bytes_for_recovery() {
+        let root = tempfile::tempdir().unwrap();
+        fs::write(
+            root.path().join("library-settings.json"),
+            b"corrupt settings",
+        )
+        .unwrap();
+        assert!(Preferences::load(root.path()).is_err());
+        let preserved = Preferences::reset_preserving(root.path()).unwrap().unwrap();
+        assert_eq!(fs::read(preserved).unwrap(), b"corrupt settings");
+        assert_eq!(
+            Preferences::load(root.path()).unwrap().import_mode,
+            StorageMode::Linked
+        );
+    }
     #[test]
     fn linked_and_both_managed_layouts_preserve_source_and_resolve_after_move() {
         let origin = tempfile::tempdir().unwrap();

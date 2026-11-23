@@ -1149,6 +1149,22 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
                         );
                         ui.add_space(12.0);
                         let book = &mut app.books[index];
+                        egui::CollapsingHeader::new("Archivos y almacenamiento").default_open(true).show(ui, |ui| {
+                            for file in &book.files {
+                                let mode=match file.mode {storage::StorageMode::Managed=>"Administrado",storage::StorageMode::Linked=>"Vinculado"};
+                                ui.label(RichText::new(format!("{mode}: {}",file.path.display())).size(10.0));
+                                match file.resolve(&app.library_folder) {
+                                    Ok(path) if path.is_file()=>(),
+                                    Ok(_)=>{ui.colored_label(Color32::DARK_RED,"Archivo no disponible; se conserva la ficha");},
+                                    Err(error)=>{ui.colored_label(Color32::DARK_RED,error);},
+                                }
+                            }
+                            if let Some(path)=&book.file_path {
+                                ui.label(RichText::new(format!("Vinculado (catálogo antiguo): {path}")).size(10.0));
+                                if !std::path::Path::new(path).is_file(){ui.colored_label(Color32::DARK_RED,"Archivo no disponible; se conserva la ficha");}
+                            }
+                            if book.files.is_empty() && book.file_path.is_none(){ui.label("Ficha sin archivo asociado");}
+                        });
                         changed |= ui
                             .add(
                                 egui::TextEdit::singleline(&mut book.title)
@@ -1669,6 +1685,18 @@ fn find_ebook_converter() -> Option<PathBuf> {
 
 fn convert_book(source: &PathBuf, format: &str) -> String {
     match transfer::convert_file(source, format, find_ebook_converter().as_deref()) {
+        Ok(path)
+            if source
+                .extension()
+                .and_then(|s| s.to_str())
+                .is_some_and(|s| s.eq_ignore_ascii_case(format)) =>
+        {
+            format!(
+                "Copia verificada; ya estaba en {}: {}",
+                format.to_uppercase(),
+                path.display()
+            )
+        }
         Ok(path) => format!("Convertido y verificado: {}", path.display()),
         Err(error) => format!("No se pudo convertir: {error}"),
     }
