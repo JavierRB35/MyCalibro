@@ -83,11 +83,12 @@ impl EpubDocument {
             if !es_documento_html(&contenido) {
                 return Err(format!("El capítulo {zip_path} no contiene HTML legible"));
             }
-            let (titulo_capitulo, mut parrafos) = html_a_parrafos(&contenido);
+            let (mut titulo_capitulo, parrafos) = html_a_parrafos(&contenido);
             if parrafos.is_empty() && titulo_capitulo.is_none() {
-                // Una portada/capítulo ilustrado puede ser XHTML válido.
-                // Conservarlo en el orden del spine, sin simular el texto de la imagen.
-                parrafos.push("Página sin texto; imagen no representada en este lector".into());
+                // Aviso de presentación, NUNCA contenido de lectura: la capa IA
+                // utiliza chapters.paragraphs como fuente de texto y citas.
+                titulo_capitulo =
+                    Some("Página sin texto; imagen no representada en este lector".into());
             }
             chapters.push(Chapter {
                 title: titulo_capitulo,
@@ -878,9 +879,18 @@ pub(crate) mod tests {
         let book = EpubDocument::from_bytes(&epub).unwrap();
         assert_eq!(book.chapters.len(), 2, "no se omiten capítulos del spine");
         assert_eq!(
-            book.chapters[0].paragraphs,
-            vec!["Página sin texto; imagen no representada en este lector"]
+            book.chapters[0].title.as_deref(),
+            Some("Página sin texto; imagen no representada en este lector")
         );
+        assert!(book.chapters[0].paragraphs.is_empty());
+        // La extracción de texto/IA consume solo paragraphs: el aviso visual
+        // no se ofrece como una cita ficticia ni se atribuye al EPUB.
+        let extracted = book.chapters.iter()
+            .flat_map(|chapter| chapter.paragraphs.iter())
+            .cloned()
+            .collect::<Vec<_>>()
+            .join("\n");
+        assert!(!extracted.contains("Página sin texto"));
         assert_eq!(book.chapters[1].paragraphs, vec!["Capítulo legible."]);
     }
 
