@@ -85,9 +85,11 @@ No se encontraron: lectura integrada de EPUB/PDF; miniaturas de portadas; visual
 
 **PROD-005 APROBADA (2026-11-23):** IA para organización del catálogo y análisis de cada libro bajo demanda (opción B). Incluye enriquecer fichas y etiquetas y, cuando se disponga de texto y autorización, generar argumentos/resúmenes, análisis y respuestas fundamentadas en el contenido. No habilita consultas transversales de toda la colección ni IA en el lector básico. La clasificación por metadatos existente no acredita el funcionamiento de estas futuras capacidades; **las nuevas funciones aún no están implementadas**.
 
-**Siguiente decisión abierta (PROD-006):** política de privacidad y consentimiento para analizar externamente textos de libros.
+**PROD-006 APROBADA (2026-11-23):** consentimiento expreso por libro y revocable (opción B) antes de transmitir su contenido a proveedores externos de IA. Debe informarse el proveedor y los datos enviados, minimizar los fragmentos transmitidos y respetar la revocación para futuras consultas. El comportamiento de clasificación por metadatos ya existente es distinto. **Esta política todavía no está implementada.**
 
-**Siguientes ejes posteriores, sin aprobar:** Windows o multiplataforma; sincronización interna/backup; instalación y actualizaciones.
+**Siguiente decisión abierta (PROD-007):** plataformas objetivo: Windows, escritorio multiplataforma o escritorio y móvil.
+
+**Siguientes ejes posteriores, sin aprobar:** sincronización interna/backup; instalación y actualizaciones.
 
 ## 8. Continuidad
 Toda propuesta futura se comparará con este inventario. Una decisión aceptada actualizará la documentación; un cambio de código exigirá pruebas proporcionales al riesgo y evidencia verificable. Mantener main como rama normal y evitar ramas salvo cambios críticos. No tocar archivos reales ni datos del usuario sin una estrategia de preservación.
