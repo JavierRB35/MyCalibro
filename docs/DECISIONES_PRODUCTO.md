@@ -51,30 +51,42 @@
 - **Comportamiento vinculante (organización):** conservar y ampliar la clasificación por temas y etiquetas, normalización y enriquecimiento de metadatos y detección asistida de duplicados.
 - **Comportamiento vinculante (por libro):** proporcionar funciones separadas del lector para obtener argumento/resumen, realizar análisis y formular preguntas sobre un libro cuando exista contenido disponible para procesar de manera autorizada. Identificar cuándo la respuesta se basa solo en metadatos y cuándo se ha examinado el texto; fundamentar las afirmaciones sobre contenido en pasajes verificables si se dispone de ellos.
 - **Límites funcionales:** no se aprueban por PROD-005 consultas sobre varios libros a la vez, búsqueda semántica global, análisis transversal de toda la biblioteca ni una interfaz de IA dentro del lector básico de PROD-004.
-- **Privacidad y seguridad:** el tratamiento del texto deberá respetar una política de consentimiento aún pendiente (PROD-006); no enviar automáticamente libros completos a servicios externos, no inventar citas y gestionar los errores de extracción/red con transparencia.
+- **Privacidad y seguridad:** el tratamiento del texto deberá respetar el consentimiento revocable por libro aprobado en PROD-006; no enviar automáticamente libros completos a servicios externos, no inventar citas y gestionar los errores de extracción/red con transparencia.
 - **Coherencia con el producto existente:** el código actual ya contiene clasificación por metadatos con Gemini y alternativa Groq; eso no equivale a tener implementados resúmenes, argumentarios ni preguntas fundamentadas en el texto.
 - **Estado de implementación:** decisión documental; las funcionalidades adicionales quedan pendientes de diseño, ejecución y verificación.
 
 ## PROD-006 — Privacidad y tratamiento del contenido con IA
+- **Fecha de apertura y aprobación:** 2026-11-23.
+- **Estado:** APROBADA por el propietario.
+- **Alternativa seleccionada:** **B: consentimiento por libro, revocable**.
+- **Comportamiento vinculante:** antes de transmitir contenido textual de un libro a un servicio de IA externo para analizarlo, resumirlo o responder preguntas, MyCalibro deberá obtener autorización expresa **para ese libro**. Una vez concedida, podrá reutilizar el permiso en consultas posteriores sobre ese mismo libro, sin interrumpir cada operación con una nueva confirmación.
+- **Control del permiso:** el usuario podrá revisar y revocar la autorización por libro. Tras revocarla, no podrán producirse nuevos envíos de contenido de ese libro amparados en el consentimiento anterior. La revocación no implica que datos ya tratados por un proveedor puedan retirarse automáticamente de sus sistemas.
+- **Información transparente:** la interfaz deberá indicar qué proveedor externo se usará (incluido cualquier proveedor de respaldo), qué categoría de información se transmite y con qué finalidad, antes de obtener el permiso y en las consultas pertinentes. Un cambio relevante de alcance de los datos o destinatarios requerirá revisar la autorización.
+- **Minimización:** no enviar automáticamente el ebook completo cuando basten fragmentos y nunca asumir que un documento puede transmitirse por el mero hecho de estar en la biblioteca. Cuando no haya permiso para enviar el contenido, no simular un análisis de texto; distinguir claramente las respuestas basadas solo en metadatos.
+- **Persistencia e integridad:** conservar los permisos de manera segura y vinculados a un identificador estable del libro, sin añadir secretos ni contenido privado a GitHub; contemplar importaciones, duplicados, eliminación y recuperación de copias de seguridad. La política de retención local y los detalles de implementación quedan pendientes de definición técnica.
+- **Alcance y compatibilidad:** afecta al **contenido de los libros** en las funciones de PROD-005; no equivale a prohibir la clasificación existente basada en metadatos, aunque su uso de servicios externos y su transparencia deberán verificarse. Mantener separado el lector básico establecido en PROD-004.
+- **Estado de implementación:** pendiente. Esta decisión documental no implica que los permisos o controles de privacidad ya existan en la app.
+
+## PROD-007 — Plataformas de destino
 - **Fecha de apertura:** 2026-11-23.
 - **Estado:** PENDIENTE DE ELECCIÓN.
-- **Pregunta:** ¿Qué autorización debe exigir MyCalibro antes de transmitir a proveedores externos fragmentos o contenido de un libro para responder preguntas y generar análisis?
+- **Pregunta:** ¿En qué sistemas debe ejecutarse MyCalibro como producto final, considerando que actualmente usa Rust/egui y parte de la integración con dispositivos es específica de Windows?
 
-| Opción | Política propuesta | Consecuencias |
+| Opción | Alcance | Consecuencia principal |
 | --- | --- | --- |
-| A. Consentimiento por consulta | Pedir autorización expresa para enviar contenido cada vez que se solicite un análisis o pregunta que requiera texto externo | Mayor control, pero más confirmaciones |
-| B. Consentimiento por libro revocable | El usuario habilita el análisis externo para cada libro una vez, puede revocarlo, y se le muestra qué proveedor y tipo de datos se procesan | Equilibrio entre privacidad y comodidad; requiere persistir permisos y controles claros |
-| C. Contenido exclusivamente local | No enviar texto del libro a servicios externos; consultas sobre contenido solo con procesamiento local compatible | Máxima restricción de salida de contenido, pero mayor coste técnico y requisitos del equipo |
+| A. Solo Windows | Desarrollo, empaquetado, lector y dispositivos centrados en Windows | Menor complejidad y validación en un único entorno |
+| B. Escritorio multiplataforma | Windows, macOS y Linux, adaptando rutas, credenciales, instaladores y compatibilidad con dispositivos por plataforma | Mayor alcance conservando el concepto de aplicación de escritorio; más pruebas y mantenimiento |
+| C. Escritorio y móvil | Aplicación de escritorio más clientes móviles, al menos Android y potencialmente iOS, con experiencia adaptada | Amplía mucho el producto; implica nuevas decisiones sobre interfaz, datos y distribución |
 
-**Recomendación para el debate (no aprobada):** B, con consentimiento claro y revocable, minimización de fragmentos transmitidos, indicación del proveedor utilizado y separación entre el tratamiento de metadatos y el de texto completo. No almacenar claves ni textos privados en GitHub; no dar por supuesto que todo libro puede procesarse o enviarse a terceros.
+**Recomendación para el debate (no aprobada):** A si lo prioritario es cerrar cuanto antes una versión Windows; B si se desea crecer en escritorio con límites de complejidad razonables. C solo si existe un objetivo real de uso móvil, pues no resulta una simple recompilación del código actual.
 
-**Aclaración:** esta decisión afecta al **contenido del libro**. El comportamiento actual de clasificación de metadatos con Gemini/Groq no se modifica por abrir PROD-006; su configuración y transparencia deberán revisarse al implementar la política acordada.
+**Pendiente:** elegir A, B o C. La elección no promete soporte inmediato ni implica iniciar una reescritura.
 
 ## Pendientes de debates posteriores
 - Detalle de importación puntual desde Calibre: campos, duplicados, política de copia/vínculo y recuperación (PROD-003, aprobada).
 - Detalles de implementación del lector básico EPUB/PDF, navegación, visualización y última posición (PROD-004, aprobada).
-- IA para organización y análisis de cada libro (PROD-005, aprobada); privacidad y consentimiento sobre contenido (PROD-006, abierta).
-- Plataformas (Windows / otras), instalación y actualizaciones.
+- IA para organización y análisis de cada libro (PROD-005, aprobada); consentimiento revocable por libro para envío de contenido (PROD-006, aprobada).
+- Plataformas objetivo (PROD-007, abierta), instalación y actualizaciones.
 - Copia y restauración, sincronización y dispositivos.
 
 ## Historial de decisiones
@@ -85,4 +97,5 @@
 | PROD-003 | 2026-11-23 | Aprobada | Opción A: importación puntual sin sincronización posterior con Calibre |
 | PROD-004 | 2026-11-23 | Aprobada | Opción A: lector básico EPUB/PDF, navegación, visualización y posición |
 | PROD-005 | 2026-11-23 | Aprobada | Opción B: IA para organización y análisis por libro bajo demanda |
-| PROD-006 | 2026-11-23 | Pendiente | Consentimiento y tratamiento de textos de libros por IA |
+| PROD-006 | 2026-11-23 | Aprobada | Opción B: consentimiento por libro, revocable, antes de enviar texto a IA externa |
+| PROD-007 | 2026-11-23 | Pendiente | Plataformas de destino: Windows, escritorio multiplataforma o escritorio+móvil |
