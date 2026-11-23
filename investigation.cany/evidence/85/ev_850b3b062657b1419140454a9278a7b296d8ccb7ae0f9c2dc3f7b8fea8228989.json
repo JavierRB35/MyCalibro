@@ -1,0 +1,442 @@
+{
+  "id": "ev_850b3b062657b1419140454a9278a7b296d8ccb7ae0f9c2dc3f7b8fea8228989",
+  "subject": {
+    "kind": "directory",
+    "sha256": "c3f303a4480878c6b7081485a2dce24c9942d54af15a23ce2360e0d4985b968c",
+    "name": "bin"
+  },
+  "operation": "core_evidence_browse",
+  "params": {
+    "show": {
+      "field_names": true,
+      "kind": "rows",
+      "limit": 50,
+      "list": "entries"
+    },
+    "source": {
+      "evidence_id": "ev_eb522f313907d650e0f8717ac2d940d92f0ae244b4c08f41a6d815c08530dd66",
+      "kind": "saved"
+    }
+  },
+  "result": {
+    "coverage": {
+      "at_end": false,
+      "examined": 50,
+      "next_offset": 50,
+      "status": "page",
+      "total": 351
+    },
+    "from_evidence": "ev_eb522f313907d650e0f8717ac2d940d92f0ae244b4c08f41a6d815c08530dd66",
+    "from_tool": "core_archive_show",
+    "shown": {
+      "field_names": [
+        "depth",
+        "kind",
+        "path",
+        "role",
+        "sha256",
+        "size"
+      ],
+      "items": [
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "ossl-modules",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "JXRDecApp-calibre.exe",
+          "sha256": "4bf33245a2944d905530b18ef857e36c28c9db2ca63319db78e66aa0e1999779",
+          "size": 524040
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6Concurrent.dll",
+          "role": "native-library",
+          "sha256": "36b982300fc970aaf5b4a290b5366d7cc3a0e6a6a5c3cd27d2d09b53bed70249",
+          "size": 34568
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6Core.dll",
+          "role": "native-library",
+          "sha256": "c277829f609d48c4cfd2c88c9de4fe1beebe0114dcaaf792c9b097f78b78dea9",
+          "size": 10341640
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6Gui.dll",
+          "role": "native-library",
+          "sha256": "44351607b26cfd0c2b8ed83cde130c7f5e2eeeba453e7d9a65ed42ceea7e92b4",
+          "size": 9533192
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6Multimedia.dll",
+          "role": "native-library",
+          "sha256": "eec81b7cf68b6abeece9eb2674437adbc9df8c5ed74fc185b049f9b5b499aeaf",
+          "size": 1251592
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6MultimediaWidgets.dll",
+          "role": "native-library",
+          "sha256": "dffa24c5a303ea0a3a1cac8e6b72cb22b0a2ad11d6ebcf87ab422b2bbd87be47",
+          "size": 61192
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6Network.dll",
+          "role": "native-library",
+          "sha256": "f84a48117044026f1eeb9fd98b9246b18cc105fa329d7d3630daa2b2c94a6830",
+          "size": 1821448
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6OpenGL.dll",
+          "role": "native-library",
+          "sha256": "68525b3e5e45f7b73bd7c4ed4fea125a8c6b0f292e7ac1c878676361c7eed05a",
+          "size": 1989384
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6OpenGLWidgets.dll",
+          "role": "native-library",
+          "sha256": "2d0baabc7cbbe1150a087a596bf98668b342d9c1d90e50525ab9d9656295c478",
+          "size": 63752
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6Positioning.dll",
+          "role": "native-library",
+          "sha256": "474ada88603ba7f25b188e9cd2deb75ffdfff52ae70ddb3863e412ec1e8091dd",
+          "size": 515848
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6PrintSupport.dll",
+          "role": "native-library",
+          "sha256": "137bd3bc8fc21009c9ed1866d9678037a51129f6b5b2f8cd147dc6ad02dfed28",
+          "size": 404232
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6Qml.dll",
+          "role": "native-library",
+          "sha256": "77c51241d031c251198f30ccdfcfbb87549ebd74e3fcb5e8d0d7bf7b513d4906",
+          "size": 5290760
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6QmlMeta.dll",
+          "role": "native-library",
+          "sha256": "c78c7ea642cdba2ac527afe1bba1fc5dcca92810d8e19118be526fbc49106efc",
+          "size": 156936
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6QmlModels.dll",
+          "role": "native-library",
+          "sha256": "08275d52d066b36fdbaf66350bd8e0edd269746054d6261b90d8a4baf4fc0723",
+          "size": 991496
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6QmlWorkerScript.dll",
+          "role": "native-library",
+          "sha256": "b1cfc688922f4c6f10a0e6ef70d3d2e19a7537d54d75f307756b77793e179bac",
+          "size": 74504
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6Quick.dll",
+          "role": "native-library",
+          "sha256": "f63a46d94c3710da0980742bbcf588169cee9a4369ca21e32cac670711751fdd",
+          "size": 6507272
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6QuickWidgets.dll",
+          "role": "native-library",
+          "sha256": "c872a576e5a2819f1b40f1edfdfee6fb168c71345da62f0fbd302361e831bc72",
+          "size": 131848
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6Sensors.dll",
+          "role": "native-library",
+          "sha256": "e69db5298a8fe0a73207e79cecbf589faef99a065e7df3896d377370c937731e",
+          "size": 223496
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6SpatialAudio.dll",
+          "role": "native-library",
+          "sha256": "6479dba4947636da8aae7bd62f23eba112f1280479dfe576b52bb31f685ffa87",
+          "size": 741640
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6Sql.dll",
+          "role": "native-library",
+          "sha256": "75b896f2919319645de6819266ec138dce6606fa96553c0036724b886c456e01",
+          "size": 329480
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6Svg.dll",
+          "role": "native-library",
+          "sha256": "ec2abd8b9832cee7db40356b2df939d468f44e3216c658f0768d40e20339e949",
+          "size": 643336
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6TextToSpeech.dll",
+          "role": "native-library",
+          "sha256": "35e7b4db461d2621d2731a76eebc183c3abd3d864745a5edea4366b37c4faa52",
+          "size": 130824
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6WebChannel.dll",
+          "role": "native-library",
+          "sha256": "a1ab0b51b134d03ff9684570c291fc35d85f9cf76bdc1f45d1b724bedf66657d",
+          "size": 248072
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6WebEngineCore.dll",
+          "role": "native-library",
+          "sha256": "e6b3a031bd5823966aae2f8ba21ced97689759e4dfe1b21db0308107a97a3dca",
+          "size": 200741640
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6WebEngineWidgets.dll",
+          "role": "native-library",
+          "sha256": "e2358399fe48789011f54eb16956c3268e0f248deca1f8a30d6c183f0cc2f2d5",
+          "size": 188168
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6Widgets.dll",
+          "role": "native-library",
+          "sha256": "97f9bb18e09f7f3b6f2cdadafb9d33e79413393936e6839b3abb6da5cf56d926",
+          "size": 6876936
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "Qt6Xml.dll",
+          "role": "native-library",
+          "sha256": "ec9a8afa4a7200f93c59127af18b6dda273cdd9af699969726c1572aca69dd2f",
+          "size": 154376
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "QtWebEngineProcess.exe",
+          "sha256": "33d0ded353c81e0562d715c706e495c55233c10573006b2b9c6ff1c1030f9ca1",
+          "size": 790280
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_asyncio.pyd",
+          "sha256": "b53fef2506b0eb80837ed70a9201447683f2836ca7a0f84f86a10ba0c8351889",
+          "size": 74504
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_brotli.pyd",
+          "sha256": "2e0d90a2e03d693f82af7c0aeadea0565802bbc45376129f2dccfd5008f6a669",
+          "size": 865032
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_bz2.pyd",
+          "sha256": "4e9628affbde6b98e6b82c4f96893547420deb0bdc28f92f41d34e07334f59a8",
+          "size": 83720
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_ctypes.pyd",
+          "sha256": "0812a832f3500bbcee8e5efbbba6bcdaaf0be30f945125efe78d0fe2a579234a",
+          "size": 138504
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_ctypes_test.pyd",
+          "sha256": "0562438d0734274d7b7ac099b87348e8e0b67dcdbf7ff01b2027e5019754347d",
+          "size": 129800
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_decimal.pyd",
+          "sha256": "c6aa3645c0c50db6d563051b81b4469a5e462611e258ae3d79d4d99ee0181988",
+          "size": 289032
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_elementtree.pyd",
+          "sha256": "9b94c9efda3e3938ae74a7841aca652e4288002d94d7e1d1ca9da6f042838d40",
+          "size": 141576
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_hashlib.pyd",
+          "sha256": "a5f63de5b115db47af2534ca4a7c8770574dcc1666bccd7776175fca5789e2ad",
+          "size": 68360
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_lzma.pyd",
+          "sha256": "cb0ab87368216f1c8041e89b377b09bfb6bef9058d884346c978fc9cb714e69c",
+          "size": 156936
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_multiprocessing.pyd",
+          "sha256": "863149179ec838b05b665f02a545ecf9db51af9b272caf6bda5e70f7342675a7",
+          "size": 34568
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_overlapped.pyd",
+          "sha256": "46dfd2abb704ac6b853e397fef58b0e9ec70d0bff34426c734f923c93fba7c33",
+          "size": 54536
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_patiencediff_c.pyd",
+          "sha256": "c4b73fa668ac7a3a9cf7ac39f501d7413ceb90bba131ad4f4997a724b5fc76c0",
+          "size": 34056
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_queue.pyd",
+          "sha256": "34e35266b75d1905d21c06291ecfc68736bfa88a36a12fe65910bda3487238f4",
+          "size": 32520
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_remote_debugging.pyd",
+          "sha256": "ae05cba23cb839c7736aa0768a793d5909f7b6b705482b6f926e3d5df6bf9030",
+          "size": 88328
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_socket.pyd",
+          "sha256": "48c1c98b79614a15ed3c2027f6cdc4f7f1bd6fe373e15a44a1b3ae6c7251efbe",
+          "size": 84232
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_sqlite3.pyd",
+          "sha256": "9180a7ff5469e831cc4f3161399b5660eeacc6c9b431906f9e97e5e79704b6b6",
+          "size": 130312
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_ssl.pyd",
+          "sha256": "1bc18fc4681a8a7b411f231743c22b8701ff3fcbf669cf9fb6495afb65c5646c",
+          "size": 187656
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_testbuffer.pyd",
+          "sha256": "5805b59099dcc5dd52181e30b0da26885ecaec11f45d9bb9086accc3c5929541",
+          "size": 54024
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_testcapi.pyd",
+          "sha256": "b790271026a2f58b624099e3c7f73a693fcb28dbbeb11ad8239674cd0eff9345",
+          "size": 310024
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_testclinic.pyd",
+          "sha256": "bfe9ced8baabeed62d8b3e6f24d99bce513c8305b8aedeb4ac79b79e278bef78",
+          "size": 108296
+        },
+        {
+          "depth": 0,
+          "kind": "pe",
+          "path": "_testclinic_limited.pyd",
+          "sha256": "291165875b55f8ea355e41623d2f45cf8ef4e9f7998df9abba0a637b5bad51d2",
+          "size": 26888
+        }
+      ],
+      "list": "entries",
+      "offset": 0,
+      "total": 351
+    }
+  },
+  "summary": "Part of core_archive_show evidence (page).",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [],
+  "coverage": {
+    "status": "partial",
+    "examined": 50,
+    "total": 351,
+    "next_offset": 50
+  },
+  "locations": [],
+  "links": [
+    "ev_eb522f313907d650e0f8717ac2d940d92f0ae244b4c08f41a6d815c08530dd66"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "question": "C:\\Program Files\\Calibre2",
+      "answer": "Info: Disabled tools: apply_patch, dynamic_workflows_manage, lexical_code_search, list_agents, list_powershell, powershell, read_agent, read_powershell, run_dynamic_workflow, semantic_code_search, session_store_sql, sql, stop_powershell, task, web_fetch, write_agent`C:\\Program Files\\Calibre2` es la ubicación habitual de la instalación de Calibre para Windows.\n\nEl código fuente de esta app estará en `C:\\Users\\cjrui\\Documents\\Craft Anything\\calibre\\app`, no dentro de esa carpeta de Calibre. No instales ni copie archivos ahí sin indicarlo.",
+      "from_session": false,
+      "backend": "GitHub Copilot",
+      "after": 14,
+      "at_ms": 1795424816741,
+      "deep": true,
+      "told": true
+    }
+  ]
+}

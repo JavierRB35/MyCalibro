@@ -1,0 +1,89 @@
+[
+  {
+    "id": 1,
+    "title": "El mapa de las estrellas",
+    "author": "Clara Montes",
+    "year": "2022",
+    "description": "Un viaje entre planetas y preguntas sobre el universo.",
+    "tags": [
+      "para pensar",
+      "favoritos"
+    ],
+    "topic": "",
+    "file_path": null
+  },
+  {
+    "id": 2,
+    "title": "La ciudad sumergida",
+    "author": "Nicolás Ríos",
+    "year": "2019",
+    "description": "Un misterio bajo las calles de una ciudad antigua.",
+    "tags": [
+      "lectura pendiente"
+    ],
+    "topic": "",
+    "file_path": null
+  },
+  {
+    "id": 3,
+    "title": "Jardines del imperio",
+    "author": "Elena Sol",
+    "year": "2021",
+    "description": "Historias y memoria de una época distante.",
+    "tags": [
+      "historia"
+    ],
+    "topic": "",
+    "file_path": null
+  },
+  {
+    "id": 4,
+    "title": "El bosque encantado",
+    "author": "Mateo Luna",
+    "year": "2020",
+    "description": "Un reino escondido, magia y un dragón dormido.",
+    "tags": [
+      "aventura",
+      "favoritos"
+    ],
+    "topic": "",
+    "file_path": null
+  },
+  {
+    "id": 5,
+    "title": "Pequeños inventos",
+    "author": "Inés Vidal",
+    "year": "2023",
+    "description": "Ideas sobre robots y tecnología para el día a día.",
+    "tags": [
+      "ideas"
+    ],
+    "topic": "",
+    "file_path": null
+  },
+  {
+    "id": 6,
+    "title": "Un café en el puerto",
+    "author": "Leo Mar",
+    "year": "2018",
+    "description": "Una novela sobre amistad, viajes y nuevos comienzos.",
+    "tags": [
+      "lectura ligera"
+    ],
+    "topic": "",
+    "file_path": null
+  },
+  {
+    "id": 7,
+    "title": "La Biblioteca de la Medianoche",
+    "author": "Matt Haig [Matt Haig]",
+    "year": "2020",
+    "description": "<p>«Entre la vida y la muerte hay una biblioteca. Y los estantes de esa biblioteca son infinitos. Cada libro da la oportunidad de probar otra vida que podrías haber vivido y de comprobar cómo habrían cambiado las cosas si hubieras tomado otras decisiones… ¿Habrías hecho algo de manera diferente si hubieras tenido la oportunidad?».</p><p>Nora Seed aparece, sin saber cómo, en la Biblioteca de la Medianoche, donde se le ofrece una nueva oportunidad para hacer las cosas bien. Hasta ese momento, su vida ha estado marcada por la infelicidad y el arrepentimiento. Nora siente que ha defraudado a todos, y también a ella misma. Pero esto está a punto de cambiar. Los libros de la Biblioteca de la Medianoche permitirán a Nora vivir como si hubiera hecho las cosas de otra manera. Con la ayuda de una vieja amiga, tendrá la opción de esquivar todo aquello que se arrepiente de haber hecho (o no haber hecho), en pos de la vida perfecta. Pero las cosas no siempre serán como imaginó que serían, y pronto sus decisiones enfrentarán a la Biblioteca y a ella misma en un peligro extremo. Nora deberá responder una última pregunta antes de que el tiempo se agote: ¿cuál es la mejor manera de vivir?</p>",
+    "tags": [
+      "Novela",
+      "Fantástico"
+    ],
+    "topic": "",
+    "file_path": "C:\\Users\\cjrui\\Downloads\\Telegram Desktop\\La_Biblioteca_de_la_Medianoche_Matt_Haig.epub"
+  }
+]

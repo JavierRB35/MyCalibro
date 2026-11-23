@@ -1,0 +1,2694 @@
+{
+  "id": "ev_eb522f313907d650e0f8717ac2d940d92f0ae244b4c08f41a6d815c08530dd66",
+  "subject": {
+    "kind": "directory",
+    "sha256": "c3f303a4480878c6b7081485a2dce24c9942d54af15a23ce2360e0d4985b968c",
+    "name": "bin"
+  },
+  "operation": "core_archive_show",
+  "params": {
+    "if_tampered": true,
+    "limit": 1000,
+    "max_depth": 1,
+    "max_entries": 10000,
+    "max_total_bytes": 536870912,
+    "offset": 0,
+    "path": "C:\\Program Files\\Calibre2\\app\\bin"
+  },
+  "result": {
+    "by_kind": {
+      "binary": 1,
+      "directory": 1,
+      "pe": 349
+    },
+    "containers": [],
+    "content_id": "inv_c3f303a4480878c6b7081485a2dce24c9942d54af15a23ce2360e0d4985b968c",
+    "contradictions": [],
+    "entries": [
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "ossl-modules",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "JXRDecApp-calibre.exe",
+        "sha256": "4bf33245a2944d905530b18ef857e36c28c9db2ca63319db78e66aa0e1999779",
+        "size": 524040
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6Concurrent.dll",
+        "role": "native-library",
+        "sha256": "36b982300fc970aaf5b4a290b5366d7cc3a0e6a6a5c3cd27d2d09b53bed70249",
+        "size": 34568
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6Core.dll",
+        "role": "native-library",
+        "sha256": "c277829f609d48c4cfd2c88c9de4fe1beebe0114dcaaf792c9b097f78b78dea9",
+        "size": 10341640
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6Gui.dll",
+        "role": "native-library",
+        "sha256": "44351607b26cfd0c2b8ed83cde130c7f5e2eeeba453e7d9a65ed42ceea7e92b4",
+        "size": 9533192
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6Multimedia.dll",
+        "role": "native-library",
+        "sha256": "eec81b7cf68b6abeece9eb2674437adbc9df8c5ed74fc185b049f9b5b499aeaf",
+        "size": 1251592
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6MultimediaWidgets.dll",
+        "role": "native-library",
+        "sha256": "dffa24c5a303ea0a3a1cac8e6b72cb22b0a2ad11d6ebcf87ab422b2bbd87be47",
+        "size": 61192
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6Network.dll",
+        "role": "native-library",
+        "sha256": "f84a48117044026f1eeb9fd98b9246b18cc105fa329d7d3630daa2b2c94a6830",
+        "size": 1821448
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6OpenGL.dll",
+        "role": "native-library",
+        "sha256": "68525b3e5e45f7b73bd7c4ed4fea125a8c6b0f292e7ac1c878676361c7eed05a",
+        "size": 1989384
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6OpenGLWidgets.dll",
+        "role": "native-library",
+        "sha256": "2d0baabc7cbbe1150a087a596bf98668b342d9c1d90e50525ab9d9656295c478",
+        "size": 63752
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6Positioning.dll",
+        "role": "native-library",
+        "sha256": "474ada88603ba7f25b188e9cd2deb75ffdfff52ae70ddb3863e412ec1e8091dd",
+        "size": 515848
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6PrintSupport.dll",
+        "role": "native-library",
+        "sha256": "137bd3bc8fc21009c9ed1866d9678037a51129f6b5b2f8cd147dc6ad02dfed28",
+        "size": 404232
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6Qml.dll",
+        "role": "native-library",
+        "sha256": "77c51241d031c251198f30ccdfcfbb87549ebd74e3fcb5e8d0d7bf7b513d4906",
+        "size": 5290760
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6QmlMeta.dll",
+        "role": "native-library",
+        "sha256": "c78c7ea642cdba2ac527afe1bba1fc5dcca92810d8e19118be526fbc49106efc",
+        "size": 156936
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6QmlModels.dll",
+        "role": "native-library",
+        "sha256": "08275d52d066b36fdbaf66350bd8e0edd269746054d6261b90d8a4baf4fc0723",
+        "size": 991496
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6QmlWorkerScript.dll",
+        "role": "native-library",
+        "sha256": "b1cfc688922f4c6f10a0e6ef70d3d2e19a7537d54d75f307756b77793e179bac",
+        "size": 74504
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6Quick.dll",
+        "role": "native-library",
+        "sha256": "f63a46d94c3710da0980742bbcf588169cee9a4369ca21e32cac670711751fdd",
+        "size": 6507272
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6QuickWidgets.dll",
+        "role": "native-library",
+        "sha256": "c872a576e5a2819f1b40f1edfdfee6fb168c71345da62f0fbd302361e831bc72",
+        "size": 131848
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6Sensors.dll",
+        "role": "native-library",
+        "sha256": "e69db5298a8fe0a73207e79cecbf589faef99a065e7df3896d377370c937731e",
+        "size": 223496
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6SpatialAudio.dll",
+        "role": "native-library",
+        "sha256": "6479dba4947636da8aae7bd62f23eba112f1280479dfe576b52bb31f685ffa87",
+        "size": 741640
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6Sql.dll",
+        "role": "native-library",
+        "sha256": "75b896f2919319645de6819266ec138dce6606fa96553c0036724b886c456e01",
+        "size": 329480
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6Svg.dll",
+        "role": "native-library",
+        "sha256": "ec2abd8b9832cee7db40356b2df939d468f44e3216c658f0768d40e20339e949",
+        "size": 643336
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6TextToSpeech.dll",
+        "role": "native-library",
+        "sha256": "35e7b4db461d2621d2731a76eebc183c3abd3d864745a5edea4366b37c4faa52",
+        "size": 130824
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6WebChannel.dll",
+        "role": "native-library",
+        "sha256": "a1ab0b51b134d03ff9684570c291fc35d85f9cf76bdc1f45d1b724bedf66657d",
+        "size": 248072
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6WebEngineCore.dll",
+        "role": "native-library",
+        "sha256": "e6b3a031bd5823966aae2f8ba21ced97689759e4dfe1b21db0308107a97a3dca",
+        "size": 200741640
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6WebEngineWidgets.dll",
+        "role": "native-library",
+        "sha256": "e2358399fe48789011f54eb16956c3268e0f248deca1f8a30d6c183f0cc2f2d5",
+        "size": 188168
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6Widgets.dll",
+        "role": "native-library",
+        "sha256": "97f9bb18e09f7f3b6f2cdadafb9d33e79413393936e6839b3abb6da5cf56d926",
+        "size": 6876936
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "Qt6Xml.dll",
+        "role": "native-library",
+        "sha256": "ec9a8afa4a7200f93c59127af18b6dda273cdd9af699969726c1572aca69dd2f",
+        "size": 154376
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "QtWebEngineProcess.exe",
+        "sha256": "33d0ded353c81e0562d715c706e495c55233c10573006b2b9c6ff1c1030f9ca1",
+        "size": 790280
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_asyncio.pyd",
+        "sha256": "b53fef2506b0eb80837ed70a9201447683f2836ca7a0f84f86a10ba0c8351889",
+        "size": 74504
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_brotli.pyd",
+        "sha256": "2e0d90a2e03d693f82af7c0aeadea0565802bbc45376129f2dccfd5008f6a669",
+        "size": 865032
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_bz2.pyd",
+        "sha256": "4e9628affbde6b98e6b82c4f96893547420deb0bdc28f92f41d34e07334f59a8",
+        "size": 83720
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_ctypes.pyd",
+        "sha256": "0812a832f3500bbcee8e5efbbba6bcdaaf0be30f945125efe78d0fe2a579234a",
+        "size": 138504
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_ctypes_test.pyd",
+        "sha256": "0562438d0734274d7b7ac099b87348e8e0b67dcdbf7ff01b2027e5019754347d",
+        "size": 129800
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_decimal.pyd",
+        "sha256": "c6aa3645c0c50db6d563051b81b4469a5e462611e258ae3d79d4d99ee0181988",
+        "size": 289032
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_elementtree.pyd",
+        "sha256": "9b94c9efda3e3938ae74a7841aca652e4288002d94d7e1d1ca9da6f042838d40",
+        "size": 141576
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_hashlib.pyd",
+        "sha256": "a5f63de5b115db47af2534ca4a7c8770574dcc1666bccd7776175fca5789e2ad",
+        "size": 68360
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_lzma.pyd",
+        "sha256": "cb0ab87368216f1c8041e89b377b09bfb6bef9058d884346c978fc9cb714e69c",
+        "size": 156936
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_multiprocessing.pyd",
+        "sha256": "863149179ec838b05b665f02a545ecf9db51af9b272caf6bda5e70f7342675a7",
+        "size": 34568
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_overlapped.pyd",
+        "sha256": "46dfd2abb704ac6b853e397fef58b0e9ec70d0bff34426c734f923c93fba7c33",
+        "size": 54536
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_patiencediff_c.pyd",
+        "sha256": "c4b73fa668ac7a3a9cf7ac39f501d7413ceb90bba131ad4f4997a724b5fc76c0",
+        "size": 34056
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_queue.pyd",
+        "sha256": "34e35266b75d1905d21c06291ecfc68736bfa88a36a12fe65910bda3487238f4",
+        "size": 32520
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_remote_debugging.pyd",
+        "sha256": "ae05cba23cb839c7736aa0768a793d5909f7b6b705482b6f926e3d5df6bf9030",
+        "size": 88328
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_socket.pyd",
+        "sha256": "48c1c98b79614a15ed3c2027f6cdc4f7f1bd6fe373e15a44a1b3ae6c7251efbe",
+        "size": 84232
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_sqlite3.pyd",
+        "sha256": "9180a7ff5469e831cc4f3161399b5660eeacc6c9b431906f9e97e5e79704b6b6",
+        "size": 130312
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_ssl.pyd",
+        "sha256": "1bc18fc4681a8a7b411f231743c22b8701ff3fcbf669cf9fb6495afb65c5646c",
+        "size": 187656
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_testbuffer.pyd",
+        "sha256": "5805b59099dcc5dd52181e30b0da26885ecaec11f45d9bb9086accc3c5929541",
+        "size": 54024
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_testcapi.pyd",
+        "sha256": "b790271026a2f58b624099e3c7f73a693fcb28dbbeb11ad8239674cd0eff9345",
+        "size": 310024
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_testclinic.pyd",
+        "sha256": "bfe9ced8baabeed62d8b3e6f24d99bce513c8305b8aedeb4ac79b79e278bef78",
+        "size": 108296
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_testclinic_limited.pyd",
+        "sha256": "291165875b55f8ea355e41623d2f45cf8ef4e9f7998df9abba0a637b5bad51d2",
+        "size": 26888
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_testconsole.pyd",
+        "sha256": "b06c7833fe8c1414c24be8b1207902ca7f90892d685436f95cc65b87ec00eba9",
+        "size": 25864
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_testimportmultiple.pyd",
+        "sha256": "928b46118054efcfdd4a885990ed8aad0beb17b0e63957dc981ee8dba020740a",
+        "size": 24840
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_testinternalcapi.pyd",
+        "sha256": "caec3e8b6b196e34e8b9f0c56a31bd6f6e5408086f0a72598f00f12f7ee2c509",
+        "size": 93448
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_testlimitedcapi.pyd",
+        "sha256": "93a7f62ee82667bcc11b509b65de32192da4175d503bf2f7510286c31d748333",
+        "size": 152840
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_testmultiphase.pyd",
+        "sha256": "160068588695f9eb220cc653af8efd618b5c37dd9100ae2f5eafb1147ac34802",
+        "size": 39176
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_testsinglephase.pyd",
+        "sha256": "a40f31648e12cfa3cc007181f2a4dfa87c9d1064623fa1981e946705cdcfa02f",
+        "size": 31496
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_uuid.pyd",
+        "sha256": "58176e2c775278884f1650004cb91d6f9df88d9399f8f4e9bc74821a48c85ef3",
+        "size": 24328
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_wmi.pyd",
+        "sha256": "244be38aa0103b42dbd7c2af33d3fb8a7edb412ffbb01a3944e91bb8b1c20ce8",
+        "size": 36616
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_zoneinfo.pyd",
+        "sha256": "67b02b881070a9315ea738751f1823a8faf465a0193c8fa5276e394cc7600d3f",
+        "size": 48392
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "_zstd.pyd",
+        "sha256": "630d393bfbe85f2138d107a8683d1a345856a97171f780719c54ade69d37f186",
+        "size": 498952
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "amatch.dll",
+        "role": "native-library",
+        "sha256": "5d2a7d14373e77fae70ce9c25452d8ed7d2b4737e9e2813a8d95c9663fcdac21",
+        "size": 33544
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "anycollseq.dll",
+        "role": "native-library",
+        "sha256": "5077e86256bf0b8a1fc462407966244b33682671fa66da611eb1202b81fbc29d",
+        "size": 25352
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-console-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "2a303ab60c40124efc793b7facdccf581524d271f8c48f7cff84794ae70a09e3",
+        "size": 22888
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-console-l1-2-0.dll",
+        "role": "native-library",
+        "sha256": "0e822bd2062f234a2272846e0a52f7e30d60631ca8aed010a21a636319cefc6e",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-datetime-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "0bc5624723725ed188ac781b9b9e8faef90921bfb3cb7efb2dce6bf9aead00b5",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-debug-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "c1b4d9fbdb818ad4d3efd1c69ca6b94634dec0f413736a8d14c7f378df82fcb4",
+        "size": 22896
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-errorhandling-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "5c68f07fd5b26cbdefb819be95e9965a6e5086d71241e703cb92976089724a90",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-fibers-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "729fd64f661d8b34321e57bed297201818cc5f5984b453900296d179ce0dcfb5",
+        "size": 22912
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-fibers-l1-1-1.dll",
+        "role": "native-library",
+        "sha256": "cb715cc1771a4a1e9f682666d9fdf30085a656386cb2df2cbadb62bad3346e7d",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-file-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "52ac9cf92558bca053ae8ec95c87ec2e7b39d3ca8e013676060a2f3b6adb4930",
+        "size": 26968
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-file-l1-2-0.dll",
+        "role": "native-library",
+        "sha256": "8746d8fd6ada8cbe31803644f785461a58d6b89812f40325cd493c155e57ad97",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-file-l2-1-0.dll",
+        "role": "native-library",
+        "sha256": "e0c03aa9d6c8c9010f8fce517511524401711504855592b0f0703c137a915a5f",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-handle-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "506f80f779dd95419a8fbda3cabd770614046b64b1be0455b62558664db85f4f",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-heap-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "87f5578925154ec2d2b52b189f3cf27caf1d3abc29f4b5fbe4bbfee746c2c3eb",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-interlocked-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "cdca66d6d7d936dc881230868703094abbbeecd946268f7f52af729472619b4e",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-kernel32-legacy-l1-1-1.dll",
+        "role": "native-library",
+        "sha256": "1c9247245e63dd20b406de29520f77c98967a0a3a96c940ea2ebdd6eee9280bc",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-libraryloader-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "fd4b3472c452730b250f1ad7284af45f758bc8370c0687a6020054072c551cc2",
+        "size": 22896
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-localization-l1-2-0.dll",
+        "role": "native-library",
+        "sha256": "edcaf1fbb669fd8e5aa88b0976cb59a0a2e6c14f52947e09beb31e4b6ccad543",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-memory-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "14c37023ea67ec68d121d13866e1af5657af3a58665a9308f6b372652b349344",
+        "size": 22896
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-namedpipe-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "befc9a19c804bc06eb2d03793164e5e25a78d3a2d4886054da02f9c5dcd43d54",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-processenvironment-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "fe1ead43adb4ba2d3a5badf9372d35a49fa94affa7ea019c46d399c80e912713",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-processthreads-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "e0cc30956fa5b83cf2818aa66391297817a3fa20b7a0a93aeb3c1e2226550ffb",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-processthreads-l1-1-1.dll",
+        "role": "native-library",
+        "sha256": "39a3771040889cd5687886a47673e463fc1c11f0912db3037be6a723eea24e05",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-profile-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "a65fc761c411044ffe4b74262bc772e93dff388199d76197ead3d83b48bfd600",
+        "size": 22896
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-rtlsupport-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "3af24743b2706303a9f32cc31c4991d88280757eaa61060bfdf7bea751cc6273",
+        "size": 22896
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-string-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "6d41bd2d5380b6ca0eedea7a07191562bbfe2c06ca1868c82dd67a1934733192",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-synch-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "967fe671582dca8bb9ed3faf7b6848f9407e2bb4d43e3d6ddb16fd32590395e1",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-synch-l1-2-0.dll",
+        "role": "native-library",
+        "sha256": "ef1724edf3763340b6eb3b1188a62291bdb7b71156d6775e8326daf3733e7f5c",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-sysinfo-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "c8596ad4d200c35870975dffef0e263ead11d2f888481a40a3fce7990cbc3f88",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-sysinfo-l1-2-0.dll",
+        "role": "native-library",
+        "sha256": "bdd27b72c25ada8bd8fdf5a732589cbe4d7c2b6e70cd04a5df8943acc8c1321d",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-timezone-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "32af8ca41c4cfce9a7ffac402ebdced89d3328d0072bcc371301663e478b7c9b",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-core-util-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "9c46194218f43c3eaaaa46a1fdd822f81b331ad94bf531287917cada4f9b09d4",
+        "size": 22896
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-crt-conio-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "00cbabc8e73828b65f10d452e1856e5eb03147c89c16812e815c5e7d5b968de9",
+        "size": 22896
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-crt-convert-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "7255488854eae6c958e46d2ed616733241d368200e75764ba31fd6ee943a4f9a",
+        "size": 26992
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-crt-environment-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "488cbafbee826ad9d32d86508b53b067504cae31ec1ebf271c402ccd34a9b9fb",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "d161558c87ff680b148baaa8eb5b99b6641675967c9a4a53a330067321c50394",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-crt-heap-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "b17ff71e85d21247dfe1a00d9507cd65f3ad8d2c0ee0e6ded90954e96871a22d",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-crt-locale-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "30fd4f5574658d34eeaacb5201ece6c9810ce1fa4fc76b6cbee7f0c83cb390e8",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-crt-math-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "2dee8b875b3e8d50da9b6b1edaae56938505b64430861d8665e8ae0e95dfac48",
+        "size": 31080
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-crt-multibyte-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "f7e0c554af1085854625caecf81aa08175f55e2d5224b3b5d034a6f3495edf58",
+        "size": 31064
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-crt-private-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "5d8948a1d58d4d94b0f12390181c61e7047026b2fca8850b6237dd3e9b7a59cb",
+        "size": 76144
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-crt-process-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "091ed228d2928e22e5e4cc8674207692544093f2ff81f0435f3b94669b44dce7",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-crt-runtime-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "f8b7cd724e5644b586fe1ef70f8f29173ca28f834f4f62e5d78bd4b85c3b149b",
+        "size": 26992
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-crt-stdio-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "55a61b280575b4ebdd9386d74c949cf23e5fffeeb984aca45801a917651c778e",
+        "size": 26968
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-crt-string-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "ec7d880ea488601e416054e6a0845a3739f6db6dae0c55267d0a48830d27b137",
+        "size": 26968
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-crt-time-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "b7f379a14ca42e702f646755cdb6356e68b47ca18cebc783cb9e0a7160470a48",
+        "size": 22888
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "api-ms-win-crt-utility-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "bc1abfacae076996912cd20250f5829ab646f79f0303ce9f3c90cb260e61b310",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "appendvfs.dll",
+        "role": "native-library",
+        "sha256": "56296bcb5cba7af92772da7677002af4647d7d51eb92bb83376f0c0190cf6bd1",
+        "size": 27400
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "apsw.__init__.pyd",
+        "sha256": "95aa531ca445d1256f305eeb29aee1f744a9d2d9bf128843ff766e95f2547695",
+        "size": 2299656
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "apsw._unicode.pyd",
+        "sha256": "da7ba43e309a81d31833c4b26ea7366786d47135eccfb5c6ae3446ab8abe6b87",
+        "size": 741128
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "avcodec-61.dll",
+        "role": "native-library",
+        "sha256": "57dda9c6f5614a82474edf6441fb41a7fb6ce40e55bb6e805f0cffa74202c162",
+        "size": 13976328
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "avdevice-61.dll",
+        "role": "native-library",
+        "sha256": "98cb02b5c263ad130b67d900d2857a4cfff17b2fe82097e95b9054e90837a20d",
+        "size": 209672
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "avfilter-10.dll",
+        "role": "native-library",
+        "sha256": "ea53c4edb5b025f5baabaf091a3ec4c6a93d3bd7e77f7ab76d35a25e6cff98a6",
+        "size": 4257032
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "avformat-61.dll",
+        "role": "native-library",
+        "sha256": "1da00796ca3eea9979f1aca69548c49594025f0e3d7beedecf30ad66a798bd01",
+        "size": 2602248
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "avutil-59.dll",
+        "role": "native-library",
+        "sha256": "f9a9ac67e7b2686faeb8e6540faf51f5f05c3ac75db6a1758e921ac3e6763f43",
+        "size": 1175304
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "base64.dll",
+        "role": "native-library",
+        "sha256": "04b930276f9057a8e0cef6cbabf5a4c15721eeb9d9c63b473721d79ef2e16ba3",
+        "size": 26376
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "base85.dll",
+        "role": "native-library",
+        "sha256": "b6e0e20cc4d1aff84de03aca8379f4feb8faae37e815ba692f4a701951e80497",
+        "size": 26888
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bcj._bcj.pyd",
+        "sha256": "ec46f92f7973fb7cbcfc60b082df0e605e2026e1ecbec1ec958ce36b9bbeb1b8",
+        "size": 33544
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "brotlicommon.dll",
+        "role": "native-library",
+        "sha256": "8f6e54d9b66cd7525a0ad02f09699f5ce03e76bc0f439abc384fb208708d82c0",
+        "size": 148744
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "brotlidec.dll",
+        "role": "native-library",
+        "sha256": "76489b0cbb35bf42365f40e855efbf1e2c5e4860520551445534da52a2061fd7",
+        "size": 62216
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "brotlienc.dll",
+        "role": "native-library",
+        "sha256": "3ef6e0c2e8f8c336652ae9c29b0b62959fd7078adc2f90360f9ee37e5ebef6e7",
+        "size": 691464
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "btreeinfo.dll",
+        "role": "native-library",
+        "sha256": "0f084ef5c45497ea5af6a4d0214ed2ec5dd214acea40ebaab5468e2fed5d8868",
+        "size": 27400
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bzzdec.pyd",
+        "sha256": "97a3b95c0b333d994d95025f4e996b7de3db75c07698e7ca08312b817a5fd347",
+        "size": 27400
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "calibre-eject.exe",
+        "sha256": "05e89895504fd03aa029528a5011b9fcdad37bd5a6cca1ac34ec1d32c6750498",
+        "size": 48904
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "calibre-file-dialog.exe",
+        "sha256": "15ca82c97f124b1a09db06ac55f15325945a1c5dad57439d9c66f998ee80ed0b",
+        "size": 51464
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "calibre-launcher.dll",
+        "role": "native-library",
+        "sha256": "3c162738cd191a4fc50cc868536a55a5e2d5652e55191013537278b5b34d1608",
+        "size": 510728
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "certgen.pyd",
+        "sha256": "e9dda2540802074342e7a0f0914873c4f2501c0037d9760f32906e041655056d",
+        "size": 35592
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "chm._chmlib.pyd",
+        "sha256": "4a8f10592c3b3e7fc94632352eb176327e8a8c8ea28f15828e374f76c44ffa9c",
+        "size": 53000
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "cjpeg-calibre.exe",
+        "sha256": "9842f4ffaaebdf42301e6a7f413707457287bfdc9a24e854fc5d4ab3212392c9",
+        "size": 966920
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "cksumvfs.dll",
+        "role": "native-library",
+        "sha256": "24e7ddc38ed1718ad3dcbcdeedbe3d3444e4aec77fc8baed8c3f5501b865d643",
+        "size": 27912
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "closure.dll",
+        "role": "native-library",
+        "sha256": "ec7f9069561da82cdd84221d3980f347bb3cdcf0ddab69e537523838fad9ab09",
+        "size": 30472
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "completion.dll",
+        "role": "native-library",
+        "sha256": "2c5dd14c16dbd3facf926f24f9a3b01d346d5c2fb8c2916eaa618eafc06c7392",
+        "size": 27912
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "compress.dll",
+        "role": "native-library",
+        "sha256": "1e906bd3875f84b8144933fead7c034c148f2a8a5100e7cfb5361ba9452674d4",
+        "size": 69384
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "cpalmdoc.pyd",
+        "sha256": "bf0a7e172c96a0be76c55cde6c5016dfafab688f9692119799d402cc996a3d73",
+        "size": 23304
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._ARC4.pyd",
+        "sha256": "ca5ec3e96e556f356bccd010b2f2ec3b4df443f3cf90f00e83a3918eaab120aa",
+        "size": 22280
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._Salsa20.pyd",
+        "sha256": "c7ec0a483f919d2006c914970ccd7ba219ea95afebac9df53d22ca8570a50ece",
+        "size": 23816
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._chacha20.pyd",
+        "sha256": "c7f9dc8e1e6c7b4a3fbf9b6ad0c7aa036a25fe5a27e760cc51fbd2aabdea717b",
+        "size": 24328
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._pkcs1_decode.pyd",
+        "sha256": "656fe34e620f6bb796f3ccad543855baeff6976b8d8fee2e183dbb29e2fe8483",
+        "size": 24328
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._raw_aes.pyd",
+        "sha256": "98a90f330a92708d5358f81f17ca2a5d7d616b0213a562b58b07a121e57f7d8b",
+        "size": 47880
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._raw_aesni.pyd",
+        "sha256": "82fc5b969a44c2ad6272c064ce8d12500b55f95844b84c5f933311935a0ccf85",
+        "size": 26376
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._raw_arc2.pyd",
+        "sha256": "53eac7a988890f28f23ebf614c5af6c86aaa24ba7fe5e19e55720bd9e4b91b6f",
+        "size": 27912
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._raw_blowfish.pyd",
+        "sha256": "aa5cb873a38831b7a7fb5520770dd9da53c966419194fec939ec4500da3fd20a",
+        "size": 30472
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._raw_cast.pyd",
+        "sha256": "2a207871b54903b854cce9f9464b261d700f740ebbd08098a6135170b7c09fe2",
+        "size": 35080
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._raw_cbc.pyd",
+        "sha256": "6a3a45f13b93215cda825638cf5de8c0674046683e1470444e0d0e045a73f5e5",
+        "size": 23304
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._raw_cfb.pyd",
+        "sha256": "c7a9c8fd685434c46825362fbc0cd16e226e5cccfc0c971eb5e98fcecc6b16ad",
+        "size": 23816
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._raw_ctr.pyd",
+        "sha256": "59b7ce7caaf5a82403f1522b6f4698b3980842844c32c61f6f139e213e5c4f78",
+        "size": 25352
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._raw_des.pyd",
+        "sha256": "e9d41e1ec15ace742ceb870757cc103c46f7b7d5752bdd6cc573a6a81bc84448",
+        "size": 63752
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._raw_des3.pyd",
+        "sha256": "1f6287684151396212717d43f0e6659f12d59442a1c517082fa56a811546fcf7",
+        "size": 64264
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._raw_ecb.pyd",
+        "sha256": "7ca138552bd6056d191ae2d55f9b902a1f06e4ec76bdb659c9cafb7a1533a7cf",
+        "size": 21768
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._raw_eksblowfish.pyd",
+        "sha256": "aee6acd0a5cc61f1ac4bd40c90718b14b0cc5446ce5aceb92bdc7756ca2806ce",
+        "size": 31496
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._raw_ocb.pyd",
+        "sha256": "c78b7c246551298a73100d21d2207feea16a02f8cba7a0326422a210d71a5cac",
+        "size": 28936
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Cipher._raw_ofb.pyd",
+        "sha256": "582db5f1a764a5d740c93fd7c2073eb17f65634b434dad50b86a5c30d6fb2024",
+        "size": 23304
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Hash._BLAKE2b.pyd",
+        "sha256": "776a591db4860a7dd20c021827bd1e961c8dab7d6b992d3b224d5f357c3b45df",
+        "size": 25352
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Hash._BLAKE2s.pyd",
+        "sha256": "646b10e79974aebc3f50f766434d10e07f1078c351462ff17179258fcd8a4eef",
+        "size": 24840
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Hash._MD2.pyd",
+        "sha256": "0d9a8ccaec2e85b470c4d972957a2776e1b9c03cf6cf2556f06d49be6ff8b9de",
+        "size": 25864
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Hash._MD4.pyd",
+        "sha256": "b8d929a34bc256dad66fccfa92271cb5a8d8eb761a867157d80316210a33298a",
+        "size": 24840
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Hash._MD5.pyd",
+        "sha256": "b8b590232d3f9496fe0974a8479eee49f8b72ee1fa9579ef16ab1dc7b23b21f0",
+        "size": 26888
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Hash._RIPEMD160.pyd",
+        "sha256": "f83a473b2d67f54fc2e159aae41620f467c9099bc9d846b00e75c1db0347dba2",
+        "size": 28424
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Hash._SHA1.pyd",
+        "sha256": "5602a82b73e81e24a95355fccd81ca9cdd5b6a704946076c09f0b4aaef20275c",
+        "size": 29448
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Hash._SHA224.pyd",
+        "sha256": "8d288d2613b5a19870c36a8d7ac0b9e51c3540daac8e537ec71c05eb730f3d9b",
+        "size": 33544
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Hash._SHA256.pyd",
+        "sha256": "00429d59cf764db15a2a00a911a1d6dd29b52f4d122d4ad715cac653329f568a",
+        "size": 33544
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Hash._SHA384.pyd",
+        "sha256": "38a80a401c8a27aa2e21e23a608ee22983c2712ee7cc5b12dc98c39a1121dbe6",
+        "size": 38664
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Hash._SHA512.pyd",
+        "sha256": "f3c802cf1d998ff82ad7a5d9942a80232e4d91fdeb4d4507abf950f6fa3ba5b6",
+        "size": 39176
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Hash._ghash_clmul.pyd",
+        "sha256": "aac8dae420c47756387e180745bd0cc944402ad91f8cfc8e86c754277a4e6952",
+        "size": 22792
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Hash._ghash_portable.pyd",
+        "sha256": "99d0e674ee0e406509a66a518f7db7f7bcb63ae8da78e5d7aa9c800ce52349ac",
+        "size": 22792
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Hash._keccak.pyd",
+        "sha256": "109694671a3a9a25dac9aa1a49d7991055d2b689eeb2256f9e06fcc237694d2f",
+        "size": 26376
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Hash._poly1305.pyd",
+        "sha256": "8e49b03d430d0bda7c4f474a2d8ae170ba2321307079d5b504c777687fce0c74",
+        "size": 25352
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Math._modexp.pyd",
+        "sha256": "cc1339ef315a6e06c0c2ce0be849b049deedf80d12010d1337c239e91b7b251f",
+        "size": 40200
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Protocol._scrypt.pyd",
+        "sha256": "8827d679985f1194222fd03efd681ded16e7ac1d29578d5b6e5c321e3b336ef2",
+        "size": 23304
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.PublicKey._curve25519.pyd",
+        "sha256": "2829b4583c15b320a6d4e690b01b2f2b7b20b64173f85bf0cd81d306384d53ab",
+        "size": 31496
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.PublicKey._curve448.pyd",
+        "sha256": "786c812b8be1cd7c8c68a98cd89338262d71acfc963a0830c8232bfcb225ec60",
+        "size": 44296
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.PublicKey._ec_ws.pyd",
+        "sha256": "5df7be23833ac62a644ab6c9de5c1a8411fd7d606968b6734397ab7fdfedb775",
+        "size": 717064
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.PublicKey._ed25519.pyd",
+        "sha256": "77828fb4725adae90ab7b292135ffdd0d14a60de1156cd2f9e907c08d4aa3d30",
+        "size": 36104
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.PublicKey._ed448.pyd",
+        "sha256": "a0f24ea74b40d1d7e1efa713da1f6a2a2c59572954bac8595700a7b5e85ce669",
+        "size": 50440
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Util._cpuid_c.pyd",
+        "sha256": "7cb0870c083bd513673cbdc0b4a587ca96ed0c8cf29c7a007ace4d6ceb1495de",
+        "size": 21768
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "crypto.Util._strxor.pyd",
+        "sha256": "908c28940457794873cd86aa496c9c5d08551b99ee16e67cb73f319edd25f787",
+        "size": 21768
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "csv.dll",
+        "role": "native-library",
+        "sha256": "4f55cf88dc041d6cc20da1739c3c1de0e4ffc68d91fbf2a2b044b3d4a3904c62",
+        "size": 30984
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "cwebp-calibre.exe",
+        "sha256": "0ba0bd2ed00ca0c19e66cbc409ba13b1d200e0353a97de0a4743cb23a9672dac",
+        "size": 62216
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "d3dcompiler_47.dll",
+        "role": "native-library",
+        "sha256": "320565434e5d8a77e13980e9c0e641daa08d12693ac0d77df9ccf2b25d9e526c",
+        "size": 4741504
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "decimal.dll",
+        "role": "native-library",
+        "sha256": "b31dabcec2ceacf05d649e69c8c68b88239feaa5030c3fb83e274485980accfe",
+        "size": 32008
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "espeak-ng.dll",
+        "role": "native-library",
+        "sha256": "c778c1ebbfa20942dbd0fca28d2f125b51fac41da2dd9015e9c36bc41933cce4",
+        "size": 421128
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "eval.dll",
+        "role": "native-library",
+        "sha256": "2783448e29a2caf2e1d73d493af3a26b0b9f0ff363157938c4b0188cf0dc97a7",
+        "size": 25864
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "fast_css_transform.pyd",
+        "sha256": "71329130045b89b1e7c373d46734cc493c61068d5b0bd8433b11da6422ab4218",
+        "size": 197896
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "fast_html_entities.pyd",
+        "sha256": "1c03aacb83b3a4da7f54946dc4b8b7fdb668c6b5fa1526b0b0b4595dec694be0",
+        "size": 431880
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "ffmpeg.pyd",
+        "sha256": "874b652ca94ed2daa6d668afc8e3c0fdfe03a48cc2fc808d10eefab6ee465aa9",
+        "size": 35080
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "fileio.dll",
+        "role": "native-library",
+        "sha256": "67bc69994833417b6d1d3b6ef88c2ae59324e4fcaeb35b222a9d1b980ea0ebad",
+        "size": 34056
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "freetype.dll",
+        "role": "native-library",
+        "sha256": "23c010193b8086c8aa3c0d33ce637dec10f3b100552f4ef3d781cfed809f77e4",
+        "size": 707848
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "freetype.pyd",
+        "sha256": "f964445ee184f0a919a2bb034fe6b3f11b8933728697ab336ccab46e8a76a026",
+        "size": 25352
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "fuzzer.dll",
+        "role": "native-library",
+        "sha256": "79e62a63d269fa3ee1685baf9a8046818d30f18322c176ce2a6c1c0a52593b26",
+        "size": 30984
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "html5_parser.html_parser.pyd",
+        "sha256": "fc6975fec16acc6f14ae2ec981db1d8a6c7a708bdbc975ce982b8d16c5a85e69",
+        "size": 397064
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "html_as_json.pyd",
+        "sha256": "d4084eabff7ef238d3590b088b771ce364d6cea10512e0af979f4c26a1e610e9",
+        "size": 37128
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "html_syntax_highlighter.pyd",
+        "sha256": "8b81b1ad168c24ba91bca9adeb1047ce1eaea9d7c197d8750f5cb7515034e492",
+        "size": 29448
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "hunspell.pyd",
+        "sha256": "bc1203fabf6f99de5615692c8f696bfb8bd48eaa03d37e267ccd43e4f5ad5426",
+        "size": 29960
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "hyphen.pyd",
+        "sha256": "a2846b3e2e2a52b6c52b3e04e8258763d91c1f91b16ac46ceecc6587969e7d86",
+        "size": 41736
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "icu.pyd",
+        "sha256": "9a9d9f265706a69fdad6c34dfba76b6047260058210f9eaa7e9ffa2e7bc73e6d",
+        "size": 59144
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "icudt78.dll",
+        "role": "native-library",
+        "sha256": "676b8d695daf4e1d5d0ca88a2f85d341c745cfed84d0681b1232c75beae55ddd",
+        "size": 33122568
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "icuin78.dll",
+        "role": "native-library",
+        "sha256": "d4116c55d60d3c51732294b08c6207a201488b756474112fdeddc12d82fb8cf3",
+        "size": 3585288
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "icuio78.dll",
+        "role": "native-library",
+        "sha256": "f296f6fe53d21a9cf42ebbf73d83e88247b06a8609a1f6bb52b203d2606f4f1d",
+        "size": 74504
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "icutu78.dll",
+        "role": "native-library",
+        "sha256": "2614efaf9496dc84966cb8462fd978d34282b7821cdef0579d1f5549772d949c",
+        "size": 459016
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "icuuc78.dll",
+        "role": "native-library",
+        "sha256": "6eca6a36e9fc2adf6722ce2a623aab514a848831e0e999a7779ab86347bbcee2",
+        "size": 2776840
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "ieee754.dll",
+        "role": "native-library",
+        "sha256": "ba1a76448433acdb07e0857204d9f8d806ea18415699dd0a746b71f6a5485c6a",
+        "size": 27400
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "imageops.pyd",
+        "sha256": "dc8547f5040526ce772ec057c6c5ad223b00b668f9a4734e660d92c02f399f6a",
+        "size": 106248
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "inflate64._inflate64.pyd",
+        "sha256": "de4bdf5c57d9a59145f3fd5470d9ff885f79d7b921ce13f499784dd4d9af1409",
+        "size": 53512
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "jpeg8.dll",
+        "role": "native-library",
+        "sha256": "ffe7234d50d69c1d172718c535003a28e3bd0f2f5a6d185c62655459af8a4f79",
+        "size": 711944
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "jpegtran-calibre.exe",
+        "sha256": "901625fecfe8f86e2d96da25496e9224f0d96efaffd20fe1f30b202e045adc4b",
+        "size": 721672
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "lcms2-2.dll",
+        "role": "native-library",
+        "sha256": "578c7c44f79e71c7649f2bd8ce7637f5e5222586c88eb654f82ec6934dfd9f53",
+        "size": 397064
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "libcrypto-3-x64.dll",
+        "role": "native-library",
+        "sha256": "922d8f423619f23f83187f8b59a2843630ba1d20162ae7cbada7b02bacb2df18",
+        "size": 7243016
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "libexpat.dll",
+        "role": "native-library",
+        "sha256": "1a4d97aed53be2ece6cb47b9f0ecdf072340824fdc535d1aa953c1b6ce283190",
+        "size": 175880
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "libexslt.dll",
+        "role": "native-library",
+        "sha256": "4b782c87e161264d526218cd9e16342af5d63f2491c8bdf48ca0436dd6113d47",
+        "size": 90888
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "libffi-8.dll",
+        "role": "native-library",
+        "sha256": "eff52743773eb550fcc6ce3efc37c85724502233b6b002a35496d828bd7b280a",
+        "size": 39696
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "libhunspell.dll",
+        "role": "native-library",
+        "sha256": "3f4e31e79308037187b0d4e0b5eb5a25124c7a982a8805e294253625ef9ee4ee",
+        "size": 799496
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "libiconv.dll",
+        "role": "native-library",
+        "sha256": "754265cc9a114373282a477be551be739734f4dde849e317625d739913abcf7b",
+        "size": 1108744
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "libpng16.dll",
+        "role": "native-library",
+        "sha256": "e235ac41f6bb8678100c663313c88c6ba2567ecf95827c4203b996c286a3757a",
+        "size": 209160
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "libsharpyuv.dll",
+        "role": "native-library",
+        "sha256": "7f1a0f69fbf7b10aea33917ba9deb250937f0344816eb5275ebd011b8fabf532",
+        "size": 39176
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "libssl-3-x64.dll",
+        "role": "native-library",
+        "sha256": "0fc82e6d8bc5864d53f96a61e8b781be73ab0e8e453185dfc28ff200c2fb68c7",
+        "size": 1322248
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "libstemmer.dll",
+        "role": "native-library",
+        "sha256": "5ffce5373fe84d64855d1d4be00151f682243975263434bbe18cc95c8a03ae5d",
+        "size": 726280
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "libwebp.dll",
+        "role": "native-library",
+        "sha256": "79c6b37d421c1215c314e75a7a9accc787a423f2d3337a34212153bfb0443f44",
+        "size": 523528
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "libwebpdecoder.dll",
+        "role": "native-library",
+        "sha256": "e7b309be9fabf9936cc15f8e01ced4f3b3d0736662b6089f4a8b72e300db2285",
+        "size": 270088
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "libwebpdemux.dll",
+        "role": "native-library",
+        "sha256": "b665ccf49f60e93b9c4cf6bc4bdccda26c41175830d5ba7c09d9fdd25a295a16",
+        "size": 31496
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "libwebpmux.dll",
+        "role": "native-library",
+        "sha256": "b816a2e50fabf761ed54e60f11df4bf9c7f6e553ec498f989c07f956900ddfce",
+        "size": 53000
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "libxml2.dll",
+        "role": "native-library",
+        "sha256": "295947635875fa45a17ec0e0b9e8527bc1b490a097043c2b7fd7adac9d9440b5",
+        "size": 1224968
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "libxslt.dll",
+        "role": "native-library",
+        "sha256": "cb41f39d734f55cf80a87aa63cfcde5b5b0df128abe51906c92a412186e5d44d",
+        "size": 234248
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "lxml._elementpath.pyd",
+        "sha256": "857c15dfa1148944f0750d2a78ee06a9f595d8e02baeca8326e427fbe8ad4c56",
+        "size": 155400
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "lxml.builder.pyd",
+        "sha256": "16c1b9ce43ab9a315f6b7ee7793b52d3e8b350bea0c83931614a44feaa9f46c5",
+        "size": 93960
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "lxml.etree.pyd",
+        "sha256": "9ec7fa9532f8f0d014305275b6cc33468b57da36ef67750de5b7abb3d5510ffb",
+        "size": 1625864
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "lxml.html._difflib.pyd",
+        "sha256": "22a4f3b57dda6e8d4c86ac4ca914eefcd90c3a92726f013726ef50cdf8b65728",
+        "size": 379144
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "lxml.html.diff.pyd",
+        "sha256": "e024e475f5b64c1e5b323680c297f0d7d2c7425c0ccdca8ce0686cda1bdff8fb",
+        "size": 243976
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "lxml.objectify.pyd",
+        "sha256": "1267929d8953fa9d2687fae66cd488b500bacfe906b7ed9c236d5502dfb43148",
+        "size": 309000
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "lxml.sax.pyd",
+        "sha256": "6f9858f27f6eaab2e151b7eb401cfae0a61be61acd2d3542673575ec884142e8",
+        "size": 128264
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "lzx.pyd",
+        "sha256": "a62b4ec5d44384117035fe0625e6adcd7ed5db5423e6c9faca7a654135fbf35b",
+        "size": 47368
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "matcher.pyd",
+        "sha256": "d9ccabfa2946497be2bae1e2ee8858927ef6103f09142f1cd2fa62bb0836542b",
+        "size": 30984
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "memstat.dll",
+        "role": "native-library",
+        "sha256": "a7d240ff63d3fc06c5e6ccd77cbcbcf1fdf4c3abea87cece45785274e870342d",
+        "size": 26888
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "msdes.pyd",
+        "sha256": "f60564775307b43b9ce376315128ded1aa74de225e69b3a36fdd738866d4267a",
+        "size": 29960
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "msgpack._cmsgpack.pyd",
+        "sha256": "cf5e915ac749a8e4feefdb2d9361e543528e32be78dc14822e5a3500b0eccc1e",
+        "size": 139016
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "msvcp140.dll",
+        "role": "native-library",
+        "sha256": "0f885b509a685d2bbfa652fed26b5fb31d88fbdab0a978c641d1c7b8aa460aa9",
+        "size": 557728
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "msvcp140_1.dll",
+        "role": "native-library",
+        "sha256": "bfad5aef4c63a669e3c140655cdfdf395b6c979b400a447bd5dcb65ed8826c3d",
+        "size": 35952
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "msvcp140_2.dll",
+        "role": "native-library",
+        "sha256": "3ea06f0ee098b4823cb79599df3780e7f23cce52c19aac31d2a0d47efe33a5e9",
+        "size": 280200
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "msvcp140_atomic_wait.dll",
+        "role": "native-library",
+        "sha256": "640b2aefced484d0368eea5bdd06addd0658a3a70a49256e560d6923b404a479",
+        "size": 50304
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "msvcp140_codecvt_ids.dll",
+        "role": "native-library",
+        "sha256": "f2069a52880ec885ee7f0511186100eb7fada0411a2b4948fafea7735b878a18",
+        "size": 31872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "netifaces.pyd",
+        "sha256": "d2b607af1406841b23a351401880cc84aaad6328ce0456595a1022e4feff59b6",
+        "size": 33032
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "nextchar.dll",
+        "role": "native-library",
+        "sha256": "3421912dad4b29522c5acf82d8b78504f1bd310cca4caf442c9158cac27a0283",
+        "size": 26888
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "noop.dll",
+        "role": "native-library",
+        "sha256": "cb2b2b403ee1cdd46073eb911e1e94035ed7cdf7e454e0e6261a3c1bbe380476",
+        "size": 25352
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "onnxruntime.dll",
+        "role": "native-library",
+        "sha256": "1e5283207b6e7dffe16c55f483e652021edd41a2910ef256c8556c03a8919c64",
+        "size": 14321416
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "onnxruntime_providers_shared.dll",
+        "role": "native-library",
+        "sha256": "b47627b62af5484cd9ee797bd3f78ca24b521fc6d669d43baa4ad051f4efc017",
+        "size": 22280
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "opengl32sw.dll",
+        "role": "native-library",
+        "sha256": "b04de4541863bc7d8879040a78889c4849c1b1da2784c4630f734c146c2998ce",
+        "size": 20639888
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "openjp2.dll",
+        "role": "native-library",
+        "sha256": "5d8dd5f4576d1c817a28a758a9778f26a5a14f4d2f590a410031d3de8ebe1da2",
+        "size": 371464
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "optipng-calibre.exe",
+        "sha256": "70ded84adb1710e1451148504a0de5d9c29950a91fe6537c5c0b817f7ea36672",
+        "size": 189704
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "ossl-modules/legacy.dll",
+        "role": "native-library",
+        "sha256": "4715624aff50291954e6886e185f19d60361d080c5dc68a70b81fc0133c72775",
+        "size": 184584
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pdfinfo.exe",
+        "sha256": "f337a3f278d98a068ed5b89f1572077becdd4f5156ecee5d522aa79d5cea253b",
+        "size": 75528
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pdftohtml.exe",
+        "sha256": "a4e8b8e09a699767f7dabe3e718b076fcb356c27bad52b3009d55ac20b1c344f",
+        "size": 140040
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pdftoppm.exe",
+        "sha256": "a6724a2b3ef47209d4a55ec12d3182bd8b817b8e7b252b55c7366e4c059485ba",
+        "size": 60680
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pdftotext.exe",
+        "sha256": "20ef6730ac0d49ba83144a3848d2ee77c53cea3404c6fceb7de4a1a9f926a576",
+        "size": 81160
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pictureflow.pyd",
+        "sha256": "d1cddc62d116a78f6b662388c90a0d9c6ee5ce9e7c70f1056917d408597634d5",
+        "size": 125704
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pil._imaging.pyd",
+        "sha256": "94bce7f0a3695f01a3527bd68fd1cfa9389172b6577d330fa8befc601ea8d7a0",
+        "size": 402696
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pil._imagingcms.pyd",
+        "sha256": "c0d324560f14785ce6ee7efcf5f8593426cb44e06ac50808a849d37ff8a301ae",
+        "size": 45320
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pil._imagingft.pyd",
+        "sha256": "64e81b0e709e3e87a24e3c39bbcc5a06b4e3d8fa127227df9e0eee95f19f6997",
+        "size": 45832
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pil._imagingmath.pyd",
+        "sha256": "fc11b5f948455d27b707ce24d7d06d6f98a1549574d7216bb3f4e4ec34660e96",
+        "size": 33544
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pil._imagingmorph.pyd",
+        "sha256": "f4c78080337ccbd95343735b577338b3d5ca510e30349ca25a9fac2ac03f2e7a",
+        "size": 23816
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pil._imagingtk.pyd",
+        "sha256": "985a09c26fdfc15ea080daa0dccf3cd6fcd89e2bb340bb0939a44d3309908118",
+        "size": 26376
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pil._webp.pyd",
+        "sha256": "e2afb98a5a37ba71347c13cb248daf27a65cffcec230fba07110bcc6114855e1",
+        "size": 35080
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "piper.pyd",
+        "sha256": "41cd05d71db423c54679a83980bc32ad65d709babc73b54903b9ac1a40a406ab",
+        "size": 55560
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "podofo.dll",
+        "role": "native-library",
+        "sha256": "88c86273c8c5a54a461640f959b3a57a66f8a669735300c402374af9e28b7d3d",
+        "size": 4969736
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "podofo.pyd",
+        "sha256": "aef99dae012bc494846492afc4c961f07df7a7cae6bcfe6aab4aa81361492655",
+        "size": 133384
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "poppler.dll",
+        "role": "native-library",
+        "sha256": "32b08d6eb92fc3e1a0dcfb868b2f55975ddf08dd73d904db3cda0b3919bf06de",
+        "size": 3358472
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "postproc-58.dll",
+        "role": "native-library",
+        "sha256": "10eace60405b5a77f5d7464d2f7fa6afc1cf1e9bafbd97d33ba9a3034db50bc8",
+        "size": 171784
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "prefixes.dll",
+        "role": "native-library",
+        "sha256": "8abd8ed5e3afc4a4de9dde8607de2662ea5f5acaab8f007775352d2f3a6461fe",
+        "size": 25864
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "progress_indicator.pyd",
+        "sha256": "31c97aab104a751de733fcbebdb8a8b4fa70db7b87208bfb56f7bf828db03c36",
+        "size": 173320
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "psutil._psutil_windows.pyd",
+        "sha256": "d3dd5f4a5aaebf7126e19b55c6e526bcbeb117a301d13eef07bb9a04ec20fdc7",
+        "size": 82696
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyexpat.pyd",
+        "sha256": "c9b4c4c128179e0e5e5e9a52070705631a477a46ffbb966a3b66792abd001aad",
+        "size": 229128
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyppmd.c._ppmd.pyd",
+        "sha256": "fb632234a14cabfe17cbbc936bea4485c4d895c27eac71073bd0b78efe1f2d67",
+        "size": 67848
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtCore.pyd",
+        "sha256": "b254d0ddb1ba05a2670883426122c4f383875c646ae45e253ac4faf9e33d31fe",
+        "size": 2334472
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtDBus.pyd",
+        "sha256": "4a6e4e7a2e48869933791cca3adb98673a87c7ed60c1341ad390dca58feda275",
+        "size": 177928
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtGui.pyd",
+        "sha256": "a924822991bfd1a6f7b4f6768b7f12c1064ae6d4befefe4a6543fd7104f9c23d",
+        "size": 2039048
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtMultimedia.pyd",
+        "sha256": "318f1949661b2f47422715cc0c9305595d88f604d72e359b37183843d5d6567c",
+        "size": 411400
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtMultimediaWidgets.pyd",
+        "sha256": "45b17e7b6b48169b90b1e26ff8cbec0d6f45bb1bd520a720c415f246847220b4",
+        "size": 101640
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtNetwork.pyd",
+        "sha256": "3ca6cb14d495977490730958e8450836598ff2d1d88b1eca3dd4387e7cbbc8cb",
+        "size": 752392
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtOpenGL.pyd",
+        "sha256": "805401d566e1887e1232049300cab2896cb14203a0def4bbcb5d5a9b9bd8d595",
+        "size": 1029384
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtOpenGLWidgets.pyd",
+        "sha256": "95f9c652b11ddc24bdfb52bf43bbcb8b66eb6f881fca2b62480ac804218ed136",
+        "size": 76552
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtPdf.pyd",
+        "sha256": "e6841f388ba44aa4f0466653cccacc8284c4e761bc200da282c3ecb368622aa0",
+        "size": 165128
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtPdfWidgets.pyd",
+        "sha256": "55304c5e6575be92d008e7307f1c6c41f814ab80dc62dac89869d339433895fe",
+        "size": 107784
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtPositioning.pyd",
+        "sha256": "36967739a17fc2f12e811edf86ba0b5ced7b50d2bef3215e88468b3b9a49b4ae",
+        "size": 202504
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtPrintSupport.pyd",
+        "sha256": "6fd21e5ade26234ce1a697b7b6058f04519660044ce12ebffc09b95d566d06aa",
+        "size": 246024
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtQml.pyd",
+        "sha256": "be7ab12962ba947d2555ae587a50182a513e5fc303d45b13d35b4a22f5a22814",
+        "size": 718088
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtQuick.pyd",
+        "sha256": "3505d1a71d8c5870546b76e38312537419be88996803d3a467465fd633da5df7",
+        "size": 941320
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtQuickWidgets.pyd",
+        "sha256": "a8a15d5e83af8be6ed793b5c771a0f393a95318c8664b493992c69ae00b5bec6",
+        "size": 76040
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtSensors.pyd",
+        "sha256": "09fd72da60de11d8c5623b231c5623c36183c729783c422f9d076f7b3b119b85",
+        "size": 231176
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtSpatialAudio.pyd",
+        "sha256": "f6f7f0934ef3f5cec6e706dae17cb7fb5cb4355fee15845839dc24affb2ad118",
+        "size": 90376
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtSql.pyd",
+        "sha256": "0a7c2c4e65699b5e18f8a3732632905c068f98ad7a8f68fd99dcc635aa5d08e5",
+        "size": 299784
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtSvg.pyd",
+        "sha256": "944e5e937d5864e745e62621726b8fb0119ce01229c405448ab8c51fda786ea5",
+        "size": 57608
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtSvgWidgets.pyd",
+        "sha256": "9df162a5338c5e25801d63ee0f4087384a29de7c6cabfc05820358ae60b1e68a",
+        "size": 101128
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtTest.pyd",
+        "sha256": "e2b62948de6c120169f6d62d9828834d3033cd27ee3a43c94fe29ae8d701fe30",
+        "size": 70408
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtTextToSpeech.pyd",
+        "sha256": "3121bbb75ad4cbec83a3ea9dead4c5a98a6d46e70816dc47cad66b4b3caaa1b5",
+        "size": 64264
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtWebChannel.pyd",
+        "sha256": "56c3ee2751e55d4e286338bbc8fedaf08928458de7a2c155827a5e26d2c52955",
+        "size": 53512
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtWebEngineCore.pyd",
+        "sha256": "cf9ae289f93d8e89960565077d4cf9d5de9ba1c8714fd57ba4b0e2fafc58ab0a",
+        "size": 370440
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtWebEngineWidgets.pyd",
+        "sha256": "4edbb6178f03fd8de730b51a88cd94a52727aba3d303c8b35da78a7459615b60",
+        "size": 83208
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtWidgets.pyd",
+        "sha256": "b6b773e4605b56a2be0f736fccc3e949aa70bdaab32edc1675ebac2c4407630f",
+        "size": 4460808
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.QtXml.pyd",
+        "sha256": "3b3f24db4784b28b1515fdfed35fd8a9f02a81024d82e3966c0c72b262fb5b72",
+        "size": 115464
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyqt6.sip.pyd",
+        "sha256": "2a0b6892a6b19394506a403d3771b9b280be798a2f01292d9005f6e887c17151",
+        "size": 119560
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "pyshellext.dll",
+        "role": "native-library",
+        "sha256": "b977c4f02c13f87c22e823d9eca533234680439a4264868915876bbbb46cd535",
+        "size": 50440
+      },
+      {
+        "depth": 0,
+        "kind": "binary",
+        "path": "python-lib.bypy.frozen",
+        "sha256": "a7aeda40c163fc2182a23fd791a4d7de0182ed347ae20437e315cecb6cb57788",
+        "size": 86189472
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "python3.dll",
+        "role": "native-library",
+        "sha256": "f085ded471cb72a529acb877f4daf99ad93717e2bc889ee4bdd25c8e5367c008",
+        "size": 71432
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "python314.dll",
+        "role": "native-library",
+        "sha256": "c39beb4c3c9d198dae9ff39aeef45dd9e9a9e879a5a8ae5553bbd4391dfa51e9",
+        "size": 6812424
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "randomjson.dll",
+        "role": "native-library",
+        "sha256": "2b36960d770b410cce031ed59eccae3f7e3a4c3d6d604952808c93ad36d66a54",
+        "size": 28936
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "rcc_backend.pyd",
+        "sha256": "b8f53cc5e4791c4e5fbcadbf12d3dcc3629e5fd05f3461bd8763a4389d635149",
+        "size": 107784
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "regex._regex.pyd",
+        "sha256": "3dc0d3ee1e5c6a3b1dcbf195f893aded706289b40cffe6d65b9e1fd0c0d2bc21",
+        "size": 733448
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "regexp.dll",
+        "role": "native-library",
+        "sha256": "8a555e1b73dcb6aeae33d535cda316c90ec229db6fd8be8e48362fc73ebaffba",
+        "size": 30984
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "rot13.dll",
+        "role": "native-library",
+        "sha256": "78511f55387993fa49761004a5d3401c7c72abdc4adf8538ed0750f43c22e829",
+        "size": 25864
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "select.pyd",
+        "sha256": "27744d721663cdfeb0038245e87382d0c61e36e83c4f0bf32dcb594271147316",
+        "size": 29960
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "sha1.dll",
+        "role": "native-library",
+        "sha256": "6cf48df1515cb3a6476a640079109db39c62d03348a8219ffc44508ec6ee8683",
+        "size": 33032
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "shathree.dll",
+        "role": "native-library",
+        "sha256": "48dad2981bbe4cc624a9f4abb240b3871692bf4f2b7418be02e23494105bf488",
+        "size": 33032
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "speedup.pyd",
+        "sha256": "dd13b86bf7055246d79727bdda22e89aae85630654b8d7adaca9516a696c9565",
+        "size": 42248
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "spellfix.dll",
+        "role": "native-library",
+        "sha256": "36899eaf370d703dc687245f6facdb9c4415f32ef06cf6607291fc4147bdbc8a",
+        "size": 43784
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "sqlar.dll",
+        "role": "native-library",
+        "sha256": "c88550550f1369acf5cf78e9f26a1d841d35b8f7f2298964ff07154f2f1d449c",
+        "size": 69384
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "sqlite3.dll",
+        "role": "native-library",
+        "sha256": "fef7af53054d78b8b81f8480888d3315f2d3fd98419eb2dfa3c7e0dc5b7f2cb1",
+        "size": 1533192
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "sqlite3_tool.dll",
+        "role": "native-library",
+        "sha256": "e60e89398012ff7cab7652177933a1c2392ce046490cafe8248f7119bbba64ea",
+        "size": 782600
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "sqlite_custom.pyd",
+        "sha256": "2eeb8430a20e47b5727a58a3d07071407a5b86ef4961bd1fa06f4ca27f8d34a3",
+        "size": 24840
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "sqlite_extension.pyd",
+        "sha256": "a94131f7a0da5671acbb19487c50f46114b9c17f8f2f1bbc8fa0ef31d494cb20",
+        "size": 50952
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "stmt.dll",
+        "role": "native-library",
+        "sha256": "42a68da31f41ccd46296a079281af1f71222a3c8677bce7b3687f9a8f619fd9a",
+        "size": 26376
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "stmtrand.dll",
+        "role": "native-library",
+        "sha256": "bfbeb7d51f281a28b25f468363963848575f0c659beb95f372a61b3dfee015f7",
+        "size": 25864
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "swresample-5.dll",
+        "role": "native-library",
+        "sha256": "c0a7893002e12661d5cc7c287a18495ebf27ecf01248975dc6372dee3a20189d",
+        "size": 243464
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "swscale-8.dll",
+        "role": "native-library",
+        "sha256": "eb5724bd71ffdade7726427dbef5f0e1c7f6157f1d194cdd8faeab8b557b5de9",
+        "size": 758536
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "tiff.dll",
+        "role": "native-library",
+        "sha256": "2d41e30eeaeaf08ee3bcff1091bd3e8521ff287f910f8a976885f5f2afb928e0",
+        "size": 579336
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "tmstmpvfs.dll",
+        "role": "native-library",
+        "sha256": "8b70cb4edd8588142b6451d616237541bf636dc9d3f1da7fb1417ee3bf62475b",
+        "size": 29960
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "tokenizer.pyd",
+        "sha256": "d00ea606cc35bbf669e7f161dee23876e00a6ce4ca87753bb9b87ed214823d1f",
+        "size": 32008
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "translator.pyd",
+        "sha256": "22c528a0605a89217e58e3f24ce2055e1121668de5d515229f640251b719c30a",
+        "size": 76552
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "uchardet.dll",
+        "role": "native-library",
+        "sha256": "e81dd1738a78c6cb40fe0663e4e289a3ec1883521963ba8f6bdb7e352f2f6be9",
+        "size": 193288
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "uchardet.pyd",
+        "sha256": "b5d7a1ce19f6d0dfbce7e166f503448bff399d6ab70a5d1a17ecf19563b538c5",
+        "size": 21768
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "ucrtbase.dll",
+        "role": "native-library",
+        "sha256": "dbdc8cd8f1047cc477e69a02f78ad0ed44cb62d437b6734870e3401386bea1ab",
+        "size": 1362288
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "uint.dll",
+        "role": "native-library",
+        "sha256": "8bd0b5274fa9f73a699cdad5da5ead1ada8c095d5fbbf0fed4d39b2590fff6a8",
+        "size": 25352
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "unicode_names.pyd",
+        "sha256": "2cf6359fdc7bc5c9ac8ffe3cfa0d3577712937ff3fc192194714c045d3dff76d",
+        "size": 2553608
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "unicodedata.pyd",
+        "sha256": "9f5fb05133802e001a4bd8fd4797ed09c5faf282c292484e586b21c85831d869",
+        "size": 755464
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "unionvtab.dll",
+        "role": "native-library",
+        "sha256": "b37acac558d0dc992a8ede3b339f296aa6a358a801761d6ff16d059a7ae0e52e",
+        "size": 33544
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "unrar.dll",
+        "role": "native-library",
+        "sha256": "0e38d008a1af86dcc366aba2f71a833af3719bc1824a3f01a43afb5703904073",
+        "size": 406280
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "unrardll.unrar.pyd",
+        "sha256": "cbc41cf14aa9c4b270d87f2700ee9480a43ef00185e1d0ed22de89960ac83f60",
+        "size": 30472
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "uuid.dll",
+        "role": "native-library",
+        "sha256": "dcb529c4dc47aecb07bf477370fb723892396cd1e13fee4cf08e8f89306252b6",
+        "size": 26376
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "vcruntime140.dll",
+        "role": "native-library",
+        "sha256": "d5e4d9a3e835fa679450145d6a7d94e36573a509317111904d9b3712c30d9066",
+        "size": 124544
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "vcruntime140_1.dll",
+        "role": "native-library",
+        "sha256": "1f2d41c4aa5db0bc33ebf7b66d72943a817d7ce6cbe880502a9403823633093f",
+        "size": 49792
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "vcruntime140_threads.dll",
+        "role": "native-library",
+        "sha256": "219915cf20822f34d5e7c1fdd4e21ae7f3396881096c51036225fb8f84b47afa",
+        "size": 38528
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "vec1.dll",
+        "role": "native-library",
+        "sha256": "1837110a1327a3b619c1f286d5a666da120c23dcb47958a095ebb5fcde2f2e8d",
+        "size": 184072
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "vfsstat.dll",
+        "role": "native-library",
+        "sha256": "0f582807faccf86a431314d71e6b41ca8a80870ef684e94f93e607d4c9ac70a5",
+        "size": 28424
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "vtablog.dll",
+        "role": "native-library",
+        "sha256": "2dabdaa12b13e1056ecca2fa33259c3181f6fa7e6b304abe9b3f6cdb8f101139",
+        "size": 32008
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "winfonts.pyd",
+        "sha256": "3ce148f177f2a5f72202c4705b12e15237e38f7e877eefb5dc458500f16ec129",
+        "size": 26376
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "winsound.pyd",
+        "sha256": "ba872268359288f8107312cb6cafec750dd0037531e586344af8a1f66ffe72c0",
+        "size": 29960
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "wintoast.pyd",
+        "sha256": "d4ec77dc91dd2cc308b21391c90e79d81424df09060b99e3e3863d2133961b11",
+        "size": 91400
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "winutil.pyd",
+        "sha256": "b4a8045ab31b971d7fbee82647ba7ba54a7fef107147c2352e8383bcc2e13da3",
+        "size": 77064
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "wpd.pyd",
+        "sha256": "a818ce31722d30f54e67b3c9a5ac5854f1fc3aeba16e7857914386b950d3aa19",
+        "size": 75528
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "xxhash._xxhash.pyd",
+        "sha256": "03deaa46afe629b57725391d086262eee6f50a33535bfbc3b506dd12126a151a",
+        "size": 69384
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "zipfile.dll",
+        "role": "native-library",
+        "sha256": "d3dc378572f02be5c77eb247321c90a900f43cb0e8a0f843e49fbd138d1d3d4e",
+        "size": 82184
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "zlib1.dll",
+        "role": "native-library",
+        "sha256": "2b7c9061afb80ab92fc565e4269fa3ffccbc3abf5571c22de5219309e97b71b9",
+        "size": 101640
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "zorder.dll",
+        "role": "native-library",
+        "sha256": "504fde60186658f6fb56ccac4cc99e45acf7b75fef19067c8fa093f11e9dddc9",
+        "size": 25864
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "zstd.dll",
+        "role": "native-library",
+        "sha256": "86b723a515809850a3e0ca587234ad963755087650db5512dd375d0427d7acdc",
+        "size": 667400
+      }
+    ],
+    "entries_total": 351,
+    "files": 350,
+    "hashed_bytes": 521089832,
+    "path": "C:\\Program Files\\Calibre2\\app\\bin",
+    "root": "bin",
+    "root_kind": "directory",
+    "truncated": false,
+    "unopened_nested": 0
+  },
+  "summary": "bin (directory) holds 350 files in 351 entries; 0 nested container(s).",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "no_disk_images",
+      "message": "Disk images (DMG), installers (PKG/MSI) and compressed tarballs are listed as single files, not opened."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 351,
+    "total": 351
+  },
+  "locations": [
+    {
+      "kind": "path",
+      "value": "C:\\Program Files\\Calibre2\\app\\bin"
+    }
+  ],
+  "links": []
+}

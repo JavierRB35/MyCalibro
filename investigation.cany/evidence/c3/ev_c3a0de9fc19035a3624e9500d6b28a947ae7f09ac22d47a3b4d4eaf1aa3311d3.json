@@ -1,0 +1,464 @@
+{
+  "id": "ev_c3a0de9fc19035a3624e9500d6b28a947ae7f09ac22d47a3b4d4eaf1aa3311d3",
+  "subject": {
+    "kind": "directory",
+    "sha256": "c3f303a4480878c6b7081485a2dce24c9942d54af15a23ce2360e0d4985b968c",
+    "name": "bin"
+  },
+  "operation": "core_evidence_browse",
+  "params": {
+    "show": {
+      "fields": [
+        "path",
+        "kind",
+        "size"
+      ],
+      "kind": "rows",
+      "limit": 80,
+      "list": "entries",
+      "offset": 150
+    },
+    "source": {
+      "evidence_id": "ev_eb522f313907d650e0f8717ac2d940d92f0ae244b4c08f41a6d815c08530dd66",
+      "kind": "saved"
+    }
+  },
+  "result": {
+    "coverage": {
+      "at_end": false,
+      "examined": 80,
+      "next_offset": 230,
+      "status": "page",
+      "total": 351
+    },
+    "from_evidence": "ev_eb522f313907d650e0f8717ac2d940d92f0ae244b4c08f41a6d815c08530dd66",
+    "from_tool": "core_archive_show",
+    "shown": {
+      "items": [
+        {
+          "kind": "pe",
+          "path": "crypto.Cipher._raw_ocb.pyd",
+          "size": 28936
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Cipher._raw_ofb.pyd",
+          "size": 23304
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Hash._BLAKE2b.pyd",
+          "size": 25352
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Hash._BLAKE2s.pyd",
+          "size": 24840
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Hash._MD2.pyd",
+          "size": 25864
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Hash._MD4.pyd",
+          "size": 24840
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Hash._MD5.pyd",
+          "size": 26888
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Hash._RIPEMD160.pyd",
+          "size": 28424
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Hash._SHA1.pyd",
+          "size": 29448
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Hash._SHA224.pyd",
+          "size": 33544
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Hash._SHA256.pyd",
+          "size": 33544
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Hash._SHA384.pyd",
+          "size": 38664
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Hash._SHA512.pyd",
+          "size": 39176
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Hash._ghash_clmul.pyd",
+          "size": 22792
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Hash._ghash_portable.pyd",
+          "size": 22792
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Hash._keccak.pyd",
+          "size": 26376
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Hash._poly1305.pyd",
+          "size": 25352
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Math._modexp.pyd",
+          "size": 40200
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Protocol._scrypt.pyd",
+          "size": 23304
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.PublicKey._curve25519.pyd",
+          "size": 31496
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.PublicKey._curve448.pyd",
+          "size": 44296
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.PublicKey._ec_ws.pyd",
+          "size": 717064
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.PublicKey._ed25519.pyd",
+          "size": 36104
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.PublicKey._ed448.pyd",
+          "size": 50440
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Util._cpuid_c.pyd",
+          "size": 21768
+        },
+        {
+          "kind": "pe",
+          "path": "crypto.Util._strxor.pyd",
+          "size": 21768
+        },
+        {
+          "kind": "pe",
+          "path": "csv.dll",
+          "size": 30984
+        },
+        {
+          "kind": "pe",
+          "path": "cwebp-calibre.exe",
+          "size": 62216
+        },
+        {
+          "kind": "pe",
+          "path": "d3dcompiler_47.dll",
+          "size": 4741504
+        },
+        {
+          "kind": "pe",
+          "path": "decimal.dll",
+          "size": 32008
+        },
+        {
+          "kind": "pe",
+          "path": "espeak-ng.dll",
+          "size": 421128
+        },
+        {
+          "kind": "pe",
+          "path": "eval.dll",
+          "size": 25864
+        },
+        {
+          "kind": "pe",
+          "path": "fast_css_transform.pyd",
+          "size": 197896
+        },
+        {
+          "kind": "pe",
+          "path": "fast_html_entities.pyd",
+          "size": 431880
+        },
+        {
+          "kind": "pe",
+          "path": "ffmpeg.pyd",
+          "size": 35080
+        },
+        {
+          "kind": "pe",
+          "path": "fileio.dll",
+          "size": 34056
+        },
+        {
+          "kind": "pe",
+          "path": "freetype.dll",
+          "size": 707848
+        },
+        {
+          "kind": "pe",
+          "path": "freetype.pyd",
+          "size": 25352
+        },
+        {
+          "kind": "pe",
+          "path": "fuzzer.dll",
+          "size": 30984
+        },
+        {
+          "kind": "pe",
+          "path": "html5_parser.html_parser.pyd",
+          "size": 397064
+        },
+        {
+          "kind": "pe",
+          "path": "html_as_json.pyd",
+          "size": 37128
+        },
+        {
+          "kind": "pe",
+          "path": "html_syntax_highlighter.pyd",
+          "size": 29448
+        },
+        {
+          "kind": "pe",
+          "path": "hunspell.pyd",
+          "size": 29960
+        },
+        {
+          "kind": "pe",
+          "path": "hyphen.pyd",
+          "size": 41736
+        },
+        {
+          "kind": "pe",
+          "path": "icu.pyd",
+          "size": 59144
+        },
+        {
+          "kind": "pe",
+          "path": "icudt78.dll",
+          "size": 33122568
+        },
+        {
+          "kind": "pe",
+          "path": "icuin78.dll",
+          "size": 3585288
+        },
+        {
+          "kind": "pe",
+          "path": "icuio78.dll",
+          "size": 74504
+        },
+        {
+          "kind": "pe",
+          "path": "icutu78.dll",
+          "size": 459016
+        },
+        {
+          "kind": "pe",
+          "path": "icuuc78.dll",
+          "size": 2776840
+        },
+        {
+          "kind": "pe",
+          "path": "ieee754.dll",
+          "size": 27400
+        },
+        {
+          "kind": "pe",
+          "path": "imageops.pyd",
+          "size": 106248
+        },
+        {
+          "kind": "pe",
+          "path": "inflate64._inflate64.pyd",
+          "size": 53512
+        },
+        {
+          "kind": "pe",
+          "path": "jpeg8.dll",
+          "size": 711944
+        },
+        {
+          "kind": "pe",
+          "path": "jpegtran-calibre.exe",
+          "size": 721672
+        },
+        {
+          "kind": "pe",
+          "path": "lcms2-2.dll",
+          "size": 397064
+        },
+        {
+          "kind": "pe",
+          "path": "libcrypto-3-x64.dll",
+          "size": 7243016
+        },
+        {
+          "kind": "pe",
+          "path": "libexpat.dll",
+          "size": 175880
+        },
+        {
+          "kind": "pe",
+          "path": "libexslt.dll",
+          "size": 90888
+        },
+        {
+          "kind": "pe",
+          "path": "libffi-8.dll",
+          "size": 39696
+        },
+        {
+          "kind": "pe",
+          "path": "libhunspell.dll",
+          "size": 799496
+        },
+        {
+          "kind": "pe",
+          "path": "libiconv.dll",
+          "size": 1108744
+        },
+        {
+          "kind": "pe",
+          "path": "libpng16.dll",
+          "size": 209160
+        },
+        {
+          "kind": "pe",
+          "path": "libsharpyuv.dll",
+          "size": 39176
+        },
+        {
+          "kind": "pe",
+          "path": "libssl-3-x64.dll",
+          "size": 1322248
+        },
+        {
+          "kind": "pe",
+          "path": "libstemmer.dll",
+          "size": 726280
+        },
+        {
+          "kind": "pe",
+          "path": "libwebp.dll",
+          "size": 523528
+        },
+        {
+          "kind": "pe",
+          "path": "libwebpdecoder.dll",
+          "size": 270088
+        },
+        {
+          "kind": "pe",
+          "path": "libwebpdemux.dll",
+          "size": 31496
+        },
+        {
+          "kind": "pe",
+          "path": "libwebpmux.dll",
+          "size": 53000
+        },
+        {
+          "kind": "pe",
+          "path": "libxml2.dll",
+          "size": 1224968
+        },
+        {
+          "kind": "pe",
+          "path": "libxslt.dll",
+          "size": 234248
+        },
+        {
+          "kind": "pe",
+          "path": "lxml._elementpath.pyd",
+          "size": 155400
+        },
+        {
+          "kind": "pe",
+          "path": "lxml.builder.pyd",
+          "size": 93960
+        },
+        {
+          "kind": "pe",
+          "path": "lxml.etree.pyd",
+          "size": 1625864
+        },
+        {
+          "kind": "pe",
+          "path": "lxml.html._difflib.pyd",
+          "size": 379144
+        },
+        {
+          "kind": "pe",
+          "path": "lxml.html.diff.pyd",
+          "size": 243976
+        },
+        {
+          "kind": "pe",
+          "path": "lxml.objectify.pyd",
+          "size": 309000
+        },
+        {
+          "kind": "pe",
+          "path": "lxml.sax.pyd",
+          "size": 128264
+        },
+        {
+          "kind": "pe",
+          "path": "lzx.pyd",
+          "size": 47368
+        }
+      ],
+      "list": "entries",
+      "offset": 150,
+      "total": 351
+    }
+  },
+  "summary": "Part of core_archive_show evidence (page).",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [],
+  "coverage": {
+    "status": "partial",
+    "examined": 80,
+    "total": 351,
+    "next_offset": 230
+  },
+  "locations": [],
+  "links": [
+    "ev_eb522f313907d650e0f8717ac2d940d92f0ae244b4c08f41a6d815c08530dd66"
+  ]
+}

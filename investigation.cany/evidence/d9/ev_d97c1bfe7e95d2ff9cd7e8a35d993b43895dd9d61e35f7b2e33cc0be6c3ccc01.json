@@ -1,0 +1,76 @@
+{
+  "id": "ev_d97c1bfe7e95d2ff9cd7e8a35d993b43895dd9d61e35f7b2e33cc0be6c3ccc01",
+  "subject": {
+    "kind": "pe",
+    "sha256": "eb6f3eda293cca1c0e1a6c52daeed586c4887130b9ef562220eff08c95eee7ab",
+    "name": "calibre.exe"
+  },
+  "operation": "native_strings_find",
+  "params": {
+    "case_sensitive": false,
+    "limit": 50,
+    "mode": "regex",
+    "offset": 0,
+    "pattern": "calibre.gui_launch|Installation directory path too long|execute_python_entrypoint"
+  },
+  "result": {
+    "matches": [
+      {
+        "address": "0x1400020c0",
+        "references": [
+          {
+            "from": "0x140001025",
+            "function": "sub_140001000"
+          }
+        ],
+        "section": ".rdata",
+        "text": "Installation directory path too long"
+      },
+      {
+        "address": "0x140002370",
+        "references": [
+          {
+            "from": "0x140001109",
+            "function": "sub_140001000"
+          }
+        ],
+        "section": ".rdata",
+        "text": "execute_python_entrypoint"
+      },
+      {
+        "address": "0x140002418",
+        "references": [
+          {
+            "from": "0x1400012f3",
+            "function": "entry"
+          }
+        ],
+        "section": ".rdata",
+        "text": "calibre.gui_launch"
+      }
+    ],
+    "total": 3
+  },
+  "summary": "3 strings match \"calibre.gui_launch|Installation directory path too long|execute_python_entrypoint\".",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "data_sections_only",
+      "message": "only strings stored in the file are searched (absence is not proof)"
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 3,
+    "total": 3
+  },
+  "locations": [],
+  "links": []
+}

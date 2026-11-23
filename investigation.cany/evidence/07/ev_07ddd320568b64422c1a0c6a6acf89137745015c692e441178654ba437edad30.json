@@ -1,0 +1,794 @@
+{
+  "id": "ev_07ddd320568b64422c1a0c6a6acf89137745015c692e441178654ba437edad30",
+  "subject": {
+    "kind": "unknown",
+    "sha256": "a7aeda40c163fc2182a23fd791a4d7de0182ed347ae20437e315cecb6cb57788",
+    "name": "python-lib.bypy.frozen"
+  },
+  "operation": "native_bytes_find",
+  "params": {
+    "encoding": "utf8",
+    "limit": 100,
+    "offset": 0,
+    "path": "C:\\Program Files\\Calibre2\\app\\bin\\python-lib.bypy.frozen",
+    "pattern": null,
+    "text": "genre"
+  },
+  "result": {
+    "file_size": 86189472,
+    "limit": 100,
+    "match_cap_reached": false,
+    "matches": [
+      {
+        "bytes": "67656e7265",
+        "file_offset": 7066409,
+        "file_offset_hex": "0x6bd329",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 7066438,
+        "file_offset_hex": "0x6bd346",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 7073604,
+        "file_offset_hex": "0x6bef44",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 7376788,
+        "file_offset_hex": "0x708f94",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 7382397,
+        "file_offset_hex": "0x70a57d",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 10387336,
+        "file_offset_hex": "0x9e7f88",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 10517222,
+        "file_offset_hex": "0xa07ae6",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 10517531,
+        "file_offset_hex": "0xa07c1b",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 10517640,
+        "file_offset_hex": "0xa07c88",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 11570219,
+        "file_offset_hex": "0xb08c2b",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 11571132,
+        "file_offset_hex": "0xb08fbc",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 11571140,
+        "file_offset_hex": "0xb08fc4",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 11571149,
+        "file_offset_hex": "0xb08fcd",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 11572094,
+        "file_offset_hex": "0xb0937e",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 12304773,
+        "file_offset_hex": "0xbbc185",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 12626090,
+        "file_offset_hex": "0xc0a8aa",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 12626163,
+        "file_offset_hex": "0xc0a8f3",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 12632072,
+        "file_offset_hex": "0xc0c008",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 12952787,
+        "file_offset_hex": "0xc5a4d3",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 12953242,
+        "file_offset_hex": "0xc5a69a",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 12953489,
+        "file_offset_hex": "0xc5a791",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 15189501,
+        "file_offset_hex": "0xe7c5fd",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 15189516,
+        "file_offset_hex": "0xe7c60c",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 15189531,
+        "file_offset_hex": "0xe7c61b",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 15189540,
+        "file_offset_hex": "0xe7c624",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24135243,
+        "file_offset_hex": "0x170464b",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24140607,
+        "file_offset_hex": "0x1705b3f",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24140901,
+        "file_offset_hex": "0x1705c65",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24140941,
+        "file_offset_hex": "0x1705c8d",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24141028,
+        "file_offset_hex": "0x1705ce4",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24141059,
+        "file_offset_hex": "0x1705d03",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24141252,
+        "file_offset_hex": "0x1705dc4",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24141311,
+        "file_offset_hex": "0x1705dff",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24141347,
+        "file_offset_hex": "0x1705e23",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24142128,
+        "file_offset_hex": "0x1706130",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24142162,
+        "file_offset_hex": "0x1706152",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24143801,
+        "file_offset_hex": "0x17067b9",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24143852,
+        "file_offset_hex": "0x17067ec",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24143890,
+        "file_offset_hex": "0x1706812",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24144231,
+        "file_offset_hex": "0x1706967",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24144292,
+        "file_offset_hex": "0x17069a4",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24144325,
+        "file_offset_hex": "0x17069c5",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24144366,
+        "file_offset_hex": "0x17069ee",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24149269,
+        "file_offset_hex": "0x1707d15",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24149455,
+        "file_offset_hex": "0x1707dcf",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24237616,
+        "file_offset_hex": "0x171d630",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24237624,
+        "file_offset_hex": "0x171d638",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24237939,
+        "file_offset_hex": "0x171d773",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24237960,
+        "file_offset_hex": "0x171d788",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24238000,
+        "file_offset_hex": "0x171d7b0",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24252944,
+        "file_offset_hex": "0x1721210",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24252977,
+        "file_offset_hex": "0x1721231",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24253377,
+        "file_offset_hex": "0x17213c1",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24253617,
+        "file_offset_hex": "0x17214b1",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24253726,
+        "file_offset_hex": "0x172151e",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24602738,
+        "file_offset_hex": "0x1776872",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24602854,
+        "file_offset_hex": "0x17768e6",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 24605906,
+        "file_offset_hex": "0x17774d2",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 30946356,
+        "file_offset_hex": "0x1d83434",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 30946526,
+        "file_offset_hex": "0x1d834de",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 31240571,
+        "file_offset_hex": "0x1dcb17b",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35896523,
+        "file_offset_hex": "0x223bccb",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35896551,
+        "file_offset_hex": "0x223bce7",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35896594,
+        "file_offset_hex": "0x223bd12",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35897139,
+        "file_offset_hex": "0x223bf33",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35897156,
+        "file_offset_hex": "0x223bf44",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35897706,
+        "file_offset_hex": "0x223c16a",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35897732,
+        "file_offset_hex": "0x223c184",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35909115,
+        "file_offset_hex": "0x223edfb",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35925989,
+        "file_offset_hex": "0x2242fe5",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35926006,
+        "file_offset_hex": "0x2242ff6",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35926021,
+        "file_offset_hex": "0x2243005",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35926038,
+        "file_offset_hex": "0x2243016",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35926422,
+        "file_offset_hex": "0x2243196",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35926455,
+        "file_offset_hex": "0x22431b7",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35932783,
+        "file_offset_hex": "0x2244a6f",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35932820,
+        "file_offset_hex": "0x2244a94",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35932893,
+        "file_offset_hex": "0x2244add",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35933272,
+        "file_offset_hex": "0x2244c58",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35933555,
+        "file_offset_hex": "0x2244d73",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35961648,
+        "file_offset_hex": "0x224bb30",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35961669,
+        "file_offset_hex": "0x224bb45",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35961676,
+        "file_offset_hex": "0x224bb4c",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35961830,
+        "file_offset_hex": "0x224bbe6",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35972341,
+        "file_offset_hex": "0x224e4f5",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35972647,
+        "file_offset_hex": "0x224e627",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35973397,
+        "file_offset_hex": "0x224e915",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35973605,
+        "file_offset_hex": "0x224e9e5",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35973863,
+        "file_offset_hex": "0x224eae7",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35973920,
+        "file_offset_hex": "0x224eb20",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35973990,
+        "file_offset_hex": "0x224eb66",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35974024,
+        "file_offset_hex": "0x224eb88",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35974048,
+        "file_offset_hex": "0x224eba0",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35974353,
+        "file_offset_hex": "0x224ecd1",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35974500,
+        "file_offset_hex": "0x224ed64",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35975697,
+        "file_offset_hex": "0x224f211",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35975727,
+        "file_offset_hex": "0x224f22f",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 35975877,
+        "file_offset_hex": "0x224f2c5",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 36008041,
+        "file_offset_hex": "0x2257069",
+        "length": 5,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "67656e7265",
+        "file_offset": 36008274,
+        "file_offset_hex": "0x2257152",
+        "length": 5,
+        "matched": "utf8"
+      }
+    ],
+    "native_container": null,
+    "offset": 0,
+    "path": "C:\\Program Files\\Calibre2\\app\\bin\\python-lib.bypy.frozen",
+    "searched_for": [
+      {
+        "kind": "utf8",
+        "length": 5
+      }
+    ],
+    "total_matches": 135
+  },
+  "summary": "135 match(es) for utf8 in python-lib.bypy.frozen; showing 100 from #0.",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "file_bytes_only",
+      "message": "The file's bytes are searched as stored: compressed, encrypted or packed regions and data built at run time are not seen, so no match is not proof of absence."
+    },
+    {
+      "code": "no_addresses",
+      "message": "This file is not a readable ELF, PE or Mach-O program, so matches carry file offsets only."
+    }
+  ],
+  "coverage": {
+    "status": "partial",
+    "examined": 100,
+    "total": 135,
+    "next_offset": 100
+  },
+  "locations": [
+    {
+      "kind": "file_offset",
+      "value": "0x6bd329"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x6bd346"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x6bef44"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x708f94"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x70a57d"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x9e7f88"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0xa07ae6"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0xa07c1b"
+    }
+  ],
+  "links": []
+}

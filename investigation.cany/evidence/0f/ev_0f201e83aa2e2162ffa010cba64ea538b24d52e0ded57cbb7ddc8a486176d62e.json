@@ -1,0 +1,45 @@
+{
+  "id": "ev_0f201e83aa2e2162ffa010cba64ea538b24d52e0ded57cbb7ddc8a486176d62e",
+  "subject": {
+    "kind": "pe",
+    "sha256": "3c162738cd191a4fc50cc868536a55a5e2d5652e55191013537278b5b34d1608",
+    "name": "calibre-launcher.dll"
+  },
+  "operation": "native_function_pseudocode",
+  "params": {
+    "function": "0x180005110"
+  },
+  "result": {
+    "engine": "ghidra",
+    "entry": "0x180005110",
+    "function": "FUN_180005110",
+    "pseudo_code": "\r\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\r\n\r\nvoid FUN_180005110(void)\r\n\r\n{\r\n  DWORD DVar1;\r\n  _FILETIME local_res8;\r\n  LARGE_INTEGER local_res10;\r\n  _FILETIME local_18 [2];\r\n  \r\n  if (DAT_180073700 == 0x2b992ddfa232) {\r\n    local_res8.dwLowDateTime = 0;\r\n    local_res8.dwHighDateTime = 0;\r\n    GetSystemTimeAsFileTime(&local_res8);\r\n    local_18[0] = local_res8;\r\n    DVar1 = GetCurrentThreadId();\r\n    local_18[0] = (_FILETIME)((ulonglong)local_18[0] ^ (ulonglong)DVar1);\r\n    DVar1 = GetCurrentProcessId();\r\n    local_18[0] = (_FILETIME)((ulonglong)local_18[0] ^ (ulonglong)DVar1);\r\n    QueryPerformanceCounter(&local_res10);\r\n    DAT_180073700 =\r\n         ((ulonglong)local_res10.s.LowPart << 0x20 ^\r\n          CONCAT44(local_res10.s.HighPart,local_res10.s.LowPart) ^ (ulonglong)local_18[0] ^\r\n         (ulonglong)local_18) & 0xffffffffffff;\r\n    if (DAT_180073700 == 0x2b992ddfa232) {\r\n      DAT_180073700 = 0x2b992ddfa233;\r\n    }\r\n  }\r\n  _DAT_180073740 = ~DAT_180073700;\r\n  return;\r\n}\r\n\r\n",
+    "signature": "void FUN_180005110(void);"
+  },
+  "summary": "Pseudo-C for FUN_180005110 from the Deep engine (33 lines).",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "ghidra",
+    "engine_version": "12.1.4",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "deep_engine",
+      "message": "the pseudo-C comes from the external Deep engine (Ghidra), not the original source"
+    }
+  ],
+  "coverage": {
+    "status": "unknown"
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x180005110"
+    }
+  ],
+  "links": [],
+  "carries_target_content": true
+}

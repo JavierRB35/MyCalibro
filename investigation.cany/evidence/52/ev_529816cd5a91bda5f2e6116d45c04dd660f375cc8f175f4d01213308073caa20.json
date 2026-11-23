@@ -1,0 +1,45 @@
+{
+  "id": "ev_529816cd5a91bda5f2e6116d45c04dd660f375cc8f175f4d01213308073caa20",
+  "subject": {
+    "kind": "pe",
+    "sha256": "eb6f3eda293cca1c0e1a6c52daeed586c4887130b9ef562220eff08c95eee7ab",
+    "name": "calibre.exe"
+  },
+  "operation": "native_function_pseudocode",
+  "params": {
+    "function": "0x1400012d0"
+  },
+  "result": {
+    "engine": "ghidra",
+    "entry": "0x1400012d0",
+    "function": "entry",
+    "pseudo_code": "\r\nvoid entry(void)\r\n\r\n{\r\n  bool bVar1;\r\n  \r\n  FUN_140001000();\r\n  bVar1 = DAT_140003000 == (code *)0x0;\r\n  if (!bVar1) {\r\n    (*DAT_140003000)(L\"calibre\",L\"calibre.gui_launch\",L\"calibre\",1);\r\n  }\r\n  if (DAT_140003010 != (HMODULE)0x0) {\r\n    FreeLibrary(DAT_140003010);\r\n    DAT_140003010 = (HMODULE)0x0;\r\n  }\r\n                    /* WARNING: Subroutine does not return */\r\n  ExitProcess((uint)bVar1);\r\n}\r\n\r\n",
+    "signature": "void entry(void);"
+  },
+  "summary": "Pseudo-C for entry from the Deep engine (19 lines).",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "ghidra",
+    "engine_version": "12.1.4",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "deep_engine",
+      "message": "the pseudo-C comes from the external Deep engine (Ghidra), not the original source"
+    }
+  ],
+  "coverage": {
+    "status": "unknown"
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x1400012d0"
+    }
+  ],
+  "links": [],
+  "carries_target_content": true
+}

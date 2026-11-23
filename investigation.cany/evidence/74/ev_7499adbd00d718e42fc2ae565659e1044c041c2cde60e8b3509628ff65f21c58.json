@@ -1,0 +1,1599 @@
+{
+  "id": "ev_7499adbd00d718e42fc2ae565659e1044c041c2cde60e8b3509628ff65f21c58",
+  "subject": {
+    "kind": "pe",
+    "sha256": "3c162738cd191a4fc50cc868536a55a5e2d5652e55191013537278b5b34d1608",
+    "name": "calibre-launcher.dll"
+  },
+  "operation": "native_strings_find",
+  "params": {
+    "case_sensitive": false,
+    "limit": 200,
+    "mode": "regex",
+    "offset": 0,
+    "pattern": "tag|genre|metadata|book|library|author"
+  },
+  "result": {
+    "matches": [
+      {
+        "address": "0x18001c811",
+        "references": [],
+        "section": ".rdata",
+        "text": "ExifTags.pyc{0z"
+      },
+      {
+        "address": "0x18001cd93",
+        "references": [],
+        "section": ".rdata",
+        "text": "TiffTags.pyc{0z"
+      },
+      {
+        "address": "0x18001d6d9",
+        "references": [],
+        "section": ".rdata",
+        "text": "_opcode_metadata.pyc{0"
+      },
+      {
+        "address": "0x18001dd2a",
+        "references": [],
+        "section": ".rdata",
+        "text": "sslproto.pyc{0z\rstaggered.pyc{0z"
+      },
+      {
+        "address": "0x18001e60b",
+        "references": [],
+        "section": ".rdata",
+        "text": "cmd_backup_metadata.pyc{0z"
+      },
+      {
+        "address": "0x18001e639",
+        "references": [],
+        "section": ".rdata",
+        "text": "cmd_check_library.pyc{0z\rcmd_clone.pyc{0z"
+      },
+      {
+        "address": "0x18001e67d",
+        "references": [],
+        "section": ".rdata",
+        "text": "cmd_embed_metadata.pyc{0z"
+      },
+      {
+        "address": "0x18001e7a8",
+        "references": [],
+        "section": ".rdata",
+        "text": "cmd_set_metadata.pyc{0z"
+      },
+      {
+        "address": "0x18001e7c0",
+        "references": [],
+        "section": ".rdata",
+        "text": "cmd_show_metadata.pyc{0z"
+      },
+      {
+        "address": "0x18001e811",
+        "references": [],
+        "section": ".rdata",
+        "text": "copy_to_library.pyc{0z\ncovers.pyc{0z\nerrors.pyc{0z\nfields.pyc{0z"
+      },
+      {
+        "address": "0x18001eb65",
+        "references": [],
+        "section": ".rdata",
+        "text": "cybook{z"
+      },
+      {
+        "address": "0x18001ed2d",
+        "references": [],
+        "section": ".rdata",
+        "text": "jetbook{z"
+      },
+      {
+        "address": "0x18001ee85",
+        "references": [],
+        "section": ".rdata",
+        "text": "bookmark.pyc{0z\ndriver.pyc{00z"
+      },
+      {
+        "address": "0x18001eebb",
+        "references": [],
+        "section": ".rdata",
+        "text": "bookmark.pyc{0z\tbooks.pyc{0z"
+      },
+      {
+        "address": "0x18001ef37",
+        "references": [],
+        "section": ".rdata",
+        "text": "base.pyc{0z\tbooks.pyc{0z"
+      },
+      {
+        "address": "0x18001f1ac",
+        "references": [],
+        "section": ".rdata",
+        "text": "__init__.pyc{0z\tbooks.pyc{0z"
+      },
+      {
+        "address": "0x18001f24f",
+        "references": [],
+        "section": ".rdata",
+        "text": "ebooks{z"
+      },
+      {
+        "address": "0x18001f2c8",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata.pyc{0z\nreader.pyc{00z"
+      },
+      {
+        "address": "0x18001fbf1",
+        "references": [],
+        "section": ".rdata",
+        "text": "tags.pyc{00z"
+      },
+      {
+        "address": "0x18001fbfe",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata{z"
+      },
+      {
+        "address": "0x18001fc28",
+        "references": [],
+        "section": ".rdata",
+        "text": "author_mapper.pyc{0z"
+      },
+      {
+        "address": "0x18001fc3d",
+        "references": [],
+        "section": ".rdata",
+        "text": "book{z"
+      },
+      {
+        "address": "0x18001fea9",
+        "references": [],
+        "section": ".rdata",
+        "text": "openlibrary.pyc{0z\tprefs.pyc{0z"
+      },
+      {
+        "address": "0x18001ff08",
+        "references": [],
+        "section": ".rdata",
+        "text": "tag_mapper.pyc{0z"
+      },
+      {
+        "address": "0x18001ff1a",
+        "references": [],
+        "section": ".rdata",
+        "text": "test_author_sort.pyc{0z"
+      },
+      {
+        "address": "0x180020250",
+        "references": [],
+        "section": ".rdata",
+        "text": "book.pyc{0z\rbookmarks.pyc{0z\tspine.pyc{00z"
+      },
+      {
+        "address": "0x1800203d9",
+        "references": [],
+        "section": ".rdata",
+        "text": "import_book.pyc{0z\njacket.pyc{0z"
+      },
+      {
+        "address": "0x180020633",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata.pyc{0z"
+      },
+      {
+        "address": "0x180020b52",
+        "references": [],
+        "section": ".rdata",
+        "text": "convert_to_tags.pyc{0z"
+      },
+      {
+        "address": "0x18002100e",
+        "references": [],
+        "section": ".rdata",
+        "text": "add_to_library.pyc{0z"
+      },
+      {
+        "address": "0x180021056",
+        "references": [],
+        "section": ".rdata",
+        "text": "author_mapper.pyc{0z"
+      },
+      {
+        "address": "0x18002107e",
+        "references": [],
+        "section": ".rdata",
+        "text": "booklist_context_menu.pyc{0z"
+      },
+      {
+        "address": "0x1800210d3",
+        "references": [],
+        "section": ".rdata",
+        "text": "choose_library.pyc{0z"
+      },
+      {
+        "address": "0x18002110f",
+        "references": [],
+        "section": ".rdata",
+        "text": "copy_to_library.pyc{0z"
+      },
+      {
+        "address": "0x180021166",
+        "references": [],
+        "section": ".rdata",
+        "text": "edit_metadata.pyc{0z\tembed.pyc{0z"
+      },
+      {
+        "address": "0x1800211c7",
+        "references": [],
+        "section": ".rdata",
+        "text": "llm_book.pyc{0z\rllm_cover.pyc{0z"
+      },
+      {
+        "address": "0x180021201",
+        "references": [],
+        "section": ".rdata",
+        "text": "mark_books.pyc{0z"
+      },
+      {
+        "address": "0x180021213",
+        "references": [],
+        "section": ".rdata",
+        "text": "match_books.pyc{0z"
+      },
+      {
+        "address": "0x1800212c2",
+        "references": [],
+        "section": ".rdata",
+        "text": "show_book_details.pyc{0z"
+      },
+      {
+        "address": "0x18002132a",
+        "references": [],
+        "section": ".rdata",
+        "text": "similar_books.pyc{0z"
+      },
+      {
+        "address": "0x180021358",
+        "references": [],
+        "section": ".rdata",
+        "text": "tag_mapper.pyc{0z"
+      },
+      {
+        "address": "0x18002138c",
+        "references": [],
+        "section": ".rdata",
+        "text": "unpack_book.pyc{0z"
+      },
+      {
+        "address": "0x1800213ab",
+        "references": [],
+        "section": ".rdata",
+        "text": "virtual_library.pyc{00z"
+      },
+      {
+        "address": "0x1800213e1",
+        "references": [],
+        "section": ".rdata",
+        "text": "author_mapper.pyc{0z"
+      },
+      {
+        "address": "0x180021412",
+        "references": [],
+        "section": ".rdata",
+        "text": "book_details.pyc{0z"
+      },
+      {
+        "address": "0x180021782",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata.pyc{0z"
+      },
+      {
+        "address": "0x180021792",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata_ui.pyc{0z"
+      },
+      {
+        "address": "0x180021c2f",
+        "references": [],
+        "section": ".rdata",
+        "text": "add_empty_book.pyc{0z"
+      },
+      {
+        "address": "0x180021c5a",
+        "references": [],
+        "section": ".rdata",
+        "text": "authors_edit.pyc{0z\rbook_info.pyc{0z"
+      },
+      {
+        "address": "0x180021ca0",
+        "references": [],
+        "section": ".rdata",
+        "text": "check_library.pyc{0z"
+      },
+      {
+        "address": "0x180021d05",
+        "references": [],
+        "section": ".rdata",
+        "text": "choose_library.pyc{0z"
+      },
+      {
+        "address": "0x180021d1b",
+        "references": [],
+        "section": ".rdata",
+        "text": "choose_library_ui.pyc{0z"
+      },
+      {
+        "address": "0x180021eee",
+        "references": [],
+        "section": ".rdata",
+        "text": "edit_authors_dialog.pyc{0z"
+      },
+      {
+        "address": "0x180021f09",
+        "references": [],
+        "section": ".rdata",
+        "text": "edit_authors_dialog_ui.pyc{0z"
+      },
+      {
+        "address": "0x180021f8a",
+        "references": [],
+        "section": ".rdata",
+        "text": "llm_book.pyc{0z\rllm_cover.pyc{0z"
+      },
+      {
+        "address": "0x180021fab",
+        "references": [],
+        "section": ".rdata",
+        "text": "match_books.pyc{0z"
+      },
+      {
+        "address": "0x180021fbe",
+        "references": [],
+        "section": ".rdata",
+        "text": "match_books_ui.pyc{0z"
+      },
+      {
+        "address": "0x180021fe7",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata_bulk.pyc{0z"
+      },
+      {
+        "address": "0x180021ffc",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata_bulk_ui.pyc{0z\rmultisort.pyc{0z"
+      },
+      {
+        "address": "0x1800220ae",
+        "references": [],
+        "section": ".rdata",
+        "text": "restore_library.pyc{0z"
+      },
+      {
+        "address": "0x180022158",
+        "references": [],
+        "section": ".rdata",
+        "text": "tag_categories.pyc{0z"
+      },
+      {
+        "address": "0x18002216e",
+        "references": [],
+        "section": ".rdata",
+        "text": "tag_categories_ui.pyc{0z"
+      },
+      {
+        "address": "0x180022187",
+        "references": [],
+        "section": ".rdata",
+        "text": "tag_editor.pyc{0z"
+      },
+      {
+        "address": "0x180022199",
+        "references": [],
+        "section": ".rdata",
+        "text": "tag_editor_ui.pyc{0z"
+      },
+      {
+        "address": "0x1800221ae",
+        "references": [],
+        "section": ".rdata",
+        "text": "tag_list_editor.pyc{0z tag_list_editor_table_widget.pyc{0z"
+      },
+      {
+        "address": "0x1800221e9",
+        "references": [],
+        "section": ".rdata",
+        "text": "tag_list_editor_ui.pyc{0z"
+      },
+      {
+        "address": "0x1800222d0",
+        "references": [],
+        "section": ".rdata",
+        "text": "ebook_download.pyc{0z\temail.pyc{0z"
+      },
+      {
+        "address": "0x180022481",
+        "references": [],
+        "section": ".rdata",
+        "text": "library{z"
+      },
+      {
+        "address": "0x1800224c5",
+        "references": [],
+        "section": ".rdata",
+        "text": "bookshelf_view.pyc{0z\ncaches.pyc{0z\rdelegates.pyc{0z\nmodels.pyc{0z\tnotes.pyc{0z"
+      },
+      {
+        "address": "0x18002258f",
+        "references": [],
+        "section": ".rdata",
+        "text": "bookview.pyc{0z\rconfig_ui.pyc{0z"
+      },
+      {
+        "address": "0x180022641",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata{z"
+      },
+      {
+        "address": "0x1800228a4",
+        "references": [],
+        "section": ".rdata",
+        "text": "book_details.pyc{0z"
+      },
+      {
+        "address": "0x1800228b8",
+        "references": [],
+        "section": ".rdata",
+        "text": "book_details_ui.pyc{0z"
+      },
+      {
+        "address": "0x1800228cf",
+        "references": [],
+        "section": ".rdata",
+        "text": "bookshelf_view.pyc{0z"
+      },
+      {
+        "address": "0x1800228e5",
+        "references": [],
+        "section": ".rdata",
+        "text": "bookshelf_view_ui.pyc{0z"
+      },
+      {
+        "address": "0x18002294c",
+        "references": [],
+        "section": ".rdata",
+        "text": "edit_metadata.pyc{0z"
+      },
+      {
+        "address": "0x180022961",
+        "references": [],
+        "section": ".rdata",
+        "text": "edit_metadata_ui.pyc{0z"
+      },
+      {
+        "address": "0x180022ad2",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata_sources.pyc{0z"
+      },
+      {
+        "address": "0x180022aea",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata_sources_ui.pyc{0z"
+      },
+      {
+        "address": "0x180023119",
+        "references": [],
+        "section": ".rdata",
+        "text": "beam_ebooks_de_plugin.pyc{0z"
+      },
+      {
+        "address": "0x1800231af",
+        "references": [],
+        "section": ".rdata",
+        "text": "ebook_nl_plugin.pyc{0z"
+      },
+      {
+        "address": "0x1800231c6",
+        "references": [],
+        "section": ".rdata",
+        "text": "ebookpoint_plugin.pyc{0z"
+      },
+      {
+        "address": "0x1800231df",
+        "references": [],
+        "section": ".rdata",
+        "text": "ebooks_com_plugin.pyc{0z"
+      },
+      {
+        "address": "0x1800231f8",
+        "references": [],
+        "section": ".rdata",
+        "text": "ebooksgratuits_plugin.pyc{0z"
+      },
+      {
+        "address": "0x180023215",
+        "references": [],
+        "section": ".rdata",
+        "text": "ebookshoppe_uk_plugin.pyc{0z"
+      },
+      {
+        "address": "0x180023246",
+        "references": [],
+        "section": ".rdata",
+        "text": "feedbooks_plugin.pyc{0z"
+      },
+      {
+        "address": "0x18002325e",
+        "references": [],
+        "section": ".rdata",
+        "text": "google_books_plugin.pyc{0z"
+      },
+      {
+        "address": "0x1800232e5",
+        "references": [],
+        "section": ".rdata",
+        "text": "manybooks_plugin.pyc{0z"
+      },
+      {
+        "address": "0x18002342e",
+        "references": [],
+        "section": ".rdata",
+        "text": "pragmatic_bookshelf_plugin.pyc{0z"
+      },
+      {
+        "address": "0x180023493",
+        "references": [],
+        "section": ".rdata",
+        "text": "swiatebookow_plugin.pyc{0z"
+      },
+      {
+        "address": "0x1800234c5",
+        "references": [],
+        "section": ".rdata",
+        "text": "weightless_books_plugin.pyc{0z"
+      },
+      {
+        "address": "0x180023540",
+        "references": [],
+        "section": ".rdata",
+        "text": "tag_browser{z"
+      },
+      {
+        "address": "0x180023582",
+        "references": [],
+        "section": ".rdata",
+        "text": "tag_mapper.pyc{0z"
+      },
+      {
+        "address": "0x18002366f",
+        "references": [],
+        "section": ".rdata",
+        "text": "speechd.pyc{0z\ttypes.pyc{00z\ntweak_book{z"
+      },
+      {
+        "address": "0x180023a87",
+        "references": [],
+        "section": ".rdata",
+        "text": "annotations.pyc{0z\rbookmarks.pyc{0z\nconfig.pyc{0z"
+      },
+      {
+        "address": "0x180023ace",
+        "references": [],
+        "section": ".rdata",
+        "text": "convert_book.pyc{0z"
+      },
+      {
+        "address": "0x180023c4e",
+        "references": [],
+        "section": ".rdata",
+        "text": "library_ui.pyc{0z"
+      },
+      {
+        "address": "0x180023cac",
+        "references": [],
+        "section": ".rdata",
+        "text": "library{z"
+      },
+      {
+        "address": "0x180023cc6",
+        "references": [],
+        "section": ".rdata",
+        "text": "add_to_library.pyc{0z\ncaches.pyc{0z"
+      },
+      {
+        "address": "0x180023d5a",
+        "references": [],
+        "section": ".rdata",
+        "text": "check_library.pyc{0z"
+      },
+      {
+        "address": "0x180023dc6",
+        "references": [],
+        "section": ".rdata",
+        "text": "field_metadata.pyc{0z"
+      },
+      {
+        "address": "0x180023fa5",
+        "references": [],
+        "section": ".rdata",
+        "text": "bonjour.pyc{0z\tbooks.pyc{0z"
+      },
+      {
+        "address": "0x180024091",
+        "references": [],
+        "section": ".rdata",
+        "text": "legacy_book_details.pyc{0z"
+      },
+      {
+        "address": "0x1800240ac",
+        "references": [],
+        "section": ".rdata",
+        "text": "library_broker.pyc{0z"
+      },
+      {
+        "address": "0x1800240e6",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata.pyc{0z"
+      },
+      {
+        "address": "0x18002412f",
+        "references": [],
+        "section": ".rdata",
+        "text": "render_book.pyc{0z\nroutes.pyc{0z"
+      },
+      {
+        "address": "0x180024403",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata.pyc{0z"
+      },
+      {
+        "address": "0x18002509f",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata{z"
+      },
+      {
+        "address": "0x1800283fa",
+        "references": [],
+        "section": ".rdata",
+        "text": "Mirrored.pyc{0z\nOTTags.pyc{0z"
+      },
+      {
+        "address": "0x180028a34",
+        "references": [],
+        "section": ".rdata",
+        "text": "optionaltags.pyc{0z\rsanitizer.pyc{0z"
+      },
+      {
+        "address": "0x180028ccd",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata{z"
+      },
+      {
+        "address": "0x18002a089",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata.pyc{0z"
+      },
+      {
+        "address": "0x18002a0cb",
+        "references": [],
+        "section": ".rdata",
+        "text": "tags.pyc{0z\tutils.pyc{0z"
+      },
+      {
+        "address": "0x18002a6df",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata.pyc{0z"
+      },
+      {
+        "address": "0x18002a721",
+        "references": [],
+        "section": ".rdata",
+        "text": "tags.pyc{0z\tutils.pyc{0z"
+      },
+      {
+        "address": "0x18002aa68",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata.pyc{0z"
+      },
+      {
+        "address": "0x18002ca3e",
+        "references": [],
+        "section": ".rdata",
+        "text": "qt_metadata.pyc{0z"
+      },
+      {
+        "address": "0x18002ca96",
+        "references": [],
+        "section": ".rdata",
+        "text": "METADATA{0z"
+      },
+      {
+        "address": "0x18002ce03",
+        "references": [],
+        "section": ".rdata",
+        "text": "_core_metadata.pyc{0z"
+      },
+      {
+        "address": "0x18002d3ae",
+        "references": [],
+        "section": ".rdata",
+        "text": "importlib_metadata{z"
+      },
+      {
+        "address": "0x18002d675",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata.pyc{0z"
+      },
+      {
+        "address": "0x18002d6c5",
+        "references": [],
+        "section": ".rdata",
+        "text": "tags.pyc{0z\tutils.pyc{0z"
+      },
+      {
+        "address": "0x18002d83b",
+        "references": [],
+        "section": ".rdata",
+        "text": "tags.pyc{0z\nunpack.pyc{00z\r_metadata.pyc{0z"
+      },
+      {
+        "address": "0x18002d8ab",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata.pyc{0z\rwheelfile.pyc{00z"
+      },
+      {
+        "address": "0x1800317c9",
+        "references": [],
+        "section": ".rdata",
+        "text": "tags.pyc{0z\nunpack.pyc{00z\r_metadata.pyc{0z"
+      },
+      {
+        "address": "0x18003181e",
+        "references": [],
+        "section": ".rdata",
+        "text": "metadata.pyc{0z\rwheelfile.pyc{00z"
+      },
+      {
+        "address": "0x18003a78a",
+        "references": [],
+        "section": ".rdata",
+        "text": "FreeLibrary"
+      },
+      {
+        "address": "0x18003a7be",
+        "references": [],
+        "section": ".rdata",
+        "text": "LoadLibraryExA"
+      },
+      {
+        "address": "0x18003a830",
+        "references": [],
+        "section": ".rdata",
+        "text": "DisableThreadLibraryCalls"
+      },
+      {
+        "address": "0x18003bda0",
+        "references": [
+          {
+            "from": "0x1800686b0",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "PIL/ExifTags.pyc"
+      },
+      {
+        "address": "0x18003c440",
+        "references": [
+          {
+            "from": "0x1800688e0",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "PIL/TiffTags.pyc"
+      },
+      {
+        "address": "0x18003d180",
+        "references": [
+          {
+            "from": "0x180068c10",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "_opcode_metadata.pyc"
+      },
+      {
+        "address": "0x18003da80",
+        "references": [
+          {
+            "from": "0x180068ec8",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "asyncio/staggered.pyc"
+      },
+      {
+        "address": "0x18003e8f8",
+        "references": [
+          {
+            "from": "0x1800692b0",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/db/cli/cmd_backup_metadata.pyc"
+      },
+      {
+        "address": "0x18003e940",
+        "references": [
+          {
+            "from": "0x1800692c0",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/db/cli/cmd_check_library.pyc"
+      },
+      {
+        "address": "0x18003e9b0",
+        "references": [
+          {
+            "from": "0x1800692d8",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/db/cli/cmd_embed_metadata.pyc"
+      },
+      {
+        "address": "0x18003eba0",
+        "references": [
+          {
+            "from": "0x180069340",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/db/cli/cmd_set_metadata.pyc"
+      },
+      {
+        "address": "0x18003ebc8",
+        "references": [
+          {
+            "from": "0x180069348",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/db/cli/cmd_show_metadata.pyc"
+      },
+      {
+        "address": "0x18003ec68",
+        "references": [
+          {
+            "from": "0x180069370",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/db/copy_to_library.pyc"
+      },
+      {
+        "address": "0x18003f2a0",
+        "references": [
+          {
+            "from": "0x180069508",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/devices/cybook/__init__.pyc"
+      },
+      {
+        "address": "0x18003f2c8",
+        "references": [
+          {
+            "from": "0x180069510",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/devices/cybook/driver.pyc"
+      },
+      {
+        "address": "0x18003f2f0",
+        "references": [
+          {
+            "from": "0x180069518",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/devices/cybook/t2b.pyc"
+      },
+      {
+        "address": "0x18003f310",
+        "references": [
+          {
+            "from": "0x180069520",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/devices/cybook/t4b.pyc"
+      },
+      {
+        "address": "0x18003f648",
+        "references": [
+          {
+            "from": "0x1800695c8",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/devices/jetbook/__init__.pyc"
+      },
+      {
+        "address": "0x18003f670",
+        "references": [
+          {
+            "from": "0x1800695d0",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/devices/jetbook/driver.pyc"
+      },
+      {
+        "address": "0x18003f9c8",
+        "references": [
+          {
+            "from": "0x180069638",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/devices/kindle/bookmark.pyc"
+      },
+      {
+        "address": "0x18003fa40",
+        "references": [
+          {
+            "from": "0x180069650",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/devices/kobo/bookmark.pyc"
+      },
+      {
+        "address": "0x18003fa68",
+        "references": [
+          {
+            "from": "0x180069658",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/devices/kobo/books.pyc"
+      },
+      {
+        "address": "0x18003fb80",
+        "references": [
+          {
+            "from": "0x180069698",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/devices/mtp/books.pyc"
+      },
+      {
+        "address": "0x180040098",
+        "references": [
+          {
+            "from": "0x1800697a0",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/devices/usbms/books.pyc"
+      },
+      {
+        "address": "0x1800401e8",
+        "references": [
+          {
+            "from": "0x1800697e8",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/BeautifulSoup.pyc"
+      },
+      {
+        "address": "0x180040210",
+        "references": [
+          {
+            "from": "0x1800697f0",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/__init__.pyc"
+      },
+      {
+        "address": "0x180040230",
+        "references": [
+          {
+            "from": "0x1800697f8",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/azw4/__init__.pyc"
+      },
+      {
+        "address": "0x180040258",
+        "references": [
+          {
+            "from": "0x180069800",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/azw4/reader.pyc"
+      },
+      {
+        "address": "0x180040278",
+        "references": [
+          {
+            "from": "0x180069808",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/chardet.pyc"
+      },
+      {
+        "address": "0x180040298",
+        "references": [
+          {
+            "from": "0x180069810",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/chm/__init__.pyc"
+      },
+      {
+        "address": "0x1800402b8",
+        "references": [
+          {
+            "from": "0x180069818",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/chm/metadata.pyc"
+      },
+      {
+        "address": "0x1800402d8",
+        "references": [
+          {
+            "from": "0x180069820",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/chm/reader.pyc"
+      },
+      {
+        "address": "0x1800402f8",
+        "references": [
+          {
+            "from": "0x180069828",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/comic/__init__.pyc"
+      },
+      {
+        "address": "0x180040320",
+        "references": [
+          {
+            "from": "0x180069830",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/comic/input.pyc"
+      },
+      {
+        "address": "0x180040340",
+        "references": [
+          {
+            "from": "0x180069838",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/compression/__init__.pyc"
+      },
+      {
+        "address": "0x180040368",
+        "references": [
+          {
+            "from": "0x180069840",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/compression/palmdoc.pyc"
+      },
+      {
+        "address": "0x180040390",
+        "references": [
+          {
+            "from": "0x180069848",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/compression/tcr.pyc"
+      },
+      {
+        "address": "0x1800403b8",
+        "references": [
+          {
+            "from": "0x180069850",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/constants.pyc"
+      },
+      {
+        "address": "0x1800403d8",
+        "references": [
+          {
+            "from": "0x180069858",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/__init__.pyc"
+      },
+      {
+        "address": "0x180040400",
+        "references": [
+          {
+            "from": "0x180069860",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/archives.pyc"
+      },
+      {
+        "address": "0x180040428",
+        "references": [
+          {
+            "from": "0x180069868",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/cli.pyc"
+      },
+      {
+        "address": "0x180040450",
+        "references": [
+          {
+            "from": "0x180069870",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/config.pyc"
+      },
+      {
+        "address": "0x180040478",
+        "references": [
+          {
+            "from": "0x180069878",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/__init__.pyc"
+      },
+      {
+        "address": "0x1800404a8",
+        "references": [
+          {
+            "from": "0x180069880",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/archive_input.pyc"
+      },
+      {
+        "address": "0x1800404e0",
+        "references": [
+          {
+            "from": "0x180069888",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/azw4_input.pyc"
+      },
+      {
+        "address": "0x180040518",
+        "references": [
+          {
+            "from": "0x180069890",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/chm_input.pyc"
+      },
+      {
+        "address": "0x180040548",
+        "references": [
+          {
+            "from": "0x180069898",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/comic_input.pyc"
+      },
+      {
+        "address": "0x180040580",
+        "references": [
+          {
+            "from": "0x1800698a0",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/djvu_input.pyc"
+      },
+      {
+        "address": "0x1800405b8",
+        "references": [
+          {
+            "from": "0x1800698a8",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/docx_input.pyc"
+      },
+      {
+        "address": "0x1800405f0",
+        "references": [
+          {
+            "from": "0x1800698b0",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/docx_output.pyc"
+      },
+      {
+        "address": "0x180040628",
+        "references": [
+          {
+            "from": "0x1800698b8",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/epub_input.pyc"
+      },
+      {
+        "address": "0x180040660",
+        "references": [
+          {
+            "from": "0x1800698c0",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/epub_output.pyc"
+      },
+      {
+        "address": "0x180040698",
+        "references": [
+          {
+            "from": "0x1800698c8",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/fb2_input.pyc"
+      },
+      {
+        "address": "0x1800406c8",
+        "references": [
+          {
+            "from": "0x1800698d0",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/fb2_output.pyc"
+      },
+      {
+        "address": "0x180040700",
+        "references": [
+          {
+            "from": "0x1800698d8",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/html_input.pyc"
+      },
+      {
+        "address": "0x180040738",
+        "references": [
+          {
+            "from": "0x1800698e0",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/html_output.pyc"
+      },
+      {
+        "address": "0x180040770",
+        "references": [
+          {
+            "from": "0x1800698e8",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/htmlz_input.pyc"
+      },
+      {
+        "address": "0x1800407a8",
+        "references": [
+          {
+            "from": "0x1800698f0",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/htmlz_output.pyc"
+      },
+      {
+        "address": "0x1800407e0",
+        "references": [
+          {
+            "from": "0x1800698f8",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/lit_input.pyc"
+      },
+      {
+        "address": "0x180040810",
+        "references": [
+          {
+            "from": "0x180069900",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/lit_output.pyc"
+      },
+      {
+        "address": "0x180040848",
+        "references": [
+          {
+            "from": "0x180069908",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/lrf_input.pyc"
+      },
+      {
+        "address": "0x180040878",
+        "references": [
+          {
+            "from": "0x180069910",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/lrf_output.pyc"
+      },
+      {
+        "address": "0x1800408b0",
+        "references": [
+          {
+            "from": "0x180069918",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/mobi_input.pyc"
+      },
+      {
+        "address": "0x1800408e8",
+        "references": [
+          {
+            "from": "0x180069920",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/mobi_output.pyc"
+      },
+      {
+        "address": "0x180040920",
+        "references": [
+          {
+            "from": "0x180069928",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/odt_input.pyc"
+      },
+      {
+        "address": "0x180040950",
+        "references": [
+          {
+            "from": "0x180069930",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/oeb_output.pyc"
+      },
+      {
+        "address": "0x180040988",
+        "references": [
+          {
+            "from": "0x180069938",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/pdb_input.pyc"
+      },
+      {
+        "address": "0x1800409b8",
+        "references": [
+          {
+            "from": "0x180069940",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/pdb_output.pyc"
+      },
+      {
+        "address": "0x1800409f0",
+        "references": [
+          {
+            "from": "0x180069948",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/pdf_input.pyc"
+      },
+      {
+        "address": "0x180040a20",
+        "references": [
+          {
+            "from": "0x180069950",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/pdf_output.pyc"
+      },
+      {
+        "address": "0x180040a58",
+        "references": [
+          {
+            "from": "0x180069958",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/pml_input.pyc"
+      },
+      {
+        "address": "0x180040a88",
+        "references": [
+          {
+            "from": "0x180069960",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/pml_output.pyc"
+      },
+      {
+        "address": "0x180040ac0",
+        "references": [
+          {
+            "from": "0x180069968",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/rb_input.pyc"
+      },
+      {
+        "address": "0x180040af0",
+        "references": [
+          {
+            "from": "0x180069970",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/ebooks/conversion/plugins/rb_output.pyc"
+      }
+    ],
+    "total": 819
+  },
+  "summary": "819 strings match \"tag|genre|metadata|book|library|author\".",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "data_sections_only",
+      "message": "only strings stored in the file are searched (absence is not proof)"
+    }
+  ],
+  "coverage": {
+    "status": "partial",
+    "examined": 200,
+    "total": 819,
+    "next_offset": 200
+  },
+  "locations": [],
+  "links": []
+}

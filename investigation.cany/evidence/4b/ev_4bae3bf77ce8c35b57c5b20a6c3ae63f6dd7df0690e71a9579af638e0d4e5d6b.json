@@ -1,0 +1,94 @@
+{
+  "id": "ev_4bae3bf77ce8c35b57c5b20a6c3ae63f6dd7df0690e71a9579af638e0d4e5d6b",
+  "subject": {
+    "kind": "pe",
+    "sha256": "eb6f3eda293cca1c0e1a6c52daeed586c4887130b9ef562220eff08c95eee7ab",
+    "name": "calibre.exe"
+  },
+  "operation": "native_functions_list",
+  "params": {
+    "limit": 200,
+    "offset": 0
+  },
+  "result": {
+    "functions": [
+      {
+        "address": "0x140001000",
+        "blocks": 21,
+        "found_by": "function_starts",
+        "instructions": 78,
+        "name": "sub_140001000",
+        "name_source": "generated",
+        "size": 335,
+        "thunk_of": null
+      },
+      {
+        "address": "0x140001150",
+        "blocks": 9,
+        "found_by": "call",
+        "instructions": 29,
+        "name": "sub_140001150",
+        "name_source": "generated",
+        "size": 89,
+        "thunk_of": null
+      },
+      {
+        "address": "0x1400011ac",
+        "blocks": 4,
+        "found_by": "function_starts",
+        "instructions": 47,
+        "name": "sub_1400011ac",
+        "name_source": "generated",
+        "size": 161,
+        "thunk_of": null
+      },
+      {
+        "address": "0x140001250",
+        "blocks": 3,
+        "found_by": "function_starts",
+        "instructions": 30,
+        "name": "sub_140001250",
+        "name_source": "generated",
+        "size": 126,
+        "thunk_of": null
+      },
+      {
+        "address": "0x1400012d0",
+        "blocks": 6,
+        "found_by": "entry_point",
+        "instructions": 21,
+        "name": "entry",
+        "name_source": "entry_point",
+        "size": 92,
+        "thunk_of": null
+      }
+    ],
+    "total": 5
+  },
+  "summary": "5 functions (showing 5).",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "stripped_binary",
+      "message": "no local symbols: most function names are generated (sub_…)"
+    },
+    {
+      "code": "static_analysis_only",
+      "message": "functions reached only through computed pointers or at run time may be missing; absence is not proof"
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 5,
+    "total": 5
+  },
+  "locations": [],
+  "links": []
+}

@@ -1,0 +1,45 @@
+{
+  "id": "ev_0a669320eb9894ac5b9d37ddf5a13293c1b28ae0e600506eb9df65fd47b725fd",
+  "subject": {
+    "kind": "pe",
+    "sha256": "8beb32bfe70e3038a5b090238499d2afbf4f268aafa8e02f7b1e173d04e7590d",
+    "name": "ebook-meta.exe"
+  },
+  "operation": "native_function_pseudocode",
+  "params": {
+    "function": "0x1400012d0"
+  },
+  "result": {
+    "engine": "ghidra",
+    "entry": "0x1400012d0",
+    "function": "entry",
+    "pseudo_code": "\r\nvoid entry(void)\r\n\r\n{\r\n  UINT uExitCode;\r\n  \r\n  FUN_140001000();\r\n  if (DAT_140003000 == (code *)0x0) {\r\n    uExitCode = 1;\r\n  }\r\n  else {\r\n    uExitCode = (*DAT_140003000)(L\"ebook-meta\",L\"calibre.ebooks.metadata.cli\",L\"main\",0);\r\n  }\r\n  if (DAT_140003010 != (HMODULE)0x0) {\r\n    FreeLibrary(DAT_140003010);\r\n    DAT_140003010 = (HMODULE)0x0;\r\n  }\r\n                    /* WARNING: Subroutine does not return */\r\n  ExitProcess(uExitCode);\r\n}\r\n\r\n",
+    "signature": "void entry(void);"
+  },
+  "summary": "Pseudo-C for entry from the Deep engine (21 lines).",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "ghidra",
+    "engine_version": "12.1.4",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "deep_engine",
+      "message": "the pseudo-C comes from the external Deep engine (Ghidra), not the original source"
+    }
+  ],
+  "coverage": {
+    "status": "unknown"
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x1400012d0"
+    }
+  ],
+  "links": [],
+  "carries_target_content": true
+}

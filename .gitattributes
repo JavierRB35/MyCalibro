@@ -1,0 +1,12 @@
+# Normalización de fines de línea
+* text=auto
+
+# Fuentes y formatos binarios
+*.png binary
+
+# Diffs legibles para Rust
+*.rs text diff=rust
+*.toml text
+*.json text
+*.md text
+*.log text

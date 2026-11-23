@@ -1,0 +1,150 @@
+{
+  "id": "ev_c202141cc9dd60232a1392e613ad2be2e9dbcc40cd0dae7adfd4010cb710de9f",
+  "subject": {
+    "kind": "pe",
+    "sha256": "eb6f3eda293cca1c0e1a6c52daeed586c4887130b9ef562220eff08c95eee7ab",
+    "name": "calibre.exe"
+  },
+  "operation": "core_overview_show",
+  "params": {},
+  "result": {
+    "architecture": "x86_64",
+    "bits": 64,
+    "counts": {
+      "basic_blocks": 43,
+      "cross_references": 78,
+      "exports": 0,
+      "functions": 5,
+      "functions_with_generated_names": 4,
+      "imports": 14,
+      "instructions": 205,
+      "jump_tables": 0,
+      "strings": 362,
+      "symbols": 0
+    },
+    "discovered_by": {
+      "call": 1,
+      "entry_point": 1,
+      "function_starts": 3
+    },
+    "endianness": "little",
+    "entry_point": "0x1400012d0",
+    "file": "calibre.exe",
+    "format": "pe",
+    "image_base": "0x140000000",
+    "info": {
+      "linker_version": "14.50",
+      "rich_header": "present (built with Microsoft tools)",
+      "subsystem": "windows-gui",
+      "timestamp": "1789697589"
+    },
+    "kind": "executable",
+    "libraries": [
+      "KERNEL32.dll",
+      "USER32.dll"
+    ],
+    "mitigations": {
+      "canary": false,
+      "code_signature": null,
+      "control_flow_guard": false,
+      "encrypted": null,
+      "fortify": null,
+      "high_entropy_va": true,
+      "no_seh": false,
+      "nx": true,
+      "pie": true,
+      "relro": null,
+      "stripped": true
+    },
+    "section_count": 5,
+    "segments": [
+      {
+        "end": "0x14000132d",
+        "entropy": 5.687954902648926,
+        "kind": "code",
+        "name": ".text",
+        "perms": "r-x",
+        "size": 813,
+        "start": "0x140001000"
+      },
+      {
+        "end": "0x14000276a",
+        "entropy": 3.7923905849456787,
+        "kind": "rodata",
+        "name": ".rdata",
+        "perms": "r--",
+        "size": 1898,
+        "start": "0x140002000"
+      },
+      {
+        "end": "0x140003228",
+        "entropy": null,
+        "kind": "data",
+        "name": ".data",
+        "perms": "rw-",
+        "size": 552,
+        "start": "0x140003000"
+      },
+      {
+        "end": "0x140004030",
+        "entropy": 2.692227363586426,
+        "kind": "rodata",
+        "name": ".pdata",
+        "perms": "r--",
+        "size": 48,
+        "start": "0x140004000"
+      },
+      {
+        "end": "0x140012390",
+        "entropy": 5.913812637329102,
+        "kind": "rodata",
+        "name": ".rsrc",
+        "perms": "r--",
+        "size": 54160,
+        "start": "0x140005000"
+      }
+    ],
+    "toolchain_hints": [
+      {
+        "category": "compiler",
+        "evidence": "Rich header",
+        "id": "msvc",
+        "label": "Microsoft Visual C++ toolchain",
+        "strength": "strong"
+      }
+    ],
+    "warnings": []
+  },
+  "summary": "PE (Windows) executable for x86_64 with 5 functions, 362 strings, 14 imports from 2 libraries.",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "stripped_binary",
+      "message": "no local symbols: most function names are generated (sub_…)"
+    },
+    {
+      "code": "static_analysis_only",
+      "message": "functions reached only through computed pointers or at run time may be missing; absence is not proof"
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 1,
+    "total": 1
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x1400012d0",
+      "label": "entry point"
+    }
+  ],
+  "links": []
+}

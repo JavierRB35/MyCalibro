@@ -1,0 +1,306 @@
+{
+  "id": "ev_1e4b7671d679102bc02b2772e7f022462b75717183bbbd66f79cc553c36d3e8e",
+  "subject": {
+    "kind": "directory",
+    "sha256": "12ee6c78b63bb2e12afa8739947e71923ea7b7e6ba77efcc9415846acf5662d7",
+    "name": "app"
+  },
+  "operation": "core_evidence_browse",
+  "params": {
+    "show": {
+      "fields": [
+        "path",
+        "kind",
+        "size",
+        "role",
+        "note"
+      ],
+      "kind": "rows",
+      "limit": 40,
+      "list": "entries",
+      "offset": 900
+    },
+    "source": {
+      "evidence_id": "ev_83a5dd18746b173406bf40372e1e88738b605806e9c223cdab3aaf3d2db3191f",
+      "kind": "saved"
+    }
+  },
+  "result": {
+    "coverage": {
+      "at_end": false,
+      "examined": 40,
+      "next_offset": 940,
+      "status": "page",
+      "total": 1000
+    },
+    "from_evidence": "ev_83a5dd18746b173406bf40372e1e88738b605806e9c223cdab3aaf3d2db3191f",
+    "from_tool": "core_archive_show",
+    "shown": {
+      "items": [
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/b433981b.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/b7a5b843.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/b81b93f0.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/b8d25de6.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/bf53fb88.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/c01eb047.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/c28a8a30.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/cbf06781.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/cc450945.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/cd58d51e.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/cd8c0d63.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/ce5e74ef.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/d4dae3dd.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/d52c538d.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/d6325660.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/da0cfd1d.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/dc4d6a89.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/dd8e9d41.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/ddcda989.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/de6d66f3.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/e18bfb83.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/e35234b1.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/e73d606e.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/e868b802.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/e8de2f56.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/ecccd8db.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/ed858448.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/eed8c118.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/ef954a4e.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/f0c70a8d.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/f30dd6ad.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/f44703f1.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/f51bb24c.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/faf4fe6b.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/fb717492.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/fc5a8f99.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/fd64f3fc.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/fe8a2cd8.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/feffd413.0",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/mozilla-ca-certs/ff34af3f.0",
+          "size": 0
+        }
+      ],
+      "list": "entries",
+      "offset": 900,
+      "total": 1000
+    }
+  },
+  "summary": "Part of core_archive_show evidence (page).",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [],
+  "coverage": {
+    "status": "partial",
+    "examined": 40,
+    "total": 1000,
+    "next_offset": 940
+  },
+  "locations": [],
+  "links": [
+    "ev_83a5dd18746b173406bf40372e1e88738b605806e9c223cdab3aaf3d2db3191f"
+  ]
+}

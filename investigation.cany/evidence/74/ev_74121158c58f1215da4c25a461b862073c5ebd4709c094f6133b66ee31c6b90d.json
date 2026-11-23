@@ -1,0 +1,45 @@
+{
+  "id": "ev_74121158c58f1215da4c25a461b862073c5ebd4709c094f6133b66ee31c6b90d",
+  "subject": {
+    "kind": "pe",
+    "sha256": "f46a01c9b8cd392e1190ce2e50a2a5a48b326c8c3eab670bbcd8b298bede501d",
+    "name": "ebook-convert.exe"
+  },
+  "operation": "native_function_pseudocode",
+  "params": {
+    "function": "0x1400011ac"
+  },
+  "result": {
+    "engine": "ghidra",
+    "entry": "0x1400011ac",
+    "function": "FUN_1400011ac",
+    "pseudo_code": "\r\n/* WARNING: Restarted to delay deadcode elimination for space: register */\r\n\r\nundefined4 FUN_1400011ac(LPCWSTR param_1,undefined8 param_2,undefined4 param_3)\r\n\r\n{\r\n  longlong lVar1;\r\n  longlong lVar2;\r\n  LPCWSTR lpText;\r\n  \r\n  lVar1 = FUN_140001150();\r\n  lVar2 = FUN_140001150(param_2);\r\n  lpText = LocalAlloc(0x40,(lVar1 + lVar2) * 2 + 0xa0);\r\n  if (lpText == (LPCWSTR)0x0) {\r\n    MessageBoxW((HWND)0x0,param_1,(LPCWSTR)0x0,0x10);\r\n  }\r\n  else {\r\n    MessageBeep(0x10);\r\n    wsprintfW(lpText,L\"%s\\r\\n  %s (Error Code: %d)\\r\\n\",param_1,param_2);\r\n    MessageBoxW((HWND)0x0,lpText,(LPCWSTR)0x0,0x10);\r\n    LocalFree(lpText);\r\n  }\r\n  return param_3;\r\n}\r\n\r\n",
+    "signature": "undefined4 FUN_1400011ac(LPCWSTR param_1,undefined8 param_2,undefined4 param_3);"
+  },
+  "summary": "Pseudo-C for FUN_1400011ac from the Deep engine (25 lines).",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "ghidra",
+    "engine_version": "12.1.4",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "deep_engine",
+      "message": "the pseudo-C comes from the external Deep engine (Ghidra), not the original source"
+    }
+  ],
+  "coverage": {
+    "status": "unknown"
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x1400011ac"
+    }
+  ],
+  "links": [],
+  "carries_target_content": true
+}

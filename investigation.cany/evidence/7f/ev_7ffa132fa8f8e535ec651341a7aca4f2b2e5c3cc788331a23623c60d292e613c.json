@@ -1,0 +1,794 @@
+{
+  "id": "ev_7ffa132fa8f8e535ec651341a7aca4f2b2e5c3cc788331a23623c60d292e613c",
+  "subject": {
+    "kind": "unknown",
+    "sha256": "a7aeda40c163fc2182a23fd791a4d7de0182ed347ae20437e315cecb6cb57788",
+    "name": "python-lib.bypy.frozen"
+  },
+  "operation": "native_bytes_find",
+  "params": {
+    "encoding": "utf8",
+    "limit": 100,
+    "offset": 0,
+    "path": "C:\\Program Files\\Calibre2\\app\\bin\\python-lib.bypy.frozen",
+    "pattern": null,
+    "text": "calibre.gui2"
+  },
+  "result": {
+    "file_size": 86189472,
+    "limit": 100,
+    "match_cap_reached": false,
+    "matches": [
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 6487626,
+        "file_offset_hex": "0x62fe4a",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 6499892,
+        "file_offset_hex": "0x632e34",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 6729003,
+        "file_offset_hex": "0x66ad2b",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 6776551,
+        "file_offset_hex": "0x6766e7",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 6804402,
+        "file_offset_hex": "0x67d3b2",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 6804421,
+        "file_offset_hex": "0x67d3c5",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 6836196,
+        "file_offset_hex": "0x684fe4",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 6836215,
+        "file_offset_hex": "0x684ff7",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 6923003,
+        "file_offset_hex": "0x69a2fb",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 6923032,
+        "file_offset_hex": "0x69a318",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 6972893,
+        "file_offset_hex": "0x6a65dd",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7009918,
+        "file_offset_hex": "0x6af67e",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7009937,
+        "file_offset_hex": "0x6af691",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7136184,
+        "file_offset_hex": "0x6ce3b8",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7240600,
+        "file_offset_hex": "0x6e7b98",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7240624,
+        "file_offset_hex": "0x6e7bb0",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7245802,
+        "file_offset_hex": "0x6e8fea",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7281937,
+        "file_offset_hex": "0x6f1d11",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7281961,
+        "file_offset_hex": "0x6f1d29",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7342152,
+        "file_offset_hex": "0x700848",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7342486,
+        "file_offset_hex": "0x700996",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7342796,
+        "file_offset_hex": "0x700acc",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7343092,
+        "file_offset_hex": "0x700bf4",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7343362,
+        "file_offset_hex": "0x700d02",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7343630,
+        "file_offset_hex": "0x700e0e",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7343943,
+        "file_offset_hex": "0x700f47",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7344246,
+        "file_offset_hex": "0x701076",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7344533,
+        "file_offset_hex": "0x701195",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7344805,
+        "file_offset_hex": "0x7012a5",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7345093,
+        "file_offset_hex": "0x7013c5",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7345400,
+        "file_offset_hex": "0x7014f8",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7345682,
+        "file_offset_hex": "0x701612",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7345950,
+        "file_offset_hex": "0x70171e",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7346241,
+        "file_offset_hex": "0x701841",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7346555,
+        "file_offset_hex": "0x70197b",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7346875,
+        "file_offset_hex": "0x701abb",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7347157,
+        "file_offset_hex": "0x701bd5",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7347438,
+        "file_offset_hex": "0x701cee",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7347728,
+        "file_offset_hex": "0x701e10",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7348024,
+        "file_offset_hex": "0x701f38",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7348332,
+        "file_offset_hex": "0x70206c",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7348674,
+        "file_offset_hex": "0x7021c2",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7348982,
+        "file_offset_hex": "0x7022f6",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7349264,
+        "file_offset_hex": "0x702410",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7349513,
+        "file_offset_hex": "0x702509",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7349825,
+        "file_offset_hex": "0x702641",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7350113,
+        "file_offset_hex": "0x702761",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7350389,
+        "file_offset_hex": "0x702875",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7350710,
+        "file_offset_hex": "0x7029b6",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7350969,
+        "file_offset_hex": "0x702ab9",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7351232,
+        "file_offset_hex": "0x702bc0",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7351538,
+        "file_offset_hex": "0x702cf2",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7351864,
+        "file_offset_hex": "0x702e38",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7352170,
+        "file_offset_hex": "0x702f6a",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7352482,
+        "file_offset_hex": "0x7030a2",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7352794,
+        "file_offset_hex": "0x7031da",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7353106,
+        "file_offset_hex": "0x703312",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7353399,
+        "file_offset_hex": "0x703437",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7353678,
+        "file_offset_hex": "0x70354e",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7353982,
+        "file_offset_hex": "0x70367e",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7354314,
+        "file_offset_hex": "0x7037ca",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7354588,
+        "file_offset_hex": "0x7038dc",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7354838,
+        "file_offset_hex": "0x7039d6",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7355130,
+        "file_offset_hex": "0x703afa",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7355479,
+        "file_offset_hex": "0x703c57",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7355775,
+        "file_offset_hex": "0x703d7f",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7356098,
+        "file_offset_hex": "0x703ec2",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7356420,
+        "file_offset_hex": "0x704004",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7356704,
+        "file_offset_hex": "0x704120",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7357000,
+        "file_offset_hex": "0x704248",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7357313,
+        "file_offset_hex": "0x704381",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7357636,
+        "file_offset_hex": "0x7044c4",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7358241,
+        "file_offset_hex": "0x704721",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7358624,
+        "file_offset_hex": "0x7048a0",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7359002,
+        "file_offset_hex": "0x704a1a",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7359490,
+        "file_offset_hex": "0x704c02",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7359864,
+        "file_offset_hex": "0x704d78",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7360241,
+        "file_offset_hex": "0x704ef1",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7360644,
+        "file_offset_hex": "0x705084",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7361064,
+        "file_offset_hex": "0x705228",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7361821,
+        "file_offset_hex": "0x70551d",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7362229,
+        "file_offset_hex": "0x7056b5",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7362646,
+        "file_offset_hex": "0x705856",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7363039,
+        "file_offset_hex": "0x7059df",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7363458,
+        "file_offset_hex": "0x705b82",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7363854,
+        "file_offset_hex": "0x705d0e",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7364251,
+        "file_offset_hex": "0x705e9b",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7364627,
+        "file_offset_hex": "0x706013",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7365064,
+        "file_offset_hex": "0x7061c8",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7365545,
+        "file_offset_hex": "0x7063a9",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7365960,
+        "file_offset_hex": "0x706548",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7366358,
+        "file_offset_hex": "0x7066d6",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7366720,
+        "file_offset_hex": "0x706840",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7367093,
+        "file_offset_hex": "0x7069b5",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7367457,
+        "file_offset_hex": "0x706b21",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7367790,
+        "file_offset_hex": "0x706c6e",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7368154,
+        "file_offset_hex": "0x706dda",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7368501,
+        "file_offset_hex": "0x706f35",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7368762,
+        "file_offset_hex": "0x70703a",
+        "length": 12,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "63616c696272652e67756932",
+        "file_offset": 7369049,
+        "file_offset_hex": "0x707159",
+        "length": 12,
+        "matched": "utf8"
+      }
+    ],
+    "native_container": null,
+    "offset": 0,
+    "path": "C:\\Program Files\\Calibre2\\app\\bin\\python-lib.bypy.frozen",
+    "searched_for": [
+      {
+        "kind": "utf8",
+        "length": 12
+      }
+    ],
+    "total_matches": 2055
+  },
+  "summary": "2055 match(es) for utf8 in python-lib.bypy.frozen; showing 100 from #0.",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "file_bytes_only",
+      "message": "The file's bytes are searched as stored: compressed, encrypted or packed regions and data built at run time are not seen, so no match is not proof of absence."
+    },
+    {
+      "code": "no_addresses",
+      "message": "This file is not a readable ELF, PE or Mach-O program, so matches carry file offsets only."
+    }
+  ],
+  "coverage": {
+    "status": "partial",
+    "examined": 100,
+    "total": 2055,
+    "next_offset": 100
+  },
+  "locations": [
+    {
+      "kind": "file_offset",
+      "value": "0x62fe4a"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x632e34"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x66ad2b"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x6766e7"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x67d3b2"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x67d3c5"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x684fe4"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x684ff7"
+    }
+  ],
+  "links": []
+}

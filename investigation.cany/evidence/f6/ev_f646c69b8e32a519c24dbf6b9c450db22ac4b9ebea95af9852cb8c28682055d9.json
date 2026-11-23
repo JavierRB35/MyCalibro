@@ -1,0 +1,304 @@
+{
+  "id": "ev_f646c69b8e32a519c24dbf6b9c450db22ac4b9ebea95af9852cb8c28682055d9",
+  "subject": {
+    "kind": "directory",
+    "sha256": "12ee6c78b63bb2e12afa8739947e71923ea7b7e6ba77efcc9415846acf5662d7",
+    "name": "app"
+  },
+  "operation": "core_evidence_browse",
+  "params": {
+    "show": {
+      "fields": [
+        "path",
+        "kind",
+        "size",
+        "role",
+        "note"
+      ],
+      "kind": "rows",
+      "limit": 40,
+      "list": "entries",
+      "offset": 150
+    },
+    "source": {
+      "evidence_id": "ev_83a5dd18746b173406bf40372e1e88738b605806e9c223cdab3aaf3d2db3191f",
+      "kind": "saved"
+    }
+  },
+  "result": {
+    "coverage": {
+      "at_end": false,
+      "examined": 40,
+      "next_offset": 190,
+      "status": "page",
+      "total": 1000
+    },
+    "from_evidence": "ev_83a5dd18746b173406bf40372e1e88738b605806e9c223cdab3aaf3d2db3191f",
+    "from_tool": "core_archive_show",
+    "shown": {
+      "items": [
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-file-l1-2-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-file-l2-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-handle-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-heap-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-interlocked-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-kernel32-legacy-l1-1-1.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-libraryloader-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22896
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-localization-l1-2-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-memory-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22896
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-namedpipe-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-processenvironment-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-processthreads-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-processthreads-l1-1-1.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-profile-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22896
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-rtlsupport-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22896
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-string-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-synch-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-synch-l1-2-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-sysinfo-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-sysinfo-l1-2-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-timezone-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-core-util-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22896
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-crt-conio-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22896
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-crt-convert-l1-1-0.dll",
+          "role": "native-library",
+          "size": 26992
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-crt-environment-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-crt-filesystem-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-crt-heap-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-crt-locale-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-crt-math-l1-1-0.dll",
+          "role": "native-library",
+          "size": 31080
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-crt-multibyte-l1-1-0.dll",
+          "role": "native-library",
+          "size": 31064
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-crt-private-l1-1-0.dll",
+          "role": "native-library",
+          "size": 76144
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-crt-process-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-crt-runtime-l1-1-0.dll",
+          "role": "native-library",
+          "size": 26992
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-crt-stdio-l1-1-0.dll",
+          "role": "native-library",
+          "size": 26968
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-crt-string-l1-1-0.dll",
+          "role": "native-library",
+          "size": 26968
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-crt-time-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22888
+        },
+        {
+          "kind": "pe",
+          "path": "bin/api-ms-win-crt-utility-l1-1-0.dll",
+          "role": "native-library",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "bin/appendvfs.dll",
+          "role": "native-library",
+          "size": 27400
+        },
+        {
+          "kind": "pe",
+          "path": "bin/apsw.__init__.pyd",
+          "size": 2299656
+        },
+        {
+          "kind": "pe",
+          "path": "bin/apsw._unicode.pyd",
+          "size": 741128
+        }
+      ],
+      "list": "entries",
+      "offset": 150,
+      "total": 1000
+    }
+  },
+  "summary": "Part of core_archive_show evidence (page).",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [],
+  "coverage": {
+    "status": "partial",
+    "examined": 40,
+    "total": 1000,
+    "next_offset": 190
+  },
+  "locations": [],
+  "links": [
+    "ev_83a5dd18746b173406bf40372e1e88738b605806e9c223cdab3aaf3d2db3191f"
+  ]
+}

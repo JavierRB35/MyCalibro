@@ -1,0 +1,53 @@
+{
+  "id": "ev_2f323da3776a5addda616bbcc370e85cd28a57d2368e636ddd0134b7a8e3eebc",
+  "subject": {
+    "kind": "text",
+    "sha256": "77965f5a27a9a55ade09435097bc42ad266ed44b8c0c008b8eec4c3146400885",
+    "name": "README.md"
+  },
+  "operation": "core_text_read",
+  "params": {
+    "limit": 200,
+    "offset": 0,
+    "path": "C:\\Users\\cjrui\\Documents\\Craft Anything\\calibre\\capture\\README.md"
+  },
+  "result": {
+    "cut_lines": [],
+    "encoding": "utf8",
+    "file_size": 1881,
+    "lines": 69,
+    "more": false,
+    "offset": 0,
+    "path": "C:\\Users\\cjrui\\Documents\\Craft Anything\\calibre\\capture\\README.md",
+    "replaced_sequences": 0,
+    "text": "# What we found in C:\\Program Files\\Calibre2\\calibre.exe\n\ncalibre.exe is a program for Windows, built for x86_64 (64-bit). Its internal names were removed (stripped), so most functions will have generated names.\n\nEvidence ev_a7cc2f5e82cd7437576cf2c527bf9440c85b377abfdb4c253bf77a0f7b02f07a.\n\n```json\n{\n  \"architecture\": \"x86_64\",\n  \"bits\": 64,\n  \"dotnet_arch\": null,\n  \"entry_point\": \"0x1400012d0\",\n  \"format\": \"pe\",\n  \"format_name\": \"PE (Windows)\",\n  \"kind\": \"executable\",\n  \"libraries\": [\n    \"KERNEL32.dll\",\n    \"USER32.dll\"\n  ],\n  \"next_steps\": [\n    {\n      \"tool\": \"core_overview_show\",\n      \"why\": \"a one-page summary: sections, imports, counts\"\n    },\n    {\n      \"tool\": \"native_functions_list\",\n      \"why\": \"every function we found\"\n    },\n    {\n      \"tool\": \"native_strings_find\",\n      \"why\": \"find text the program shows or uses\"\n    },\n    {\n      \"tool\": \"native_function_study\",\n      \"why\": \"a full dossier on one function (start with main or the entry point)\"\n    },\n    {\n      \"tool\": \"core_feature_find\",\n      \"why\": \"follow a word you see in the app to the code behind it\"\n    },\n    {\n      \"tool\": \"native_pe_resources_list\",\n      \"why\": \"icons, version information and the manifest\"\n    }\n  ],\n  \"operating_system\": \"Windows\",\n  \"plain_english\": \"calibre.exe is a program for Windows, built for x86_64 (64-bit). Its internal names were removed (stripped), so most functions will have generated names.\",\n  \"recommended_toolsets\": [\n    \"core\",\n    \"native\",\n    \"formats\"\n  ],\n  \"stripped\": true,\n  \"symbol_table_stripped\": true,\n  \"toolchain_hints\": [\n    {\n      \"category\": \"compiler\",\n      \"evidence\": \"Rich header\",\n      \"id\": \"msvc\",\n      \"label\": \"Microsoft Visual C++ toolchain\",\n      \"strength\": \"strong\"\n    }\n  ]\n}\n```\n\n## Ghidra\n\nDeep mode: Ghidra has analysed C:\\Program Files\\Calibre2\\calibre.exe (0 min), so decompiling it is quick.\n",
+    "total_lines": 69
+  },
+  "summary": "README.md: lines 1–69 of 69 (UTF-8).",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "text_as_stored",
+      "message": "The file is read as text as it is stored: nothing is run, rendered or formatted, and text a program builds or downloads while it runs isn't here."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 69,
+    "total": 69
+  },
+  "locations": [
+    {
+      "kind": "path",
+      "value": "C:\\Users\\cjrui\\Documents\\Craft Anything\\calibre\\capture\\README.md"
+    }
+  ],
+  "links": []
+}

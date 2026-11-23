@@ -1,0 +1,54 @@
+{
+  "id": "ev_ed74d51117693f8ca7210b7c2ab1a0f16138bbdbe9b39c6e7297c1bb97998a1e",
+  "subject": {
+    "kind": "pe",
+    "sha256": "3c162738cd191a4fc50cc868536a55a5e2d5652e55191013537278b5b34d1608",
+    "name": "calibre-launcher.dll"
+  },
+  "operation": "native_strings_find",
+  "params": {
+    "case_sensitive": false,
+    "limit": 200,
+    "mode": "regex",
+    "offset": 0,
+    "pattern": "^tag$|^tags$|^genre$|^metadata$|^calibre/gui_launch\\.pyc$"
+  },
+  "result": {
+    "matches": [
+      {
+        "address": "0x18004aa70",
+        "references": [
+          {
+            "from": "0x18006b810",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/gui_launch.pyc"
+      }
+    ],
+    "total": 1
+  },
+  "summary": "1 strings match \"^tag$|^tags$|^genre$|^metadata$|^calibre/gui_launch\\.pyc$\".",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "data_sections_only",
+      "message": "only strings stored in the file are searched (absence is not proof)"
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 1,
+    "total": 1
+  },
+  "locations": [],
+  "links": []
+}

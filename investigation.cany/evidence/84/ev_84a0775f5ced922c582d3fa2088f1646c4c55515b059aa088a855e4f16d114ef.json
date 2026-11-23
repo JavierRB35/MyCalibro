@@ -1,0 +1,45 @@
+{
+  "id": "ev_84a0775f5ced922c582d3fa2088f1646c4c55515b059aa088a855e4f16d114ef",
+  "subject": {
+    "kind": "pe",
+    "sha256": "8beb32bfe70e3038a5b090238499d2afbf4f268aafa8e02f7b1e173d04e7590d",
+    "name": "ebook-meta.exe"
+  },
+  "operation": "native_function_pseudocode",
+  "params": {
+    "function": "0x140001150"
+  },
+  "result": {
+    "engine": "ghidra",
+    "entry": "0x140001150",
+    "function": "FUN_140001150",
+    "pseudo_code": "\r\nulonglong FUN_140001150(short *param_1)\r\n\r\n{\r\n  ulonglong uVar1;\r\n  uint uVar2;\r\n  longlong lVar3;\r\n  ulonglong uVar4;\r\n  \r\n  uVar1 = 0;\r\n  uVar4 = uVar1;\r\n  if (param_1 == (short *)0x0) {\r\n    uVar2 = 0x80070057;\r\n  }\r\n  else {\r\n    lVar3 = 0xfa;\r\n    do {\r\n      if (*param_1 == 0) break;\r\n      param_1 = param_1 + 1;\r\n      lVar3 = lVar3 + -1;\r\n    } while (lVar3 != 0);\r\n    uVar2 = ~-(uint)(lVar3 != 0) & 0x80070057;\r\n    if (lVar3 != 0) {\r\n      uVar4 = -(ulonglong)(lVar3 != 0) & (0xfa - lVar3) * 2;\r\n    }\r\n  }\r\n  if (-1 < (int)uVar2) {\r\n    uVar1 = uVar4;\r\n  }\r\n  return uVar1;\r\n}\r\n\r\n",
+    "signature": "ulonglong FUN_140001150(short *param_1);"
+  },
+  "summary": "Pseudo-C for FUN_140001150 from the Deep engine (32 lines).",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "ghidra",
+    "engine_version": "12.1.4",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "deep_engine",
+      "message": "the pseudo-C comes from the external Deep engine (Ghidra), not the original source"
+    }
+  ],
+  "coverage": {
+    "status": "unknown"
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x140001150"
+    }
+  ],
+  "links": [],
+  "carries_target_content": true
+}

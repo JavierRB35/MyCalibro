@@ -1,0 +1,59 @@
+{
+  "id": "ev_c36d1b9fac8c51080b02fea79ec499262dc1d9456f25247fcf46147421f8b609",
+  "subject": {
+    "kind": "unknown",
+    "sha256": "a7aeda40c163fc2182a23fd791a4d7de0182ed347ae20437e315cecb6cb57788",
+    "name": "python-lib.bypy.frozen"
+  },
+  "operation": "native_bytes_find",
+  "params": {
+    "encoding": "utf8",
+    "limit": 50,
+    "offset": 0,
+    "path": "C:\\Program Files\\Calibre2\\app\\bin\\python-lib.bypy.frozen",
+    "pattern": null,
+    "text": "calibre/gui2/library.pyc"
+  },
+  "result": {
+    "file_size": 86189472,
+    "limit": 50,
+    "match_cap_reached": false,
+    "matches": [],
+    "native_container": null,
+    "offset": 0,
+    "path": "C:\\Program Files\\Calibre2\\app\\bin\\python-lib.bypy.frozen",
+    "searched_for": [
+      {
+        "kind": "utf8",
+        "length": 24
+      }
+    ],
+    "total_matches": 0
+  },
+  "summary": "0 match(es) for utf8 in python-lib.bypy.frozen.",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "file_bytes_only",
+      "message": "The file's bytes are searched as stored: compressed, encrypted or packed regions and data built at run time are not seen, so no match is not proof of absence."
+    },
+    {
+      "code": "no_addresses",
+      "message": "This file is not a readable ELF, PE or Mach-O program, so matches carry file offsets only."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 0,
+    "total": 0
+  },
+  "locations": [],
+  "links": []
+}

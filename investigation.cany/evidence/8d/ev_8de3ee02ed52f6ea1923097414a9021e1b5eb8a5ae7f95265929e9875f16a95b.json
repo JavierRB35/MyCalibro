@@ -1,0 +1,266 @@
+{
+  "id": "ev_8de3ee02ed52f6ea1923097414a9021e1b5eb8a5ae7f95265929e9875f16a95b",
+  "subject": {
+    "kind": "directory",
+    "sha256": "12ee6c78b63bb2e12afa8739947e71923ea7b7e6ba77efcc9415846acf5662d7",
+    "name": "app"
+  },
+  "operation": "core_evidence_browse",
+  "params": {
+    "show": {
+      "fields": [
+        "path",
+        "kind",
+        "size",
+        "role",
+        "note"
+      ],
+      "kind": "rows",
+      "limit": 40,
+      "list": "entries",
+      "offset": 20
+    },
+    "source": {
+      "evidence_id": "ev_83a5dd18746b173406bf40372e1e88738b605806e9c223cdab3aaf3d2db3191f",
+      "kind": "saved"
+    }
+  },
+  "result": {
+    "coverage": {
+      "at_end": false,
+      "examined": 40,
+      "next_offset": 60,
+      "status": "page",
+      "total": 1000
+    },
+    "from_evidence": "ev_83a5dd18746b173406bf40372e1e88738b605806e9c223cdab3aaf3d2db3191f",
+    "from_tool": "core_archive_show",
+    "shown": {
+      "items": [
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/gmq",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/gmw",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/grk",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/inc",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/ine",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/ira",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/iro",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/itc",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/jpx",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/map",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/miz",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/myn",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/poz",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/roa",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/sai",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/sem",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/sit",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/tai",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/trk",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/urj",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/xgn",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/zle",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/zls",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/zlw",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "resources/catalog",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "resources/content-server",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "resources/dictionaries",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "resources/editor-help",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "resources/fonts",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "resources/hyphenation",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "resources/images",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "resources/jacket",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "resources/localization",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "resources/mathjax",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "resources/mozilla-ca-certs",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "resources/quick_start",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "resources/rapydscript",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "resources/templates",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "resources/mathjax/input",
+          "size": 0
+        },
+        {
+          "kind": "directory",
+          "path": "resources/mathjax/output",
+          "size": 0
+        }
+      ],
+      "list": "entries",
+      "offset": 20,
+      "total": 1000
+    }
+  },
+  "summary": "Part of core_archive_show evidence (page).",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [],
+  "coverage": {
+    "status": "partial",
+    "examined": 40,
+    "total": 1000,
+    "next_offset": 60
+  },
+  "locations": [],
+  "links": [
+    "ev_83a5dd18746b173406bf40372e1e88738b605806e9c223cdab3aaf3d2db3191f"
+  ]
+}

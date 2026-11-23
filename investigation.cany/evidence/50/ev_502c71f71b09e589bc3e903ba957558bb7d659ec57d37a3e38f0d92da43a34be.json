@@ -1,0 +1,794 @@
+{
+  "id": "ev_502c71f71b09e589bc3e903ba957558bb7d659ec57d37a3e38f0d92da43a34be",
+  "subject": {
+    "kind": "unknown",
+    "sha256": "a7aeda40c163fc2182a23fd791a4d7de0182ed347ae20437e315cecb6cb57788",
+    "name": "python-lib.bypy.frozen"
+  },
+  "operation": "native_bytes_find",
+  "params": {
+    "encoding": "utf8",
+    "limit": 100,
+    "offset": 0,
+    "path": "C:\\Program Files\\Calibre2\\app\\bin\\python-lib.bypy.frozen",
+    "pattern": null,
+    "text": "tag"
+  },
+  "result": {
+    "file_size": 86189472,
+    "limit": 100,
+    "match_cap_reached": false,
+    "matches": [
+      {
+        "bytes": "746167",
+        "file_offset": 25410,
+        "file_offset_hex": "0x6342",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 30316,
+        "file_offset_hex": "0x766c",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 30668,
+        "file_offset_hex": "0x77cc",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 67252,
+        "file_offset_hex": "0x106b4",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 77986,
+        "file_offset_hex": "0x130a2",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 78310,
+        "file_offset_hex": "0x131e6",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 97219,
+        "file_offset_hex": "0x17bc3",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 99917,
+        "file_offset_hex": "0x1864d",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 101193,
+        "file_offset_hex": "0x18b49",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 101602,
+        "file_offset_hex": "0x18ce2",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 114487,
+        "file_offset_hex": "0x1bf37",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 114625,
+        "file_offset_hex": "0x1bfc1",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 119866,
+        "file_offset_hex": "0x1d43a",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 120914,
+        "file_offset_hex": "0x1d852",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 121248,
+        "file_offset_hex": "0x1d9a0",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 136115,
+        "file_offset_hex": "0x213b3",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 136167,
+        "file_offset_hex": "0x213e7",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 138296,
+        "file_offset_hex": "0x21c38",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 138589,
+        "file_offset_hex": "0x21d5d",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 138892,
+        "file_offset_hex": "0x21e8c",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 144561,
+        "file_offset_hex": "0x234b1",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 144597,
+        "file_offset_hex": "0x234d5",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 144623,
+        "file_offset_hex": "0x234ef",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 146068,
+        "file_offset_hex": "0x23a94",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 146401,
+        "file_offset_hex": "0x23be1",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 159050,
+        "file_offset_hex": "0x26d4a",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 162158,
+        "file_offset_hex": "0x2796e",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 162503,
+        "file_offset_hex": "0x27ac7",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 164016,
+        "file_offset_hex": "0x280b0",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 171556,
+        "file_offset_hex": "0x29e24",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 171857,
+        "file_offset_hex": "0x29f51",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 178106,
+        "file_offset_hex": "0x2b7ba",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 178407,
+        "file_offset_hex": "0x2b8e7",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 182358,
+        "file_offset_hex": "0x2c856",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 187480,
+        "file_offset_hex": "0x2dc58",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 187781,
+        "file_offset_hex": "0x2dd85",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 188532,
+        "file_offset_hex": "0x2e074",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 188578,
+        "file_offset_hex": "0x2e0a2",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 193432,
+        "file_offset_hex": "0x2f398",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 194096,
+        "file_offset_hex": "0x2f630",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 197493,
+        "file_offset_hex": "0x30375",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 197801,
+        "file_offset_hex": "0x304a9",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 221718,
+        "file_offset_hex": "0x36216",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 224296,
+        "file_offset_hex": "0x36c28",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 224607,
+        "file_offset_hex": "0x36d5f",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 324390,
+        "file_offset_hex": "0x4f326",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 329269,
+        "file_offset_hex": "0x50635",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 424584,
+        "file_offset_hex": "0x67a88",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 425485,
+        "file_offset_hex": "0x67e0d",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 425518,
+        "file_offset_hex": "0x67e2e",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 438620,
+        "file_offset_hex": "0x6b15c",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 722943,
+        "file_offset_hex": "0xb07ff",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 722975,
+        "file_offset_hex": "0xb081f",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 723020,
+        "file_offset_hex": "0xb084c",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 723567,
+        "file_offset_hex": "0xb0a6f",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 723601,
+        "file_offset_hex": "0xb0a91",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 726318,
+        "file_offset_hex": "0xb152e",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 726352,
+        "file_offset_hex": "0xb1550",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 1171619,
+        "file_offset_hex": "0x11e0a3",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 1174806,
+        "file_offset_hex": "0x11ed16",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 1175122,
+        "file_offset_hex": "0x11ee52",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 1261153,
+        "file_offset_hex": "0x133e61",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 1261492,
+        "file_offset_hex": "0x133fb4",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 1261549,
+        "file_offset_hex": "0x133fed",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 1659320,
+        "file_offset_hex": "0x1951b8",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 1661225,
+        "file_offset_hex": "0x195929",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 1665422,
+        "file_offset_hex": "0x19698e",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 1665431,
+        "file_offset_hex": "0x196997",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 1796723,
+        "file_offset_hex": "0x1b6a73",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2063585,
+        "file_offset_hex": "0x1f7ce1",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2065073,
+        "file_offset_hex": "0x1f82b1",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2065083,
+        "file_offset_hex": "0x1f82bb",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2065093,
+        "file_offset_hex": "0x1f82c5",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2066525,
+        "file_offset_hex": "0x1f885d",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2072400,
+        "file_offset_hex": "0x1f9f50",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2085116,
+        "file_offset_hex": "0x1fd0fc",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2085276,
+        "file_offset_hex": "0x1fd19c",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2085493,
+        "file_offset_hex": "0x1fd275",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2085531,
+        "file_offset_hex": "0x1fd29b",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2090335,
+        "file_offset_hex": "0x1fe55f",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2097348,
+        "file_offset_hex": "0x2000c4",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2097354,
+        "file_offset_hex": "0x2000ca",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2099083,
+        "file_offset_hex": "0x20078b",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2102909,
+        "file_offset_hex": "0x20167d",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2129490,
+        "file_offset_hex": "0x207e52",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2139842,
+        "file_offset_hex": "0x20a6c2",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2140700,
+        "file_offset_hex": "0x20aa1c",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2165193,
+        "file_offset_hex": "0x2109c9",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2168285,
+        "file_offset_hex": "0x2115dd",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2172452,
+        "file_offset_hex": "0x212624",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2172494,
+        "file_offset_hex": "0x21264e",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2248273,
+        "file_offset_hex": "0x224e51",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2248477,
+        "file_offset_hex": "0x224f1d",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2248658,
+        "file_offset_hex": "0x224fd2",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2248906,
+        "file_offset_hex": "0x2250ca",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2249174,
+        "file_offset_hex": "0x2251d6",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2249432,
+        "file_offset_hex": "0x2252d8",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2249627,
+        "file_offset_hex": "0x22539b",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2249878,
+        "file_offset_hex": "0x225496",
+        "length": 3,
+        "matched": "utf8"
+      },
+      {
+        "bytes": "746167",
+        "file_offset": 2250119,
+        "file_offset_hex": "0x225587",
+        "length": 3,
+        "matched": "utf8"
+      }
+    ],
+    "native_container": null,
+    "offset": 0,
+    "path": "C:\\Program Files\\Calibre2\\app\\bin\\python-lib.bypy.frozen",
+    "searched_for": [
+      {
+        "kind": "utf8",
+        "length": 3
+      }
+    ],
+    "total_matches": 5618
+  },
+  "summary": "5618 match(es) for utf8 in python-lib.bypy.frozen; showing 100 from #0.",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "file_bytes_only",
+      "message": "The file's bytes are searched as stored: compressed, encrypted or packed regions and data built at run time are not seen, so no match is not proof of absence."
+    },
+    {
+      "code": "no_addresses",
+      "message": "This file is not a readable ELF, PE or Mach-O program, so matches carry file offsets only."
+    }
+  ],
+  "coverage": {
+    "status": "partial",
+    "examined": 100,
+    "total": 5618,
+    "next_offset": 100
+  },
+  "locations": [
+    {
+      "kind": "file_offset",
+      "value": "0x6342"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x766c"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x77cc"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x106b4"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x130a2"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x131e6"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x17bc3"
+    },
+    {
+      "kind": "file_offset",
+      "value": "0x1864d"
+    }
+  ],
+  "links": []
+}

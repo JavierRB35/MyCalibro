@@ -1,0 +1,182 @@
+{
+  "id": "ev_7d856963c6a213c433326f3df95fa301df652e20e15585468b0d5c51169d9f45",
+  "subject": {
+    "kind": "pe",
+    "sha256": "3c162738cd191a4fc50cc868536a55a5e2d5652e55191013537278b5b34d1608",
+    "name": "calibre-launcher.dll"
+  },
+  "operation": "core_overview_show",
+  "params": {},
+  "result": {
+    "architecture": "x86_64",
+    "bits": 64,
+    "counts": {
+      "basic_blocks": 880,
+      "cross_references": 6818,
+      "exports": 2,
+      "functions": 159,
+      "functions_with_generated_names": 148,
+      "imports": 132,
+      "instructions": 4569,
+      "jump_tables": 0,
+      "strings": 10716,
+      "symbols": 0
+    },
+    "discovered_by": {
+      "call": 20,
+      "code_pointer": 1,
+      "entry_point": 1,
+      "export": 2,
+      "function_starts": 135
+    },
+    "endianness": "little",
+    "entry_point": "0x1800050c4",
+    "file": "calibre-launcher.dll",
+    "format": "pe",
+    "image_base": "0x180000000",
+    "info": {
+      "linker_version": "14.50",
+      "rich_header": "present (built with Microsoft tools)",
+      "subsystem": "windows-gui",
+      "timestamp": "1789697584"
+    },
+    "kind": "shared-library",
+    "libraries": [
+      "KERNEL32.dll",
+      "SHELL32.dll",
+      "USER32.dll",
+      "VCRUNTIME140.dll",
+      "api-ms-win-crt-environment-l1-1-0.dll",
+      "api-ms-win-crt-filesystem-l1-1-0.dll",
+      "api-ms-win-crt-heap-l1-1-0.dll",
+      "api-ms-win-crt-runtime-l1-1-0.dll",
+      "api-ms-win-crt-stdio-l1-1-0.dll",
+      "api-ms-win-crt-string-l1-1-0.dll",
+      "python3.dll",
+      "python314.dll"
+    ],
+    "mitigations": {
+      "canary": false,
+      "code_signature": null,
+      "control_flow_guard": false,
+      "encrypted": null,
+      "fortify": null,
+      "high_entropy_va": true,
+      "no_seh": false,
+      "nx": true,
+      "pie": true,
+      "relro": null,
+      "stripped": true
+    },
+    "section_count": 6,
+    "segments": [
+      {
+        "end": "0x1800059a8",
+        "entropy": 6.132301330566406,
+        "kind": "code",
+        "name": ".text",
+        "perms": "r-x",
+        "size": 18856,
+        "start": "0x180001000"
+      },
+      {
+        "end": "0x18003abf0",
+        "entropy": 5.528934001922607,
+        "kind": "rodata",
+        "name": ".rdata",
+        "perms": "r--",
+        "size": 216048,
+        "start": "0x180006000"
+      },
+      {
+        "end": "0x180077980",
+        "entropy": 5.031581878662109,
+        "kind": "data",
+        "name": ".data",
+        "perms": "rw-",
+        "size": 248192,
+        "start": "0x18003b000"
+      },
+      {
+        "end": "0x180078678",
+        "entropy": 4.738865375518799,
+        "kind": "rodata",
+        "name": ".pdata",
+        "perms": "r--",
+        "size": 1656,
+        "start": "0x180078000"
+      },
+      {
+        "end": "0x18007d5d0",
+        "entropy": 5.257264614105225,
+        "kind": "rodata",
+        "name": ".rsrc",
+        "perms": "r--",
+        "size": 17872,
+        "start": "0x180079000"
+      },
+      {
+        "end": "0x180080a98",
+        "entropy": 5.435488700866699,
+        "kind": "other",
+        "name": ".reloc",
+        "perms": "r--",
+        "size": 10904,
+        "start": "0x18007e000"
+      }
+    ],
+    "toolchain_hints": [
+      {
+        "category": "runtime",
+        "evidence": "Python runtime import",
+        "id": "python",
+        "label": "Embedded Python",
+        "strength": "weak"
+      },
+      {
+        "category": "compiler",
+        "evidence": "Rich header",
+        "id": "msvc",
+        "label": "Microsoft Visual C++ toolchain",
+        "strength": "strong"
+      }
+    ],
+    "warnings": []
+  },
+  "summary": "PE (Windows) shared-library for x86_64 with 159 functions, 10716 strings, 132 imports from 12 libraries.",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "indirect_jumps_unresolved",
+      "message": "4 indirect jumps could not be resolved; code they reach may be missing"
+    },
+    {
+      "code": "stripped_binary",
+      "message": "no local symbols: most function names are generated (sub_…)"
+    },
+    {
+      "code": "static_analysis_only",
+      "message": "functions reached only through computed pointers or at run time may be missing; absence is not proof"
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 1,
+    "total": 1
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x1800050c4",
+      "label": "entry point"
+    }
+  ],
+  "links": []
+}

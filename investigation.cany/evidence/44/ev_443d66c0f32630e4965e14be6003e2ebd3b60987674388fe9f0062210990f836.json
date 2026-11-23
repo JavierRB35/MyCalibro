@@ -1,0 +1,60 @@
+{
+  "id": "ev_443d66c0f32630e4965e14be6003e2ebd3b60987674388fe9f0062210990f836",
+  "subject": {
+    "kind": "pe",
+    "sha256": "3c162738cd191a4fc50cc868536a55a5e2d5652e55191013537278b5b34d1608",
+    "name": "calibre-launcher.dll"
+  },
+  "operation": "native_strings_find",
+  "params": {
+    "case_sensitive": false,
+    "limit": 200,
+    "mode": "regex",
+    "offset": 0,
+    "pattern": "execute_python_entrypoint|calibre.gui_launch"
+  },
+  "result": {
+    "matches": [
+      {
+        "address": "0x180039ce1",
+        "references": [],
+        "section": ".rdata",
+        "text": "execute_python_entrypoint"
+      },
+      {
+        "address": "0x18004aa70",
+        "references": [
+          {
+            "from": "0x18006b810",
+            "function": null
+          }
+        ],
+        "section": ".data",
+        "text": "calibre/gui_launch.pyc"
+      }
+    ],
+    "total": 2
+  },
+  "summary": "2 strings match \"execute_python_entrypoint|calibre.gui_launch\".",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "data_sections_only",
+      "message": "only strings stored in the file are searched (absence is not proof)"
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 2,
+    "total": 2
+  },
+  "locations": [],
+  "links": []
+}

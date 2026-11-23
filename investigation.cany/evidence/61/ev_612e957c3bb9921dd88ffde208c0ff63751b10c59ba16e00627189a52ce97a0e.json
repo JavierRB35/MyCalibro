@@ -1,0 +1,105 @@
+{
+  "id": "ev_612e957c3bb9921dd88ffde208c0ff63751b10c59ba16e00627189a52ce97a0e",
+  "subject": {
+    "kind": "pe",
+    "sha256": "f46a01c9b8cd392e1190ce2e50a2a5a48b326c8c3eab670bbcd8b298bede501d",
+    "name": "ebook-convert.exe"
+  },
+  "operation": "native_pe_resources_list",
+  "params": {
+    "max_entries": 1000,
+    "path": "C:\\Program Files\\Calibre2\\ebook-convert.exe"
+  },
+  "result": {
+    "entries": [
+      {
+        "codepage": 0,
+        "file_offset": 22544,
+        "language": 1033,
+        "name": "1",
+        "rva": "0x9610",
+        "sha256": "cb492b58bd3e1b9ec68b2a44c37cb9eba3f4979bfe05734177c2f8de9fbae776",
+        "size": 20,
+        "type": "RT_GROUP_ICON"
+      },
+      {
+        "codepage": 0,
+        "file_offset": 5872,
+        "language": 1033,
+        "name": "1",
+        "rva": "0x54f0",
+        "sha256": "23b01d36480590c603c133a3d58a9447015f3176053e607e47c70b798a225279",
+        "size": 16672,
+        "type": "RT_ICON"
+      },
+      {
+        "codepage": 0,
+        "file_offset": 22568,
+        "language": 1033,
+        "name": "1",
+        "rva": "0x9628",
+        "sha256": "56ff2785eedb1911850e7cc276ed4118f640ba60015d8fa88db644e8d43f3d6d",
+        "size": 1352,
+        "type": "RT_MANIFEST"
+      },
+      {
+        "codepage": 0,
+        "file_offset": 4912,
+        "language": 1033,
+        "name": "1",
+        "rva": "0x5130",
+        "sha256": "ea9a07445cba636533b0e03bdf889ea415000f228fe33aa3fa2ef5f55440f0e6",
+        "size": 956,
+        "type": "RT_VERSION"
+      }
+    ],
+    "icon_groups": [
+      {
+        "icons": [
+          {
+            "bit_count": 32,
+            "bytes": 16672,
+            "height": 63,
+            "icon_id": 1,
+            "width": 64
+          }
+        ],
+        "name": "1"
+      }
+    ],
+    "manifest": "﻿<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<assembly xmlns=\"urn:schemas-microsoft-com:asm.v1\" manifestVersion=\"1.0\"><trustInfo xmlns=\"urn:schemas-microsoft-com:asm.v2\"><security><requestedPrivileges xmlns=\"urn:schemas-microsoft-com:asm.v3\"><requestedExecutionLevel level=\"asInvoker\" uiAccess=\"false\"></requestedExecutionLevel></requestedPrivileges></security></trustInfo><ms_asmv3:application xmlns:ms_asmv3=\"urn:schemas-microsoft-com:asm.v3\" xmlns=\"urn:schemas-microsoft-com:asm.v3\"><ms_asmv3:windowsSettings xmlns:ms_asmv3=\"urn:schemas-microsoft-com:asm.v3\"><ms_windowsSettings2016:longPathAware xmlns:ms_windowsSettings2016=\"http://schemas.microsoft.com/SMI/2016/WindowsSettings\" xmlns=\"http://schemas.microsoft.com/SMI/2016/WindowsSettings\">true</ms_windowsSettings2016:longPathAware></ms_asmv3:windowsSettings></ms_asmv3:application><ms_compatibility:compatibility xmlns:ms_compatibility=\"urn:schemas-microsoft-com:compatibility.v1\" xmlns=\"urn:schemas-microsoft-com:compatibility.v1\"><ms_compatibility:application xmlns:ms_compatibility=\"urn:schemas-microsoft-com:compatibility.v1\"><ms_compatibility:supportedOS xmlns:ms_compatibility=\"urn:schemas-microsoft-com:compatibility.v1\" Id=\"{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}\"></ms_compatibility:supportedOS></ms_compatibility:application></ms_compatibility:compatibility></assembly>",
+    "truncated": false,
+    "version": {
+      "file_version": "9.15.0.0",
+      "product_version": "9.15.0.0",
+      "strings": {
+        "CompanyName": "calibre-ebook.com",
+        "FileDescription": "Command line interface to the conversion/news download system",
+        "FileVersion": "9.15.0.0",
+        "InternalName": "ebook-convert",
+        "LegalCopyright": "GNU GPL v3.0",
+        "LegalTrademarks": "calibre is a registered U.S. trademark number 3,666,525",
+        "OriginalFilename": "ebook-convert.exe",
+        "ProductName": "calibre",
+        "ProductVersion": "9.15.0"
+      }
+    }
+  },
+  "summary": "4 resources, 1 icon groups, product \"calibre\".",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [],
+  "coverage": {
+    "status": "complete",
+    "examined": 4,
+    "total": 4
+  },
+  "locations": [],
+  "links": []
+}

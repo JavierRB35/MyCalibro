@@ -1,0 +1,185 @@
+{
+  "id": "ev_7fb65d2fe0dba3f48dbd306f6238ec97072b299f17b0d5ba872b9ad0511d8966",
+  "subject": {
+    "kind": "folder",
+    "name": "Calibre2"
+  },
+  "operation": "app_folder_explain",
+  "params": {
+    "max_depth": 4,
+    "max_entries": 3000,
+    "path": "C:\\Program Files\\Calibre2"
+  },
+  "result": {
+    "bundle": null,
+    "candidates": [
+      {
+        "markers": [
+          {
+            "count": 1,
+            "marker": "library_6",
+            "means": "Qt 6's core library",
+            "paths": [
+              "app/bin/Qt6Core.dll"
+            ],
+            "weight": "strong"
+          },
+          {
+            "count": 4,
+            "marker": "platform_plugin",
+            "means": "a file where Qt keeps its platform plugins",
+            "paths": [
+              "app/plugins/platforms/qdirect2d.dll",
+              "app/plugins/platforms/qminimal.dll",
+              "app/plugins/platforms/qoffscreen.dll",
+              "app/plugins/platforms/qwindows.dll"
+            ],
+            "weight": "weak"
+          }
+        ],
+        "next": [
+          {
+            "args": {
+              "path": "C:\\Program Files\\Calibre2\\app\\bin\\Qt6Core.dll"
+            },
+            "tool": "core_target_triage",
+            "why": "what its Qt library is"
+          }
+        ],
+        "runtime": "qt",
+        "score": 6,
+        "secondary": false,
+        "strength": "strong",
+        "title": "Qt (a native C++ interface toolkit)"
+      },
+      {
+        "markers": [
+          {
+            "count": 2,
+            "marker": "library_dll",
+            "means": "Python's interpreter library",
+            "paths": [
+              "app/bin/python3.dll",
+              "app/bin/python314.dll"
+            ],
+            "weight": "strong"
+          }
+        ],
+        "next": [],
+        "runtime": "python",
+        "score": 5,
+        "secondary": false,
+        "strength": "strong",
+        "title": "Python (bundled with its interpreter)"
+      },
+      {
+        "markers": [
+          {
+            "count": 32,
+            "marker": "program",
+            "means": "a program in a machine's own code",
+            "paths": [
+              "calibre-complete.exe",
+              "calibre-customize.exe",
+              "calibre-debug.exe",
+              "calibre-parallel.exe",
+              "calibre-server.exe"
+            ],
+            "weight": "weak"
+          }
+        ],
+        "next": [
+          {
+            "args": {
+              "path": "C:\\Program Files\\Calibre2\\calibre-complete.exe"
+            },
+            "tool": "core_target_triage",
+            "why": "what the program is and what it does"
+          },
+          {
+            "args": {
+              "path": "C:\\Program Files\\Calibre2\\calibre-complete.exe"
+            },
+            "tool": "native_rust_binary_show",
+            "why": "whether it was written in Rust"
+          }
+        ],
+        "runtime": "native",
+        "score": 1,
+        "secondary": true,
+        "strength": "weak",
+        "title": "Native code (no bigger runtime recognised for this)"
+      }
+    ],
+    "folder": "C:\\Program Files\\Calibre2",
+    "game": null,
+    "next_steps": [
+      {
+        "args": {
+          "path": "C:\\Program Files\\Calibre2\\app\\bin\\Qt6Core.dll"
+        },
+        "tool": "core_target_triage",
+        "why": "what its Qt library is"
+      },
+      {
+        "args": {
+          "path": "C:\\Program Files\\Calibre2\\calibre-complete.exe"
+        },
+        "tool": "core_target_triage",
+        "why": "what the program is and what it does"
+      },
+      {
+        "args": {
+          "path": "C:\\Program Files\\Calibre2\\calibre-complete.exe"
+        },
+        "tool": "native_rust_binary_show",
+        "why": "whether it was written in Rust"
+      }
+    ],
+    "walk": {
+      "bytes_read": 1217568,
+      "capped": true,
+      "entries": 1154,
+      "files_looked_inside": 230,
+      "folders": 80,
+      "folders_not_walked": [],
+      "links_not_followed": 0,
+      "max_depth": 4,
+      "max_entries": 3000
+    }
+  },
+  "summary": "Calibre2: looks built on Qt (a native C++ interface toolkit); Python (bundled with its interpreter).",
+  "confidence": "inferred",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "presence_not_proof",
+      "message": "A file being in the folder doesn't prove the app runs it: it may be unused, left over from an update, or there for another reason. Nothing was started, so these are inferences."
+    },
+    {
+      "code": "small_reads_only",
+      "message": "Only names, the ends of some files and the start of the main programs were read. The app's contents weren't unpacked or analysed; next_steps says what to run for that."
+    },
+    {
+      "code": "walk_capped",
+      "message": "max_entries (3000) or max_depth (4) stopped the walk, so what's further in wasn't seen. Raise them to see more."
+    }
+  ],
+  "coverage": {
+    "status": "partial",
+    "examined": 1154
+  },
+  "locations": [
+    {
+      "kind": "path",
+      "value": "C:\\Program Files\\Calibre2"
+    }
+  ],
+  "links": []
+}

@@ -1,0 +1,464 @@
+{
+  "id": "ev_9610bf47680553520747176436c136615417a4f27999e8b66a9a07aa37771b04",
+  "subject": {
+    "kind": "directory",
+    "sha256": "c3f303a4480878c6b7081485a2dce24c9942d54af15a23ce2360e0d4985b968c",
+    "name": "bin"
+  },
+  "operation": "core_evidence_browse",
+  "params": {
+    "show": {
+      "fields": [
+        "path",
+        "kind",
+        "size"
+      ],
+      "kind": "rows",
+      "limit": 80,
+      "list": "entries",
+      "offset": 250
+    },
+    "source": {
+      "evidence_id": "ev_eb522f313907d650e0f8717ac2d940d92f0ae244b4c08f41a6d815c08530dd66",
+      "kind": "saved"
+    }
+  },
+  "result": {
+    "coverage": {
+      "at_end": false,
+      "examined": 80,
+      "next_offset": 330,
+      "status": "page",
+      "total": 351
+    },
+    "from_evidence": "ev_eb522f313907d650e0f8717ac2d940d92f0ae244b4c08f41a6d815c08530dd66",
+    "from_tool": "core_archive_show",
+    "shown": {
+      "items": [
+        {
+          "kind": "pe",
+          "path": "pdftoppm.exe",
+          "size": 60680
+        },
+        {
+          "kind": "pe",
+          "path": "pdftotext.exe",
+          "size": 81160
+        },
+        {
+          "kind": "pe",
+          "path": "pictureflow.pyd",
+          "size": 125704
+        },
+        {
+          "kind": "pe",
+          "path": "pil._imaging.pyd",
+          "size": 402696
+        },
+        {
+          "kind": "pe",
+          "path": "pil._imagingcms.pyd",
+          "size": 45320
+        },
+        {
+          "kind": "pe",
+          "path": "pil._imagingft.pyd",
+          "size": 45832
+        },
+        {
+          "kind": "pe",
+          "path": "pil._imagingmath.pyd",
+          "size": 33544
+        },
+        {
+          "kind": "pe",
+          "path": "pil._imagingmorph.pyd",
+          "size": 23816
+        },
+        {
+          "kind": "pe",
+          "path": "pil._imagingtk.pyd",
+          "size": 26376
+        },
+        {
+          "kind": "pe",
+          "path": "pil._webp.pyd",
+          "size": 35080
+        },
+        {
+          "kind": "pe",
+          "path": "piper.pyd",
+          "size": 55560
+        },
+        {
+          "kind": "pe",
+          "path": "podofo.dll",
+          "size": 4969736
+        },
+        {
+          "kind": "pe",
+          "path": "podofo.pyd",
+          "size": 133384
+        },
+        {
+          "kind": "pe",
+          "path": "poppler.dll",
+          "size": 3358472
+        },
+        {
+          "kind": "pe",
+          "path": "postproc-58.dll",
+          "size": 171784
+        },
+        {
+          "kind": "pe",
+          "path": "prefixes.dll",
+          "size": 25864
+        },
+        {
+          "kind": "pe",
+          "path": "progress_indicator.pyd",
+          "size": 173320
+        },
+        {
+          "kind": "pe",
+          "path": "psutil._psutil_windows.pyd",
+          "size": 82696
+        },
+        {
+          "kind": "pe",
+          "path": "pyexpat.pyd",
+          "size": 229128
+        },
+        {
+          "kind": "pe",
+          "path": "pyppmd.c._ppmd.pyd",
+          "size": 67848
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtCore.pyd",
+          "size": 2334472
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtDBus.pyd",
+          "size": 177928
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtGui.pyd",
+          "size": 2039048
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtMultimedia.pyd",
+          "size": 411400
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtMultimediaWidgets.pyd",
+          "size": 101640
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtNetwork.pyd",
+          "size": 752392
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtOpenGL.pyd",
+          "size": 1029384
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtOpenGLWidgets.pyd",
+          "size": 76552
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtPdf.pyd",
+          "size": 165128
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtPdfWidgets.pyd",
+          "size": 107784
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtPositioning.pyd",
+          "size": 202504
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtPrintSupport.pyd",
+          "size": 246024
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtQml.pyd",
+          "size": 718088
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtQuick.pyd",
+          "size": 941320
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtQuickWidgets.pyd",
+          "size": 76040
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtSensors.pyd",
+          "size": 231176
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtSpatialAudio.pyd",
+          "size": 90376
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtSql.pyd",
+          "size": 299784
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtSvg.pyd",
+          "size": 57608
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtSvgWidgets.pyd",
+          "size": 101128
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtTest.pyd",
+          "size": 70408
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtTextToSpeech.pyd",
+          "size": 64264
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtWebChannel.pyd",
+          "size": 53512
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtWebEngineCore.pyd",
+          "size": 370440
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtWebEngineWidgets.pyd",
+          "size": 83208
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtWidgets.pyd",
+          "size": 4460808
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.QtXml.pyd",
+          "size": 115464
+        },
+        {
+          "kind": "pe",
+          "path": "pyqt6.sip.pyd",
+          "size": 119560
+        },
+        {
+          "kind": "pe",
+          "path": "pyshellext.dll",
+          "size": 50440
+        },
+        {
+          "kind": "binary",
+          "path": "python-lib.bypy.frozen",
+          "size": 86189472
+        },
+        {
+          "kind": "pe",
+          "path": "python3.dll",
+          "size": 71432
+        },
+        {
+          "kind": "pe",
+          "path": "python314.dll",
+          "size": 6812424
+        },
+        {
+          "kind": "pe",
+          "path": "randomjson.dll",
+          "size": 28936
+        },
+        {
+          "kind": "pe",
+          "path": "rcc_backend.pyd",
+          "size": 107784
+        },
+        {
+          "kind": "pe",
+          "path": "regex._regex.pyd",
+          "size": 733448
+        },
+        {
+          "kind": "pe",
+          "path": "regexp.dll",
+          "size": 30984
+        },
+        {
+          "kind": "pe",
+          "path": "rot13.dll",
+          "size": 25864
+        },
+        {
+          "kind": "pe",
+          "path": "select.pyd",
+          "size": 29960
+        },
+        {
+          "kind": "pe",
+          "path": "sha1.dll",
+          "size": 33032
+        },
+        {
+          "kind": "pe",
+          "path": "shathree.dll",
+          "size": 33032
+        },
+        {
+          "kind": "pe",
+          "path": "speedup.pyd",
+          "size": 42248
+        },
+        {
+          "kind": "pe",
+          "path": "spellfix.dll",
+          "size": 43784
+        },
+        {
+          "kind": "pe",
+          "path": "sqlar.dll",
+          "size": 69384
+        },
+        {
+          "kind": "pe",
+          "path": "sqlite3.dll",
+          "size": 1533192
+        },
+        {
+          "kind": "pe",
+          "path": "sqlite3_tool.dll",
+          "size": 782600
+        },
+        {
+          "kind": "pe",
+          "path": "sqlite_custom.pyd",
+          "size": 24840
+        },
+        {
+          "kind": "pe",
+          "path": "sqlite_extension.pyd",
+          "size": 50952
+        },
+        {
+          "kind": "pe",
+          "path": "stmt.dll",
+          "size": 26376
+        },
+        {
+          "kind": "pe",
+          "path": "stmtrand.dll",
+          "size": 25864
+        },
+        {
+          "kind": "pe",
+          "path": "swresample-5.dll",
+          "size": 243464
+        },
+        {
+          "kind": "pe",
+          "path": "swscale-8.dll",
+          "size": 758536
+        },
+        {
+          "kind": "pe",
+          "path": "tiff.dll",
+          "size": 579336
+        },
+        {
+          "kind": "pe",
+          "path": "tmstmpvfs.dll",
+          "size": 29960
+        },
+        {
+          "kind": "pe",
+          "path": "tokenizer.pyd",
+          "size": 32008
+        },
+        {
+          "kind": "pe",
+          "path": "translator.pyd",
+          "size": 76552
+        },
+        {
+          "kind": "pe",
+          "path": "uchardet.dll",
+          "size": 193288
+        },
+        {
+          "kind": "pe",
+          "path": "uchardet.pyd",
+          "size": 21768
+        },
+        {
+          "kind": "pe",
+          "path": "ucrtbase.dll",
+          "size": 1362288
+        },
+        {
+          "kind": "pe",
+          "path": "uint.dll",
+          "size": 25352
+        },
+        {
+          "kind": "pe",
+          "path": "unicode_names.pyd",
+          "size": 2553608
+        }
+      ],
+      "list": "entries",
+      "offset": 250,
+      "total": 351
+    }
+  },
+  "summary": "Part of core_archive_show evidence (page).",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [],
+  "coverage": {
+    "status": "partial",
+    "examined": 80,
+    "total": 351,
+    "next_offset": 330
+  },
+  "locations": [],
+  "links": [
+    "ev_eb522f313907d650e0f8717ac2d940d92f0ae244b4c08f41a6d815c08530dd66"
+  ]
+}

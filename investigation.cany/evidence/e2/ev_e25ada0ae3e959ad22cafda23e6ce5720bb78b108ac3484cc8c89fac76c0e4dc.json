@@ -1,0 +1,464 @@
+{
+  "id": "ev_e25ada0ae3e959ad22cafda23e6ce5720bb78b108ac3484cc8c89fac76c0e4dc",
+  "subject": {
+    "kind": "directory",
+    "sha256": "c3f303a4480878c6b7081485a2dce24c9942d54af15a23ce2360e0d4985b968c",
+    "name": "bin"
+  },
+  "operation": "core_evidence_browse",
+  "params": {
+    "show": {
+      "fields": [
+        "path",
+        "kind",
+        "size"
+      ],
+      "kind": "rows",
+      "limit": 80,
+      "list": "entries",
+      "offset": 50
+    },
+    "source": {
+      "evidence_id": "ev_eb522f313907d650e0f8717ac2d940d92f0ae244b4c08f41a6d815c08530dd66",
+      "kind": "saved"
+    }
+  },
+  "result": {
+    "coverage": {
+      "at_end": false,
+      "examined": 80,
+      "next_offset": 130,
+      "status": "page",
+      "total": 351
+    },
+    "from_evidence": "ev_eb522f313907d650e0f8717ac2d940d92f0ae244b4c08f41a6d815c08530dd66",
+    "from_tool": "core_archive_show",
+    "shown": {
+      "items": [
+        {
+          "kind": "pe",
+          "path": "_testconsole.pyd",
+          "size": 25864
+        },
+        {
+          "kind": "pe",
+          "path": "_testimportmultiple.pyd",
+          "size": 24840
+        },
+        {
+          "kind": "pe",
+          "path": "_testinternalcapi.pyd",
+          "size": 93448
+        },
+        {
+          "kind": "pe",
+          "path": "_testlimitedcapi.pyd",
+          "size": 152840
+        },
+        {
+          "kind": "pe",
+          "path": "_testmultiphase.pyd",
+          "size": 39176
+        },
+        {
+          "kind": "pe",
+          "path": "_testsinglephase.pyd",
+          "size": 31496
+        },
+        {
+          "kind": "pe",
+          "path": "_uuid.pyd",
+          "size": 24328
+        },
+        {
+          "kind": "pe",
+          "path": "_wmi.pyd",
+          "size": 36616
+        },
+        {
+          "kind": "pe",
+          "path": "_zoneinfo.pyd",
+          "size": 48392
+        },
+        {
+          "kind": "pe",
+          "path": "_zstd.pyd",
+          "size": 498952
+        },
+        {
+          "kind": "pe",
+          "path": "amatch.dll",
+          "size": 33544
+        },
+        {
+          "kind": "pe",
+          "path": "anycollseq.dll",
+          "size": 25352
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-console-l1-1-0.dll",
+          "size": 22888
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-console-l1-2-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-datetime-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-debug-l1-1-0.dll",
+          "size": 22896
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-errorhandling-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-fibers-l1-1-0.dll",
+          "size": 22912
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-fibers-l1-1-1.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-file-l1-1-0.dll",
+          "size": 26968
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-file-l1-2-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-file-l2-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-handle-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-heap-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-interlocked-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-kernel32-legacy-l1-1-1.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-libraryloader-l1-1-0.dll",
+          "size": 22896
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-localization-l1-2-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-memory-l1-1-0.dll",
+          "size": 22896
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-namedpipe-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-processenvironment-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-processthreads-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-processthreads-l1-1-1.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-profile-l1-1-0.dll",
+          "size": 22896
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-rtlsupport-l1-1-0.dll",
+          "size": 22896
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-string-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-synch-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-synch-l1-2-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-sysinfo-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-sysinfo-l1-2-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-timezone-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-core-util-l1-1-0.dll",
+          "size": 22896
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-crt-conio-l1-1-0.dll",
+          "size": 22896
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-crt-convert-l1-1-0.dll",
+          "size": 26992
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-crt-environment-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-crt-heap-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-crt-locale-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-crt-math-l1-1-0.dll",
+          "size": 31080
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-crt-multibyte-l1-1-0.dll",
+          "size": 31064
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-crt-private-l1-1-0.dll",
+          "size": 76144
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-crt-process-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-crt-runtime-l1-1-0.dll",
+          "size": 26992
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-crt-stdio-l1-1-0.dll",
+          "size": 26968
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-crt-string-l1-1-0.dll",
+          "size": 26968
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-crt-time-l1-1-0.dll",
+          "size": 22888
+        },
+        {
+          "kind": "pe",
+          "path": "api-ms-win-crt-utility-l1-1-0.dll",
+          "size": 22872
+        },
+        {
+          "kind": "pe",
+          "path": "appendvfs.dll",
+          "size": 27400
+        },
+        {
+          "kind": "pe",
+          "path": "apsw.__init__.pyd",
+          "size": 2299656
+        },
+        {
+          "kind": "pe",
+          "path": "apsw._unicode.pyd",
+          "size": 741128
+        },
+        {
+          "kind": "pe",
+          "path": "avcodec-61.dll",
+          "size": 13976328
+        },
+        {
+          "kind": "pe",
+          "path": "avdevice-61.dll",
+          "size": 209672
+        },
+        {
+          "kind": "pe",
+          "path": "avfilter-10.dll",
+          "size": 4257032
+        },
+        {
+          "kind": "pe",
+          "path": "avformat-61.dll",
+          "size": 2602248
+        },
+        {
+          "kind": "pe",
+          "path": "avutil-59.dll",
+          "size": 1175304
+        },
+        {
+          "kind": "pe",
+          "path": "base64.dll",
+          "size": 26376
+        },
+        {
+          "kind": "pe",
+          "path": "base85.dll",
+          "size": 26888
+        },
+        {
+          "kind": "pe",
+          "path": "bcj._bcj.pyd",
+          "size": 33544
+        },
+        {
+          "kind": "pe",
+          "path": "brotlicommon.dll",
+          "size": 148744
+        },
+        {
+          "kind": "pe",
+          "path": "brotlidec.dll",
+          "size": 62216
+        },
+        {
+          "kind": "pe",
+          "path": "brotlienc.dll",
+          "size": 691464
+        },
+        {
+          "kind": "pe",
+          "path": "btreeinfo.dll",
+          "size": 27400
+        },
+        {
+          "kind": "pe",
+          "path": "bzzdec.pyd",
+          "size": 27400
+        },
+        {
+          "kind": "pe",
+          "path": "calibre-eject.exe",
+          "size": 48904
+        },
+        {
+          "kind": "pe",
+          "path": "calibre-file-dialog.exe",
+          "size": 51464
+        },
+        {
+          "kind": "pe",
+          "path": "calibre-launcher.dll",
+          "size": 510728
+        },
+        {
+          "kind": "pe",
+          "path": "certgen.pyd",
+          "size": 35592
+        },
+        {
+          "kind": "pe",
+          "path": "chm._chmlib.pyd",
+          "size": 53000
+        },
+        {
+          "kind": "pe",
+          "path": "cjpeg-calibre.exe",
+          "size": 966920
+        },
+        {
+          "kind": "pe",
+          "path": "cksumvfs.dll",
+          "size": 27912
+        }
+      ],
+      "list": "entries",
+      "offset": 50,
+      "total": 351
+    }
+  },
+  "summary": "Part of core_archive_show evidence (page).",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [],
+  "coverage": {
+    "status": "partial",
+    "examined": 80,
+    "total": 351,
+    "next_offset": 130
+  },
+  "locations": [],
+  "links": [
+    "ev_eb522f313907d650e0f8717ac2d940d92f0ae244b4c08f41a6d815c08530dd66"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "ev_e84e70d283cf47cb2f630c0933dbccc306bc18e6dcff6eaa0a9532f70816c26d",
+  "subject": {
+    "kind": "pe",
+    "sha256": "3c162738cd191a4fc50cc868536a55a5e2d5652e55191013537278b5b34d1608",
+    "name": "calibre-launcher.dll"
+  },
+  "operation": "native_data_show",
+  "params": {
+    "address": "0x18006b810",
+    "type": null
+  },
+  "result": {
+    "address": "0x18006b810",
+    "name": null,
+    "references_to": 0,
+    "section": ".data",
+    "type": "pointer[512]",
+    "value": {
+      "table_length": 512,
+      "target": {
+        "address": "0x18004aa70",
+        "points_to": "string",
+        "text": "calibre/gui_launch.pyc"
+      },
+      "value": "0x18004aa70"
+    }
+  },
+  "summary": "0x18006b810 looks like pointer[512].",
+  "confidence": "inferred",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "no_type_recovery",
+      "message": "the clean-room engine doesn't recover declared types; this reads the bytes and infers what they look like"
+    }
+  ],
+  "coverage": {
+    "status": "unknown"
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x18006b810"
+    }
+  ],
+  "links": []
+}

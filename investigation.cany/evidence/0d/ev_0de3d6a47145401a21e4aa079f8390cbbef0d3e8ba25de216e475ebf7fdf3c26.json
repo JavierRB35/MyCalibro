@@ -1,0 +1,54 @@
+{
+  "id": "ev_0de3d6a47145401a21e4aa079f8390cbbef0d3e8ba25de216e475ebf7fdf3c26",
+  "subject": {
+    "kind": "pe",
+    "sha256": "3c162738cd191a4fc50cc868536a55a5e2d5652e55191013537278b5b34d1608",
+    "name": "calibre-launcher.dll"
+  },
+  "operation": "native_function_references_list",
+  "params": {
+    "direction": "outgoing",
+    "function": "0x1800050c4"
+  },
+  "result": {
+    "direction": "outgoing",
+    "entry": "0x1800050c4",
+    "function": "entry",
+    "references": [
+      {
+        "from": "0x1800050e0",
+        "kind": "call",
+        "name": "sub_180005110",
+        "to": "0x180005110"
+      },
+      {
+        "from": "0x1800050fc",
+        "kind": "jump",
+        "name": "sub_180004f9c",
+        "to": "0x180004f9c"
+      }
+    ]
+  },
+  "summary": "2 outgoing references for entry.",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [],
+  "coverage": {
+    "status": "complete",
+    "examined": 2,
+    "total": 2
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x1800050c4"
+    }
+  ],
+  "links": []
+}

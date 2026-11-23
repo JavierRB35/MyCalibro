@@ -1,0 +1,54 @@
+{
+  "id": "ev_06014166d029d3ded3e86868607b24e1f577e3614c4b7c34a33c7f7c6050b086",
+  "subject": {
+    "kind": "pe",
+    "sha256": "3c162738cd191a4fc50cc868536a55a5e2d5652e55191013537278b5b34d1608",
+    "name": "calibre-launcher.dll"
+  },
+  "operation": "native_xrefs_list",
+  "params": {
+    "address": "0x18006b810",
+    "limit": 100,
+    "offset": 0
+  },
+  "result": {
+    "address": "0x18006b810",
+    "name": null,
+    "references_from": [
+      {
+        "kind": "string",
+        "name": null,
+        "to": "0x18004aa70"
+      }
+    ],
+    "references_to": [],
+    "total_to": 0
+  },
+  "summary": "0x18006b810 is referenced from 0 places and refers to 1.",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "static_references",
+      "message": "references made through computed pointers at run time are not seen"
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 0,
+    "total": 0
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x18006b810"
+    }
+  ],
+  "links": []
+}

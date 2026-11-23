@@ -1,0 +1,61 @@
+{
+  "id": "ev_1550f2965c3a32967a38270b62f99efc1e6f1c6f36e5902791eb5e5fa56c69e8",
+  "subject": {
+    "kind": "pe",
+    "sha256": "eb6f3eda293cca1c0e1a6c52daeed586c4887130b9ef562220eff08c95eee7ab",
+    "name": "calibre.exe"
+  },
+  "operation": "native_strings_find",
+  "params": {
+    "case_sensitive": false,
+    "limit": 200,
+    "mode": "regex",
+    "offset": 0,
+    "pattern": "genre|book|library|author|metadata|categor"
+  },
+  "result": {
+    "matches": [
+      {
+        "address": "0x1400026c4",
+        "references": [],
+        "section": ".rdata",
+        "text": "FreeLibrary"
+      },
+      {
+        "address": "0x14000270e",
+        "references": [],
+        "section": ".rdata",
+        "text": "LoadLibraryW"
+      },
+      {
+        "address": "0x1400052d8",
+        "references": [],
+        "section": ".rsrc",
+        "text": "calibre-ebook.com"
+      }
+    ],
+    "total": 3
+  },
+  "summary": "3 strings match \"genre|book|library|author|metadata|categor\".",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "data_sections_only",
+      "message": "only strings stored in the file are searched (absence is not proof)"
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 3,
+    "total": 3
+  },
+  "locations": [],
+  "links": []
+}

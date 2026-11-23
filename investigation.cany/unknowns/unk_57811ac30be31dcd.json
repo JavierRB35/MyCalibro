@@ -1,0 +1,29 @@
+{
+  "id": "unk_57811ac30be31dcd",
+  "revision": 4,
+  "question": "¿Qué reglas y valores específicos de la biblioteca original Calibre determinan la clasificación de libros por tema y la gestión de etiquetas?",
+  "severity": "high",
+  "domain": "features",
+  "status": "blocked",
+  "probes": [
+    "Recuperar y analizar los módulos Python del contenedor personalizado python-lib.bypy.frozen; los lectores de bytecode y archivos empaquetados disponibles no reconocen su formato"
+  ],
+  "evidence_for": [
+    "ev_7d856963c6a213c433326f3df95fa301df652e20e15585468b0d5c51169d9f45",
+    "ev_85b4b1f728f4917d238849c6e483fa2c9739826a41a7581ffc4427766063b396",
+    "ev_7499adbd00d718e42fc2ae565659e1044c041c2cde60e8b3509628ff65f21c58",
+    "ev_443d66c0f32630e4965e14be6003e2ebd3b60987674388fe9f0062210990f836",
+    "ev_f04973291efa04ffefb258bf945c356c72539b6f5678a4ad99d4d45ef5249109",
+    "ev_ab08af5f0f56f5c8a67c3fa46aa5ec805c230a9b1e0b593276c42ba7912bef50",
+    "ev_67b0ef5ae2848c8950f0eed77325a606d5d480de3ff5e423962743ec76ef5faa",
+    "ev_0f201e83aa2e2162ffa010cba64ea538b24d52e0ded57cbb7ddc8a486176d62e",
+    "ev_e84e70d283cf47cb2f630c0933dbccc306bc18e6dcff6eaa0a9532f70816c26d",
+    "ev_ed74d51117693f8ca7210b7c2ab1a0f16138bbdbe9b39c6e7297c1bb97998a1e",
+    "ev_f04973291efa04ffefb258bf945c356c72539b6f5678a4ad99d4d45ef5249109",
+    "ev_7fb65d2fe0dba3f48dbd306f6238ec97072b299f17b0d5ba872b9ad0511d8966",
+    "ev_606c23164c9809e13404699c0392d05cdfd1046ee153c64c67a3263c8fc1d089",
+    "ev_529816cd5a91bda5f2e6116d45c04dd660f375cc8f175f4d01213308073caa20"
+  ],
+  "evidence_against": [],
+  "resolution": "Se completó otra traza en calibre-launcher.dll: el punto de entrada 0x1800050c4 deriva eventos a FUN_180004f9c; el módulo Python GUI aparece como cadena calibre/gui_launch.pyc en 0x18004aa70, no como una función de biblioteca nativa. Las búsquedas exactas en DLL no encontraron código de tags, genres o metadata. Su función de carga confirma que el frontend está en el paquete Python, no revela las reglas solicitadas. El contenedor python-lib.bypy.frozen no lo leen el extractor empaquetado ni el lector CPython (carece de magic number); los hallazgos de bytes no bastan para afirmar comportamiento. Por tanto no se pudieron verificar reglas de Calibre para clasificación temática ni etiquetas; la app usa solo las reglas estimadas ya documentadas."
+}

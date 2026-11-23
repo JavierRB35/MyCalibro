@@ -1,0 +1,94 @@
+{
+  "id": "ev_0e4233d42617c5bc9606e95495eddc5b957dc3e0da487060324b7cb3db920583",
+  "subject": {
+    "kind": "pe",
+    "sha256": "f46a01c9b8cd392e1190ce2e50a2a5a48b326c8c3eab670bbcd8b298bede501d",
+    "name": "ebook-convert.exe"
+  },
+  "operation": "native_functions_list",
+  "params": {
+    "limit": 20,
+    "offset": 0
+  },
+  "result": {
+    "functions": [
+      {
+        "address": "0x140001000",
+        "blocks": 21,
+        "found_by": "function_starts",
+        "instructions": 78,
+        "name": "sub_140001000",
+        "name_source": "generated",
+        "size": 335,
+        "thunk_of": null
+      },
+      {
+        "address": "0x140001150",
+        "blocks": 9,
+        "found_by": "call",
+        "instructions": 29,
+        "name": "sub_140001150",
+        "name_source": "generated",
+        "size": 89,
+        "thunk_of": null
+      },
+      {
+        "address": "0x1400011ac",
+        "blocks": 4,
+        "found_by": "function_starts",
+        "instructions": 47,
+        "name": "sub_1400011ac",
+        "name_source": "generated",
+        "size": 161,
+        "thunk_of": null
+      },
+      {
+        "address": "0x140001250",
+        "blocks": 3,
+        "found_by": "function_starts",
+        "instructions": 30,
+        "name": "sub_140001250",
+        "name_source": "generated",
+        "size": 126,
+        "thunk_of": null
+      },
+      {
+        "address": "0x1400012d0",
+        "blocks": 6,
+        "found_by": "entry_point",
+        "instructions": 21,
+        "name": "entry",
+        "name_source": "entry_point",
+        "size": 95,
+        "thunk_of": null
+      }
+    ],
+    "total": 5
+  },
+  "summary": "5 functions (showing 5).",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "stripped_binary",
+      "message": "no local symbols: most function names are generated (sub_…)"
+    },
+    {
+      "code": "static_analysis_only",
+      "message": "functions reached only through computed pointers or at run time may be missing; absence is not proof"
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 5,
+    "total": 5
+  },
+  "locations": [],
+  "links": []
+}

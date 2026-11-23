@@ -1,0 +1,7214 @@
+{
+  "id": "ev_83a5dd18746b173406bf40372e1e88738b605806e9c223cdab3aaf3d2db3191f",
+  "subject": {
+    "kind": "directory",
+    "sha256": "12ee6c78b63bb2e12afa8739947e71923ea7b7e6ba77efcc9415846acf5662d7",
+    "name": "app"
+  },
+  "operation": "core_archive_show",
+  "params": {
+    "if_tampered": true,
+    "limit": 1000,
+    "max_depth": 1,
+    "max_entries": 20000,
+    "max_total_bytes": 67108864,
+    "offset": 0,
+    "path": "C:\\Program Files\\Calibre2\\app"
+  },
+  "result": {
+    "by_kind": {
+      "directory": 81,
+      "html": 1,
+      "pe": 123,
+      "text": 7,
+      "unread": 1192,
+      "xml": 1
+    },
+    "containers": [],
+    "content_id": "inv_12ee6c78b63bb2e12afa8739947e71923ea7b7e6ba77efcc9415846acf5662d7",
+    "contradictions": [],
+    "entries": [
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "bin",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "plugins",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "translations",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "translations/qtwebengine_locales",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/voices",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/voices/!v",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/aav",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/art",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/azc",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/bat",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/bnt",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/ccs",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/cel",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/cus",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/dra",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/esx",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/gmq",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/gmw",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/grk",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/inc",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/ine",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/ira",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/iro",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/itc",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/jpx",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/map",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/miz",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/myn",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/poz",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/roa",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/sai",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/sem",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/sit",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/tai",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/trk",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/urj",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/xgn",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/zle",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/zls",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "share/espeak-ng-data/lang/zlw",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/catalog",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/content-server",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/dictionaries",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/editor-help",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/fonts",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/hyphenation",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/images",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/jacket",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/localization",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/mathjax",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/mozilla-ca-certs",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/quick_start",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/rapydscript",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/templates",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/mathjax/input",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/mathjax/output",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/mathjax/output/chtml",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/mathjax/output/chtml/fonts",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/mathjax/input/mml",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/images/devices",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/images/mimetypes",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/images/plugins",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/images/textures",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/fonts/liberation",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/dictionaries/en-GB",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/dictionaries/en-US",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "resources/dictionaries/es-ES",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "plugins/iconengines",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "plugins/imageformats",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "plugins/multimedia",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "plugins/platforms",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "plugins/sqldrivers",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "plugins/styles",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "plugins/texttospeech",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "plugins/tls",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "directory",
+        "path": "bin/ossl-modules",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/JXRDecApp-calibre.exe",
+        "sha256": "4bf33245a2944d905530b18ef857e36c28c9db2ca63319db78e66aa0e1999779",
+        "size": 524040
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6Concurrent.dll",
+        "role": "native-library",
+        "sha256": "36b982300fc970aaf5b4a290b5366d7cc3a0e6a6a5c3cd27d2d09b53bed70249",
+        "size": 34568
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6Core.dll",
+        "role": "native-library",
+        "sha256": "c277829f609d48c4cfd2c88c9de4fe1beebe0114dcaaf792c9b097f78b78dea9",
+        "size": 10341640
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6Gui.dll",
+        "role": "native-library",
+        "sha256": "44351607b26cfd0c2b8ed83cde130c7f5e2eeeba453e7d9a65ed42ceea7e92b4",
+        "size": 9533192
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6Multimedia.dll",
+        "role": "native-library",
+        "sha256": "eec81b7cf68b6abeece9eb2674437adbc9df8c5ed74fc185b049f9b5b499aeaf",
+        "size": 1251592
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6MultimediaWidgets.dll",
+        "role": "native-library",
+        "sha256": "dffa24c5a303ea0a3a1cac8e6b72cb22b0a2ad11d6ebcf87ab422b2bbd87be47",
+        "size": 61192
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6Network.dll",
+        "role": "native-library",
+        "sha256": "f84a48117044026f1eeb9fd98b9246b18cc105fa329d7d3630daa2b2c94a6830",
+        "size": 1821448
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6OpenGL.dll",
+        "role": "native-library",
+        "sha256": "68525b3e5e45f7b73bd7c4ed4fea125a8c6b0f292e7ac1c878676361c7eed05a",
+        "size": 1989384
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6OpenGLWidgets.dll",
+        "role": "native-library",
+        "sha256": "2d0baabc7cbbe1150a087a596bf98668b342d9c1d90e50525ab9d9656295c478",
+        "size": 63752
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6Positioning.dll",
+        "role": "native-library",
+        "sha256": "474ada88603ba7f25b188e9cd2deb75ffdfff52ae70ddb3863e412ec1e8091dd",
+        "size": 515848
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6PrintSupport.dll",
+        "role": "native-library",
+        "sha256": "137bd3bc8fc21009c9ed1866d9678037a51129f6b5b2f8cd147dc6ad02dfed28",
+        "size": 404232
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6Qml.dll",
+        "role": "native-library",
+        "sha256": "77c51241d031c251198f30ccdfcfbb87549ebd74e3fcb5e8d0d7bf7b513d4906",
+        "size": 5290760
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6QmlMeta.dll",
+        "role": "native-library",
+        "sha256": "c78c7ea642cdba2ac527afe1bba1fc5dcca92810d8e19118be526fbc49106efc",
+        "size": 156936
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6QmlModels.dll",
+        "role": "native-library",
+        "sha256": "08275d52d066b36fdbaf66350bd8e0edd269746054d6261b90d8a4baf4fc0723",
+        "size": 991496
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6QmlWorkerScript.dll",
+        "role": "native-library",
+        "sha256": "b1cfc688922f4c6f10a0e6ef70d3d2e19a7537d54d75f307756b77793e179bac",
+        "size": 74504
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6Quick.dll",
+        "role": "native-library",
+        "sha256": "f63a46d94c3710da0980742bbcf588169cee9a4369ca21e32cac670711751fdd",
+        "size": 6507272
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6QuickWidgets.dll",
+        "role": "native-library",
+        "sha256": "c872a576e5a2819f1b40f1edfdfee6fb168c71345da62f0fbd302361e831bc72",
+        "size": 131848
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6Sensors.dll",
+        "role": "native-library",
+        "sha256": "e69db5298a8fe0a73207e79cecbf589faef99a065e7df3896d377370c937731e",
+        "size": 223496
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6SpatialAudio.dll",
+        "role": "native-library",
+        "sha256": "6479dba4947636da8aae7bd62f23eba112f1280479dfe576b52bb31f685ffa87",
+        "size": 741640
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6Sql.dll",
+        "role": "native-library",
+        "sha256": "75b896f2919319645de6819266ec138dce6606fa96553c0036724b886c456e01",
+        "size": 329480
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6Svg.dll",
+        "role": "native-library",
+        "sha256": "ec2abd8b9832cee7db40356b2df939d468f44e3216c658f0768d40e20339e949",
+        "size": 643336
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6TextToSpeech.dll",
+        "role": "native-library",
+        "sha256": "35e7b4db461d2621d2731a76eebc183c3abd3d864745a5edea4366b37c4faa52",
+        "size": 130824
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6WebChannel.dll",
+        "role": "native-library",
+        "sha256": "a1ab0b51b134d03ff9684570c291fc35d85f9cf76bdc1f45d1b724bedf66657d",
+        "size": 248072
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/Qt6WebEngineCore.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6WebEngineWidgets.dll",
+        "role": "native-library",
+        "sha256": "e2358399fe48789011f54eb16956c3268e0f248deca1f8a30d6c183f0cc2f2d5",
+        "size": 188168
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6Widgets.dll",
+        "role": "native-library",
+        "sha256": "97f9bb18e09f7f3b6f2cdadafb9d33e79413393936e6839b3abb6da5cf56d926",
+        "size": 6876936
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/Qt6Xml.dll",
+        "role": "native-library",
+        "sha256": "ec9a8afa4a7200f93c59127af18b6dda273cdd9af699969726c1572aca69dd2f",
+        "size": 154376
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/QtWebEngineProcess.exe",
+        "sha256": "33d0ded353c81e0562d715c706e495c55233c10573006b2b9c6ff1c1030f9ca1",
+        "size": 790280
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_asyncio.pyd",
+        "sha256": "b53fef2506b0eb80837ed70a9201447683f2836ca7a0f84f86a10ba0c8351889",
+        "size": 74504
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_brotli.pyd",
+        "sha256": "2e0d90a2e03d693f82af7c0aeadea0565802bbc45376129f2dccfd5008f6a669",
+        "size": 865032
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_bz2.pyd",
+        "sha256": "4e9628affbde6b98e6b82c4f96893547420deb0bdc28f92f41d34e07334f59a8",
+        "size": 83720
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_ctypes.pyd",
+        "sha256": "0812a832f3500bbcee8e5efbbba6bcdaaf0be30f945125efe78d0fe2a579234a",
+        "size": 138504
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_ctypes_test.pyd",
+        "sha256": "0562438d0734274d7b7ac099b87348e8e0b67dcdbf7ff01b2027e5019754347d",
+        "size": 129800
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_decimal.pyd",
+        "sha256": "c6aa3645c0c50db6d563051b81b4469a5e462611e258ae3d79d4d99ee0181988",
+        "size": 289032
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_elementtree.pyd",
+        "sha256": "9b94c9efda3e3938ae74a7841aca652e4288002d94d7e1d1ca9da6f042838d40",
+        "size": 141576
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_hashlib.pyd",
+        "sha256": "a5f63de5b115db47af2534ca4a7c8770574dcc1666bccd7776175fca5789e2ad",
+        "size": 68360
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_lzma.pyd",
+        "sha256": "cb0ab87368216f1c8041e89b377b09bfb6bef9058d884346c978fc9cb714e69c",
+        "size": 156936
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_multiprocessing.pyd",
+        "sha256": "863149179ec838b05b665f02a545ecf9db51af9b272caf6bda5e70f7342675a7",
+        "size": 34568
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_overlapped.pyd",
+        "sha256": "46dfd2abb704ac6b853e397fef58b0e9ec70d0bff34426c734f923c93fba7c33",
+        "size": 54536
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_patiencediff_c.pyd",
+        "sha256": "c4b73fa668ac7a3a9cf7ac39f501d7413ceb90bba131ad4f4997a724b5fc76c0",
+        "size": 34056
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_queue.pyd",
+        "sha256": "34e35266b75d1905d21c06291ecfc68736bfa88a36a12fe65910bda3487238f4",
+        "size": 32520
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_remote_debugging.pyd",
+        "sha256": "ae05cba23cb839c7736aa0768a793d5909f7b6b705482b6f926e3d5df6bf9030",
+        "size": 88328
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_socket.pyd",
+        "sha256": "48c1c98b79614a15ed3c2027f6cdc4f7f1bd6fe373e15a44a1b3ae6c7251efbe",
+        "size": 84232
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_sqlite3.pyd",
+        "sha256": "9180a7ff5469e831cc4f3161399b5660eeacc6c9b431906f9e97e5e79704b6b6",
+        "size": 130312
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_ssl.pyd",
+        "sha256": "1bc18fc4681a8a7b411f231743c22b8701ff3fcbf669cf9fb6495afb65c5646c",
+        "size": 187656
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_testbuffer.pyd",
+        "sha256": "5805b59099dcc5dd52181e30b0da26885ecaec11f45d9bb9086accc3c5929541",
+        "size": 54024
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_testcapi.pyd",
+        "sha256": "b790271026a2f58b624099e3c7f73a693fcb28dbbeb11ad8239674cd0eff9345",
+        "size": 310024
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_testclinic.pyd",
+        "sha256": "bfe9ced8baabeed62d8b3e6f24d99bce513c8305b8aedeb4ac79b79e278bef78",
+        "size": 108296
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_testclinic_limited.pyd",
+        "sha256": "291165875b55f8ea355e41623d2f45cf8ef4e9f7998df9abba0a637b5bad51d2",
+        "size": 26888
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_testconsole.pyd",
+        "sha256": "b06c7833fe8c1414c24be8b1207902ca7f90892d685436f95cc65b87ec00eba9",
+        "size": 25864
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_testimportmultiple.pyd",
+        "sha256": "928b46118054efcfdd4a885990ed8aad0beb17b0e63957dc981ee8dba020740a",
+        "size": 24840
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_testinternalcapi.pyd",
+        "sha256": "caec3e8b6b196e34e8b9f0c56a31bd6f6e5408086f0a72598f00f12f7ee2c509",
+        "size": 93448
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_testlimitedcapi.pyd",
+        "sha256": "93a7f62ee82667bcc11b509b65de32192da4175d503bf2f7510286c31d748333",
+        "size": 152840
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_testmultiphase.pyd",
+        "sha256": "160068588695f9eb220cc653af8efd618b5c37dd9100ae2f5eafb1147ac34802",
+        "size": 39176
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_testsinglephase.pyd",
+        "sha256": "a40f31648e12cfa3cc007181f2a4dfa87c9d1064623fa1981e946705cdcfa02f",
+        "size": 31496
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_uuid.pyd",
+        "sha256": "58176e2c775278884f1650004cb91d6f9df88d9399f8f4e9bc74821a48c85ef3",
+        "size": 24328
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_wmi.pyd",
+        "sha256": "244be38aa0103b42dbd7c2af33d3fb8a7edb412ffbb01a3944e91bb8b1c20ce8",
+        "size": 36616
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_zoneinfo.pyd",
+        "sha256": "67b02b881070a9315ea738751f1823a8faf465a0193c8fa5276e394cc7600d3f",
+        "size": 48392
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/_zstd.pyd",
+        "sha256": "630d393bfbe85f2138d107a8683d1a345856a97171f780719c54ade69d37f186",
+        "size": 498952
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/amatch.dll",
+        "role": "native-library",
+        "sha256": "5d2a7d14373e77fae70ce9c25452d8ed7d2b4737e9e2813a8d95c9663fcdac21",
+        "size": 33544
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/anycollseq.dll",
+        "role": "native-library",
+        "sha256": "5077e86256bf0b8a1fc462407966244b33682671fa66da611eb1202b81fbc29d",
+        "size": 25352
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-console-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "2a303ab60c40124efc793b7facdccf581524d271f8c48f7cff84794ae70a09e3",
+        "size": 22888
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-console-l1-2-0.dll",
+        "role": "native-library",
+        "sha256": "0e822bd2062f234a2272846e0a52f7e30d60631ca8aed010a21a636319cefc6e",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-datetime-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "0bc5624723725ed188ac781b9b9e8faef90921bfb3cb7efb2dce6bf9aead00b5",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-debug-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "c1b4d9fbdb818ad4d3efd1c69ca6b94634dec0f413736a8d14c7f378df82fcb4",
+        "size": 22896
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-errorhandling-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "5c68f07fd5b26cbdefb819be95e9965a6e5086d71241e703cb92976089724a90",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-fibers-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "729fd64f661d8b34321e57bed297201818cc5f5984b453900296d179ce0dcfb5",
+        "size": 22912
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-fibers-l1-1-1.dll",
+        "role": "native-library",
+        "sha256": "cb715cc1771a4a1e9f682666d9fdf30085a656386cb2df2cbadb62bad3346e7d",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-file-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "52ac9cf92558bca053ae8ec95c87ec2e7b39d3ca8e013676060a2f3b6adb4930",
+        "size": 26968
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-file-l1-2-0.dll",
+        "role": "native-library",
+        "sha256": "8746d8fd6ada8cbe31803644f785461a58d6b89812f40325cd493c155e57ad97",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-file-l2-1-0.dll",
+        "role": "native-library",
+        "sha256": "e0c03aa9d6c8c9010f8fce517511524401711504855592b0f0703c137a915a5f",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-handle-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "506f80f779dd95419a8fbda3cabd770614046b64b1be0455b62558664db85f4f",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-heap-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "87f5578925154ec2d2b52b189f3cf27caf1d3abc29f4b5fbe4bbfee746c2c3eb",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-interlocked-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "cdca66d6d7d936dc881230868703094abbbeecd946268f7f52af729472619b4e",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-kernel32-legacy-l1-1-1.dll",
+        "role": "native-library",
+        "sha256": "1c9247245e63dd20b406de29520f77c98967a0a3a96c940ea2ebdd6eee9280bc",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-libraryloader-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "fd4b3472c452730b250f1ad7284af45f758bc8370c0687a6020054072c551cc2",
+        "size": 22896
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-localization-l1-2-0.dll",
+        "role": "native-library",
+        "sha256": "edcaf1fbb669fd8e5aa88b0976cb59a0a2e6c14f52947e09beb31e4b6ccad543",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-memory-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "14c37023ea67ec68d121d13866e1af5657af3a58665a9308f6b372652b349344",
+        "size": 22896
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-namedpipe-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "befc9a19c804bc06eb2d03793164e5e25a78d3a2d4886054da02f9c5dcd43d54",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-processenvironment-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "fe1ead43adb4ba2d3a5badf9372d35a49fa94affa7ea019c46d399c80e912713",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-processthreads-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "e0cc30956fa5b83cf2818aa66391297817a3fa20b7a0a93aeb3c1e2226550ffb",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-processthreads-l1-1-1.dll",
+        "role": "native-library",
+        "sha256": "39a3771040889cd5687886a47673e463fc1c11f0912db3037be6a723eea24e05",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-profile-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "a65fc761c411044ffe4b74262bc772e93dff388199d76197ead3d83b48bfd600",
+        "size": 22896
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-rtlsupport-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "3af24743b2706303a9f32cc31c4991d88280757eaa61060bfdf7bea751cc6273",
+        "size": 22896
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-string-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "6d41bd2d5380b6ca0eedea7a07191562bbfe2c06ca1868c82dd67a1934733192",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-synch-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "967fe671582dca8bb9ed3faf7b6848f9407e2bb4d43e3d6ddb16fd32590395e1",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-synch-l1-2-0.dll",
+        "role": "native-library",
+        "sha256": "ef1724edf3763340b6eb3b1188a62291bdb7b71156d6775e8326daf3733e7f5c",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-sysinfo-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "c8596ad4d200c35870975dffef0e263ead11d2f888481a40a3fce7990cbc3f88",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-sysinfo-l1-2-0.dll",
+        "role": "native-library",
+        "sha256": "bdd27b72c25ada8bd8fdf5a732589cbe4d7c2b6e70cd04a5df8943acc8c1321d",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-timezone-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "32af8ca41c4cfce9a7ffac402ebdced89d3328d0072bcc371301663e478b7c9b",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-core-util-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "9c46194218f43c3eaaaa46a1fdd822f81b331ad94bf531287917cada4f9b09d4",
+        "size": 22896
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-crt-conio-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "00cbabc8e73828b65f10d452e1856e5eb03147c89c16812e815c5e7d5b968de9",
+        "size": 22896
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-crt-convert-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "7255488854eae6c958e46d2ed616733241d368200e75764ba31fd6ee943a4f9a",
+        "size": 26992
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-crt-environment-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "488cbafbee826ad9d32d86508b53b067504cae31ec1ebf271c402ccd34a9b9fb",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-crt-filesystem-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "d161558c87ff680b148baaa8eb5b99b6641675967c9a4a53a330067321c50394",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-crt-heap-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "b17ff71e85d21247dfe1a00d9507cd65f3ad8d2c0ee0e6ded90954e96871a22d",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-crt-locale-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "30fd4f5574658d34eeaacb5201ece6c9810ce1fa4fc76b6cbee7f0c83cb390e8",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-crt-math-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "2dee8b875b3e8d50da9b6b1edaae56938505b64430861d8665e8ae0e95dfac48",
+        "size": 31080
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-crt-multibyte-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "f7e0c554af1085854625caecf81aa08175f55e2d5224b3b5d034a6f3495edf58",
+        "size": 31064
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-crt-private-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "5d8948a1d58d4d94b0f12390181c61e7047026b2fca8850b6237dd3e9b7a59cb",
+        "size": 76144
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-crt-process-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "091ed228d2928e22e5e4cc8674207692544093f2ff81f0435f3b94669b44dce7",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-crt-runtime-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "f8b7cd724e5644b586fe1ef70f8f29173ca28f834f4f62e5d78bd4b85c3b149b",
+        "size": 26992
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-crt-stdio-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "55a61b280575b4ebdd9386d74c949cf23e5fffeeb984aca45801a917651c778e",
+        "size": 26968
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-crt-string-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "ec7d880ea488601e416054e6a0845a3739f6db6dae0c55267d0a48830d27b137",
+        "size": 26968
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-crt-time-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "b7f379a14ca42e702f646755cdb6356e68b47ca18cebc783cb9e0a7160470a48",
+        "size": 22888
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/api-ms-win-crt-utility-l1-1-0.dll",
+        "role": "native-library",
+        "sha256": "bc1abfacae076996912cd20250f5829ab646f79f0303ce9f3c90cb260e61b310",
+        "size": 22872
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/appendvfs.dll",
+        "role": "native-library",
+        "sha256": "56296bcb5cba7af92772da7677002af4647d7d51eb92bb83376f0c0190cf6bd1",
+        "size": 27400
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/apsw.__init__.pyd",
+        "sha256": "95aa531ca445d1256f305eeb29aee1f744a9d2d9bf128843ff766e95f2547695",
+        "size": 2299656
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/apsw._unicode.pyd",
+        "sha256": "da7ba43e309a81d31833c4b26ea7366786d47135eccfb5c6ae3446ab8abe6b87",
+        "size": 741128
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/avcodec-61.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/avdevice-61.dll",
+        "role": "native-library",
+        "sha256": "98cb02b5c263ad130b67d900d2857a4cfff17b2fe82097e95b9054e90837a20d",
+        "size": 209672
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/avfilter-10.dll",
+        "role": "native-library",
+        "sha256": "ea53c4edb5b025f5baabaf091a3ec4c6a93d3bd7e77f7ab76d35a25e6cff98a6",
+        "size": 4257032
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/avformat-61.dll",
+        "role": "native-library",
+        "sha256": "1da00796ca3eea9979f1aca69548c49594025f0e3d7beedecf30ad66a798bd01",
+        "size": 2602248
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/avutil-59.dll",
+        "role": "native-library",
+        "sha256": "f9a9ac67e7b2686faeb8e6540faf51f5f05c3ac75db6a1758e921ac3e6763f43",
+        "size": 1175304
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/base64.dll",
+        "role": "native-library",
+        "sha256": "04b930276f9057a8e0cef6cbabf5a4c15721eeb9d9c63b473721d79ef2e16ba3",
+        "size": 26376
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/base85.dll",
+        "role": "native-library",
+        "sha256": "b6e0e20cc4d1aff84de03aca8379f4feb8faae37e815ba692f4a701951e80497",
+        "size": 26888
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/bcj._bcj.pyd",
+        "sha256": "ec46f92f7973fb7cbcfc60b082df0e605e2026e1ecbec1ec958ce36b9bbeb1b8",
+        "size": 33544
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/brotlicommon.dll",
+        "role": "native-library",
+        "sha256": "8f6e54d9b66cd7525a0ad02f09699f5ce03e76bc0f439abc384fb208708d82c0",
+        "size": 148744
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/brotlidec.dll",
+        "role": "native-library",
+        "sha256": "76489b0cbb35bf42365f40e855efbf1e2c5e4860520551445534da52a2061fd7",
+        "size": 62216
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/brotlienc.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/btreeinfo.dll",
+        "role": "native-library",
+        "sha256": "0f084ef5c45497ea5af6a4d0214ed2ec5dd214acea40ebaab5468e2fed5d8868",
+        "size": 27400
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/bzzdec.pyd",
+        "sha256": "97a3b95c0b333d994d95025f4e996b7de3db75c07698e7ca08312b817a5fd347",
+        "size": 27400
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/calibre-eject.exe",
+        "sha256": "05e89895504fd03aa029528a5011b9fcdad37bd5a6cca1ac34ec1d32c6750498",
+        "size": 48904
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/calibre-file-dialog.exe",
+        "sha256": "15ca82c97f124b1a09db06ac55f15325945a1c5dad57439d9c66f998ee80ed0b",
+        "size": 51464
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/calibre-launcher.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/certgen.pyd",
+        "sha256": "e9dda2540802074342e7a0f0914873c4f2501c0037d9760f32906e041655056d",
+        "size": 35592
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/chm._chmlib.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/cjpeg-calibre.exe",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "pe",
+        "path": "bin/cksumvfs.dll",
+        "role": "native-library",
+        "sha256": "24e7ddc38ed1718ad3dcbcdeedbe3d3444e4aec77fc8baed8c3f5501b865d643",
+        "size": 27912
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/closure.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/completion.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/compress.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/cpalmdoc.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._ARC4.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._Salsa20.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._chacha20.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._pkcs1_decode.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._raw_aes.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._raw_aesni.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._raw_arc2.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._raw_blowfish.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._raw_cast.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._raw_cbc.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._raw_cfb.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._raw_ctr.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._raw_des.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._raw_des3.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._raw_ecb.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._raw_eksblowfish.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._raw_ocb.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Cipher._raw_ofb.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Hash._BLAKE2b.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Hash._BLAKE2s.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Hash._MD2.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Hash._MD4.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Hash._MD5.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Hash._RIPEMD160.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Hash._SHA1.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Hash._SHA224.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Hash._SHA256.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Hash._SHA384.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Hash._SHA512.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Hash._ghash_clmul.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Hash._ghash_portable.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Hash._keccak.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Hash._poly1305.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Math._modexp.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Protocol._scrypt.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.PublicKey._curve25519.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.PublicKey._curve448.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.PublicKey._ec_ws.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.PublicKey._ed25519.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.PublicKey._ed448.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Util._cpuid_c.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/crypto.Util._strxor.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/csv.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/cwebp-calibre.exe",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/d3dcompiler_47.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/decimal.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/espeak-ng.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/eval.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/fast_css_transform.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/fast_html_entities.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/ffmpeg.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/fileio.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/freetype.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/freetype.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/fuzzer.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/html5_parser.html_parser.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/html_as_json.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/html_syntax_highlighter.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/hunspell.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/hyphen.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/icu.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/icudt78.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/icuin78.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/icuio78.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/icutu78.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/icuuc78.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/ieee754.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/imageops.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/inflate64._inflate64.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/jpeg8.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/jpegtran-calibre.exe",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/lcms2-2.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/libcrypto-3-x64.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/libexpat.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/libexslt.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/libffi-8.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/libhunspell.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/libiconv.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/libpng16.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/libsharpyuv.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/libssl-3-x64.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/libstemmer.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/libwebp.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/libwebpdecoder.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/libwebpdemux.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/libwebpmux.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/libxml2.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/libxslt.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/lxml._elementpath.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/lxml.builder.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/lxml.etree.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/lxml.html._difflib.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/lxml.html.diff.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/lxml.objectify.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/lxml.sax.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/lzx.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/matcher.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/memstat.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/msdes.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/msgpack._cmsgpack.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/msvcp140.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/msvcp140_1.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/msvcp140_2.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/msvcp140_atomic_wait.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/msvcp140_codecvt_ids.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/netifaces.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/nextchar.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/noop.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/onnxruntime.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/onnxruntime_providers_shared.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/opengl32sw.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/openjp2.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/optipng-calibre.exe",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/ossl-modules/legacy.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pdfinfo.exe",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pdftohtml.exe",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pdftoppm.exe",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pdftotext.exe",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pictureflow.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pil._imaging.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pil._imagingcms.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pil._imagingft.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pil._imagingmath.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pil._imagingmorph.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pil._imagingtk.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pil._webp.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/piper.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/podofo.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/podofo.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/poppler.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/postproc-58.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/prefixes.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/progress_indicator.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/psutil._psutil_windows.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyexpat.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyppmd.c._ppmd.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtCore.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtDBus.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtGui.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtMultimedia.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtMultimediaWidgets.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtNetwork.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtOpenGL.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtOpenGLWidgets.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtPdf.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtPdfWidgets.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtPositioning.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtPrintSupport.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtQml.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtQuick.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtQuickWidgets.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtSensors.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtSpatialAudio.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtSql.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtSvg.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtSvgWidgets.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtTest.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtTextToSpeech.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtWebChannel.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtWebEngineCore.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtWebEngineWidgets.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtWidgets.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.QtXml.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyqt6.sip.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/pyshellext.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/python-lib.bypy.frozen",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/python3.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/python314.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/randomjson.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/rcc_backend.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/regex._regex.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/regexp.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/rot13.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/select.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/sha1.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/shathree.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/speedup.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/spellfix.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/sqlar.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/sqlite3.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/sqlite3_tool.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/sqlite_custom.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/sqlite_extension.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/stmt.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/stmtrand.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/swresample-5.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/swscale-8.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/tiff.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/tmstmpvfs.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/tokenizer.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/translator.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/uchardet.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/uchardet.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/ucrtbase.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/uint.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/unicode_names.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/unicodedata.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/unionvtab.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/unrar.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/unrardll.unrar.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/uuid.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/vcruntime140.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/vcruntime140_1.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/vcruntime140_threads.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/vec1.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/vfsstat.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/vtablog.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/winfonts.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/winsound.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/wintoast.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/winutil.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/wpd.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/xxhash._xxhash.pyd",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/zipfile.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/zlib1.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/zorder.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "bin/zstd.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/iconengines/qsvgicon.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/imageformats/qgif.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/imageformats/qicns.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/imageformats/qico.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/imageformats/qjpeg.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/imageformats/qpdf.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/imageformats/qsvg.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/imageformats/qtga.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/imageformats/qtiff.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/imageformats/qwbmp.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/imageformats/qwebp.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/multimedia/ffmpegmediaplugin.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/multimedia/windowsmediaplugin.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/platforms/qdirect2d.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/platforms/qminimal.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/platforms/qoffscreen.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/platforms/qwindows.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/sqldrivers/qsqlite.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/sqldrivers/qsqlodbc.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/styles/qmodernwindowsstyle.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/texttospeech/qtexttospeech_mock.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/texttospeech/qtexttospeech_sapi.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/texttospeech/qtexttospeech_winrt.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/tls/qcertonlybackend.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "plugins/tls/qschannelbackend.dll",
+        "role": "native-library",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/builtin_recipes.xml",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/builtin_recipes.zip",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "text",
+        "path": "resources/calibre-ebook-root-CA.crt",
+        "sha256": "1030790c23900573ed4a8c4234113133bf6a0c13ccc7eb7d12ba3bdddcb9f2b3",
+        "size": 2074
+      },
+      {
+        "depth": 0,
+        "kind": "xml",
+        "path": "resources/calibre-mimetypes.xml",
+        "sha256": "0e14b6bd8b36e24b8a33bc42d6362f9ba3f5c341224a1054ff6bc5130e58d941",
+        "size": 1719
+      },
+      {
+        "depth": 0,
+        "kind": "text",
+        "path": "resources/calibre-portable.bat",
+        "sha256": "3b2f593d03717ddab3c81691b9513a74bd44ec73044f6d9bd3e8efa78a37b682",
+        "size": 8049
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/calibre-portable.sh",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/catalog/DefaultCover.jpg",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/catalog/mastheadImage.gif",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/catalog/section_list_templates.conf",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/catalog/stylesheet.css",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/catalog/template.xhtml",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/changelog.json",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/common-english-words.txt",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/content-server/base.css",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/content-server/calibre.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "html",
+        "path": "resources/content-server/empty.html",
+        "sha256": "6f0c299dffab894347d8f39523a7bcabb89e8149eb64a3a8c7456824ff3dc93c",
+        "size": 163
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/content-server/index-generated.html",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/content-server/index.html",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/content-server/index.js.map",
+        "role": "source-map",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/content-server/locales.zip",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/content-server/mobile.css",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/content-server/reset.css",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/content-server/service_worker.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/csscolorparser.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/default_tweaks.py",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/dictionaries/en-GB/en-GB.aff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/dictionaries/en-GB/en-GB.dic",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "text",
+        "path": "resources/dictionaries/en-GB/locales",
+        "sha256": "fa4d72be2d6dce30bf3b27ae6395fefc15fb1909c1f6241a8957699ccd811c8b",
+        "size": 53
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/dictionaries/en-US/en-US.aff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/dictionaries/en-US/en-US.dic",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "text",
+        "path": "resources/dictionaries/en-US/locales",
+        "sha256": "9edbc49c08f02ea7dcd9209058abf4fabc355feaf204b704a5012a055e35207f",
+        "size": 11
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/dictionaries/es-ES/es-ES.aff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/dictionaries/es-ES/es-ES.dic",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "text",
+        "path": "resources/dictionaries/es-ES/locales",
+        "sha256": "20a77425a5f7b41a6e2c984cf1641a48e4643d20f60bbbc9a8556a4ef8ccd07b",
+        "size": 119
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/dictionaries/online-catalog.json",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/ebook-convert-complete.calibre_msgpack",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/editor-functions.json",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/editor-help/css.json",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/editor-help/html.json",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/editor-help/mathml.json",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/editor-help/opf2.json",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/editor-help/opf3.json",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/editor-help/svg.json",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/editor.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/editor.js.map",
+        "role": "source-map",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/fonts/calibreSymbols.otf",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/fonts/liberation/LiberationMono-Bold.ttf",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/fonts/liberation/LiberationMono-BoldItalic.ttf",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/fonts/liberation/LiberationMono-Italic.ttf",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/fonts/liberation/LiberationMono-Regular.ttf",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/fonts/liberation/LiberationSans-Bold.ttf",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/fonts/liberation/LiberationSans-BoldItalic.ttf",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/fonts/liberation/LiberationSans-Italic.ttf",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/fonts/liberation/LiberationSans-Regular.ttf",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/fonts/liberation/LiberationSerif-Bold.ttf",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/fonts/liberation/LiberationSerif-BoldItalic.ttf",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/fonts/liberation/LiberationSerif-Italic.ttf",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/fonts/liberation/LiberationSerif-Regular.ttf",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "text",
+        "path": "resources/fonts/liberation/version.txt",
+        "sha256": "e83249202ebe23826e8c1fd216e7b38c6a074b1ca9f0c5380b59e31942094bb8",
+        "size": 5
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/fts_sqlite.sql",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/fts_triggers.sql",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/hyphenation/dictionaries.tar.xz",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/hyphenation/locales.json",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "text",
+        "path": "resources/hyphenation/sha1sum",
+        "sha256": "2823be50a8a15a22f921148975c9eb9076656bc482e26b1a4b80b58f2b4f78de",
+        "size": 40
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/icons.rcc",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/icudtl.dat",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images.qrc",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/add_book.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/ai.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/apple-touch-icon.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/arrow-down.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/arrow-up.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/auto-reload.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/auto-scroll.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/auto_author_sort.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/back.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/beautify.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/blank.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/book.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/bookmarks.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/books_in_series.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/bookshelf.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/bullhorn.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/calibre.svg",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/catalog.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/chapters.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/character-set.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/clear_left-for-dark-theme.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/clear_left-for-light-theme.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/close-for-dark-theme.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/close-for-light-theme.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/code.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/column.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/compress-image.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/config.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/connect_share.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/connect_share_on.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/context_menu.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/convert.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/copy-to-library.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/cover_flow.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/cyoa.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/debug.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/default_cover.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/devices/bambook.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/devices/boox.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/devices/folder.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/devices/ipad.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/devices/italica.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/devices/itunes.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/devices/kindle.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/devices/nook.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/devices/tablet.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/dialog_error.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/dialog_information.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/dialog_question.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/dialog_warning.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/dictionary.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/diff.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/document-encrypt.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/document-import.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/document-new.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/document-split.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/document_open.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/donate.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/dot_green.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/dot_red.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/download-metadata.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/drm-locked.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/drm-unlocked.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/edit-clear.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/edit-copy.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/edit-cut.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/edit-paste.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/edit-redo.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/edit-select-all.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/edit-undo.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/edit_book.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/edit_input.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/eject.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/embed-fonts.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/exec.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/external-link-for-dark-theme.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/external-link.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/favicon-192.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/favicon-512.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/filter.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/folder_saved_search.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/font.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/font_size_larger.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/font_size_smaller.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-fill-color.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-indent-less.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-indent-more.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-justify-center.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-justify-fill.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-justify-left.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-justify-right.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-list-ordered.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-list-unordered.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-text-bold.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-text-color.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-text-heading.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-text-hr.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-text-italic.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-text-strikethrough.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-text-subscript.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-text-superscript.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/format-text-underline.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/forward.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/fts.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/gear.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/generic-library.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/gmail_logo.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/grid.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/h-ellipsis.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/help.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/heuristics.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/highlight.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/highlight_only_off.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/highlight_only_on.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/hotmail.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/html-fix.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/icon_choose.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/identifiers.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/insert-link.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/jobs.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/keyboard-prefs.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/languages.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/layout.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/library.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/list_remove.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/lookfeel.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/lt.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mail.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/marked.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/merge.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/merge_books.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/metadata.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/azw2.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/azw3.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/bmp.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/cbr.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/cbz.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/computer.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/dir.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/djvu.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/docx.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/epub.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/fb2.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/gif.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/html.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/jpeg.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/kepub.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/kfx.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/lit.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/lrf.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/lrx.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/mobi.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/odt.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/opml.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/pdf.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/png.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/rar.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/rtf.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/snb.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/svg.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/tpz.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/txt.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/unknown.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/xps.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/zero.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/mimetypes/zip.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/minus.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/minusminus.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/modified-for-dark-theme.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/modified-for-light-theme.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/network-server.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/news.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/next.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/notes-for-dark-theme.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/notes.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/ok.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/page.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plugboard.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plugins.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plugins/mobileread.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plugins/plugin_deprecated.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plugins/plugin_disabled_invalid.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plugins/plugin_disabled_ok.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plugins/plugin_disabled_valid.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plugins/plugin_new.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plugins/plugin_new_invalid.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plugins/plugin_new_valid.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plugins/plugin_updater.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plugins/plugin_updater_updates.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plugins/plugin_upgrade_invalid.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plugins/plugin_upgrade_ok.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plugins/plugin_upgrade_valid.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plus.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/plusplus.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/polish.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/previous.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/print.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/publisher.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/quickview.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/random.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/rating.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/reader.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/reference.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/remove_books.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/reports.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/resize.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/restart.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/rotate-right.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/save.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/scene-divider.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/scheduler.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/scroll.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/sd.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/search.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/search_add_saved.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/search_copy_saved.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/search_delete_saved.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/send.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/series.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/similar.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/smarten-punctuation.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/snippets.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/sort.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/spell-check.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/split.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/store.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/subset-fonts.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/swap.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/sync-right.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/sync.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/tags.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/tb_folder.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/template_funcs.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/textures/dark_cloth.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/textures/dark_wood.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/textures/grey_wash_wall.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/textures/light_wood.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/textures/subtle_wood.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/toc.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/trash.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/trim.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/tweak.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/tweaks.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/unpack-book.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/user_profile.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/v-ellipsis.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/view-image.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/view-refresh.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/view.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/viewer.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/vl.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/width.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/window-close.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/images/wizard.png",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/jacket/stylesheet.css",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/jacket/template.xhtml",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/localization/iso3166.calibre_msgpack",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/localization/iso639.calibre_msgpack",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/localization/locales.zip",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/localization/stats.calibre_msgpack",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/localization/website-languages.txt",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/lookup.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/core.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/input/asciimath.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/input/mml.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/input/mml/entities.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/input/tex-full.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/loader.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/manifest.json",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/tex.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Math-Regular.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/output/chtml/fonts/woff-v2/MathJax_Zero.woff",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mathjax/startup.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/metadata_sqlite.sql",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mime.types",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/002c0b4f.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/0179095f.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/062cdee6.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/064e0aa9.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/06dc52d5.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/09789157.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/0a775a30.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/0b1b94ef.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/0b9bc432.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/0bf05006.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/0f5dc4f3.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/0f6fa695.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/1001acf7.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/14bc7599.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/1cef98f5.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/1d3472b9.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/1e08bfd1.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/1e09d511.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/2923b3f9.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/2ae6433e.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/2ccbdda3.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/30e1580d.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/32888f65.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/36c6b318.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/3bde41ac.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/3e359ba6.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/3fb36b73.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/40193066.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/4042bcee.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/406c9bb1.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/422cf4bf.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/48bec511.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/4b718d9b.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/4bfab552.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/5443e9e3.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/54657681.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/5860aaa6.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/5931b5bc.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/5f15c80c.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/5f618aec.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/607986c7.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/6805c744.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/68dd7389.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/6a9bdba3.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/6d41d539.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/6fa5da56.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/749e9e03.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/75d1b2ed.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/7719f463.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/773e07ad.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/7a3adc42.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/7a780d93.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/7f3d5d1d.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/7fa05551.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/8160b96c.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/8508e720.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/865fbdf9.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/878d9bca.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/8cb5ee0f.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/8d89cda1.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/8f103249.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/9046744a.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/90c5a3c8.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/930ac5d2.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/9482e63a.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/9846683b.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/988a38cb.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/9b46e03d.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/9bf03295.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/9cd9d94b.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/9d04f354.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/9e654b62.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/9ef4a08a.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/9f727ac7.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/a09a51ae.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/a3418fda.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/a89d74c2.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/a94d09e5.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/b0d5255e.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/b0e59380.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/b433981b.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/b7a5b843.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/b81b93f0.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/b8d25de6.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/bf53fb88.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/c01eb047.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/c28a8a30.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/cbf06781.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/cc450945.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/cd58d51e.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/cd8c0d63.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/ce5e74ef.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/d4dae3dd.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/d52c538d.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/d6325660.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/da0cfd1d.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/dc4d6a89.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/dd8e9d41.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/ddcda989.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/de6d66f3.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/e18bfb83.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/e35234b1.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/e73d606e.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/e868b802.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/e8de2f56.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/ecccd8db.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/ed858448.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/eed8c118.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/ef954a4e.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/f0c70a8d.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/f30dd6ad.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/f44703f1.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/f51bb24c.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/faf4fe6b.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/fb717492.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/fc5a8f99.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/fd64f3fc.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/fe8a2cd8.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/feffd413.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/ff34af3f.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/mozilla-ca-certs/ffdd40f9.0",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/notes_sqlite.sql",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/pdf-mathjax-loader.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/pdf-preprint.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/pin-template.svg",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/piper-voices.json",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/qtwebengine_devtools_resources.pak",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/qtwebengine_resources.pak",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/qtwebengine_resources_100p.pak",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/qtwebengine_resources_200p.pak",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/quick_start/deu.epub",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/quick_start/eng.epub",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/quick_start/fra.epub",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/quick_start/ita.epub",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/quick_start/swe.epub",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/quick_start/tur.epub",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/rapydscript/compiler.js.xz",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/scraper.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/scripts.calibre_msgpack",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/stylelint-bundle.min.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/stylelint.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/template-functions.json",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/templates/book_details.css",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/templates/fb2.xsl",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/templates/html.css",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/templates/html_export_default.css",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/templates/html_export_default.mustache",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/templates/html_export_default_index.mustache",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/templates/inline_toc_styles.css",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/templates/kobo.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/templates/lrf.xsl",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/templates/new_book.html",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/templates/new_nav.html",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/templates/rtf.xsl",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/toc.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/user-agent-data.json",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/user-manual-translation-stats.json",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/v8_context_snapshot.bin",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/viewer.html",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/viewer.js",
+        "role": "script",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "resources/viewer.js.map",
+        "role": "source-map",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/af_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/am_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/an_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/ar_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/as_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/az_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/ba_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/be_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/bg_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/bn_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/bpy_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/bs_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/ca_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/chr_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/cmn_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/crh_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/cs_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/cv_dict",
+        "size": 0
+      },
+      {
+        "depth": 0,
+        "kind": "unread",
+        "note": "size budget reached",
+        "path": "share/espeak-ng-data/cy_dict",
+        "size": 0
+      }
+    ],
+    "entries_total": 1405,
+    "files": 132,
+    "hashed_bytes": 67108857,
+    "path": "C:\\Program Files\\Calibre2\\app",
+    "root": "app",
+    "root_kind": "directory",
+    "truncated": true,
+    "unopened_nested": 0
+  },
+  "summary": "app (directory) holds 132 files in 1405 entries (listing cut short by a limit); 0 nested container(s).",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "truncated",
+      "message": "A size, count or depth limit stopped the inventory early; raise max_entries, max_total_bytes or max_depth to see more."
+    },
+    {
+      "code": "no_disk_images",
+      "message": "Disk images (DMG), installers (PKG/MSI) and compressed tarballs are listed as single files, not opened."
+    }
+  ],
+  "coverage": {
+    "status": "partial",
+    "examined": 1000,
+    "total": 1405,
+    "next_offset": 1000
+  },
+  "locations": [
+    {
+      "kind": "path",
+      "value": "C:\\Program Files\\Calibre2\\app"
+    }
+  ],
+  "links": []
+}

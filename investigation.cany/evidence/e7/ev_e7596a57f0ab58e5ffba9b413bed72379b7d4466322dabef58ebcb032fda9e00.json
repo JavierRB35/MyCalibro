@@ -1,0 +1,228 @@
+{
+  "id": "ev_e7596a57f0ab58e5ffba9b413bed72379b7d4466322dabef58ebcb032fda9e00",
+  "subject": {
+    "kind": "pe",
+    "sha256": "8beb32bfe70e3038a5b090238499d2afbf4f268aafa8e02f7b1e173d04e7590d",
+    "name": "ebook-meta.exe"
+  },
+  "operation": "native_function_references_list",
+  "params": {
+    "direction": "outgoing",
+    "function": "0x140001000"
+  },
+  "result": {
+    "direction": "outgoing",
+    "entry": "0x140001000",
+    "function": "sub_140001000",
+    "references": [
+      {
+        "from": "0x140001006",
+        "kind": "data",
+        "name": null,
+        "to": "0x140003020"
+      },
+      {
+        "from": "0x140001018",
+        "kind": "import",
+        "name": "__imp_GetModuleFileNameW",
+        "to": "0x140002038"
+      },
+      {
+        "from": "0x140001025",
+        "kind": "string",
+        "name": null,
+        "to": "0x1400020c0"
+      },
+      {
+        "from": "0x140001047",
+        "kind": "string",
+        "name": null,
+        "to": "0x140002110"
+      },
+      {
+        "from": "0x140001054",
+        "kind": "data",
+        "name": null,
+        "to": "0x140002080"
+      },
+      {
+        "from": "0x140001060",
+        "kind": "jump",
+        "name": "sub_1400011ac",
+        "to": "0x1400011ac"
+      },
+      {
+        "from": "0x140001071",
+        "kind": "string",
+        "name": null,
+        "to": "0x140002160"
+      },
+      {
+        "from": "0x140001078",
+        "kind": "data",
+        "name": null,
+        "to": "0x140002170"
+      },
+      {
+        "from": "0x14000107f",
+        "kind": "import",
+        "name": "__imp_wsprintfW",
+        "to": "0x140002070"
+      },
+      {
+        "from": "0x140001085",
+        "kind": "string",
+        "name": null,
+        "to": "0x1400021a0"
+      },
+      {
+        "from": "0x14000108c",
+        "kind": "import",
+        "name": "__imp_GetModuleHandleW",
+        "to": "0x140002000"
+      },
+      {
+        "from": "0x140001095",
+        "kind": "string",
+        "name": null,
+        "to": "0x140002180"
+      },
+      {
+        "from": "0x14000109c",
+        "kind": "import",
+        "name": "__imp_GetProcAddress",
+        "to": "0x140002048"
+      },
+      {
+        "from": "0x1400010b1",
+        "kind": "import",
+        "name": "__imp_SetDllDirectoryW",
+        "to": "0x140002008"
+      },
+      {
+        "from": "0x1400010bb",
+        "kind": "string",
+        "name": null,
+        "to": "0x1400021c0"
+      },
+      {
+        "from": "0x1400010c7",
+        "kind": "jump",
+        "name": "sub_140001250",
+        "to": "0x140001250"
+      },
+      {
+        "from": "0x1400010cc",
+        "kind": "string",
+        "name": null,
+        "to": "0x1400021f8"
+      },
+      {
+        "from": "0x1400010d3",
+        "kind": "import",
+        "name": "__imp_LoadLibraryW",
+        "to": "0x140002040"
+      },
+      {
+        "from": "0x1400010de",
+        "kind": "string",
+        "name": null,
+        "to": "0x140002220"
+      },
+      {
+        "from": "0x1400010e7",
+        "kind": "string",
+        "name": null,
+        "to": "0x1400022f0"
+      },
+      {
+        "from": "0x1400010ee",
+        "kind": "import",
+        "name": "__imp_LoadLibraryW",
+        "to": "0x140002040"
+      },
+      {
+        "from": "0x1400010f4",
+        "kind": "data",
+        "name": null,
+        "to": "0x140003010"
+      },
+      {
+        "from": "0x140001100",
+        "kind": "string",
+        "name": null,
+        "to": "0x140002320"
+      },
+      {
+        "from": "0x140001109",
+        "kind": "string",
+        "name": null,
+        "to": "0x140002370"
+      },
+      {
+        "from": "0x140001113",
+        "kind": "import",
+        "name": "__imp_GetProcAddress",
+        "to": "0x140002048"
+      },
+      {
+        "from": "0x140001119",
+        "kind": "data",
+        "name": null,
+        "to": "0x140003000"
+      },
+      {
+        "from": "0x140001125",
+        "kind": "string",
+        "name": null,
+        "to": "0x140002390"
+      },
+      {
+        "from": "0x14000112e",
+        "kind": "data",
+        "name": null,
+        "to": "0x140003010"
+      },
+      {
+        "from": "0x140001135",
+        "kind": "string",
+        "name": null,
+        "to": "0x1400023f8"
+      },
+      {
+        "from": "0x14000113c",
+        "kind": "import",
+        "name": "__imp_GetProcAddress",
+        "to": "0x140002048"
+      },
+      {
+        "from": "0x140001142",
+        "kind": "data",
+        "name": null,
+        "to": "0x140003008"
+      }
+    ]
+  },
+  "summary": "31 outgoing references for sub_140001000.",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [],
+  "coverage": {
+    "status": "complete",
+    "examined": 31,
+    "total": 31
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x140001000"
+    }
+  ],
+  "links": []
+}

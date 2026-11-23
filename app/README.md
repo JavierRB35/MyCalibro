@@ -1,0 +1,11 @@
+# Mis libros
+
+Una biblioteca de escritorio sencilla hecha con Rust, eframe y egui. Permite buscar libros, filtrarlos por tema o etiqueta, añadir y editar fichas y guardar la colección localmente.
+
+## Ejecutar
+
+Desde esta carpeta, ejecuta `cargo run` para abrir la aplicación. `cargo build` compila el programa. Los cambios se guardan automáticamente en `library.json` junto al proyecto.
+
+Para guardar una captura sin activar la ventana, ejecuta `cargo run -- --screenshot shots/now.png`. La ventana se mantiene detrás de las demás, espera a dibujar y guarda la imagen PNG.
+
+Los seis libros iniciales son ejemplos ficticios. Introduce nuevos libros soltándolos dentro de la lista de la biblioteca: no hay un botón separado para abrir archivos. Tras incorporarlo, la app prueba Gemini primero y pasa automáticamente a Groq si Gemini falla o devuelve una respuesta inválida. Arrastra un ebook a la ventana; se aceptan EPUB, MOBI, AZW3, PDF, TXT, HTML, RTF, FB2, DOCX y otros formatos comunes. Cuando Calibre está instalado, se leen los metadatos del archivo. Configura Gemini o Groq en «Configurar IA» para clasificar y etiquetar automáticamente los libros importados, o vuelve a clasificar una ficha existente desde sus detalles. La IA recibe el título, autor, descripción y etiquetas existentes, no el archivo completo. Si guardas una clave después de importar un libro, la app clasifica automáticamente el libro seleccionado; también puedes pedir otra clasificación desde sus detalles. Las claves se guardan en el almacén seguro de credenciales de Windows; la conexión requiere internet y una clave válida. En Windows, al conectar por USB un Kindle, Kobo o NOOK que aparezca como unidad, la app detecta su biblioteca Documents y el formato recomendado (AZW3 para Kindle, EPUB para Kobo/NOOK). Arrastra un libro de la lista hasta la tarjeta del lector para copiarlo; si hace falta otro formato, Calibre lo convierte antes. Lectores conectados solo por MTP y no como unidad no se detectan en esta versión. Sin clave, se conserva la clasificación local demostrativa por palabras clave.

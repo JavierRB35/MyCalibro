@@ -1,0 +1,306 @@
+{
+  "id": "ev_0f1ae76dc3d748dc15075c2fa169cb6a012fea0f317f92dc4c5d656510905731",
+  "subject": {
+    "kind": "directory",
+    "sha256": "12ee6c78b63bb2e12afa8739947e71923ea7b7e6ba77efcc9415846acf5662d7",
+    "name": "app"
+  },
+  "operation": "core_evidence_browse",
+  "params": {
+    "show": {
+      "fields": [
+        "path",
+        "kind",
+        "size",
+        "role",
+        "note"
+      ],
+      "kind": "rows",
+      "limit": 40,
+      "list": "entries",
+      "offset": 600
+    },
+    "source": {
+      "evidence_id": "ev_83a5dd18746b173406bf40372e1e88738b605806e9c223cdab3aaf3d2db3191f",
+      "kind": "saved"
+    }
+  },
+  "result": {
+    "coverage": {
+      "at_end": false,
+      "examined": 40,
+      "next_offset": 640,
+      "status": "page",
+      "total": 1000
+    },
+    "from_evidence": "ev_83a5dd18746b173406bf40372e1e88738b605806e9c223cdab3aaf3d2db3191f",
+    "from_tool": "core_archive_show",
+    "shown": {
+      "items": [
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/favicon-192.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/favicon-512.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/filter.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/folder_saved_search.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/font.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/font_size_larger.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/font_size_smaller.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-fill-color.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-indent-less.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-indent-more.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-justify-center.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-justify-fill.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-justify-left.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-justify-right.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-list-ordered.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-list-unordered.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-text-bold.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-text-color.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-text-heading.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-text-hr.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-text-italic.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-text-strikethrough.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-text-subscript.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-text-superscript.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/format-text-underline.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/forward.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/fts.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/gear.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/generic-library.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/gmail_logo.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/grid.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/h-ellipsis.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/help.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/heuristics.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/highlight.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/highlight_only_off.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/highlight_only_on.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/hotmail.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/html-fix.png",
+          "size": 0
+        },
+        {
+          "kind": "unread",
+          "note": "size budget reached",
+          "path": "resources/images/icon_choose.png",
+          "size": 0
+        }
+      ],
+      "list": "entries",
+      "offset": 600,
+      "total": 1000
+    }
+  },
+  "summary": "Part of core_archive_show evidence (page).",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [],
+  "coverage": {
+    "status": "partial",
+    "examined": 40,
+    "total": 1000,
+    "next_offset": 640
+  },
+  "locations": [],
+  "links": [
+    "ev_83a5dd18746b173406bf40372e1e88738b605806e9c223cdab3aaf3d2db3191f"
+  ]
+}

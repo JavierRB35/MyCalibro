@@ -1,0 +1,150 @@
+{
+  "id": "ev_e9694ca112bacd19e353e4c858b543b25ed4e0fc519cbb9c628908c5ad8f9e10",
+  "subject": {
+    "kind": "pe",
+    "sha256": "f46a01c9b8cd392e1190ce2e50a2a5a48b326c8c3eab670bbcd8b298bede501d",
+    "name": "ebook-convert.exe"
+  },
+  "operation": "core_overview_show",
+  "params": {},
+  "result": {
+    "architecture": "x86_64",
+    "bits": 64,
+    "counts": {
+      "basic_blocks": 43,
+      "cross_references": 79,
+      "exports": 0,
+      "functions": 5,
+      "functions_with_generated_names": 4,
+      "imports": 14,
+      "instructions": 205,
+      "jump_tables": 0,
+      "strings": 142,
+      "symbols": 0
+    },
+    "discovered_by": {
+      "call": 1,
+      "entry_point": 1,
+      "function_starts": 3
+    },
+    "endianness": "little",
+    "entry_point": "0x1400012d0",
+    "file": "ebook-convert.exe",
+    "format": "pe",
+    "image_base": "0x140000000",
+    "info": {
+      "linker_version": "14.50",
+      "rich_header": "present (built with Microsoft tools)",
+      "subsystem": "windows-console",
+      "timestamp": "1789697585"
+    },
+    "kind": "executable",
+    "libraries": [
+      "KERNEL32.dll",
+      "USER32.dll"
+    ],
+    "mitigations": {
+      "canary": false,
+      "code_signature": null,
+      "control_flow_guard": false,
+      "encrypted": null,
+      "fortify": null,
+      "high_entropy_va": true,
+      "no_seh": false,
+      "nx": true,
+      "pie": true,
+      "relro": null,
+      "stripped": true
+    },
+    "section_count": 5,
+    "segments": [
+      {
+        "end": "0x140001330",
+        "entropy": 5.67098331451416,
+        "kind": "code",
+        "name": ".text",
+        "perms": "r-x",
+        "size": 816,
+        "start": "0x140001000"
+      },
+      {
+        "end": "0x1400027a2",
+        "entropy": 3.773113250732422,
+        "kind": "rodata",
+        "name": ".rdata",
+        "perms": "r--",
+        "size": 1954,
+        "start": "0x140002000"
+      },
+      {
+        "end": "0x140003228",
+        "entropy": null,
+        "kind": "data",
+        "name": ".data",
+        "perms": "rw-",
+        "size": 552,
+        "start": "0x140003000"
+      },
+      {
+        "end": "0x140004030",
+        "entropy": 2.7496206760406494,
+        "kind": "rodata",
+        "name": ".pdata",
+        "perms": "r--",
+        "size": 48,
+        "start": "0x140004000"
+      },
+      {
+        "end": "0x140009b70",
+        "entropy": 5.478288173675537,
+        "kind": "rodata",
+        "name": ".rsrc",
+        "perms": "r--",
+        "size": 19312,
+        "start": "0x140005000"
+      }
+    ],
+    "toolchain_hints": [
+      {
+        "category": "compiler",
+        "evidence": "Rich header",
+        "id": "msvc",
+        "label": "Microsoft Visual C++ toolchain",
+        "strength": "strong"
+      }
+    ],
+    "warnings": []
+  },
+  "summary": "PE (Windows) executable for x86_64 with 5 functions, 142 strings, 14 imports from 2 libraries.",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "stripped_binary",
+      "message": "no local symbols: most function names are generated (sub_…)"
+    },
+    {
+      "code": "static_analysis_only",
+      "message": "functions reached only through computed pointers or at run time may be missing; absence is not proof"
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 1,
+    "total": 1
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x1400012d0",
+      "label": "entry point"
+    }
+  ],
+  "links": []
+}

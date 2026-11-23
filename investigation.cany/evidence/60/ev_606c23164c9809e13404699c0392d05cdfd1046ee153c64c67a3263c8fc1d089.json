@@ -1,0 +1,45 @@
+{
+  "id": "ev_606c23164c9809e13404699c0392d05cdfd1046ee153c64c67a3263c8fc1d089",
+  "subject": {
+    "kind": "pe",
+    "sha256": "eb6f3eda293cca1c0e1a6c52daeed586c4887130b9ef562220eff08c95eee7ab",
+    "name": "calibre.exe"
+  },
+  "operation": "native_function_pseudocode",
+  "params": {
+    "function": "0x140001000"
+  },
+  "result": {
+    "engine": "ghidra",
+    "entry": "0x140001000",
+    "function": "FUN_140001000",
+    "pseudo_code": "\r\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\r\n\r\nvoid FUN_140001000(void)\r\n\r\n{\r\n  uint uVar1;\r\n  BOOL BVar2;\r\n  HMODULE pHVar3;\r\n  FARPROC pFVar4;\r\n  wchar_t *pwVar5;\r\n  ulonglong uVar6;\r\n  \r\n  uVar1 = GetModuleFileNameW((HMODULE)0x0,(LPWSTR)&DAT_140003020,0x104);\r\n  if (uVar1 < 0xe6) {\r\n    for (; uVar1 != 0; uVar1 = uVar1 - 1) {\r\n      uVar6 = (ulonglong)uVar1;\r\n      if ((*(short *)(&DAT_140003020 + uVar6 * 2) == 0x5c) ||\r\n         (*(short *)(&DAT_140003020 + uVar6 * 2) == 0x2f)) {\r\n        if ((LPWSTR)(&DAT_140003020 + (uVar6 + 1) * 2) != (LPWSTR)0x0) {\r\n          wsprintfW((LPWSTR)(&DAT_140003020 + (uVar6 + 1) * 2),L\"%s\",L\"app\\\\bin\");\r\n          pHVar3 = GetModuleHandleW(L\"kernel32.dll\");\r\n          pFVar4 = GetProcAddress(pHVar3,\"SetDefaultDllDirectories\");\r\n          if (pFVar4 != (FARPROC)0x0) {\r\n            (*pFVar4)(0x1000);\r\n          }\r\n          BVar2 = SetDllDirectoryW((LPCWSTR)&DAT_140003020);\r\n          if (BVar2 == 0) {\r\n            pwVar5 = L\"Failed to set DLL directory\";\r\n          }\r\n          else {\r\n            pHVar3 = LoadLibraryW(L\"ucrtbase.dll\");\r\n            if (pHVar3 == (HMODULE)0x0) {\r\n              pwVar5 = \r\n              L\"Unable to find ucrtbase.dll. You should install all Windows updates on your computer to get this file.\"\r\n              ;\r\n            }\r\n            else {\r\n              DAT_140003010 = LoadLibraryW(L\"calibre-launcher.dll\");\r\n              if (DAT_140003010 == (HMODULE)0x0) {\r\n                pwVar5 = L\"Failed to load: calibre-launcher.dll\";\r\n              }\r\n              else {\r\n                DAT_140003000 = GetProcAddress(DAT_140003010,\"execute_python_entrypoint\");\r\n                if (DAT_140003000 != (FARPROC)0x0) {\r\n                  _DAT_140003008 = GetProcAddress(DAT_140003010,\"simple_print\");\r\n                  return;\r\n                }\r\n                pwVar5 = L\"Failed to get the calibre-launcher dll entry point\";\r\n                DAT_140003000 = (FARPROC)0x0;\r\n              }\r\n            }\r\n          }\r\n          FUN_140001250(pwVar5);\r\n          return;\r\n        }\r\n        break;\r\n      }\r\n    }\r\n    pwVar5 = L\"Executable path has no path separators\";\r\n  }\r\n  else {\r\n    pwVar5 = L\"Installation directory path too long\";\r\n  }\r\n  FUN_1400011ac(pwVar5,&DAT_140002080,1);\r\n  return;\r\n}\r\n\r\n",
+    "signature": "void FUN_140001000(void);"
+  },
+  "summary": "Pseudo-C for FUN_140001000 from the Deep engine (68 lines).",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "ghidra",
+    "engine_version": "12.1.4",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "deep_engine",
+      "message": "the pseudo-C comes from the external Deep engine (Ghidra), not the original source"
+    }
+  ],
+  "coverage": {
+    "status": "unknown"
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x140001000"
+    }
+  ],
+  "links": [],
+  "carries_target_content": true
+}

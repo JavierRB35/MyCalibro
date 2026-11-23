@@ -1,0 +1,283 @@
+{
+  "id": "ev_75829da4255589ed11a74056f4f45053dc877f687567e857a597a3d1969cc065",
+  "subject": {
+    "kind": "directory",
+    "sha256": "b35dc4499cb3ceda4c5623a9214fcae5cc28011f8fc5b126e6a4017947beace9",
+    "name": "resources"
+  },
+  "operation": "core_evidence_browse",
+  "params": {
+    "show": {
+      "field_names": true,
+      "kind": "rows",
+      "limit": 35,
+      "list": "entries"
+    },
+    "source": {
+      "evidence_id": "ev_a17156ed53985868ba741a6b89aeafa6bc19afa240b4b80945fe66d78d054cb5",
+      "kind": "saved"
+    }
+  },
+  "result": {
+    "coverage": {
+      "at_end": false,
+      "examined": 35,
+      "next_offset": 35,
+      "status": "page",
+      "total": 1000
+    },
+    "from_evidence": "ev_a17156ed53985868ba741a6b89aeafa6bc19afa240b4b80945fe66d78d054cb5",
+    "from_tool": "core_archive_show",
+    "shown": {
+      "field_names": [
+        "depth",
+        "kind",
+        "path",
+        "sha256",
+        "size"
+      ],
+      "items": [
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "catalog",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "content-server",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "dictionaries",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "editor-help",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "fonts",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "hyphenation",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "images",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "jacket",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "localization",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "mathjax",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "mozilla-ca-certs",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "quick_start",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "rapydscript",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "templates",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "mathjax/input",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "mathjax/output",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "mathjax/output/chtml",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "mathjax/output/chtml/fonts",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "mathjax/output/chtml/fonts/woff-v2",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "mathjax/input/mml",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "images/devices",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "images/mimetypes",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "images/plugins",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "images/textures",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "fonts/liberation",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "dictionaries/en-GB",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "dictionaries/en-US",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "dictionaries/es-ES",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "xml",
+          "path": "builtin_recipes.xml",
+          "sha256": "e89761570ecad172b1302ac0860525cb51e2731a2d1a490a90eea9371f9af6ab",
+          "size": 292995
+        },
+        {
+          "depth": 0,
+          "kind": "zip",
+          "path": "builtin_recipes.zip",
+          "sha256": "a2c5f5342399fb4029a7590fed3d79b8a01163479b776c6808f6de93a151dbda",
+          "size": 4409269
+        },
+        {
+          "depth": 1,
+          "kind": "png",
+          "path": "builtin_recipes.zip!/10minutos.png",
+          "sha256": "eeb8ad7b41e46d22bf0665d56d7f7e6044654d0b9a4964f98c3be460c56cb456",
+          "size": 2014
+        },
+        {
+          "depth": 1,
+          "kind": "text",
+          "path": "builtin_recipes.zip!/10minutos.recipe",
+          "sha256": "4b854b893f7fc789bc4f213a112d9b5df7d7f0f6b97dfc07f61695ab23025d38",
+          "size": 1972
+        },
+        {
+          "depth": 1,
+          "kind": "png",
+          "path": "builtin_recipes.zip!/1843.png",
+          "sha256": "48e17be0e7a165d9a445969dbceb912085cc16161dc941616abdc95dee3fe254",
+          "size": 284
+        },
+        {
+          "depth": 1,
+          "kind": "text",
+          "path": "builtin_recipes.zip!/1843.recipe",
+          "sha256": "f0134613457fe2c79fc93607f7e68ace7015c18ebc54ae1ec53dec354d427247",
+          "size": 16009
+        },
+        {
+          "depth": 1,
+          "kind": "png",
+          "path": "builtin_recipes.zip!/20_minutos.png",
+          "sha256": "b7179abe434b105866bcb10c037dd7aabd9ff8708dd4644fa123a104de83ccca",
+          "size": 1148
+        }
+      ],
+      "list": "entries",
+      "offset": 0,
+      "total": 1000
+    }
+  },
+  "summary": "Part of core_archive_show evidence (page).",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [],
+  "coverage": {
+    "status": "partial",
+    "examined": 35,
+    "total": 1000,
+    "next_offset": 35
+  },
+  "locations": [],
+  "links": [
+    "ev_a17156ed53985868ba741a6b89aeafa6bc19afa240b4b80945fe66d78d054cb5"
+  ]
+}

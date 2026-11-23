@@ -1,0 +1,10 @@
+# Build artifacts de Rust (regenerables con `cargo build`)
+target/
+
+# Backup generado por rustc
+**/*.rs.bk
+
+# Basura del sistema operativo
+Thumbs.db
+Desktop.ini
+.DS_Store

@@ -1,0 +1,90 @@
+{
+  "id": "ev_c8657ba81ff3b79e4e336044a88f99962f4c20131a932ca8a82ddb79f974f87a",
+  "subject": {
+    "kind": "pe",
+    "sha256": "eb6f3eda293cca1c0e1a6c52daeed586c4887130b9ef562220eff08c95eee7ab",
+    "name": "calibre.exe"
+  },
+  "operation": "native_function_references_list",
+  "params": {
+    "direction": "outgoing",
+    "function": "0x1400012d0"
+  },
+  "result": {
+    "direction": "outgoing",
+    "entry": "0x1400012d0",
+    "function": "entry",
+    "references": [
+      {
+        "from": "0x1400012d6",
+        "kind": "call",
+        "name": "sub_140001000",
+        "to": "0x140001000"
+      },
+      {
+        "from": "0x1400012db",
+        "kind": "data",
+        "name": null,
+        "to": "0x140003000"
+      },
+      {
+        "from": "0x1400012e9",
+        "kind": "string",
+        "name": null,
+        "to": "0x140002408"
+      },
+      {
+        "from": "0x1400012f3",
+        "kind": "string",
+        "name": null,
+        "to": "0x140002418"
+      },
+      {
+        "from": "0x140001307",
+        "kind": "data",
+        "name": null,
+        "to": "0x140003010"
+      },
+      {
+        "from": "0x140001313",
+        "kind": "import",
+        "name": "__imp_FreeLibrary",
+        "to": "0x140002030"
+      },
+      {
+        "from": "0x140001319",
+        "kind": "data",
+        "name": null,
+        "to": "0x140003010"
+      },
+      {
+        "from": "0x140001326",
+        "kind": "import",
+        "name": "__imp_ExitProcess",
+        "to": "0x140002028"
+      }
+    ]
+  },
+  "summary": "8 outgoing references for entry.",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [],
+  "coverage": {
+    "status": "complete",
+    "examined": 8,
+    "total": 8
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x1400012d0"
+    }
+  ],
+  "links": []
+}

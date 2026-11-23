@@ -1,0 +1,134 @@
+{
+  "id": "ev_494b1d2774d61d6f6b6cbe676e6e633c119144c8f822940e526d907e140252f4",
+  "subject": {
+    "kind": "pe",
+    "sha256": "8beb32bfe70e3038a5b090238499d2afbf4f268aafa8e02f7b1e173d04e7590d",
+    "name": "ebook-meta.exe"
+  },
+  "operation": "native_strings_find",
+  "params": {
+    "case_sensitive": false,
+    "limit": 100,
+    "mode": "regex",
+    "offset": 0,
+    "pattern": "ebook-meta|metadata|title|author|tags|calibre|cli"
+  },
+  "result": {
+    "matches": [
+      {
+        "address": "0x1400022f0",
+        "references": [
+          {
+            "from": "0x1400010e7",
+            "function": "sub_140001000"
+          }
+        ],
+        "section": ".rdata",
+        "text": "calibre-launcher.dll"
+      },
+      {
+        "address": "0x140002320",
+        "references": [
+          {
+            "from": "0x140001100",
+            "function": "sub_140001000"
+          }
+        ],
+        "section": ".rdata",
+        "text": "Failed to load: calibre-launcher.dll"
+      },
+      {
+        "address": "0x140002390",
+        "references": [
+          {
+            "from": "0x140001125",
+            "function": "sub_140001000"
+          }
+        ],
+        "section": ".rdata",
+        "text": "Failed to get the calibre-launcher dll entry point"
+      },
+      {
+        "address": "0x140002418",
+        "references": [
+          {
+            "from": "0x1400012f1",
+            "function": "entry"
+          }
+        ],
+        "section": ".rdata",
+        "text": "calibre.ebooks.metadata.cli"
+      },
+      {
+        "address": "0x140002450",
+        "references": [
+          {
+            "from": "0x1400012f8",
+            "function": "entry"
+          }
+        ],
+        "section": ".rdata",
+        "text": "ebook-meta"
+      },
+      {
+        "address": "0x1400051e8",
+        "references": [],
+        "section": ".rsrc",
+        "text": "calibre-ebook.com"
+      },
+      {
+        "address": "0x140005234",
+        "references": [],
+        "section": ".rsrc",
+        "text": "Command line interface for manipulating e-book metadata"
+      },
+      {
+        "address": "0x1400052f8",
+        "references": [],
+        "section": ".rsrc",
+        "text": "ebook-meta"
+      },
+      {
+        "address": "0x140005378",
+        "references": [],
+        "section": ".rsrc",
+        "text": "calibre is a registered U.S. trademark number 3,666,525"
+      },
+      {
+        "address": "0x140005410",
+        "references": [],
+        "section": ".rsrc",
+        "text": "ebook-meta.exe"
+      },
+      {
+        "address": "0x140005450",
+        "references": [],
+        "section": ".rsrc",
+        "text": "calibre"
+      }
+    ],
+    "total": 11
+  },
+  "summary": "11 strings match \"ebook-meta|metadata|title|author|tags|calibre|cli\".",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "data_sections_only",
+      "message": "only strings stored in the file are searched (absence is not proof)"
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 11,
+    "total": 11
+  },
+  "locations": [],
+  "links": []
+}

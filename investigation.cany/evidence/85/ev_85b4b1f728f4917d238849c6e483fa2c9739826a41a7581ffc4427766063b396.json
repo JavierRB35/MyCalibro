@@ -1,0 +1,112 @@
+{
+  "id": "ev_85b4b1f728f4917d238849c6e483fa2c9739826a41a7581ffc4427766063b396",
+  "subject": {
+    "kind": "pe",
+    "sha256": "3c162738cd191a4fc50cc868536a55a5e2d5652e55191013537278b5b34d1608",
+    "name": "calibre-launcher.dll"
+  },
+  "operation": "core_target_triage",
+  "params": {
+    "path": "C:\\Program Files\\Calibre2\\app\\bin\\calibre-launcher.dll"
+  },
+  "result": {
+    "architecture": "x86_64",
+    "bits": 64,
+    "dotnet_arch": null,
+    "entry_point": "0x1800050c4",
+    "format": "pe",
+    "format_name": "PE (Windows)",
+    "kind": "shared-library",
+    "libraries": [
+      "KERNEL32.dll",
+      "SHELL32.dll",
+      "USER32.dll",
+      "VCRUNTIME140.dll",
+      "api-ms-win-crt-environment-l1-1-0.dll",
+      "api-ms-win-crt-filesystem-l1-1-0.dll",
+      "api-ms-win-crt-heap-l1-1-0.dll",
+      "api-ms-win-crt-runtime-l1-1-0.dll",
+      "api-ms-win-crt-stdio-l1-1-0.dll",
+      "api-ms-win-crt-string-l1-1-0.dll",
+      "python3.dll",
+      "python314.dll"
+    ],
+    "next_steps": [
+      {
+        "tool": "core_overview_show",
+        "why": "a one-page summary: sections, imports, counts"
+      },
+      {
+        "tool": "native_functions_list",
+        "why": "every function we found"
+      },
+      {
+        "tool": "native_strings_find",
+        "why": "find text the program shows or uses"
+      },
+      {
+        "tool": "native_function_study",
+        "why": "a full dossier on one function (start with main or the entry point)"
+      },
+      {
+        "tool": "core_feature_find",
+        "why": "follow a word you see in the app to the code behind it"
+      },
+      {
+        "tool": "native_pe_resources_list",
+        "why": "icons, version information and the manifest"
+      }
+    ],
+    "operating_system": "Windows",
+    "plain_english": "calibre-launcher.dll is a library (code other programs load) for Windows, built for x86_64 (64-bit). It looks like it was made with Embedded Python. Its internal names were removed (stripped), so most functions will have generated names.",
+    "recommended_toolsets": [
+      "core",
+      "native",
+      "formats"
+    ],
+    "stripped": true,
+    "symbol_table_stripped": true,
+    "toolchain_hints": [
+      {
+        "category": "runtime",
+        "evidence": "Python runtime import",
+        "id": "python",
+        "label": "Embedded Python",
+        "strength": "weak"
+      },
+      {
+        "category": "compiler",
+        "evidence": "Rich header",
+        "id": "msvc",
+        "label": "Microsoft Visual C++ toolchain",
+        "strength": "strong"
+      }
+    ]
+  },
+  "summary": "calibre-launcher.dll is a library (code other programs load) for Windows, built for x86_64 (64-bit). It looks like it was made with Embedded Python. Its internal names were removed (stripped), so most functions will have generated names.",
+  "confidence": "inferred",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "heuristic_hints",
+      "message": "toolchain and packer hints come from markers that can be faked or borrowed"
+    }
+  ],
+  "coverage": {
+    "status": "unknown"
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x1800050c4",
+      "label": "entry point"
+    }
+  ],
+  "links": []
+}

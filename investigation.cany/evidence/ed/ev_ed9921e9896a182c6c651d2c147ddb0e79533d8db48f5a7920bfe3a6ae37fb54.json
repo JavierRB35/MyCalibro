@@ -1,0 +1,77 @@
+{
+  "id": "ev_ed9921e9896a182c6c651d2c147ddb0e79533d8db48f5a7920bfe3a6ae37fb54",
+  "subject": {
+    "kind": "pe",
+    "sha256": "f46a01c9b8cd392e1190ce2e50a2a5a48b326c8c3eab670bbcd8b298bede501d",
+    "name": "ebook-convert.exe"
+  },
+  "operation": "native_strings_find",
+  "params": {
+    "case_sensitive": false,
+    "limit": 50,
+    "mode": "regex",
+    "offset": 0,
+    "pattern": "calibre\\.ebooks\\.conversion\\.cli|ebook-convert"
+  },
+  "result": {
+    "matches": [
+      {
+        "address": "0x140002418",
+        "references": [
+          {
+            "from": "0x1400012f1",
+            "function": "entry"
+          }
+        ],
+        "section": ".rdata",
+        "text": "calibre.ebooks.conversion.cli"
+      },
+      {
+        "address": "0x140002458",
+        "references": [
+          {
+            "from": "0x1400012f8",
+            "function": "entry"
+          }
+        ],
+        "section": ".rdata",
+        "text": "ebook-convert"
+      },
+      {
+        "address": "0x140005304",
+        "references": [],
+        "section": ".rsrc",
+        "text": "ebook-convert"
+      },
+      {
+        "address": "0x140005420",
+        "references": [],
+        "section": ".rsrc",
+        "text": "ebook-convert.exe"
+      }
+    ],
+    "total": 4
+  },
+  "summary": "4 strings match \"calibre\\.ebooks\\.conversion\\.cli|ebook-convert\".",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "data_sections_only",
+      "message": "only strings stored in the file are searched (absence is not proof)"
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 4,
+    "total": 4
+  },
+  "locations": [],
+  "links": []
+}

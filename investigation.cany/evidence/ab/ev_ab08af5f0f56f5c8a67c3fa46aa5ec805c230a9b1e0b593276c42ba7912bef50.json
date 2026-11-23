@@ -1,0 +1,45 @@
+{
+  "id": "ev_ab08af5f0f56f5c8a67c3fa46aa5ec805c230a9b1e0b593276c42ba7912bef50",
+  "subject": {
+    "kind": "pe",
+    "sha256": "3c162738cd191a4fc50cc868536a55a5e2d5652e55191013537278b5b34d1608",
+    "name": "calibre-launcher.dll"
+  },
+  "operation": "native_function_pseudocode",
+  "params": {
+    "function": "0x1800050c4"
+  },
+  "result": {
+    "engine": "ghidra",
+    "entry": "0x1800050c4",
+    "function": "entry",
+    "pseudo_code": "\r\nvoid entry(undefined8 param_1,int param_2,undefined8 param_3)\r\n\r\n{\r\n  if (param_2 == 1) {\r\n    FUN_180005110();\r\n  }\r\n  FUN_180004f9c(param_1,param_2,param_3);\r\n  return;\r\n}\r\n\r\n",
+    "signature": "void entry(undefined8 param_1,int param_2,undefined8 param_3);"
+  },
+  "summary": "Pseudo-C for entry from the Deep engine (11 lines).",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "ghidra",
+    "engine_version": "12.1.4",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "deep_engine",
+      "message": "the pseudo-C comes from the external Deep engine (Ghidra), not the original source"
+    }
+  ],
+  "coverage": {
+    "status": "unknown"
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x1800050c4"
+    }
+  ],
+  "links": [],
+  "carries_target_content": true
+}

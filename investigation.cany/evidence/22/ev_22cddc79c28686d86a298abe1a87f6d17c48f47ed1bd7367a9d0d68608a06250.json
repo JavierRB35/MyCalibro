@@ -1,0 +1,81 @@
+{
+  "id": "ev_22cddc79c28686d86a298abe1a87f6d17c48f47ed1bd7367a9d0d68608a06250",
+  "subject": {
+    "kind": "folder",
+    "name": "Calibre2"
+  },
+  "operation": "core_evidence_browse",
+  "params": {
+    "show": {
+      "kind": "summary"
+    },
+    "source": {
+      "evidence_id": "ev_7fb65d2fe0dba3f48dbd306f6238ec97072b299f17b0d5ba872b9ad0511d8966",
+      "kind": "saved"
+    }
+  },
+  "result": {
+    "coverage": {
+      "at_end": true,
+      "examined": 1,
+      "next_offset": null,
+      "status": "all-in-view",
+      "total": 1
+    },
+    "from_evidence": "ev_7fb65d2fe0dba3f48dbd306f6238ec97072b299f17b0d5ba872b9ad0511d8966",
+    "from_tool": "app_folder_explain",
+    "shown": {
+      "carries_target_content": false,
+      "confidence": "inferred",
+      "coverage": {
+        "examined": 1154,
+        "status": "partial"
+      },
+      "evidence_id": "ev_7fb65d2fe0dba3f48dbd306f6238ec97072b299f17b0d5ba872b9ad0511d8966",
+      "limitations": [
+        {
+          "code": "presence_not_proof",
+          "message": "A file being in the folder doesn't prove the app runs it: it may be unused, left over from an update, or there for another reason. Nothing was started, so these are inferences."
+        },
+        {
+          "code": "small_reads_only",
+          "message": "Only names, the ends of some files and the start of the main programs were read. The app's contents weren't unpacked or analysed; next_steps says what to run for that."
+        },
+        {
+          "code": "walk_capped",
+          "message": "max_entries (3000) or max_depth (4) stopped the walk, so what's further in wasn't seen. Raise them to see more."
+        }
+      ],
+      "lists": {
+        "candidates": 3,
+        "folders_not_walked": 0,
+        "next_steps": 3
+      },
+      "operation": "app_folder_explain",
+      "subject": {
+        "kind": "folder",
+        "name": "Calibre2"
+      },
+      "summary": "Calibre2: looks built on Qt (a native C++ interface toolkit); Python (bundled with its interpreter)."
+    }
+  },
+  "summary": "Part of app_folder_explain evidence (all-in-view).",
+  "confidence": "inferred",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [],
+  "coverage": {
+    "status": "complete",
+    "examined": 1,
+    "total": 1
+  },
+  "locations": [],
+  "links": [
+    "ev_7fb65d2fe0dba3f48dbd306f6238ec97072b299f17b0d5ba872b9ad0511d8966"
+  ]
+}

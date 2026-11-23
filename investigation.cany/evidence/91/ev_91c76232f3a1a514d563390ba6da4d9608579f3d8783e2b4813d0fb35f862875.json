@@ -1,0 +1,45 @@
+{
+  "id": "ev_91c76232f3a1a514d563390ba6da4d9608579f3d8783e2b4813d0fb35f862875",
+  "subject": {
+    "kind": "pe",
+    "sha256": "eb6f3eda293cca1c0e1a6c52daeed586c4887130b9ef562220eff08c95eee7ab",
+    "name": "calibre.exe"
+  },
+  "operation": "native_function_pseudocode",
+  "params": {
+    "function": "0x140001250"
+  },
+  "result": {
+    "engine": "ghidra",
+    "entry": "0x140001250",
+    "function": "FUN_140001250",
+    "pseudo_code": "\r\nundefined4 FUN_140001250(undefined8 param_1)\r\n\r\n{\r\n  DWORD dwMessageId;\r\n  undefined4 uVar1;\r\n  HLOCAL local_res10 [3];\r\n  \r\n  local_res10[0] = (HLOCAL)0x0;\r\n  dwMessageId = GetLastError();\r\n  FormatMessageW(0x1300,(LPCVOID)0x0,dwMessageId,0x400,(LPWSTR)local_res10,0,(va_list *)0x0);\r\n  uVar1 = FUN_1400011ac(param_1,local_res10[0],dwMessageId);\r\n  if (local_res10[0] != (HLOCAL)0x0) {\r\n    LocalFree(local_res10[0]);\r\n  }\r\n  return uVar1;\r\n}\r\n\r\n",
+    "signature": "undefined4 FUN_140001250(undefined8 param_1);"
+  },
+  "summary": "Pseudo-C for FUN_140001250 from the Deep engine (18 lines).",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "ghidra",
+    "engine_version": "12.1.4",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "deep_engine",
+      "message": "the pseudo-C comes from the external Deep engine (Ghidra), not the original source"
+    }
+  ],
+  "coverage": {
+    "status": "unknown"
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x140001250"
+    }
+  ],
+  "links": [],
+  "carries_target_content": true
+}

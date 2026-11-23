@@ -1,0 +1,188 @@
+{
+  "id": "ev_d31a86b9f1f909805be3fbff18564abbb2eeaa424e43521bc8eaf1c432314d3e",
+  "subject": {
+    "kind": "directory",
+    "sha256": "12ee6c78b63bb2e12afa8739947e71923ea7b7e6ba77efcc9415846acf5662d7",
+    "name": "app"
+  },
+  "operation": "core_evidence_browse",
+  "params": {
+    "show": {
+      "field_names": true,
+      "kind": "rows",
+      "limit": 20,
+      "list": "entries"
+    },
+    "source": {
+      "evidence_id": "ev_83a5dd18746b173406bf40372e1e88738b605806e9c223cdab3aaf3d2db3191f",
+      "kind": "saved"
+    }
+  },
+  "result": {
+    "coverage": {
+      "at_end": false,
+      "examined": 20,
+      "next_offset": 20,
+      "status": "page",
+      "total": 1000
+    },
+    "from_evidence": "ev_83a5dd18746b173406bf40372e1e88738b605806e9c223cdab3aaf3d2db3191f",
+    "from_tool": "core_archive_show",
+    "shown": {
+      "field_names": [
+        "depth",
+        "kind",
+        "note",
+        "path",
+        "role",
+        "sha256",
+        "size"
+      ],
+      "items": [
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "bin",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "plugins",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "resources",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "share",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "translations",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "translations/qtwebengine_locales",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "share/espeak-ng-data",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "share/espeak-ng-data/voices",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "share/espeak-ng-data/voices/!v",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/aav",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/art",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/azc",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/bat",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/bnt",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/ccs",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/cel",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/cus",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/dra",
+          "size": 0
+        },
+        {
+          "depth": 0,
+          "kind": "directory",
+          "path": "share/espeak-ng-data/lang/esx",
+          "size": 0
+        }
+      ],
+      "list": "entries",
+      "offset": 0,
+      "total": 1000
+    }
+  },
+  "summary": "Part of core_archive_show evidence (page).",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [],
+  "coverage": {
+    "status": "partial",
+    "examined": 20,
+    "total": 1000,
+    "next_offset": 20
+  },
+  "locations": [],
+  "links": [
+    "ev_83a5dd18746b173406bf40372e1e88738b605806e9c223cdab3aaf3d2db3191f"
+  ]
+}

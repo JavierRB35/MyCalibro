@@ -1,0 +1,56 @@
+{
+  "id": "ev_f04973291efa04ffefb258bf945c356c72539b6f5678a4ad99d4d45ef5249109",
+  "subject": {
+    "kind": "pe",
+    "sha256": "3c162738cd191a4fc50cc868536a55a5e2d5652e55191013537278b5b34d1608",
+    "name": "calibre-launcher.dll"
+  },
+  "operation": "core_feature_find",
+  "params": {
+    "case_sensitive": false,
+    "query": "calibre/gui_launch.pyc"
+  },
+  "result": {
+    "case_sensitive": false,
+    "function_names": [],
+    "functions": [],
+    "imports": [],
+    "query": "calibre/gui_launch.pyc",
+    "strings": [
+      {
+        "address": "0x18004aa70",
+        "references": [
+          {
+            "from": "0x18006b810",
+            "function": null,
+            "kind": "string"
+          }
+        ],
+        "text": "calibre/gui_launch.pyc"
+      }
+    ],
+    "truncated": false
+  },
+  "summary": "\"calibre/gui_launch.pyc\": 1 matching strings, 0 matching function names, 0 matching imports; 0 functions involved.",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "no_match",
+      "message": "nothing matched; the text may be built at run time, encrypted, or come from a resource file (absence is not proof)"
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 1,
+    "total": 1
+  },
+  "locations": [],
+  "links": []
+}

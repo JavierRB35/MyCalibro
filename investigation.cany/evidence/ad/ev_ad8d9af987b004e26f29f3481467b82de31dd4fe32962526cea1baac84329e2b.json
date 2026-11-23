@@ -1,0 +1,96 @@
+{
+  "id": "ev_ad8d9af987b004e26f29f3481467b82de31dd4fe32962526cea1baac84329e2b",
+  "subject": {
+    "kind": "pe",
+    "sha256": "8beb32bfe70e3038a5b090238499d2afbf4f268aafa8e02f7b1e173d04e7590d",
+    "name": "ebook-meta.exe"
+  },
+  "operation": "native_function_references_list",
+  "params": {
+    "direction": "outgoing",
+    "function": "0x1400012d0"
+  },
+  "result": {
+    "direction": "outgoing",
+    "entry": "0x1400012d0",
+    "function": "entry",
+    "references": [
+      {
+        "from": "0x1400012d6",
+        "kind": "call",
+        "name": "sub_140001000",
+        "to": "0x140001000"
+      },
+      {
+        "from": "0x1400012db",
+        "kind": "data",
+        "name": null,
+        "to": "0x140003000"
+      },
+      {
+        "from": "0x1400012ea",
+        "kind": "string",
+        "name": null,
+        "to": "0x140002408"
+      },
+      {
+        "from": "0x1400012f1",
+        "kind": "string",
+        "name": null,
+        "to": "0x140002418"
+      },
+      {
+        "from": "0x1400012f8",
+        "kind": "string",
+        "name": null,
+        "to": "0x140002450"
+      },
+      {
+        "from": "0x14000130a",
+        "kind": "data",
+        "name": null,
+        "to": "0x140003010"
+      },
+      {
+        "from": "0x140001316",
+        "kind": "import",
+        "name": "__imp_FreeLibrary",
+        "to": "0x140002030"
+      },
+      {
+        "from": "0x14000131c",
+        "kind": "data",
+        "name": null,
+        "to": "0x140003010"
+      },
+      {
+        "from": "0x140001329",
+        "kind": "import",
+        "name": "__imp_ExitProcess",
+        "to": "0x140002028"
+      }
+    ]
+  },
+  "summary": "9 outgoing references for entry.",
+  "confidence": "derived",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [],
+  "coverage": {
+    "status": "complete",
+    "examined": 9,
+    "total": 9
+  },
+  "locations": [
+    {
+      "kind": "address",
+      "value": "0x1400012d0"
+    }
+  ],
+  "links": []
+}

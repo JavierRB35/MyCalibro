@@ -1,0 +1,83 @@
+{
+  "id": "ev_88e9ff513c3c5b0ca498e886864f32b59444155d01065f7c3948128200322e23",
+  "subject": {
+    "kind": "pe",
+    "sha256": "eb6f3eda293cca1c0e1a6c52daeed586c4887130b9ef562220eff08c95eee7ab",
+    "name": "calibre.exe"
+  },
+  "operation": "native_strings_find",
+  "params": {
+    "case_sensitive": false,
+    "limit": 100,
+    "mode": "regex",
+    "offset": 0,
+    "pattern": "tag|genre|metadata|book|library|author|ebook|calibre.gui_launch|execute_python_entrypoint"
+  },
+  "result": {
+    "matches": [
+      {
+        "address": "0x140002370",
+        "references": [
+          {
+            "from": "0x140001109",
+            "function": "sub_140001000"
+          }
+        ],
+        "section": ".rdata",
+        "text": "execute_python_entrypoint"
+      },
+      {
+        "address": "0x140002418",
+        "references": [
+          {
+            "from": "0x1400012f3",
+            "function": "entry"
+          }
+        ],
+        "section": ".rdata",
+        "text": "calibre.gui_launch"
+      },
+      {
+        "address": "0x1400026c4",
+        "references": [],
+        "section": ".rdata",
+        "text": "FreeLibrary"
+      },
+      {
+        "address": "0x14000270e",
+        "references": [],
+        "section": ".rdata",
+        "text": "LoadLibraryW"
+      },
+      {
+        "address": "0x1400052d8",
+        "references": [],
+        "section": ".rsrc",
+        "text": "calibre-ebook.com"
+      }
+    ],
+    "total": 5
+  },
+  "summary": "5 strings match \"tag|genre|metadata|book|library|author|ebook|calibre.gui_launch|execute_python_entrypoint\".",
+  "confidence": "observed",
+  "authority": "original-files",
+  "environment": {
+    "clean_room": false,
+    "engine": "builtin",
+    "engine_version": "0.6.1",
+    "host": "windows-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "data_sections_only",
+      "message": "only strings stored in the file are searched (absence is not proof)"
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 5,
+    "total": 5
+  },
+  "locations": [],
+  "links": []
+}
