@@ -63,7 +63,11 @@ pub fn groq_classification_format() -> Value {
 }
 
 /// Error sin exponer credenciales ni la respuesta completa del servidor.
-pub fn read_json_response(response: Response, provider: &str, model: &str) -> Result<Value, String> {
+pub fn read_json_response(
+    response: Response,
+    provider: &str,
+    model: &str,
+) -> Result<Value, String> {
     let code = response.status().as_u16();
     if !response.status().is_success() {
         let reason = match code {
@@ -108,7 +112,8 @@ pub fn test_connection(provider: &str, api_key: &str) -> Result<u128, String> {
             let output = body["candidates"][0]["content"]["parts"]
                 .as_array()
                 .map(|parts| {
-                    parts.iter()
+                    parts
+                        .iter()
                         .filter_map(|p| p["text"].as_str())
                         .collect::<String>()
                 })
@@ -153,7 +158,10 @@ mod tests {
         assert_eq!(value["json_schema"]["strict"], true);
         let schema = &value["json_schema"]["schema"];
         assert_eq!(schema["additionalProperties"], false);
-        assert_eq!(schema["required"], json!(["answer", "supported", "citations"]));
+        assert_eq!(
+            schema["required"],
+            json!(["answer", "supported", "citations"])
+        );
         assert_eq!(
             schema["properties"]["citations"]["items"]["required"],
             json!(["fragment_id", "quote"])
@@ -174,8 +182,12 @@ mod tests {
 
     #[test]
     fn missing_keys_never_issue_network_requests() {
-        assert!(test_connection("Gemini", "").unwrap_err().contains("guardada"));
-        assert!(test_connection("Groq", " ").unwrap_err().contains("guardada"));
+        assert!(test_connection("Gemini", "")
+            .unwrap_err()
+            .contains("guardada"));
+        assert!(test_connection("Groq", " ")
+            .unwrap_err()
+            .contains("guardada"));
         assert!(gemini_endpoint().contains(GEMINI_MODEL));
         assert!(!gemini_endpoint().contains("2.5-flash-lite"));
     }
