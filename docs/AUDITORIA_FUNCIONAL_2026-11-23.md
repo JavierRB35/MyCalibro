@@ -95,9 +95,11 @@ No se encontraron: lectura integrada de EPUB/PDF; miniaturas de portadas; visual
 
 **PROD-010 APROBADA (2026-11-23):** asistente de importación masiva (opción B), con lectura recursiva de archivos y carpetas, progreso y vista previa; detectar coincidencias por datos e identificadores disponibles y exigir revisión del usuario antes de fusionar registros, omitir entradas o asociar formatos a un libro existente. No confundir coincidencias de título/autor con identidad de edición. **Aún no implementada.**
 
-**Siguiente decisión abierta (PROD-011):** política de metadatos bibliográficos y portadas: edición local, enriquecimiento asistido con revisión o enriquecimiento automático continuo.
+**PROD-011 — CRITERIO APROBADO (2026-11-23):** utilizar **por defecto los metadatos que vengan en el propio libro**. No sobrescribirlos automáticamente con búsqueda externa o inferencia de IA ni introducir descarga automática de portadas. Mantener edición manual y distinguir datos derivados de información bibliográfica original. Verificar la extracción real por formato; **no se ha implementado ninguna capacidad adicional por esta decisión**.
 
-**Siguientes ejes posteriores, sin aprobar:** detalles de organización lógica y colecciones, frecuencia/formato de backups, instalación y actualizaciones.
+**Transición al desarrollo:** el propietario ha indicado que no desea seguir debatiendo funcionalidades salvo cuestiones de verdadera criticidad y facilitará la composición y organización del equipo. El siguiente paso es preparar plan de ejecución y reparto de tareas, con prioridad inicial a los riesgos de integridad y persistencia ya detectados.
+
+**Detalles aplazados no bloqueantes:** organización lógica y colecciones, frecuencia/formato de backups, instalación y actualizaciones. Resolver durante ejecución solo cuando una decisión crítica lo exija.
 
 ## 8. Continuidad
 Toda propuesta futura se comparará con este inventario. Una decisión aceptada actualizará la documentación; un cambio de código exigirá pruebas proporcionales al riesgo y evidencia verificable. Mantener main como rama normal y evitar ramas salvo cambios críticos. No tocar archivos reales ni datos del usuario sin una estrategia de preservación.
