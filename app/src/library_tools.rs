@@ -92,6 +92,15 @@ impl LibraryTools {
             ui.label(format!("Carpeta: {}",root.display()));
             if let Some(error)=&self.preferences_error { ui.colored_label(egui::Color32::DARK_RED,error); }
             let available=writable && self.receiver.is_none();
+            if self.preferences_error.is_some() && ui.add_enabled(available,egui::Button::new("Restablecer preferencias conservando copia…")).clicked() {
+                match Preferences::reset_preserving(root) {
+                    Ok(path) => {
+                        self.preferences=Preferences::default();self.preferences_error=None;
+                        self.status=path.map(|p|format!("Preferencias restablecidas; original conservado en {}",p.display())).unwrap_or_else(||"Preferencias restablecidas".into());
+                    }
+                    Err(error)=>self.status=error,
+                }
+            }
             ui.add_enabled_ui(available && self.preferences_error.is_none(),|ui| {
                 let previous=serde_json::to_string(&self.preferences).unwrap_or_default();
                 ui.label("Al importar libros:");
