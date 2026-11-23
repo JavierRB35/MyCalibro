@@ -1,6 +1,10 @@
 mod backup;
 mod calibre_import;
+mod import_flow;
 mod import_jobs;
+mod import_scan;
+mod import_wizard;
+mod import_wizard_view;
 mod library_tools;
 mod persistence;
 mod storage;
@@ -17,11 +21,7 @@ const PAPER: Color32 = Color32::from_rgb(247, 247, 243);
 const GREEN: Color32 = Color32::from_rgb(48, 111, 91);
 const PALE_GREEN: Color32 = Color32::from_rgb(226, 239, 230);
 const BORDER: Color32 = Color32::from_rgb(229, 231, 224);
-const SUPPORTED_BOOK_EXTENSIONS: &[&str] = &[
-    "epub", "mobi", "azw", "azw3", "azw4", "kfx", "prc", "pdf", "txt", "html", "htm", "xhtml",
-    "rtf", "fb2", "fbz", "doc", "docx", "odt", "lrf", "pdb", "pml", "rb", "snb", "tcr", "chm",
-    "djvu", "djv", "cbz", "cbr", "cb7", "cbc", "zip", "rar",
-];
+use import_scan::SUPPORTED_BOOK_EXTENSIONS;
 
 #[derive(Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -138,6 +138,7 @@ struct LibraryApp {
     confirm_exit: bool,
     discard_on_exit: bool,
     library_tools: library_tools::LibraryTools,
+    import_flow: import_flow::ImportFlow,
     screenshot_path: Option<PathBuf>,
     frame_count: u32,
     screenshot_requested: bool,
@@ -183,6 +184,7 @@ impl LibraryApp {
             catalog,
             storage_error,
             library_tools: library_tools::LibraryTools::new(&library_folder),
+            import_flow: import_flow::ImportFlow::default(),
             library_folder,
             library_generation: 0,
             confirm_exit: false,
@@ -295,102 +297,6 @@ impl LibraryApp {
             .count()
     }
 
-    fn import_book(&mut self, path: PathBuf, ctx: &egui::Context) {
-        if self.storage_error.is_some() {
-            return;
-        }
-        if let Some(error) = &self.library_tools.preferences_error {
-            self.notice = error.clone();
-            return;
-        }
-        if !is_supported_book(&path) {
-            self.notice = format!(
-                "No reconozco el formato de {}",
-                path.file_name().unwrap_or_default().to_string_lossy()
-            );
-            return;
-        }
-        let source = match std::fs::canonicalize(&path) {
-            Ok(path) => path,
-            Err(error) => {
-                self.notice = format!("Archivo inaccesible: {error}");
-                return;
-            }
-        };
-        if self.books.iter().any(|book| {
-            book.file_paths(&self.library_folder)
-                .iter()
-                .any(|p| std::fs::canonicalize(p).ok().as_ref() == Some(&source))
-        }) {
-            self.notice = "Ese libro ya está en la biblioteca".to_owned();
-            return;
-        }
-        let (metadata, metadata_notice) = match read_book_metadata(&path) {
-            Ok(metadata) => (metadata, String::new()),
-            Err(error) => (
-                std::collections::HashMap::new(),
-                format!("Metadatos no leídos: {error}"),
-            ),
-        };
-        let title = metadata
-            .get("title")
-            .cloned()
-            .filter(|value| !value.is_empty())
-            .or_else(|| {
-                path.file_stem()
-                    .map(|name| name.to_string_lossy().to_string())
-            })
-            .unwrap_or_else(|| "Libro sin título".to_owned());
-        let Some(id) = self.next_book_id() else {
-            return;
-        };
-        let stored = match storage::import_file(
-            &source,
-            &self.library_folder,
-            id,
-            metadata.get("author").map(String::as_str).unwrap_or(""),
-            &title,
-            self.library_tools.preferences.import_mode,
-            self.library_tools.preferences.layout,
-            None,
-        ) {
-            Ok(file) => file,
-            Err(error) => {
-                self.notice = error;
-                return;
-            }
-        };
-        let book = Book {
-            id,
-            title,
-            author: metadata.get("author").cloned().unwrap_or_default(),
-            year: metadata.get("year").cloned().unwrap_or_default(),
-            description: metadata.get("description").cloned().unwrap_or_default(),
-            tags: metadata
-                .get("tags")
-                .map(|tags| {
-                    tags.split(',')
-                        .map(str::trim)
-                        .filter(|tag| !tag.is_empty())
-                        .map(str::to_owned)
-                        .collect()
-                })
-                .unwrap_or_default(),
-            topic: String::new(),
-            file_path: None,
-            files: vec![stored],
-        };
-        self.books.push(book);
-        self.selected = Some(id);
-        self.save();
-        self.start_classification(id, ctx.clone());
-        self.notice = if metadata_notice.is_empty() {
-            "Libro añadido; preparando su clasificación".to_owned()
-        } else {
-            format!("Libro añadido. {metadata_notice}")
-        };
-    }
-
     fn start_classification(&mut self, book_id: u64, ctx: egui::Context) {
         if self.storage_error.is_some() {
             return;
@@ -484,15 +390,18 @@ impl LibraryApp {
 
 impl eframe::App for LibraryApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        if self.library_tools.busy() && ctx.input(|i| i.viewport().close_requested()) {
+        self.import_ui(ctx);
+        if (self.library_tools.busy() || self.import_flow.busy())
+            && ctx.input(|i| i.viewport().close_requested())
+        {
             ctx.send_viewport_cmd(egui::ViewportCommand::CancelClose);
-            self.notice = "Espere a que termine la copia o restauración antes de cerrar".into();
+            self.notice = "Espere a que termine la operación de archivos antes de cerrar".into();
         }
         if let Some(restored) = self.library_tools.show(
             ctx,
             &self.library_folder,
             &self.books,
-            self.storage_error.is_none(),
+            self.storage_error.is_none() && !self.import_flow.active(),
         ) {
             let status = self.library_tools.status().to_owned();
             // A failed autosave during background restoration must not discard pending edits.
@@ -542,7 +451,7 @@ impl eframe::App for LibraryApp {
                 }
             }
             // Do not abandon unsaved edits when switching libraries.
-            let can_switch = (self.storage_error.is_none() || self.catalog.is_none()) && !self.library_tools.busy();
+            let can_switch = (self.storage_error.is_none() || self.catalog.is_none()) && !self.library_tools.busy() && !self.import_flow.active();
             if ui.button("Biblioteca y copias…").clicked() { self.library_tools.open=true; }
             if ui.add_enabled(can_switch, egui::Button::new("Abrir carpeta de biblioteca…")).clicked() {
                 if let Some(folder) = rfd::FileDialog::new().pick_folder() { self.open_library(folder); }
@@ -579,8 +488,8 @@ impl eframe::App for LibraryApp {
                 .filter_map(|file| file.path.clone())
                 .collect::<Vec<_>>()
         });
-        for path in dropped_files {
-            self.import_book(path, ctx);
+        if !dropped_files.is_empty() {
+            self.begin_import(dropped_files);
         }
         self.frame_count += 1;
         if self.screenshot_path.is_some() && self.frame_count >= 120 && !self.screenshot_requested {
@@ -625,11 +534,14 @@ impl eframe::App for LibraryApp {
             .show(ctx, |ui| {
                 ui.horizontal(|ui| {
                     ui.set_height(ui.available_height());
-                    ui.add_enabled_ui(self.storage_error.is_none(), |ui| {
-                        sidebar(ui, self);
-                        ui.separator();
-                        main_panel(ui, self);
-                    });
+                    ui.add_enabled_ui(
+                        self.storage_error.is_none() && !self.import_flow.busy(),
+                        |ui| {
+                            sidebar(ui, self);
+                            ui.separator();
+                            main_panel(ui, self);
+                        },
+                    );
                 });
             });
 
@@ -1005,6 +917,7 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
                     app.draft = Draft::default();
                     app.adding = true;
                 }
+                if ui.add_enabled(!app.import_flow.active(), egui::Button::new("Importar libros…")).clicked() { app.begin_import(Vec::new()); }
                 if !app.notice.is_empty() {
                     ui.label(RichText::new(&app.notice).size(11.0).color(MUTED));
                 }
