@@ -87,11 +87,11 @@ No se encontraron: lectura integrada de EPUB/PDF; miniaturas de portadas; visual
 
 **PROD-006 APROBADA (2026-11-23):** consentimiento expreso por libro y revocable (opción B) antes de transmitir su contenido a proveedores externos de IA. Debe informarse el proveedor y los datos enviados, minimizar los fragmentos transmitidos y respetar la revocación para futuras consultas. El comportamiento de clasificación por metadatos ya existente es distinto. **Esta política todavía no está implementada.**
 
-**PROD-007 APROBADA (2026-11-23):** MyCalibro será una aplicación de escritorio **solo Windows** (opción A). Separadamente, el propietario quiere que **BibliotecaAI para Android** pueda conectarse a la biblioteca MyCalibro alojada en **Google Drive**, usando BibliotecaAI como aplicación cliente, sin portar MyCalibro a Android. Debe preservarse la directriz preexistente de BibliotecaAI de acceso a Drive mediante SAF, sin OAuth/Gmail propio. Esta interoperabilidad **no se ha implementado ni verificado**. No confundir la biblioteca viva con el ZIP de copia de seguridad de Android, ni con la integración puntual desde Calibre de PROD-003.
+**PROD-007 APROBADA Y ACLARADA (2026-11-23):** MyCalibro será exclusivamente Windows (opción A). Se desea que su biblioteca pueda residir en una carpeta elegida por el usuario, incluida una sincronizada con Google Drive. **No** se requiere ninguna integración entre aplicaciones, API de Drive ni sistema de conexión remoto; la idea anterior de interoperabilidad quedó expresamente descartada. Las carpetas sincronizadas presentan riesgos de concurrencia y no equivalen a una copia de seguridad. La selección y traslado seguro de biblioteca aún requieren implementación.
 
-**Siguiente decisión abierta (PROD-008):** tipo de acceso desde BibliotecaAI a la biblioteca en Drive: consulta/descarga, intercambio de progreso o edición bidireccional.
+**Siguiente decisión abierta (PROD-008):** alcance de las copias de seguridad y restauración: solo catálogo, catálogo y libros administrados, o copia completa configurable que permita incluir también libros externos.
 
-**Siguientes ejes posteriores, sin aprobar:** diseño técnico de biblioteca Drive y SAF; sincronización/backup y compatibilidad offline; instalación y actualizaciones.
+**Siguientes ejes posteriores, sin aprobar:** organización y ubicación de carpetas, importación masiva, integridad y recuperación, instalación y actualizaciones.
 
 ## 8. Continuidad
 Toda propuesta futura se comparará con este inventario. Una decisión aceptada actualizará la documentación; un cambio de código exigirá pruebas proporcionales al riesgo y evidencia verificable. Mantener main como rama normal y evitar ramas salvo cambios críticos. No tocar archivos reales ni datos del usuario sin una estrategia de preservación.
