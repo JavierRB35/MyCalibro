@@ -83,9 +83,11 @@ impl EpubDocument {
             if !es_documento_html(&contenido) {
                 return Err(format!("El capítulo {zip_path} no contiene HTML legible"));
             }
-            let (titulo_capitulo, parrafos) = html_a_parrafos(&contenido);
+            let (titulo_capitulo, mut parrafos) = html_a_parrafos(&contenido);
             if parrafos.is_empty() && titulo_capitulo.is_none() {
-                return Err(format!("El capítulo {zip_path} no contiene texto legible"));
+                // Una portada/capítulo ilustrado puede ser XHTML válido.
+                // Conservarlo en el orden del spine, sin simular el texto de la imagen.
+                parrafos.push("Página sin texto; imagen no representada en este lector".into());
             }
             chapters.push(Chapter {
                 title: titulo_capitulo,
@@ -102,16 +104,26 @@ impl EpubDocument {
         })
     }
 
-    /// Comprueba el tamaño antes de leer todo el archivo de origen.
+    /// Limita también la lectura efectiva: el fichero puede crecer después
+    /// de consultar sus metadatos si otro proceso lo modifica.
     pub fn from_path(path: &Path) -> Result<Self, String> {
-        let length = std::fs::metadata(path)
+        let file = std::fs::File::open(path)
+            .map_err(|error| format!("No se pudo abrir el archivo: {error}"))?;
+        if file
+            .metadata()
             .map_err(|error| format!("No se pudo consultar el archivo: {error}"))?
-            .len();
-        if length > MAX_EPUB_BYTES as u64 {
+            .len()
+            > MAX_EPUB_BYTES as u64
+        {
             return Err("El EPUB supera el límite de tamaño (64 MiB)".into());
         }
-        let data =
-            std::fs::read(path).map_err(|error| format!("No se pudo leer el archivo: {error}"))?;
+        let mut data = Vec::new();
+        file.take(MAX_EPUB_BYTES as u64 + 1)
+            .read_to_end(&mut data)
+            .map_err(|error| format!("No se pudo leer el archivo: {error}"))?;
+        if data.len() > MAX_EPUB_BYTES {
+            return Err("El EPUB supera el límite de tamaño (64 MiB)".into());
+        }
         Self::from_bytes(&data)
     }
 
@@ -844,6 +856,41 @@ pub(crate) mod tests {
         let huge = "a".repeat(MAX_OPF_BYTES as usize + 1);
         let file = fixture(container, "OPS/content.opf", &huge, &[]);
         assert!(EpubDocument::from_bytes(&file).unwrap_err().contains("demasiado grande"));
+    }
+
+
+    #[test]
+    fn imagen_sin_texto_conserva_su_posicion_y_no_oculta_el_capitulo_siguiente() {
+        let container = "<container><rootfiles><rootfile full-path='OPS/content.opf'/></rootfiles></container>";
+        let opf = "<package><manifest>\
+        <item id='cover' href='portada.xhtml' media-type='application/xhtml+xml'/>\
+        <item id='content' href='texto.xhtml' media-type='application/xhtml+xml'/>\
+        </manifest><spine><itemref idref='cover'/><itemref idref='content'/></spine></package>";
+        let epub = fixture(
+            container,
+            "OPS/content.opf",
+            opf,
+            &[
+                ("OPS/portada.xhtml", "<html><body><img src='cover.jpg'/></body></html>"),
+                ("OPS/texto.xhtml", "<html><body><p>Capítulo legible.</p></body></html>"),
+            ],
+        );
+        let book = EpubDocument::from_bytes(&epub).unwrap();
+        assert_eq!(book.chapters.len(), 2, "no se omiten capítulos del spine");
+        assert_eq!(
+            book.chapters[0].paragraphs,
+            vec!["Página sin texto; imagen no representada en este lector"]
+        );
+        assert_eq!(book.chapters[1].paragraphs, vec!["Capítulo legible."]);
+    }
+
+    #[test]
+    fn from_path_rechaza_archivos_mas_grandes_antes_de_cargarlos() {
+        let tmp = tempfile::NamedTempFile::new().unwrap();
+        tmp.as_file().set_len(MAX_EPUB_BYTES as u64 + 1).unwrap();
+        assert!(EpubDocument::from_path(tmp.path())
+            .unwrap_err()
+            .contains("supera el límite"));
     }
 
 }
