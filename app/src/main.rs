@@ -1066,6 +1066,21 @@ fn nav_button(ui: &mut egui::Ui, title: &str, count: usize, active: bool) -> boo
     response.clicked()
 }
 
+/// Reserva espacio para varias fichas en la biblioteca, en vez de encoger el
+/// listado a la altura mínima de una única tarjeta.
+fn library_list_size(available: egui::Vec2) -> egui::Vec2 {
+    egui::vec2(
+        (available.x - 48.0).max(200.0),
+        (available.y - 8.0).max(120.0),
+    )
+}
+
+fn library_list_scroll_area() -> egui::ScrollArea {
+    egui::ScrollArea::vertical()
+        .id_salt("book_list")
+        .auto_shrink([false, false])
+}
+
 fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
     ui.vertical(|ui| {
         ui.add_space(24.0);
@@ -1161,13 +1176,17 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
             );
         });
         ui.add_space(8.0);
+        // El scroll necesita un alto explícito: un UI anidado en horizontal
+        // puede encogerse a una sola fila aunque haya cientos de libros.
+        let list_size = library_list_size(ui.available_size());
         ui.horizontal(|ui| {
             ui.add_space(24.0);
-            ui.vertical(|ui| {
-                ui.set_min_width(ui.available_width());
-                egui::ScrollArea::vertical()
-                    .id_salt("book_list")
-                    .show(ui, |ui| {
+            ui.allocate_ui_with_layout(
+                list_size,
+                egui::Layout::top_down(egui::Align::Min),
+                |ui| {
+                    library_list_scroll_area().show(ui, |ui| {
+                        ui.set_min_width(ui.available_width());
                         for book in &filtered {
                             let active = app.selected == Some(book.id);
                             egui::Frame::new()
@@ -1240,7 +1259,8 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
                             );
                         }
                     });
-            });
+                },
+            );
             ui.add_space(24.0);
         });
         ui.add_space(8.0);
@@ -2015,6 +2035,7 @@ fn screenshot_argument() -> Result<Option<PathBuf>, String> {
 #[cfg(test)]
 mod tests {
     use super::{automatic_topic, classify_with_fallback, device_profile, is_supported_book, Book};
+    use eframe::egui;
 
     #[cfg(windows)]
     #[test]
@@ -2092,6 +2113,46 @@ mod tests {
         let item = book("Notas", "un día tranquilo");
         let error = classify_with_fallback(&item, "", "").unwrap_err();
         assert!(error.contains("Gemini") && error.contains("Groq"));
+    }
+
+    #[test]
+    fn library_list_uses_available_height_instead_of_one_row() {
+        let ctx = egui::Context::default();
+        let mut measured_height = 0.0;
+        let _ = ctx.run(
+            egui::RawInput {
+                screen_rect: Some(egui::Rect::from_min_size(
+                    egui::Pos2::ZERO,
+                    egui::vec2(1200.0, 800.0),
+                )),
+                ..Default::default()
+            },
+            |ctx| {
+                egui::CentralPanel::default().show(ctx, |ui| {
+                    ui.add_space(200.0); // cabecera, buscador y filtros
+                    let size = super::library_list_size(ui.available_size());
+                    ui.horizontal(|ui| {
+                        ui.add_space(24.0);
+                        ui.allocate_ui_with_layout(
+                            size,
+                            egui::Layout::top_down(egui::Align::Min),
+                            |ui| {
+                                let output = super::library_list_scroll_area().show(ui, |ui| {
+                                    for number in 0..35 {
+                                        ui.label(format!("Libro {number}"));
+                                    }
+                                });
+                                measured_height = output.inner_rect.height();
+                            },
+                        );
+                    });
+                });
+            },
+        );
+        assert!(
+            measured_height > 350.0,
+            "el listado se ha encogido a {measured_height} puntos"
+        );
     }
 
     #[test]
