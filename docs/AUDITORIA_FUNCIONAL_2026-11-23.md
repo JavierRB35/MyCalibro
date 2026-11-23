@@ -69,11 +69,11 @@ No se encontraron: lectura integrada de EPUB/PDF; miniaturas de portadas; visual
 2. Corregir el envío a lectores: preservar extensión real al copiar formatos compatibles; convertir solo cuando haga falta; validar resultado y errores.
 3. Mejorar importación: selector, carpetas, progreso, no bloquear interfaz, integridad, duplicados y ubicación administrada de libros.
 4. Ampliar metadatos, portadas, colecciones, filtros, operaciones masivas e interoperabilidad Calibre.
-5. Decidir si incorporar un lector propio con progreso, notas, subrayados, OCR/IA; esto cambia sustancialmente el alcance.
+5. Incorporar el lector básico EPUB/PDF aprobado (PROD-004), con navegación, preferencias de visualización y última posición; no presupone notas, subrayados ni OCR.
 6. Preparar empaquetado, pruebas reales y mantenimiento continuo.
 
 ## 7. Dirección de producto y debate vigente
-**PROD-001 APROBADA (2026-11-23):** MyCalibro evolucionará a una **plataforma integral de biblioteca, lectura e inteligencia artificial (opción C)**. Incluye como horizonte funcional gestión avanzada de libros y dispositivos, lectura integrada, anotaciones y funciones de IA. Esta decisión es de producto, **no equivale a afirmar que esas funciones estén implementadas ni autoriza cambios de código sin especificar su alcance**. El inventario de los apartados anteriores mantiene su valor como estado actual.
+**PROD-001 APROBADA (2026-11-23):** MyCalibro evolucionará a una **plataforma integral de biblioteca, lectura e inteligencia artificial (opción C)**. Incluye como horizonte funcional gestión avanzada de libros y dispositivos, lectura integrada y funciones de IA; el alcance concreto del lector está delimitado por PROD-004. Esta decisión es de producto, **no equivale a afirmar que esas funciones estén implementadas ni autoriza cambios de código sin especificar su alcance**. El inventario de los apartados anteriores mantiene su valor como estado actual.
 
 **Registro canónico de decisiones:** [docs/DECISIONES_PRODUCTO.md](DECISIONES_PRODUCTO.md). Las futuras decisiones aprobadas se registrarán allí y deberán respetar el protocolo recogido en AGENTS.md.
 
@@ -81,9 +81,11 @@ No se encontraron: lectura integrada de EPUB/PDF; miniaturas de portadas; visual
 
 **PROD-003 APROBADA (2026-11-23):** importación puntual desde Calibre (opción A). Los libros y metadatos se importarán sin escrituras a la biblioteca de origen y **sin sincronización posterior**; el catálogo de cada aplicación evolucionará de forma independiente. El modo de almacenamiento administrado/vinculado sigue lo dispuesto en PROD-002. **Aún no implementado**: no confundir con la importación actual de archivos individuales.
 
-**Siguiente decisión abierta (PROD-004):** alcance del lector integrado: básico, premium o avanzado con OCR e IA.
+**PROD-004 APROBADA (2026-11-23):** lector básico EPUB/PDF (opción A), con navegación, preferencias de visualización y recuperación de posición. No incluye subrayados, notas, OCR ni IA contextual dentro del lector. **Aún no implementado**.
 
-**Siguientes ejes posteriores, sin aprobar:** alcance de IA y privacidad; Windows o multiplataforma; sincronización interna/backup; instalación y actualizaciones.
+**Siguiente decisión abierta (PROD-005):** alcance de IA fuera del lector: organización bibliográfica, análisis por libro o consultas sobre la biblioteca completa.
+
+**Siguientes ejes posteriores, sin aprobar:** privacidad y procesamiento de IA; Windows o multiplataforma; sincronización interna/backup; instalación y actualizaciones.
 
 ## 8. Continuidad
 Toda propuesta futura se comparará con este inventario. Una decisión aceptada actualizará la documentación; un cambio de código exigirá pruebas proporcionales al riesgo y evidencia verificable. Mantener main como rama normal y evitar ramas salvo cambios críticos. No tocar archivos reales ni datos del usuario sin una estrategia de preservación.
