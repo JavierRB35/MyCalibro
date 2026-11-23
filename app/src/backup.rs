@@ -136,7 +136,7 @@ pub fn create(
     destination_parent: &Path,
     include_external: bool,
 ) -> Result<BackupReport, String> {
-    crate::persistence::decode(catalog)?;
+    let decoded_books = crate::persistence::decode(catalog)?;
     let root = fs::canonicalize(root).map_err(|e| e.to_string())?;
     let parent = fs::canonicalize(destination_parent).map_err(|e| e.to_string())?;
     if parent.starts_with(&root) {
@@ -175,6 +175,20 @@ pub fn create(
     }
     let mut managed = HashSet::new();
     let mut linked = HashSet::new();
+    for cover in decoded_books
+        .iter()
+        .filter_map(|b| b.bibliography.cover.as_ref())
+    {
+        if cover.mode != StorageMode::Managed {
+            return Err("La portada debe ser un recurso administrado".into());
+        }
+        let source = cover.resolve(&root)?;
+        if storage::hash_file(&source)? != cover.sha256 {
+            return Err("La portada ha cambiado desde su importación".into());
+        }
+        managed.insert(cover.path.clone());
+        files.push(cover.path.clone());
+    }
     for book in &values {
         if let Some(path) = book["file_path"].as_str() {
             if let Ok(path) = fs::canonicalize(path) {
@@ -317,7 +331,15 @@ fn read_verified(backup: &Path) -> Result<Manifest, String> {
     }
     let books = crate::persistence::decode(&catalog_snapshot(backup, &manifest)?)?;
     for book in &books {
-        for file in &book.files {
+        if book
+            .bibliography
+            .cover
+            .as_ref()
+            .is_some_and(|cover| cover.mode != StorageMode::Managed)
+        {
+            return Err("Portada no administrada en el catálogo respaldado".into());
+        }
+        for file in book.files.iter().chain(book.bibliography.cover.iter()) {
             if file.mode == StorageMode::Managed {
                 let relative = PathBuf::from("library").join(&file.path);
                 storage::safe_join(backup, &relative)?;
@@ -453,6 +475,13 @@ pub fn restore(backup: &Path, destination_parent: &Path) -> Result<BackupReport,
         }
     }
     let (mut destination, _) = crate::persistence::Catalog::open(stage.path())?;
+    for cover in books.iter().filter_map(|b| b.bibliography.cover.as_ref()) {
+        if cover.mode != StorageMode::Managed
+            || storage::hash_file(&cover.resolve(stage.path())?)? != cover.sha256
+        {
+            return Err("Portada corrupta tras restaurar".into());
+        }
+    }
     destination.save(&books)?;
     drop(destination);
     Ok(BackupReport {
