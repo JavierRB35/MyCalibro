@@ -20,6 +20,10 @@
 //! vigente; cada fotograma llama a `show(ctx, manager)` y consulta
 //! `pending_id()` para saber si el análisis debe esperar.
 
+// El diálogo se activa cuando el usuario pide un análisis; el motor de
+// análisis por libro está pendiente de integración (issue #1).
+#![allow(dead_code)]
+
 use eframe::egui;
 
 use crate::ai_consent::{consent_notice, ConsentManager, ConsentStatus, Provider};

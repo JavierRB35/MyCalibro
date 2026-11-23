@@ -238,7 +238,8 @@ impl ImportWizardView {
             .map(|outcome| outcome.reviews.clone())
             .unwrap_or_default();
         egui::ScrollArea::vertical()
-            .auto_shrink(false)
+            .max_height((ui.available_height() - 110.0).max(100.0))
+            .auto_shrink([false, true])
             .show(ui, |ui| {
                 for (index, review) in reviews.iter().enumerate() {
                     ui.push_id(index, |ui| {
@@ -340,7 +341,7 @@ impl ImportWizardView {
             }
         });
         ui.add_space(4.0);
-        if ui.button("Generar plan de importación").clicked() {
+        if ui.button("Confirmar importación revisada").clicked() {
             match self.wizard.build_plan() {
                 Ok(plan) => {
                     self.mensaje = None;
