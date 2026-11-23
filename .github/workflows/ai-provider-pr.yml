@@ -1,0 +1,41 @@
+name: AI provider pull-request checks
+on:
+  pull_request:
+    paths:
+      - 'app/src/ai_provider.rs'
+      - 'app/src/analysis_backend.rs'
+      - 'app/src/main.rs'
+      - '.github/workflows/ai-provider-pr.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ai:
+    runs-on: windows-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: app
+          cache-on-failure: true
+      - name: Check formatting
+        working-directory: app
+        run: cargo fmt --check
+      - name: Check provider contracts
+        working-directory: app
+        run: cargo test --locked ai_provider::tests -- --test-threads=1
+      - name: Check analysis validation and fallback
+        working-directory: app
+        run: cargo test --locked analysis_backend::tests -- --test-threads=1
+      - name: Check no-key behavior
+        working-directory: app
+        run: cargo test --locked tests::fallback_requires_an_api_key_from_either_provider -- --exact
+      - name: Check integrated Windows build
+        working-directory: app
+        run: cargo check --locked
