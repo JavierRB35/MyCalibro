@@ -159,6 +159,24 @@ mod tests {
         );
         assert_eq!(fs::read(source).unwrap(), b"original");
         assert_eq!(fs::read(cover).unwrap(), b"original cover");
+        fs::write(
+            books[0]
+                .bibliography
+                .cover
+                .as_ref()
+                .unwrap()
+                .resolve(root.path())
+                .unwrap(),
+            b"changed cover",
+        )
+        .unwrap();
+        assert!(crate::backup::create(
+            root.path(),
+            &serde_json::to_vec(&books).unwrap(),
+            output.path(),
+            true
+        )
+        .is_err());
     }
 }
 
