@@ -87,9 +87,11 @@ No se encontraron: lectura integrada de EPUB/PDF; miniaturas de portadas; visual
 
 **PROD-006 APROBADA (2026-11-23):** consentimiento expreso por libro y revocable (opción B) antes de transmitir su contenido a proveedores externos de IA. Debe informarse el proveedor y los datos enviados, minimizar los fragmentos transmitidos y respetar la revocación para futuras consultas. El comportamiento de clasificación por metadatos ya existente es distinto. **Esta política todavía no está implementada.**
 
-**Siguiente decisión abierta (PROD-007):** plataformas objetivo: Windows, escritorio multiplataforma o escritorio y móvil.
+**PROD-007 APROBADA (2026-11-23):** MyCalibro será una aplicación de escritorio **solo Windows** (opción A). Separadamente, el propietario quiere que **BibliotecaAI para Android** pueda conectarse a la biblioteca MyCalibro alojada en **Google Drive**, usando BibliotecaAI como aplicación cliente, sin portar MyCalibro a Android. Debe preservarse la directriz preexistente de BibliotecaAI de acceso a Drive mediante SAF, sin OAuth/Gmail propio. Esta interoperabilidad **no se ha implementado ni verificado**. No confundir la biblioteca viva con el ZIP de copia de seguridad de Android, ni con la integración puntual desde Calibre de PROD-003.
 
-**Siguientes ejes posteriores, sin aprobar:** sincronización interna/backup; instalación y actualizaciones.
+**Siguiente decisión abierta (PROD-008):** tipo de acceso desde BibliotecaAI a la biblioteca en Drive: consulta/descarga, intercambio de progreso o edición bidireccional.
+
+**Siguientes ejes posteriores, sin aprobar:** diseño técnico de biblioteca Drive y SAF; sincronización/backup y compatibilidad offline; instalación y actualizaciones.
 
 ## 8. Continuidad
 Toda propuesta futura se comparará con este inventario. Una decisión aceptada actualizará la documentación; un cambio de código exigirá pruebas proporcionales al riesgo y evidencia verificable. Mantener main como rama normal y evitar ramas salvo cambios críticos. No tocar archivos reales ni datos del usuario sin una estrategia de preservación.
