@@ -89,7 +89,9 @@ fn resolve_format(root: &Path, relative: &Path) -> Result<Option<PathBuf>, Strin
         match matches.len() {
             0 => return Ok(None),
             1 => resolved.push(&matches[0]),
-            _ => return Err("Nombre ambiguo: varios archivos coinciden ignorando mayúsculas".into()),
+            _ => {
+                return Err("Nombre ambiguo: varios archivos coinciden ignorando mayúsculas".into())
+            }
         }
     }
     let candidate = storage::safe_join(root, &resolved)?;
