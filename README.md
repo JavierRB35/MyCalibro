@@ -9,13 +9,15 @@ Biblioteca de escritorio sencilla («Mis libros») hecha en Rust con eframe/egui
 ```
 .
 ├── app/                  # Aplicación (crate Rust)
-│   ├── src/main.rs       # Código fuente completo de la app
+│   ├── src/main.rs       # Interfaz y coordinación de la app
+│   ├── src/persistence.rs # Catálogo seguro y recuperación
+│   ├── src/transfer.rs    # Transferencias validadas sin sobrescritura
 │   ├── Cargo.toml        # Manifiesto y dependencias
 │   ├── Cargo.lock        # Versiones bloqueadas de dependencias
 │   ├── README.md         # Cómo ejecutar la aplicación
 │   ├── MECHANICS.md      # Mecánicas investigadas del Calibre original
 │   ├── mechanics.json    # Valores de mecánicas con su fuente
-│   ├── library.json      # Datos de la biblioteca (la app guarda aquí)
+│   ├── library.json      # Fixture histórico; no se carga ni modifica automáticamente
 │   └── shots/            # Capturas generadas por la propia app
 ├── capture/              # Análisis del ejecutable original de Calibre
 ├── checks/               # Capturas de las verificaciones de compilación
@@ -36,4 +38,4 @@ Requiere [Rust](https://rustup.rs). Desde la carpeta `app/`:
 cargo run
 ```
 
-Los cambios se guardan automáticamente en `app/library.json`. Para más detalles (importación con IA, capturas sin foco, lectores compatibles), consulta [`app/README.md`](app/README.md).
+La biblioteca nueva comienza vacía en `%LOCALAPPDATA%\MyCalibro` (Windows). Puede elegirse otra carpeta desde la ventana; la elección se recuerda. Los catálogos antiguos se importan explícitamente a una carpeta vacía. El JSON del repositorio no se carga ni modifica automáticamente. Para más detalles (importación con IA, capturas sin foco, lectores compatibles), consulta [`app/README.md`](app/README.md).

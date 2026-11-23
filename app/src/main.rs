@@ -1,3 +1,6 @@
+mod persistence;
+mod transfer;
+
 use eframe::egui::{self, Color32, RichText, Stroke, Vec2};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
@@ -16,6 +19,7 @@ const SUPPORTED_BOOK_EXTENSIONS: &[&str] = &[
 ];
 
 #[derive(Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 struct Book {
     id: u64,
     title: String,
@@ -79,6 +83,7 @@ struct EbookDevice {
 }
 
 struct AiTaskResult {
+    library_generation: u64,
     book_id: u64,
     result: Result<(String, Vec<String>), String>,
 }
@@ -96,7 +101,12 @@ struct LibraryApp {
     draft: Draft,
     adding: bool,
     notice: String,
-    data_path: PathBuf,
+    catalog: Option<persistence::Catalog>,
+    storage_error: Option<String>,
+    library_folder: PathBuf,
+    library_generation: u64,
+    confirm_exit: bool,
+    discard_on_exit: bool,
     screenshot_path: Option<PathBuf>,
     frame_count: u32,
     screenshot_requested: bool,
@@ -119,17 +129,12 @@ struct LibraryApp {
 
 impl LibraryApp {
     fn new(screenshot_path: Option<PathBuf>) -> Self {
-        let data_path = data_file_path();
-        let books = match std::fs::read(&data_path) {
-            Ok(bytes) => serde_json::from_slice(&bytes).unwrap_or_else(|error| {
-                eprintln!("No se pudo leer la biblioteca local: {error}");
-                sample_books()
-            }),
-            Err(error) if error.kind() == std::io::ErrorKind::NotFound => sample_books(),
-            Err(error) => {
-                eprintln!("No se pudo abrir la biblioteca local: {error}");
-                sample_books()
-            }
+        let folder_result = persistence::startup_folder();
+        let library_folder = folder_result.as_ref().cloned().unwrap_or_default();
+        let opened = folder_result.and_then(|folder| persistence::Catalog::open(&folder));
+        let (catalog, books, storage_error) = match opened {
+            Ok((catalog, books)) => (Some(catalog), books, None),
+            Err(error) => (None, Vec::new(), Some(error)),
         };
         let selected = books.first().map(|book| book.id);
         let (task_sender, task_receiver) = mpsc::channel();
@@ -143,7 +148,12 @@ impl LibraryApp {
             draft: Draft::default(),
             adding: false,
             notice: String::new(),
-            data_path,
+            catalog,
+            storage_error,
+            library_folder,
+            library_generation: 0,
+            confirm_exit: false,
+            discard_on_exit: false,
             screenshot_path,
             frame_count: 0,
             screenshot_requested: false,
@@ -166,12 +176,36 @@ impl LibraryApp {
     }
 
     fn save(&mut self) {
-        match serde_json::to_vec_pretty(&self.books) {
-            Ok(bytes) => match std::fs::write(&self.data_path, bytes) {
-                Ok(()) => self.notice = "Biblioteca guardada".to_owned(),
-                Err(error) => self.notice = format!("No se pudo guardar: {error}"),
-            },
-            Err(error) => self.notice = format!("No se pudo preparar el archivo: {error}"),
+        let result = self
+            .catalog
+            .as_mut()
+            .ok_or_else(|| "Biblioteca bloqueada".to_owned())
+            .and_then(|catalog| catalog.save(&self.books));
+        match result {
+            Ok(()) => {
+                self.storage_error = None;
+                self.notice = "Biblioteca guardada".into();
+            }
+            Err(error) => self.storage_error = Some(error),
+        }
+    }
+
+    fn open_library(&mut self, folder: PathBuf) {
+        match persistence::Catalog::open(&folder) {
+            Ok((catalog, books)) => {
+                self.catalog = Some(catalog);
+                self.books = books;
+                self.selected = self.books.first().map(|b| b.id);
+                self.notice = match persistence::remember_folder(&folder) {
+                    Ok(()) => "Biblioteca abierta".into(),
+                    Err(error) => format!("Abierta, pero no se pudo recordar la carpeta: {error}"),
+                };
+                self.library_folder = folder;
+                self.library_generation = self.library_generation.wrapping_add(1);
+                self.storage_error = None;
+                self.adding = false;
+            }
+            Err(error) => self.notice = error,
         }
     }
 
@@ -212,6 +246,9 @@ impl LibraryApp {
     }
 
     fn import_book(&mut self, path: PathBuf, ctx: &egui::Context) {
+        if self.storage_error.is_some() {
+            return;
+        }
         if !is_supported_book(&path) {
             self.notice = format!(
                 "No reconozco el formato de {}",
@@ -276,6 +313,9 @@ impl LibraryApp {
     }
 
     fn start_classification(&mut self, book_id: u64, ctx: egui::Context) {
+        if self.storage_error.is_some() {
+            return;
+        }
         let gemini_key = load_api_key("Gemini");
         let groq_key = load_api_key("Groq");
         if gemini_key.is_empty() && groq_key.is_empty() {
@@ -289,13 +329,18 @@ impl LibraryApp {
             return;
         };
         let sender = self.task_sender.clone();
+        let library_generation = self.library_generation;
         self.ai_status = format!(
             "Clasificando «{}» con Gemini; Groq queda como alternativa…",
             book.title
         );
         std::thread::spawn(move || {
             let result = classify_with_fallback(&book, &gemini_key, &groq_key);
-            let _ = sender.send(AiTaskResult { book_id, result });
+            let _ = sender.send(AiTaskResult {
+                library_generation,
+                book_id,
+                result,
+            });
             ctx.request_repaint();
         });
     }
@@ -323,6 +368,9 @@ impl LibraryApp {
 
     fn receive_classifications(&mut self) {
         while let Ok(task) = self.task_receiver.try_recv() {
+            if task.library_generation != self.library_generation {
+                continue;
+            }
             match task.result {
                 Ok((topic, tags)) => {
                     if let Some(book) = self.books.iter_mut().find(|book| book.id == task.book_id) {
@@ -341,6 +389,9 @@ impl LibraryApp {
                             book.title
                         );
                         self.save();
+                        if self.storage_error.is_some() {
+                            break;
+                        }
                     }
                 }
                 Err(error) => self.ai_status = format!("No se pudo clasificar: {error}"),
@@ -351,7 +402,63 @@ impl LibraryApp {
 
 impl eframe::App for LibraryApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        self.receive_classifications();
+        if ctx.input(|i| i.viewport().close_requested())
+            && self.storage_error.is_some()
+            && self.catalog.is_some()
+            && !self.discard_on_exit
+        {
+            ctx.send_viewport_cmd(egui::ViewportCommand::CancelClose);
+            self.confirm_exit = true;
+        }
+        if self.confirm_exit {
+            egui::Window::new("Cambios sin guardar").collapsible(false).show(ctx, |ui| {
+                ui.label("Hay cambios en memoria que no se han guardado. Puede volver y exportarlos a una carpeta vacía.");
+                if ui.button("Volver para guardar/exportar").clicked() { self.confirm_exit = false; }
+                if ui.button("Cerrar y descartar cambios pendientes").clicked() {
+                    self.discard_on_exit = true;
+                    ctx.send_viewport_cmd(egui::ViewportCommand::Close);
+                }
+            });
+        }
+        if self.storage_error.is_none() {
+            self.receive_classifications();
+        }
+        egui::TopBottomPanel::top("storage_status").show(ctx, |ui| {
+            ui.label(format!("Biblioteca: {}", self.library_folder.display()));
+            if let Some(error) = self.storage_error.clone() {
+                ui.colored_label(Color32::DARK_RED, format!("Guardado bloqueado: {error}"));
+                ui.label("Los archivos originales se conservan. Los cambios pendientes siguen en memoria.");
+                if self.catalog.is_some() && ui.button("Reintentar guardado").clicked() { self.save(); }
+                if self.catalog.is_some() && ui.button("Exportar cambios pendientes…").clicked() {
+                    if let Some(folder) = rfd::FileDialog::new().pick_folder() {
+                        let result = (|| -> Result<(), String> {
+                            if std::fs::read_dir(&folder).map_err(|e| e.to_string())?.next().is_some() {
+                                return Err("Elija una carpeta vacía".into());
+                            }
+                            let (mut destination, _) = persistence::Catalog::open(&folder)?;
+                            destination.save(&self.books)
+                        })();
+                        self.notice = result.map(|_| "Cambios exportados; el catálogo original no se ha sustituido".into()).unwrap_or_else(|e| e);
+                    }
+                }
+            }
+            // Do not abandon unsaved edits when switching libraries.
+            let can_switch = self.storage_error.is_none() || self.catalog.is_none();
+            if ui.add_enabled(can_switch, egui::Button::new("Abrir carpeta de biblioteca…")).clicked() {
+                if let Some(folder) = rfd::FileDialog::new().pick_folder() { self.open_library(folder); }
+            }
+            if ui.add_enabled(can_switch, egui::Button::new("Recuperar/importar catálogo antiguo…")).clicked() {
+                if let Some(source) = rfd::FileDialog::new().add_filter("Catálogo JSON", &["json"]).pick_file() {
+                    if let Some(folder) = rfd::FileDialog::new().set_title("Seleccione una carpeta VACÍA para recuperar").pick_folder() {
+                        match persistence::recover_into(&source, &folder) {
+                            Ok(()) => self.open_library(folder),
+                            Err(error) => self.notice = error,
+                        }
+                    }
+                }
+            }
+            if !self.notice.is_empty() { ui.label(&self.notice); }
+        });
         while let Ok(transfer) = self.transfer_receiver.try_recv() {
             self.notice = transfer.message;
         }
@@ -413,13 +520,15 @@ impl eframe::App for LibraryApp {
             .show(ctx, |ui| {
                 ui.horizontal(|ui| {
                     ui.set_height(ui.available_height());
-                    sidebar(ui, self);
-                    ui.separator();
-                    main_panel(ui, self);
+                    ui.add_enabled_ui(self.storage_error.is_none(), |ui| {
+                        sidebar(ui, self);
+                        ui.separator();
+                        main_panel(ui, self);
+                    });
                 });
             });
 
-        if self.adding {
+        if self.adding && self.storage_error.is_none() {
             add_book_window(ctx, self);
         }
         if self.converting {
@@ -570,105 +679,22 @@ fn device_library_window(ctx: &egui::Context, app: &mut LibraryApp, root: PathBu
     }
 }
 
-fn device_output_path(device: &EbookDevice, source: &std::path::Path, title: &str) -> PathBuf {
-    let documents = if device.root.join("Documents").is_dir() {
-        device.root.join("Documents")
-    } else {
-        device.root.join("My Documents")
-    };
-    let safe_title: String = title
-        .chars()
-        .map(|ch| {
-            if "<>:\"/\\|?*".contains(ch) || ch.is_control() {
-                '_'
-            } else {
-                ch
-            }
-        })
-        .collect();
-    let stem = if safe_title.trim().is_empty() {
-        source
-            .file_stem()
-            .and_then(|name| name.to_str())
-            .unwrap_or("Libro")
-    } else {
-        safe_title.trim()
-    };
-    let base = documents.join(format!("{stem}.{}", device.output_format));
-    if !base.exists() {
-        return base;
-    }
-    for number in 2..u32::MAX {
-        let candidate = documents.join(format!("{stem} ({number}).{}", device.output_format));
-        if !candidate.exists() {
-            return candidate;
-        }
-    }
-    base
-}
-
 fn transfer_book_to_device(source: &std::path::Path, title: &str, device: &EbookDevice) -> String {
-    if !source.is_file() {
-        return format!("No se encontró el archivo original: {}", source.display());
-    }
     let documents = if device.root.join("Documents").is_dir() {
         device.root.join("Documents")
     } else {
         device.root.join("My Documents")
     };
-    if let Err(error) = std::fs::create_dir_all(&documents) {
-        return format!("No se pudo abrir la biblioteca del lector: {error}");
-    }
-    let output = device_output_path(device, source, title);
-    let current_format = source
-        .extension()
-        .and_then(|ext| ext.to_str())
-        .unwrap_or("")
-        .to_ascii_lowercase();
-    let already_supported = if device.name.starts_with("Kindle") {
-        ["azw3", "mobi", "pdf", "txt"].contains(&current_format.as_str())
-    } else {
-        [device.output_format, "pdf", "txt"].contains(&current_format.as_str())
-    };
-    let result = if already_supported {
-        std::fs::copy(source, &output)
-            .map(|_| ())
-            .map_err(|error| error.to_string())
-    } else if let Some(converter) = find_ebook_converter() {
-        Command::new(converter)
-            .arg(source)
-            .arg(&output)
-            .output()
-            .map_err(|error| error.to_string())
-            .and_then(|result| {
-                if result.status.success() {
-                    Ok(())
-                } else {
-                    let error = String::from_utf8_lossy(&result.stderr).trim().to_owned();
-                    Err(if error.is_empty() {
-                        format!("ebook-convert terminó con {}", result.status)
-                    } else {
-                        error
-                            .lines()
-                            .next()
-                            .unwrap_or("falló la conversión")
-                            .to_owned()
-                    })
-                }
-            })
-    } else {
-        Err("Calibre no está instalado; no se puede convertir este formato".to_owned())
-    };
-    match result {
-        Ok(()) => format!(
-            "«{title}» enviado a {} como {}",
-            device.name,
-            device.output_format.to_uppercase()
-        ),
-        Err(error) => {
-            let _ = std::fs::remove_file(&output);
-            format!("No se pudo enviar «{title}»: {error}")
-        }
+    match transfer::send(
+        source,
+        title,
+        &device.name,
+        device.output_format,
+        &documents,
+        find_ebook_converter().as_deref(),
+    ) {
+        Ok(path) => format!("«{title}» enviado a {}: {}", device.name, path.display()),
+        Err(error) => format!("No se pudo enviar «{title}»: {error}"),
     }
 }
 
@@ -1650,83 +1676,6 @@ fn automatic_topic(book: &Book) -> &'static str {
         .find(|(_, words)| words.iter().any(|word| text.contains(word)))
         .map(|(topic, _)| *topic)
         .unwrap_or("Sin clasificar")
-}
-
-fn sample_books() -> Vec<Book> {
-    vec![
-        Book {
-            id: 1,
-            title: "El mapa de las estrellas".into(),
-            author: "Clara Montes".into(),
-            year: "2022".into(),
-            description: "Un viaje entre planetas y preguntas sobre el universo.".into(),
-            topic: String::new(),
-            file_path: None,
-            tags: vec!["para pensar".into(), "favoritos".into()],
-        },
-        Book {
-            id: 2,
-            title: "La ciudad sumergida".into(),
-            author: "Nicolás Ríos".into(),
-            year: "2019".into(),
-            description: "Un misterio bajo las calles de una ciudad antigua.".into(),
-            topic: String::new(),
-            file_path: None,
-            tags: vec!["lectura pendiente".into()],
-        },
-        Book {
-            id: 3,
-            title: "Jardines del imperio".into(),
-            author: "Elena Sol".into(),
-            year: "2021".into(),
-            description: "Historias y memoria de una época distante.".into(),
-            topic: String::new(),
-            file_path: None,
-            tags: vec!["historia".into()],
-        },
-        Book {
-            id: 4,
-            title: "El bosque encantado".into(),
-            author: "Mateo Luna".into(),
-            year: "2020".into(),
-            description: "Un reino escondido, magia y un dragón dormido.".into(),
-            topic: String::new(),
-            file_path: None,
-            tags: vec!["aventura".into(), "favoritos".into()],
-        },
-        Book {
-            id: 5,
-            title: "Pequeños inventos".into(),
-            author: "Inés Vidal".into(),
-            year: "2023".into(),
-            description: "Ideas sobre robots y tecnología para el día a día.".into(),
-            topic: String::new(),
-            file_path: None,
-            tags: vec!["ideas".into()],
-        },
-        Book {
-            id: 6,
-            title: "Un café en el puerto".into(),
-            author: "Leo Mar".into(),
-            year: "2018".into(),
-            description: "Una novela sobre amistad, viajes y nuevos comienzos.".into(),
-            topic: String::new(),
-            file_path: None,
-            tags: vec!["lectura ligera".into()],
-        },
-    ]
-}
-
-fn data_file_path() -> PathBuf {
-    let executable = std::env::current_exe().ok();
-    executable
-        .and_then(|path| {
-            path.parent()?
-                .parent()?
-                .parent()
-                .map(|root| root.join("library.json"))
-        })
-        .unwrap_or_else(|| PathBuf::from("library.json"))
 }
 
 fn screenshot_argument() -> Result<Option<PathBuf>, String> {
