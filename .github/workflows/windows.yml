@@ -1,6 +1,11 @@
 name: Windows candidate verification
 on:
   workflow_dispatch:
+    inputs:
+      run_tests:
+        description: 'Run tests (disable only when this exact source already has recorded Windows test evidence)'
+        type: boolean
+        default: true
   push:
     tags: ['v*']
 
@@ -20,14 +25,16 @@ jobs:
         with:
           workspaces: app
       - name: Format and tests on candidate
+        if: github.event_name != 'workflow_dispatch' || inputs.run_tests
         working-directory: app
         run: |
           cargo fmt --check
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           cargo test --locked
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          cargo build --release --locked
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Build candidate
+        working-directory: app
+        run: cargo build --release --locked
       - name: Install packaging tool
         run: choco install nsis --yes --no-progress
       - name: Build installer
