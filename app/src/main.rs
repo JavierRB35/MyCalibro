@@ -247,10 +247,44 @@ impl LibraryApp {
         if !avisos_iniciales.is_empty() {
             app.notice = avisos_iniciales;
         }
+        app.apply_reader_preferences();
         app
     }
 
     /// Persiste posiciones y consentimientos de la biblioteca actual.
+    fn apply_reader_preferences(&mut self) {
+        use reader_view::{FontScale, ReaderTheme};
+        let prefs = self.positions.preferences;
+        self.reader.font_scale = match prefs.font_size {
+            0 => FontScale::Small,
+            2 => FontScale::Large,
+            3 => FontScale::ExtraLarge,
+            _ => FontScale::Normal,
+        };
+        self.reader.theme = if prefs.dark {
+            ReaderTheme::Dark
+        } else {
+            ReaderTheme::Light
+        };
+        self.pdf_view.zoom = prefs.pdf_zoom.clamp(0.5, 2.0);
+        self.pdf_view.dark = prefs.pdf_dark;
+    }
+
+    fn current_reader_preferences(&self) -> reading_positions::ReaderPreferences {
+        use reader_view::{FontScale, ReaderTheme};
+        reading_positions::ReaderPreferences {
+            font_size: match self.reader.font_scale {
+                FontScale::Small => 0,
+                FontScale::Normal => 1,
+                FontScale::Large => 2,
+                FontScale::ExtraLarge => 3,
+            },
+            dark: self.reader.theme == ReaderTheme::Dark,
+            pdf_zoom: self.pdf_view.zoom,
+            pdf_dark: self.pdf_view.dark,
+        }
+    }
+
     fn save_library_data(&mut self) -> bool {
         let result = (|| {
             if self.catalog.is_none() {
@@ -294,6 +328,7 @@ impl LibraryApp {
         }
         self.reader.close();
         self.pdf_view.reset();
+        self.apply_reader_preferences();
     }
 
     fn save(&mut self) {
@@ -510,6 +545,13 @@ impl eframe::App for LibraryApp {
             self.positions.set_pdf(book_id, page);
             if self.aux_error.is_none() && self.save_library_data() {
                 self.pdf_view.mark_saved();
+            }
+        }
+        let preferences = self.current_reader_preferences();
+        if preferences != self.positions.preferences {
+            self.positions.preferences = preferences;
+            if self.aux_error.is_none() {
+                self.save_library_data();
             }
         }
         // Consentimiento IA: solo aparece si hay una petición pendiente.

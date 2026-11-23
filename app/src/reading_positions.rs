@@ -8,6 +8,7 @@
 
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
+#[cfg(test)]
 use std::path::{Path, PathBuf};
 
 use crate::reader_epub::ReadingPosition;
@@ -28,8 +29,29 @@ pub struct StoredPosition {
     pub page: Option<u32>,
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(default)]
+pub struct ReaderPreferences {
+    pub font_size: u8,
+    pub dark: bool,
+    pub pdf_zoom: f32,
+    pub pdf_dark: bool,
+}
+impl Default for ReaderPreferences {
+    fn default() -> Self {
+        Self {
+            font_size: 1,
+            dark: false,
+            pdf_zoom: 1.0,
+            pdf_dark: false,
+        }
+    }
+}
+
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 pub struct ReadingPositions {
+    #[serde(default)]
+    pub preferences: ReaderPreferences,
     #[serde(default)]
     positions: BTreeMap<u64, StoredPosition>,
 }
@@ -37,6 +59,7 @@ pub struct ReadingPositions {
 /// Carga el archivo de la carpeta indicada. Un archivo ausente no es error;
 /// uno corrupto se informa y se empieza vacío sin destruirlo (solo una
 /// posición nueva lo reescribe).
+#[cfg(test)]
 pub fn load(folder: &Path) -> (ReadingPositions, Option<String>) {
     let ruta = folder.join(FILE_NAME);
     match std::fs::read(&ruta) {
@@ -54,6 +77,7 @@ pub fn load(folder: &Path) -> (ReadingPositions, Option<String>) {
 }
 
 impl ReadingPositions {
+    #[cfg(test)]
     pub fn save(&self, folder: &Path) -> Result<(), String> {
         let ruta: PathBuf = folder.join(FILE_NAME);
         let bytes = serde_json::to_vec_pretty(self).map_err(|e| e.to_string())?;
@@ -97,6 +121,20 @@ impl ReadingPositions {
 mod tests {
     use super::*;
 
+    #[test]
+    fn old_positions_get_default_preferences_and_new_preferences_roundtrip() {
+        let mut positions: ReadingPositions = serde_json::from_str(r#"{"positions":{}}"#).unwrap();
+        assert_eq!(positions.preferences, ReaderPreferences::default());
+        positions.preferences = ReaderPreferences {
+            font_size: 3,
+            dark: true,
+            pdf_zoom: 1.5,
+            pdf_dark: true,
+        };
+        let restored: ReadingPositions =
+            serde_json::from_slice(&serde_json::to_vec(&positions).unwrap()).unwrap();
+        assert_eq!(restored.preferences, positions.preferences);
+    }
     #[test]
     fn ausente_no_es_error_y_corrupto_se_informa_sin_destruir() {
         let base =
