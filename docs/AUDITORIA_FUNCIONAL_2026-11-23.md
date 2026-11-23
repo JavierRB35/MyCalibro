@@ -79,9 +79,11 @@ No se encontraron: lectura integrada de EPUB/PDF; miniaturas de portadas; visual
 
 **PROD-002 APROBADA (2026-11-23):** sistema híbrido de almacenamiento. MyCalibro deberá admitir libros administrados y libros referenciados externamente, distinguiendo ambos casos y preservando archivos y datos existentes. **Todavía no está implementado**: el inventario anterior describe el estado real del código.
 
-**Siguiente decisión abierta (PROD-003):** modalidad de integración con bibliotecas Calibre: importación puntual, consulta vinculada o sincronización bidireccional controlada.
+**PROD-003 APROBADA (2026-11-23):** importación puntual desde Calibre (opción A). Los libros y metadatos se importarán sin escrituras a la biblioteca de origen y **sin sincronización posterior**; el catálogo de cada aplicación evolucionará de forma independiente. El modo de almacenamiento administrado/vinculado sigue lo dispuesto en PROD-002. **Aún no implementado**: no confundir con la importación actual de archivos individuales.
 
-**Siguientes ejes posteriores, sin aprobar:** lectura/anotaciones; alcance de IA y privacidad; Windows o multiplataforma; sincronización/backup; instalación y actualizaciones.
+**Siguiente decisión abierta (PROD-004):** alcance del lector integrado: básico, premium o avanzado con OCR e IA.
+
+**Siguientes ejes posteriores, sin aprobar:** alcance de IA y privacidad; Windows o multiplataforma; sincronización interna/backup; instalación y actualizaciones.
 
 ## 8. Continuidad
 Toda propuesta futura se comparará con este inventario. Una decisión aceptada actualizará la documentación; un cambio de código exigirá pruebas proporcionales al riesgo y evidencia verificable. Mantener main como rama normal y evitar ramas salvo cambios críticos. No tocar archivos reales ni datos del usuario sin una estrategia de preservación.
