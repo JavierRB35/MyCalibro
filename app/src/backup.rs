@@ -152,9 +152,54 @@ pub fn create(
         external: vec![],
         exclusions: vec![],
     };
+    let mut values: Vec<Value> = serde_json::from_slice(catalog).map_err(|e| e.to_string())?;
     let mut files = Vec::new();
-    collect(&root, Path::new(""), &mut files)?;
+    // Only owned state/resources are part of the library. A selected directory
+    // may also contain unrelated private files or explicitly excluded Linked books.
+    for name in [
+        "library-settings.json",
+        "next-book-id.json",
+        "library.previous.json",
+        "reader.json",
+    ] {
+        let path = storage::safe_join(&root, Path::new(name))?;
+        if path.is_file() {
+            files.push(PathBuf::from(name));
+        }
+    }
+    for name in ["state", "covers", "resources"] {
+        let path = storage::safe_join(&root, Path::new(name))?;
+        if path.is_dir() {
+            collect(&root, Path::new(name), &mut files)?;
+        }
+    }
+    let mut managed = HashSet::new();
+    let mut linked = HashSet::new();
+    for book in &values {
+        if let Some(path) = book["file_path"].as_str() {
+            if let Ok(path) = fs::canonicalize(path) {
+                linked.insert(path);
+            }
+        }
+        if let Some(formats) = book["files"].as_array() {
+            for value in formats {
+                let file: StoredFile =
+                    serde_json::from_value(value.clone()).map_err(|e| e.to_string())?;
+                if file.mode == StorageMode::Managed {
+                    managed.insert(file.path.clone());
+                    files.push(file.path);
+                } else if let Ok(path) = fs::canonicalize(file.resolve(&root)?) {
+                    linked.insert(path);
+                }
+            }
+        }
+    }
+    files.retain(|path| {
+        managed.contains(path)
+            || !fs::canonicalize(root.join(path)).is_ok_and(|p| linked.contains(&p))
+    });
     files.sort();
+    files.dedup();
     for relative in files {
         add_file(
             &storage::safe_join(&root, &relative)?,
@@ -163,7 +208,6 @@ pub fn create(
             &mut manifest,
         )?;
     }
-    let mut values: Vec<Value> = serde_json::from_slice(catalog).map_err(|e| e.to_string())?;
     for book in &mut values {
         let id = book["id"].as_u64().ok_or("ID de libro inválido")?;
         if let Some(path) = book["file_path"].as_str() {
@@ -421,6 +465,28 @@ pub fn restore(backup: &Path, destination_parent: &Path) -> Result<BackupReport,
 mod tests {
     use super::*;
     #[test]
+    fn unrelated_files_and_excluded_links_inside_library_are_not_copied() {
+        let root = tempfile::tempdir().unwrap();
+        let output = tempfile::tempdir().unwrap();
+        fs::create_dir(root.path().join("resources")).unwrap();
+        let linked = root.path().join("resources/linked.txt");
+        fs::write(&linked, b"external even inside root").unwrap();
+        fs::write(
+            root.path().join("unrelated-private.txt"),
+            b"not library data",
+        )
+        .unwrap();
+        let snapshot = create(root.path(), &legacy_catalog(&linked), output.path(), false).unwrap();
+        let manifest = read_verified(&snapshot.path).unwrap();
+        assert_eq!(manifest.entries.len(), 1);
+        assert_eq!(manifest.entries[0].path, Path::new("catalog.json"));
+        assert_eq!(snapshot.exclusions.len(), 1);
+        let restored = restore(&snapshot.path, output.path()).unwrap();
+        assert!(!restored.path.join("resources/linked.txt").exists());
+        assert!(!restored.path.join("unrelated-private.txt").exists());
+        assert_eq!(fs::read(linked).unwrap(), b"external even inside root");
+    }
+    #[test]
     fn managed_and_linked_formats_restore_with_integrity_and_modes() {
         let root = tempfile::tempdir().unwrap();
         let output = tempfile::tempdir().unwrap();
@@ -518,12 +584,16 @@ mod tests {
     fn corrupt_payload_or_traversal_cannot_restore_or_overwrite_existing_data() {
         let root = tempfile::tempdir().unwrap();
         let output = tempfile::tempdir().unwrap();
-        fs::write(root.path().join("settings.json"), b"settings").unwrap();
+        fs::write(root.path().join("library-settings.json"), b"settings").unwrap();
         let snapshot = create(root.path(), b"[]", output.path(), false).unwrap();
-        fs::write(snapshot.path.join("library/settings.json"), b"corrupt").unwrap();
+        fs::write(
+            snapshot.path.join("library/library-settings.json"),
+            b"corrupt",
+        )
+        .unwrap();
         assert!(restore(&snapshot.path, output.path()).is_err());
         assert_eq!(
-            fs::read(root.path().join("settings.json")).unwrap(),
+            fs::read(root.path().join("library-settings.json")).unwrap(),
             b"settings"
         );
         let mut manifest: Value =
