@@ -1821,11 +1821,7 @@ fn classify_with_ai(
             }))
             .send()
             .map_err(|error| error.to_string())?;
-        let body = ai_provider::read_json_response(
-            response,
-            "Gemini",
-            ai_provider::GEMINI_MODEL,
-        )?;
+        let body = ai_provider::read_json_response(response, "Gemini", ai_provider::GEMINI_MODEL)?;
         body["candidates"][0]["content"]["parts"][0]["text"]
             .as_str()
             .ok_or("Gemini no devolvió una clasificación")?
@@ -1843,11 +1839,7 @@ fn classify_with_ai(
             }))
             .send()
             .map_err(|error| error.to_string())?;
-        let body = ai_provider::read_json_response(
-            response,
-            "Groq",
-            ai_provider::GROQ_MODEL,
-        )?;
+        let body = ai_provider::read_json_response(response, "Groq", ai_provider::GROQ_MODEL)?;
         body["choices"][0]["message"]["content"]
             .as_str()
             .ok_or("Groq no devolvió una clasificación")?
