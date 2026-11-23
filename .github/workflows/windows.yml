@@ -31,6 +31,8 @@ jobs:
         run: |
           cargo fmt --check
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cargo test --locked pdf_backend::tests::native_windows_pdf_renders_real_pages_without_modifying_source -- --exact --test-threads=1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           cargo test --locked
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Build candidate
