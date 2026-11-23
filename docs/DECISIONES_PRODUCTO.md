@@ -14,22 +14,32 @@
 - **Implementación en esta decisión:** solo documentación; ningún cambio al código.
 
 ## PROD-002 — Modelo de almacenamiento de libros
+- **Fecha de apertura y aprobación:** 2026-11-23.
+- **Estado:** APROBADA por el propietario.
+- **Alternativa seleccionada:** **C: sistema híbrido de almacenamiento**.
+- **Comportamiento vinculante:** MyCalibro permitirá coexistir libros incorporados a una biblioteca administrada y libros vinculados en sus ubicaciones externas, sin necesidad de copiar estos últimos. La distinción deberá quedar identificable para que el usuario sepa qué archivos controla MyCalibro y cuáles dependen de otras carpetas o gestores.
+- **Objetivo:** mantener compatibilidad con colecciones y carpetas existentes y, a la vez, permitir una biblioteca propia organizada, portable y recuperable. Se conservará la funcionalidad actual mientras se desarrolla la transición.
+- **Seguridad e integridad:** no mover ni borrar archivos originales automáticamente; proteger el catálogo durante la migración. Detectar referencias rotas, diferenciar adecuadamente archivos administrados y externos en los procesos de recuperación y no presentar como completo un backup que omita libros vinculados.
+- **Límites de la decisión:** aún no se ha aprobado el diseño de carpetas, la ubicación por defecto, el modo predeterminado al importar, políticas de duplicados, sincronización, incorporación de archivos externos en copias de seguridad, ni migración precisa de metadatos. Se definirán con criterios técnicos y decisiones posteriores.
+- **Estado de implementación:** no implementado todavía como sistema híbrido: el código actual conserva únicamente referencias a rutas absolutas de archivos externos (véase auditoría). Esta aprobación solo actualiza documentación.
+
+## PROD-003 — Integración con bibliotecas de Calibre
 - **Fecha de apertura:** 2026-11-23.
-- **Estado:** PENDIENTE DE ELECCIÓN; ninguna alternativa autorizada.
-- **Pregunta:** ¿Los archivos de los libros se incorporarán al almacenamiento gestionado de MyCalibro, permanecerán donde están o podrán coexistir ambos modelos?
+- **Estado:** PENDIENTE DE ELECCIÓN.
+- **Pregunta:** ¿Hasta qué grado debe interoperar MyCalibro con las bibliotecas existentes de Calibre?
 
-| Opción | Comportamiento | Ventaja principal | Riesgo o coste |
+| Opción | Comportamiento propuesto | Principal ventaja | Riesgos y limitaciones |
 | --- | --- | --- | --- |
-| A. Biblioteca administrada | Al importar, copiar el libro a una carpeta administrada por la app, conservando inicialmente el original | Biblioteca más portable, controlada y sencilla de respaldar | Más espacio, posibles duplicados; hace falta migración segura |
-| B. Solo referencias externas | Mantener ruta al archivo existente sin copiarlo | Sin duplicar espacio y máxima compatibilidad inicial con carpetas/Calibre | Enlaces rotos si se mueven archivos; copias incompletas si se respalda solo el catálogo |
-| C. Híbrida | Permitir libro administrado o vinculado, con estado explícito y selector de política de importación | Se adapta a bibliotecas de Calibre y colecciones propias; migración gradual | Más estados y reglas que probar, especialmente backups y archivos externos |
+| A. Importación puntual | Importar libros y metadatos desde Calibre a MyCalibro; futuras modificaciones se gestionan separadamente | Menor complejidad y menor riesgo de cambios en bibliotecas Calibre | Los cambios posteriores no se sincronizan |
+| B. Vinculación y consulta continua | Mostrar la biblioteca Calibre vinculada y actualizar su información de forma controlada, con acceso de solo lectura para la biblioteca de origen; gestionar cambios propios en MyCalibro | Respeta Calibre como propietario de sus datos y muestra sus actualizaciones | Las ediciones en MyCalibro no retornan automáticamente a Calibre |
+| C. Importación más sincronización bidireccional controlada | Combinar importación inicial y conexión posterior, pudiendo propagar cambios entre ambos catálogos mediante operaciones verificadas, conflictos explícitos y procedimientos de recuperación | Máxima interoperabilidad si se implementa de forma fiable | Mayor complejidad; riesgo alto de sobrescribir metadatos, perder cambios o corromper bibliotecas ante escrituras simultáneas |
 
-**Recomendación técnica para el debate (NO aprobada):** C, con un repositorio administrado en carpeta configurable, posibilidad de vincular archivos sin copiarlos, detección de rutas faltantes y distinción inequívoca en la copia de seguridad de archivos administrados y externos. El cambio no debe mover ni borrar originales automáticamente. Priorizar una migración que preserve el catálogo actual antes de alterar su esquema.
+**Criterio técnico para el debate (no aprobado):** C aporta el máximo alcance, pero deberá implantarse por fases: importación y consulta de solo lectura primero; las escrituras hacia Calibre solo tras verificar mecanismos compatibles y estrategia de reconciliación, copias y recuperación. Nunca escribir directamente en una base de datos de Calibre de forma especulativa.
 
-**Criterios que deberá concretar la opción escogida:** ubicación y configuración, qué significa «importar» por defecto, tratamiento de duplicados, qué entra en el backup/restauración, compatibilidad con colecciones Calibre, recuperación de archivos ausentes y manejo de varias copias/formatos de una misma obra.
+**Aspectos aún no resueltos:** tratamiento de categorías/etiquetas/series/portadas, múltiples formatos, duplicados, detección de cambios, conflictos, permisos, compatibilidad de versiones y qué biblioteca es la fuente de verdad para cada dato.
 
 ## Pendientes de debates posteriores
-- Integración con Calibre y migración de bibliotecas existentes.
+- Integración con Calibre y migración de bibliotecas existentes (PROD-003, abierta).
 - Experiencia de lectura, PDF/EPUB, anotaciones y OCR.
 - IA sobre metadatos frente a contenido y controles de privacidad.
 - Plataformas (Windows / otras), instalación y actualizaciones.
@@ -39,4 +49,5 @@
 | ID | Fecha | Estado | Resultado |
 | --- | --- | --- | --- |
 | PROD-001 | 2026-11-23 | Aprobada | Opción C: plataforma integral de biblioteca, lectura e IA |
-| PROD-002 | 2026-11-23 | Pendiente | Modelo de almacenamiento por decidir |
+| PROD-002 | 2026-11-23 | Aprobada | Opción C: almacenamiento híbrido (archivos administrados y vinculados) |
+| PROD-003 | 2026-11-23 | Pendiente | Modalidad de integración con bibliotecas de Calibre |
