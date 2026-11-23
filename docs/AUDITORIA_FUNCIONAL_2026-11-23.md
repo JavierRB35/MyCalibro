@@ -72,10 +72,14 @@ No se encontraron: lectura integrada de EPUB/PDF; miniaturas de portadas; visual
 5. Decidir si incorporar un lector propio con progreso, notas, subrayados, OCR/IA; esto cambia sustancialmente el alcance.
 6. Preparar empaquetado, pruebas reales y mantenimiento continuo.
 
-## 7. Debate de producto: decisiones aún NO aprobadas
-Primera decisión: **¿MyCalibro será (A) gestor de biblioteca y dispositivos, (B) gestor + lector integrado, o (C) plataforma integrada de biblioteca, lectura e IA?** A minimiza alcance; B añade experiencia de lectura; C exige mayor esfuerzo de arquitectura, persistencia y pruebas. No implementar ninguna alternativa antes de la decisión.
+## 7. Dirección de producto y debate vigente
+**PROD-001 APROBADA (2026-11-23):** MyCalibro evolucionará a una **plataforma integral de biblioteca, lectura e inteligencia artificial (opción C)**. Incluye como horizonte funcional gestión avanzada de libros y dispositivos, lectura integrada, anotaciones y funciones de IA. Esta decisión es de producto, **no equivale a afirmar que esas funciones estén implementadas ni autoriza cambios de código sin especificar su alcance**. El inventario de los apartados anteriores mantiene su valor como estado actual.
 
-Siguientes ejes, por orden: (i) catálogo local administrado o solo referencias a archivos, (ii) importación desde Calibre existente, (iii) lectura/anotaciones, (iv) alcance de IA y privacidad, (v) Windows primero o multiplataforma, (vi) sincronización/backup, (vii) entrega e instalación.
+**Registro canónico de decisiones:** [docs/DECISIONES_PRODUCTO.md](DECISIONES_PRODUCTO.md). Las futuras decisiones aprobadas se registrarán allí y deberán respetar el protocolo recogido en AGENTS.md.
+
+**Siguiente decisión abierta (PROD-002):** modelo de almacenamiento de los ebooks: copias administradas, referencias externas o enfoque híbrido. Condiciona importación, integridad, duplicados, lectura, integración con Calibre, portabilidad y copias de seguridad.
+
+**Siguientes ejes posteriores, sin aprobar:** importación desde Calibre; lectura/anotaciones; alcance de IA y privacidad; Windows o multiplataforma; sincronización/backup; instalación y actualizaciones.
 
 ## 8. Continuidad
 Toda propuesta futura se comparará con este inventario. Una decisión aceptada actualizará la documentación; un cambio de código exigirá pruebas proporcionales al riesgo y evidencia verificable. Mantener main como rama normal y evitar ramas salvo cambios críticos. No tocar archivos reales ni datos del usuario sin una estrategia de preservación.
