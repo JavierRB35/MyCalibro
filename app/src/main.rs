@@ -822,7 +822,10 @@ fn sidebar(ui: &mut egui::Ui, app: &mut LibraryApp) {
         .show(ui, |ui| {
             ui.set_min_width(210.0);
             ui.set_max_width(230.0);
-            // Cabecera fija.
+            // NOTA (AGENTE B): la versión con ScrollArea central rompía el
+            // layout al vivir dentro de este contenedor ui.horizontal; queda
+            // como mejora pendiente post-MVP (issue #1). El pie puede quedar
+            // cortado a alturas de ventana muy pequeñas.
             ui.vertical(|ui| {
                 ui.label(RichText::new("MIS LIBROS").size(12.0).strong().color(GREEN));
                 ui.add_space(12.0);
@@ -833,148 +836,135 @@ fn sidebar(ui: &mut egui::Ui, app: &mut LibraryApp) {
                         .color(INK),
                 );
                 ui.add_space(30.0);
-            });
-            // Zona central desplazable: con la altura mínima de ventana
-            // (950×620) los temas, dispositivos y etiquetas no cabían todos y
-            // el pie de la barra lateral quedaba fuera del área visible.
-            egui::ScrollArea::vertical()
-                .id_salt("barra_lateral_mi_libros")
-                .auto_shrink(false)
-                .max_width(190.0)
-                .show(ui, |ui| {
-                    // El contenedor externo es ui.horizontal: sin forzar el
-                    // layout, el contenido del scroll se extiende en fila.
-                    ui.with_layout(egui::Layout::top_down(egui::Align::LEFT), |ui| {
-                        ui.label(RichText::new("BIBLIOTECA").size(10.0).strong().color(MUTED));
-                        ui.add_space(8.0);
-                        let selected = app.topic_filter.is_none() && app.tag_filter.is_none();
-                        if nav_button(ui, "Todos los libros", app.books.len(), selected) {
-                            app.topic_filter = None;
-                            app.tag_filter = None;
-                        }
-                        ui.add_space(20.0);
-                        ui.label(RichText::new("TEMAS").size(10.0).strong().color(MUTED));
-                        ui.add_space(8.0);
-                        for topic in topics() {
-                            let active = app.topic_filter.as_deref() == Some(topic);
-                            if nav_button(ui, topic, app.topic_count(topic), active) {
-                                app.topic_filter = if active {
-                                    None
-                                } else {
-                                    Some((*topic).to_owned())
-                                };
-                                app.tag_filter = None;
-                            }
-                        }
-                        ui.add_space(22.0);
-                        ui.label(
-                            RichText::new("DISPOSITIVOS")
+                ui.label(RichText::new("BIBLIOTECA").size(10.0).strong().color(MUTED));
+                ui.add_space(8.0);
+                let selected = app.topic_filter.is_none() && app.tag_filter.is_none();
+                if nav_button(ui, "Todos los libros", app.books.len(), selected) {
+                    app.topic_filter = None;
+                    app.tag_filter = None;
+                }
+                ui.add_space(20.0);
+                ui.label(RichText::new("TEMAS").size(10.0).strong().color(MUTED));
+                ui.add_space(8.0);
+                for topic in topics() {
+                    let active = app.topic_filter.as_deref() == Some(topic);
+                    if nav_button(ui, topic, app.topic_count(topic), active) {
+                        app.topic_filter = if active {
+                            None
+                        } else {
+                            Some((*topic).to_owned())
+                        };
+                        app.tag_filter = None;
+                    }
+                }
+                ui.add_space(22.0);
+                ui.label(
+                    RichText::new("DISPOSITIVOS")
+                        .size(10.0)
+                        .strong()
+                        .color(MUTED),
+                );
+                ui.add_space(8.0);
+                if app.devices.is_empty() {
+                    ui.label(
+                        RichText::new("Conecta un Kindle, Kobo o NOOK por USB")
+                            .size(11.0)
+                            .color(MUTED),
+                    );
+                }
+                let mut open_device = None;
+                let devices = app.devices.clone();
+                for device in devices {
+                    let response = ui.dnd_drop_zone::<u64, _>(
+                        egui::Frame::new()
+                            .fill(Color32::WHITE)
+                            .stroke(Stroke::new(1.0_f32, BORDER))
+                            .inner_margin(egui::Margin::symmetric(8, 6)),
+                        |ui| {
+                            ui.label(
+                                RichText::new(format!("📚 {}", device.name))
+                                    .strong()
+                                    .color(INK),
+                            );
+                            ui.label(
+                                RichText::new(format!(
+                                    "Formato: {}",
+                                    device.output_format.to_uppercase()
+                                ))
                                 .size(10.0)
-                                .strong()
                                 .color(MUTED),
-                        );
-                        ui.add_space(8.0);
-                        if app.devices.is_empty() {
-                            ui.label(
-                                RichText::new("Conecta un Kindle, Kobo o NOOK por USB")
-                                    .size(11.0)
-                                    .color(MUTED),
                             );
-                        }
-                        let mut open_device = None;
-                        let devices = app.devices.clone();
-                        for device in devices {
-                            let response = ui.dnd_drop_zone::<u64, _>(
-                                egui::Frame::new()
-                                    .fill(Color32::WHITE)
-                                    .stroke(Stroke::new(1.0_f32, BORDER))
-                                    .inner_margin(egui::Margin::symmetric(8, 6)),
-                                |ui| {
-                                    ui.label(
-                                        RichText::new(format!("📚 {}", device.name))
-                                            .strong()
-                                            .color(INK),
-                                    );
-                                    ui.label(
-                                        RichText::new(format!(
-                                            "Formato: {}",
-                                            device.output_format.to_uppercase()
-                                        ))
-                                        .size(10.0)
-                                        .color(MUTED),
-                                    );
-                                    if ui.small_button("Abrir biblioteca").clicked() {
-                                        open_device = Some(device.root.clone());
-                                    }
-                                    ui.label(
-                                        RichText::new("Suelta aquí un libro")
-                                            .size(10.0)
-                                            .color(GREEN),
-                                    );
-                                },
-                            );
-                            if let Some(book_id) = response.1 {
-                                app.queue_device_transfer(*book_id, device);
+                            if ui.small_button("Abrir biblioteca").clicked() {
+                                open_device = Some(device.root.clone());
                             }
-                        }
-                        if let Some(root) = open_device {
-                            app.device_view = Some(root);
-                        }
-                        ui.add_space(22.0);
-                        ui.label(RichText::new("ETIQUETAS").size(10.0).strong().color(MUTED));
-                        ui.add_space(8.0);
-                        let tags: BTreeSet<String> = app
-                            .books
-                            .iter()
-                            .flat_map(|book| book.tags.iter().cloned())
-                            .collect();
-                        if tags.is_empty() {
                             ui.label(
-                                RichText::new("Añade etiquetas a tus libros")
-                                    .size(12.0)
-                                    .color(MUTED),
+                                RichText::new("Suelta aquí un libro")
+                                    .size(10.0)
+                                    .color(GREEN),
                             );
-                        }
-                        for tag in tags {
-                            let active = app.tag_filter.as_deref() == Some(tag.as_str());
-                            if ui.selectable_label(active, format!("# {tag}")).clicked() {
-                                app.tag_filter = if active { None } else { Some(tag) };
-                                app.topic_filter = None;
-                            }
-                        }
-                    });
+                        },
+                    );
+                    if let Some(book_id) = response.1 {
+                        app.queue_device_transfer(*book_id, device);
+                    }
+                }
+                if let Some(root) = open_device {
+                    app.device_view = Some(root);
+                }
+                ui.add_space(22.0);
+                ui.label(RichText::new("ETIQUETAS").size(10.0).strong().color(MUTED));
+                ui.add_space(8.0);
+                let tags: BTreeSet<String> = app
+                    .books
+                    .iter()
+                    .flat_map(|book| book.tags.iter().cloned())
+                    .collect();
+                if tags.is_empty() {
+                    ui.label(
+                        RichText::new("Añade etiquetas a tus libros")
+                            .size(12.0)
+                            .color(MUTED),
+                    );
+                }
+                for tag in tags {
+                    let active = app.tag_filter.as_deref() == Some(tag.as_str());
+                    if ui.selectable_label(active, format!("# {tag}")).clicked() {
+                        app.tag_filter = if active { None } else { Some(tag) };
+                        app.topic_filter = None;
+                    }
+                }
+                ui.add_space(18.0);
+                if ui
+                    .add_sized(
+                        [190.0, 36.0],
+                        egui::Button::new("Configurar IA")
+                            .fill(PALE_GREEN)
+                            .stroke(Stroke::new(1.0_f32, BORDER)),
+                    )
+                    .clicked()
+                {
+                    app.settings_open = true;
+                }
+                if ui
+                    .add_sized(
+                        [190.0, 36.0],
+                        egui::Button::new("⇄  Convertir formatos")
+                            .fill(PALE_GREEN)
+                            .stroke(Stroke::new(1.0_f32, BORDER)),
+                    )
+                    .clicked()
+                {
+                    app.converting = true;
+                    app.conversion_status.clear();
+                }
+                ui.with_layout(egui::Layout::bottom_up(egui::Align::LEFT), |ui| {
+                    ui.label(
+                        RichText::new(format!("{} libros en tu colección", app.books.len()))
+                            .size(11.0)
+                            .color(MUTED),
+                    );
                 });
-            // Pie fijo.
-            ui.add_space(18.0);
-            if ui
-                .add_sized(
-                    [190.0, 36.0],
-                    egui::Button::new("Configurar IA")
-                        .fill(PALE_GREEN)
-                        .stroke(Stroke::new(1.0_f32, BORDER)),
-                )
-                .clicked()
-            {
-                app.settings_open = true;
-            }
-            if ui
-                .add_sized(
-                    [190.0, 36.0],
-                    egui::Button::new("⇄  Convertir formatos")
-                        .fill(PALE_GREEN)
-                        .stroke(Stroke::new(1.0_f32, BORDER)),
-                )
-                .clicked()
-            {
-                app.converting = true;
-                app.conversion_status.clear();
-            }
-            ui.add_space(6.0);
-            ui.label(
-                RichText::new(format!("{} libros en tu colección", app.books.len()))
-                    .size(11.0)
-                    .color(MUTED),
-            );
+            });
         });
 }
 
