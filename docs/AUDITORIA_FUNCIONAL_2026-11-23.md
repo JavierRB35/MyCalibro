@@ -83,9 +83,11 @@ No se encontraron: lectura integrada de EPUB/PDF; miniaturas de portadas; visual
 
 **PROD-004 APROBADA (2026-11-23):** lector básico EPUB/PDF (opción A), con navegación, preferencias de visualización y recuperación de posición. No incluye subrayados, notas, OCR ni IA contextual dentro del lector. **Aún no implementado**.
 
-**Siguiente decisión abierta (PROD-005):** alcance de IA fuera del lector: organización bibliográfica, análisis por libro o consultas sobre la biblioteca completa.
+**PROD-005 APROBADA (2026-11-23):** IA para organización del catálogo y análisis de cada libro bajo demanda (opción B). Incluye enriquecer fichas y etiquetas y, cuando se disponga de texto y autorización, generar argumentos/resúmenes, análisis y respuestas fundamentadas en el contenido. No habilita consultas transversales de toda la colección ni IA en el lector básico. La clasificación por metadatos existente no acredita el funcionamiento de estas futuras capacidades; **las nuevas funciones aún no están implementadas**.
 
-**Siguientes ejes posteriores, sin aprobar:** privacidad y procesamiento de IA; Windows o multiplataforma; sincronización interna/backup; instalación y actualizaciones.
+**Siguiente decisión abierta (PROD-006):** política de privacidad y consentimiento para analizar externamente textos de libros.
+
+**Siguientes ejes posteriores, sin aprobar:** Windows o multiplataforma; sincronización interna/backup; instalación y actualizaciones.
 
 ## 8. Continuidad
 Toda propuesta futura se comparará con este inventario. Una decisión aceptada actualizará la documentación; un cambio de código exigirá pruebas proporcionales al riesgo y evidencia verificable. Mantener main como rama normal y evitar ramas salvo cambios críticos. No tocar archivos reales ni datos del usuario sin una estrategia de preservación.
