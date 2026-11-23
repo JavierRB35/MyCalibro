@@ -212,6 +212,21 @@ impl LibraryApp {
         }
     }
 
+    fn next_book_id(&mut self) -> Option<u64> {
+        match self
+            .catalog
+            .as_mut()
+            .ok_or_else(|| "Biblioteca bloqueada".to_owned())
+            .and_then(|c| c.allocate_id(&self.books))
+        {
+            Ok(id) => Some(id),
+            Err(error) => {
+                self.notice = error;
+                None
+            }
+        }
+    }
+
     fn visible_books(&self) -> Vec<Book> {
         let query = self.search.to_lowercase();
         self.books
@@ -284,7 +299,9 @@ impl LibraryApp {
                     .map(|name| name.to_string_lossy().to_string())
             })
             .unwrap_or_else(|| "Libro sin título".to_owned());
-        let id = self.books.iter().map(|book| book.id).max().unwrap_or(0) + 1;
+        let Some(id) = self.next_book_id() else {
+            return;
+        };
         let book = Book {
             id,
             title,
@@ -1183,7 +1200,9 @@ fn add_book_window(ctx: &egui::Context, app: &mut LibraryApp) {
                     )
                     .clicked()
                 {
-                    let id = app.books.iter().map(|book| book.id).max().unwrap_or(0) + 1;
+                    let Some(id) = app.next_book_id() else {
+                        return;
+                    };
                     app.books.push(std::mem::take(&mut app.draft).into_book(id));
                     app.selected = Some(id);
                     app.adding = false;

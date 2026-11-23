@@ -46,6 +46,35 @@ pub fn atomic_write(path: &Path, bytes: &[u8]) -> Result<(), String> {
 }
 
 impl Catalog {
+    /// Reserve durably before importing/saving. Failed imports may leave gaps,
+    /// but deletion and restart must never reuse an ID for a different book.
+    pub fn allocate_id(&mut self, books: &[Book]) -> Result<u64, String> {
+        if read_optional(&self.path)? != self.expected {
+            return Err(
+                "El catálogo cambió externamente; no se puede reservar un identificador".into(),
+            );
+        }
+        let path = self.path.with_file_name("next-book-id.json");
+        let minimum = books
+            .iter()
+            .map(|b| b.id)
+            .max()
+            .unwrap_or(0)
+            .checked_add(1)
+            .ok_or("Identificadores agotados")?;
+        let saved = match read_optional(&path)? {
+            Some(bytes) => serde_json::from_slice::<u64>(&bytes)
+                .map_err(|e| format!("Contador de libros ilegible: {e}"))?,
+            None => minimum,
+        };
+        let next = minimum.max(saved);
+        let after = next.checked_add(1).ok_or("Identificadores agotados")?;
+        atomic_write(
+            &path,
+            &serde_json::to_vec(&after).map_err(|e| e.to_string())?,
+        )?;
+        Ok(next)
+    }
     pub fn open(folder: &Path) -> Result<(Self, Vec<Book>), String> {
         // Opening a library does not recreate a missing synchronized/external folder.
         if !folder.is_dir() {
@@ -156,6 +185,26 @@ mod tests {
     fn books() -> Vec<Book> {
         decode(br#"[{"id":1,"title":"Libro","author":"A","year":"","description":"","tags":[]}]"#)
             .unwrap()
+    }
+
+    #[test]
+    fn reserved_book_ids_survive_deletion_restart_and_failed_imports() {
+        let dir = tempfile::tempdir().unwrap();
+        let (mut catalog, _) = Catalog::open(dir.path()).unwrap();
+        assert_eq!(catalog.allocate_id(&[]).unwrap(), 1);
+        assert_eq!(catalog.allocate_id(&[]).unwrap(), 2);
+        catalog.save(&books()).unwrap();
+        catalog.save(&[]).unwrap();
+        drop(catalog);
+        let (mut catalog, books) = Catalog::open(dir.path()).unwrap();
+        assert!(books.is_empty());
+        assert_eq!(catalog.allocate_id(&books).unwrap(), 3);
+        fs::write(dir.path().join("next-book-id.json"), b"corrupt").unwrap();
+        assert!(catalog.allocate_id(&books).is_err());
+        assert_eq!(
+            fs::read(dir.path().join("next-book-id.json")).unwrap(),
+            b"corrupt"
+        );
     }
 
     #[test]
