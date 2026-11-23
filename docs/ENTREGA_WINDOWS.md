@@ -53,7 +53,7 @@ integrada; compilar el instalador no acredita sus flujos.
 | [Run 45160690573](https://github.com/JavierRB35/MyCalibro/actions/runs/45160690573), f765fb3 | Release e instalador generados. El runner no dispone de OpenGL 2.0; falló el arranque allí. |
 | [Comprobación de B en Windows real](https://github.com/JavierRB35/MyCalibro/issues/1#issuecomment-7099328433), instalador f765fb3 | Instalación aislada, ventana visible, catálogo intacto y desinstalación con datos preservados. B completó manualmente los pasos tras detectar un fallo de captura de ExitCode en el script, posteriormente corregido. Valida ese artefacto P0, no funciones posteriores. |
 | [Run 45161919605](https://github.com/JavierRB35/MyCalibro/actions/runs/45161919605), 8c57e95 | Pruebas Windows, incluida credencial ficticia nativa, y construcción correctas. Arranque falló porque faltaba habilitar dx12 en wgpu. |
-| [Run 45163682512](https://github.com/JavierRB35/MyCalibro/actions/runs/45163682512), e301d4c | Verificación en curso tras habilitar dx12 y corregir el handle del proceso. Consultar resultado antes de atribuir éxito. |
+| [Run 45163682512](https://github.com/JavierRB35/MyCalibro/actions/runs/45163682512), e301d4c | Todos los pasos correctos: pruebas, release, NSIS, instalación, ventana capturada, catálogo intacto y desinstalación con datos preservados. SHA-256 del instalador: `3d19395d8a56e7cdc6a505d3badea2832f7b14e655e5db95e42ae379c3877238`. |
 
 ## Pendientes para declarar finalización
 
