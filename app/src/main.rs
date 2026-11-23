@@ -409,7 +409,7 @@ impl eframe::App for LibraryApp {
         ) {
             let status = self.library_tools.status().to_owned();
             // A failed autosave during background restoration must not discard pending edits.
-            if self.storage_error.is_none() {
+            if self.storage_error.is_none() || self.catalog.is_none() {
                 self.open_library(restored);
             }
             self.notice = status;
@@ -441,16 +441,9 @@ impl eframe::App for LibraryApp {
                 ui.colored_label(Color32::DARK_RED, format!("Guardado bloqueado: {error}"));
                 ui.label("Los archivos originales se conservan. Los cambios pendientes siguen en memoria.");
                 if self.catalog.is_some() && ui.button("Reintentar guardado").clicked() { self.save(); }
-                if self.catalog.is_some() && ui.button("Exportar cambios pendientes…").clicked() {
+                if self.catalog.is_some() && ui.add_enabled(!self.library_tools.busy() && !self.import_flow.busy(), egui::Button::new("Exportar cambios pendientes…")).clicked() {
                     if let Some(folder) = rfd::FileDialog::new().pick_folder() {
-                        let result = (|| -> Result<(), String> {
-                            if std::fs::read_dir(&folder).map_err(|e| e.to_string())?.next().is_some() {
-                                return Err("Elija una carpeta vacía".into());
-                            }
-                            let (mut destination, _) = persistence::Catalog::open(&folder)?;
-                            destination.save(&self.books)
-                        })();
-                        self.notice = result.map(|_| "Cambios exportados; el catálogo original no se ha sustituido".into()).unwrap_or_else(|e| e);
+                        self.library_tools.export_pending(ctx,self.books.clone(),self.library_folder.clone(),folder);
                     }
                 }
             }
@@ -463,10 +456,7 @@ impl eframe::App for LibraryApp {
             if ui.add_enabled(can_switch, egui::Button::new("Recuperar/importar catálogo antiguo…")).clicked() {
                 if let Some(source) = rfd::FileDialog::new().add_filter("Catálogo JSON", &["json"]).pick_file() {
                     if let Some(folder) = rfd::FileDialog::new().set_title("Seleccione una carpeta VACÍA para recuperar").pick_folder() {
-                        match persistence::recover_into(&source, &folder) {
-                            Ok(()) => self.open_library(folder),
-                            Err(error) => self.notice = error,
-                        }
+                        self.library_tools.recover_catalog(ctx,source,folder);
                     }
                 }
             }
