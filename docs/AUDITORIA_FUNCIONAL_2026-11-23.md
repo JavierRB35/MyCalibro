@@ -93,9 +93,11 @@ No se encontraron: lectura integrada de EPUB/PDF; miniaturas de portadas; visual
 
 **PROD-009 APROBADA (2026-11-23):** organización física configurable (opción C) para libros administrados: conservar nombres y estructura de origen o utilizar carpetas por autor/obra, con colecciones y etiquetas independientes de las rutas físicas. Los archivos vinculados externamente no se moverán ni renombrarán de forma automática. Los cambios de ubicación deben preservar integridad, vínculos y respaldos. **Aún no implementada.**
 
-**Siguiente decisión abierta (PROD-010):** importación masiva y tratamiento de posibles duplicados: importación básica, asistente con revisión o fusión automática.
+**PROD-010 APROBADA (2026-11-23):** asistente de importación masiva (opción B), con lectura recursiva de archivos y carpetas, progreso y vista previa; detectar coincidencias por datos e identificadores disponibles y exigir revisión del usuario antes de fusionar registros, omitir entradas o asociar formatos a un libro existente. No confundir coincidencias de título/autor con identidad de edición. **Aún no implementada.**
 
-**Siguientes ejes posteriores, sin aprobar:** detalles de metadatos, frecuencia/formato de backups, instalación y actualizaciones.
+**Siguiente decisión abierta (PROD-011):** política de metadatos bibliográficos y portadas: edición local, enriquecimiento asistido con revisión o enriquecimiento automático continuo.
+
+**Siguientes ejes posteriores, sin aprobar:** detalles de organización lógica y colecciones, frecuencia/formato de backups, instalación y actualizaciones.
 
 ## 8. Continuidad
 Toda propuesta futura se comparará con este inventario. Una decisión aceptada actualizará la documentación; un cambio de código exigirá pruebas proporcionales al riesgo y evidencia verificable. Mantener main como rama normal y evitar ramas salvo cambios críticos. No tocar archivos reales ni datos del usuario sin una estrategia de preservación.
