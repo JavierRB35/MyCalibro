@@ -213,20 +213,36 @@ fn send(provider: Provider, key: &str, prompt: &str) -> Result<String, String> {
         .redirect(reqwest::redirect::Policy::none())
         .build()
         .map_err(|e| e.to_string())?;
-    let response=match provider {
-        Provider::Gemini=>client.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent").header("x-goog-api-key",key).json(&json!({"contents":[{"parts":[{"text":prompt}]}],"generationConfig":{"responseMimeType":"application/json","maxOutputTokens":2500}})).send(),
-        Provider::Groq=>client.post("https://api.groq.com/openai/v1/chat/completions").bearer_auth(key).json(&json!({"model":"openai/gpt-oss-20b","messages":[{"role":"user","content":prompt}],"response_format":{"type":"json_object"},"reasoning_effort":"low","max_completion_tokens":2500})).send(),
-    }.map_err(|e|format!("No se pudo completar la conexión: {e}"))?;
-    let status = response.status();
-    if !status.is_success() {
-        return Err(format!(
-            "HTTP {}. Comprueba clave, disponibilidad del modelo y cuota del proveedor",
-            status.as_u16()
-        ));
+    let response = match provider {
+        Provider::Gemini => client
+            .post(crate::ai_provider::gemini_endpoint())
+            .header("x-goog-api-key", key)
+            .json(&json!({
+                "contents": [{"parts": [{"text": prompt}]}],
+                "generationConfig": {
+                    "responseMimeType": "application/json",
+                    "maxOutputTokens": 2500
+                }
+            }))
+            .send(),
+        Provider::Groq => client
+            .post("https://api.groq.com/openai/v1/chat/completions")
+            .bearer_auth(key)
+            .json(&json!({
+                "model": crate::ai_provider::GROQ_MODEL,
+                "messages": [{"role": "user", "content": prompt}],
+                "response_format": crate::ai_provider::groq_analysis_format(),
+                "reasoning_effort": "low",
+                "max_completion_tokens": 2500
+            }))
+            .send(),
     }
-    let json: Value = response
-        .json()
-        .map_err(|_| "El proveedor no devolvió JSON válido")?;
+    .map_err(|e| format!("No se pudo completar la conexión: {e}"))?;
+    let model = match provider {
+        Provider::Gemini => crate::ai_provider::GEMINI_MODEL,
+        Provider::Groq => crate::ai_provider::GROQ_MODEL,
+    };
+    let json = crate::ai_provider::read_json_response(response, provider.display_name(), model)?;
     match provider {
         Provider::Gemini => json["candidates"][0]["content"]["parts"]
             .as_array()
