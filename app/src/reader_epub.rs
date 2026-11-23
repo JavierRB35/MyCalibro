@@ -364,7 +364,9 @@ fn parse_opf(opf: &str) -> Result<(String, String, Vec<String>), String> {
             Event::Text(e) => {
                 if let Some((_, text)) = &mut current {
                     let decoded = e.decode().map_err(|e| e.to_string())?;
-                    text.push_str(&quick_xml::escape::unescape(&decoded).map_err(|e| e.to_string())?);
+                    text.push_str(
+                        &quick_xml::escape::unescape(&decoded).map_err(|e| e.to_string())?,
+                    );
                 }
             }
             Event::CData(e) => {
@@ -583,11 +585,19 @@ fn decodificar_entidades(texto: &str) -> String {
             };
         let digits: String = digits_start
             .chars()
-            .take_while(|c| if radix == 16 { c.is_ascii_hexdigit() } else { c.is_ascii_digit() })
+            .take_while(|c| {
+                if radix == 16 {
+                    c.is_ascii_hexdigit()
+                } else {
+                    c.is_ascii_digit()
+                }
+            })
             .collect();
         let marker = offset + digits.len();
         let replacement = if !digits.is_empty() && after.as_bytes().get(marker) == Some(&b';') {
-            u32::from_str_radix(&digits, radix).ok().and_then(char::from_u32)
+            u32::from_str_radix(&digits, radix)
+                .ok()
+                .and_then(char::from_u32)
         } else {
             None
         };
@@ -763,7 +773,10 @@ pub(crate) mod tests {
 
     #[test]
     fn rutas_zip_se_resuelven_con_segmentos_relativos() {
-        assert_eq!(join_zip_path("OEBPS", "cap1.xhtml").unwrap(), "OEBPS/cap1.xhtml");
+        assert_eq!(
+            join_zip_path("OEBPS", "cap1.xhtml").unwrap(),
+            "OEBPS/cap1.xhtml"
+        );
         assert_eq!(
             join_zip_path("OEBPS", "sub/cap2.xhtml").unwrap(),
             "OEBPS/sub/cap2.xhtml"
@@ -780,10 +793,10 @@ pub(crate) mod tests {
         let mut buffer = std::io::Cursor::new(Vec::new());
         {
             let mut zip = zip::ZipWriter::new(&mut buffer);
-            let stored: zip::write::FileOptions<'_, ()> =
-                zip::write::FileOptions::default().compression_method(zip::CompressionMethod::Stored);
-            let deflated: zip::write::FileOptions<'_, ()> =
-                zip::write::FileOptions::default().compression_method(zip::CompressionMethod::Deflated);
+            let stored: zip::write::FileOptions<'_, ()> = zip::write::FileOptions::default()
+                .compression_method(zip::CompressionMethod::Stored);
+            let deflated: zip::write::FileOptions<'_, ()> = zip::write::FileOptions::default()
+                .compression_method(zip::CompressionMethod::Deflated);
             zip.start_file("mimetype", stored).unwrap();
             zip.write_all(b"application/epub+zip").unwrap();
             zip.start_file("META-INF/container.xml", deflated).unwrap();
@@ -811,9 +824,14 @@ pub(crate) mod tests {
           <item id='dos' href='sub/../dos.xhtml' media-type='application/xhtml+xml'/></manifest>
           <spine><itemref idref = 'dos'/><itemref idref = 'uno'/></spine></package>"#;
         let file = fixture(
-            container, "OPS/mi libro.opf", opf,
+            container,
+            "OPS/mi libro.opf",
+            opf,
             &[
-                ("OPS/texto uno.xhtml", "<html><body><p>Primero</p></body></html>"),
+                (
+                    "OPS/texto uno.xhtml",
+                    "<html><body><p>Primero</p></body></html>",
+                ),
                 ("OPS/dos.xhtml", "<html><body><p>Segundo</p></body></html>"),
             ],
         );
@@ -827,13 +845,18 @@ pub(crate) mod tests {
 
     #[test]
     fn no_oculta_capitulos_ausentes_ni_spine_roto() {
-        let container = "<container><rootfiles><rootfile full-path='OPS/content.opf'/></rootfiles></container>";
+        let container =
+            "<container><rootfiles><rootfile full-path='OPS/content.opf'/></rootfiles></container>";
         let opf = "<package><manifest><item id='uno' href='falta.xhtml' media-type='application/xhtml+xml'/></manifest><spine><itemref idref='uno'/></spine></package>";
         let file = fixture(container, "OPS/content.opf", opf, &[]);
-        assert!(EpubDocument::from_bytes(&file).unwrap_err().contains("Entrada no encontrada"));
+        assert!(EpubDocument::from_bytes(&file)
+            .unwrap_err()
+            .contains("Entrada no encontrada"));
         let broken = opf.replace("idref='uno'", "idref='inexistente'");
         let file = fixture(container, "OPS/content.opf", &broken, &[]);
-        assert!(EpubDocument::from_bytes(&file).unwrap_err().contains("ID ausente"));
+        assert!(EpubDocument::from_bytes(&file)
+            .unwrap_err()
+            .contains("ID ausente"));
     }
 
     #[test]
@@ -843,9 +866,15 @@ pub(crate) mod tests {
             "OPS/cap uno.xhtml"
         );
         for bad in [
-            "../../../fuera.xhtml", "%2e%2e/%2e%2e/fuera.xhtml", "/absolute.xhtml",
-            "C:%5cWindows%5cfile", "http://externo/libro.xhtml", "%5cshare",
-            "foo%00bar", "bad%XZpath.xhtml", "bad%.xhtml",
+            "../../../fuera.xhtml",
+            "%2e%2e/%2e%2e/fuera.xhtml",
+            "/absolute.xhtml",
+            "C:%5cWindows%5cfile",
+            "http://externo/libro.xhtml",
+            "%5cshare",
+            "foo%00bar",
+            "bad%XZpath.xhtml",
+            "bad%.xhtml",
         ] {
             assert!(join_zip_path("OPS", bad).is_err(), "se aceptó {bad}");
         }
@@ -853,16 +882,19 @@ pub(crate) mod tests {
 
     #[test]
     fn limita_recursos_descomprimidos_antes_de_analizarlos() {
-        let container = "<container><rootfiles><rootfile full-path='OPS/content.opf'/></rootfiles></container>";
+        let container =
+            "<container><rootfiles><rootfile full-path='OPS/content.opf'/></rootfiles></container>";
         let huge = "a".repeat(MAX_OPF_BYTES as usize + 1);
         let file = fixture(container, "OPS/content.opf", &huge, &[]);
-        assert!(EpubDocument::from_bytes(&file).unwrap_err().contains("demasiado grande"));
+        assert!(EpubDocument::from_bytes(&file)
+            .unwrap_err()
+            .contains("demasiado grande"));
     }
-
 
     #[test]
     fn imagen_sin_texto_conserva_su_posicion_y_no_oculta_el_capitulo_siguiente() {
-        let container = "<container><rootfiles><rootfile full-path='OPS/content.opf'/></rootfiles></container>";
+        let container =
+            "<container><rootfiles><rootfile full-path='OPS/content.opf'/></rootfiles></container>";
         let opf = "<package><manifest>\
         <item id='cover' href='portada.xhtml' media-type='application/xhtml+xml'/>\
         <item id='content' href='texto.xhtml' media-type='application/xhtml+xml'/>\
@@ -872,8 +904,14 @@ pub(crate) mod tests {
             "OPS/content.opf",
             opf,
             &[
-                ("OPS/portada.xhtml", "<html><body><img src='cover.jpg'/></body></html>"),
-                ("OPS/texto.xhtml", "<html><body><p>Capítulo legible.</p></body></html>"),
+                (
+                    "OPS/portada.xhtml",
+                    "<html><body><img src='cover.jpg'/></body></html>",
+                ),
+                (
+                    "OPS/texto.xhtml",
+                    "<html><body><p>Capítulo legible.</p></body></html>",
+                ),
             ],
         );
         let book = EpubDocument::from_bytes(&epub).unwrap();
@@ -885,7 +923,9 @@ pub(crate) mod tests {
         assert!(book.chapters[0].paragraphs.is_empty());
         // La extracción de texto/IA consume solo paragraphs: el aviso visual
         // no se ofrece como una cita ficticia ni se atribuye al EPUB.
-        let extracted = book.chapters.iter()
+        let extracted = book
+            .chapters
+            .iter()
             .flat_map(|chapter| chapter.paragraphs.iter())
             .cloned()
             .collect::<Vec<_>>()
@@ -902,5 +942,4 @@ pub(crate) mod tests {
             .unwrap_err()
             .contains("supera el límite"));
     }
-
 }
