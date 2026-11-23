@@ -89,9 +89,11 @@ No se encontraron: lectura integrada de EPUB/PDF; miniaturas de portadas; visual
 
 **PROD-007 APROBADA Y ACLARADA (2026-11-23):** MyCalibro será exclusivamente Windows (opción A). Se desea que su biblioteca pueda residir en una carpeta elegida por el usuario, incluida una sincronizada con Google Drive. **No** se requiere ninguna integración entre aplicaciones, API de Drive ni sistema de conexión remoto; la idea anterior de interoperabilidad quedó expresamente descartada. Las carpetas sincronizadas presentan riesgos de concurrencia y no equivalen a una copia de seguridad. La selección y traslado seguro de biblioteca aún requieren implementación.
 
-**Siguiente decisión abierta (PROD-008):** alcance de las copias de seguridad y restauración: solo catálogo, catálogo y libros administrados, o copia completa configurable que permita incluir también libros externos.
+**PROD-008 APROBADA (2026-11-23):** copia de seguridad **completa y configurable** (opción C), con catálogo, metadatos y configuración, libros administrados y opción de incluir libros externos vinculados. Deberá ofrecer manifiesto, verificación de integridad y restauración segura, informando de exclusiones, errores y referencias inaccesibles. El formato, automatización, retención y destino concreto siguen sin decidirse. **Aún no implementada.**
 
-**Siguientes ejes posteriores, sin aprobar:** organización y ubicación de carpetas, importación masiva, integridad y recuperación, instalación y actualizaciones.
+**Siguiente decisión abierta (PROD-009):** organización física de los libros administrados: conservar estructura, orden automático por autor/obra o política configurable.
+
+**Siguientes ejes posteriores, sin aprobar:** organización de carpetas, importación masiva, frecuencia/formato de backup, instalación y actualizaciones.
 
 ## 8. Continuidad
 Toda propuesta futura se comparará con este inventario. Una decisión aceptada actualizará la documentación; un cambio de código exigirá pruebas proporcionales al riesgo y evidencia verificable. Mantener main como rama normal y evitar ramas salvo cambios críticos. No tocar archivos reales ni datos del usuario sin una estrategia de preservación.
