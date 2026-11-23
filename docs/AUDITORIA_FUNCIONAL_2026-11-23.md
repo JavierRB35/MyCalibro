@@ -91,9 +91,11 @@ No se encontraron: lectura integrada de EPUB/PDF; miniaturas de portadas; visual
 
 **PROD-008 APROBADA (2026-11-23):** copia de seguridad **completa y configurable** (opción C), con catálogo, metadatos y configuración, libros administrados y opción de incluir libros externos vinculados. Deberá ofrecer manifiesto, verificación de integridad y restauración segura, informando de exclusiones, errores y referencias inaccesibles. El formato, automatización, retención y destino concreto siguen sin decidirse. **Aún no implementada.**
 
-**Siguiente decisión abierta (PROD-009):** organización física de los libros administrados: conservar estructura, orden automático por autor/obra o política configurable.
+**PROD-009 APROBADA (2026-11-23):** organización física configurable (opción C) para libros administrados: conservar nombres y estructura de origen o utilizar carpetas por autor/obra, con colecciones y etiquetas independientes de las rutas físicas. Los archivos vinculados externamente no se moverán ni renombrarán de forma automática. Los cambios de ubicación deben preservar integridad, vínculos y respaldos. **Aún no implementada.**
 
-**Siguientes ejes posteriores, sin aprobar:** organización de carpetas, importación masiva, frecuencia/formato de backup, instalación y actualizaciones.
+**Siguiente decisión abierta (PROD-010):** importación masiva y tratamiento de posibles duplicados: importación básica, asistente con revisión o fusión automática.
+
+**Siguientes ejes posteriores, sin aprobar:** detalles de metadatos, frecuencia/formato de backups, instalación y actualizaciones.
 
 ## 8. Continuidad
 Toda propuesta futura se comparará con este inventario. Una decisión aceptada actualizará la documentación; un cambio de código exigirá pruebas proporcionales al riesgo y evidencia verificable. Mantener main como rama normal y evitar ramas salvo cambios críticos. No tocar archivos reales ni datos del usuario sin una estrategia de preservación.
