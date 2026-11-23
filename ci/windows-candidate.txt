@@ -1,4 +1,4 @@
 MyCalibro - Windows candidate validation
-Source commit: 0e64ee5a85fcdd6a63418d8f3f0a0a3dffe8ce3b
-Reason: PR #12 integrated: library list uses available height, preserving scrolling and existing books. Build tested installer for Windows.
+Source commit: 8881a6bab9555b2b82bbeb82ef9c23f690043129
+Reason: PR #13 integrated: Gemini supported model, Groq structured output, in-app provider connection checks. Build and smoke test updated Windows installer.
 Issued: 2026-11-23
