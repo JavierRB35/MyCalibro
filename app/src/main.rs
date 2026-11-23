@@ -90,6 +90,7 @@ struct AiTaskResult {
 
 struct TransferResult {
     message: String,
+    conversion: bool,
 }
 
 struct LibraryApp {
@@ -114,6 +115,7 @@ struct LibraryApp {
     conversion_source: Option<PathBuf>,
     conversion_format: String,
     conversion_status: String,
+    conversion_busy: bool,
     settings_open: bool,
     classify_provider: String,
     api_key_input: String,
@@ -161,6 +163,7 @@ impl LibraryApp {
             conversion_source: None,
             conversion_format: "epub".to_owned(),
             conversion_status: String::new(),
+            conversion_busy: false,
             settings_open: false,
             classify_provider: "Gemini".to_owned(),
             api_key_input: load_api_key("Gemini"),
@@ -362,7 +365,10 @@ impl LibraryApp {
         self.notice = format!("Preparando {} para {}…", book.title, device.name);
         std::thread::spawn(move || {
             let message = transfer_book_to_device(&source, &book.title, &device);
-            let _ = sender.send(TransferResult { message });
+            let _ = sender.send(TransferResult {
+                message,
+                conversion: false,
+            });
         });
     }
 
@@ -460,7 +466,12 @@ impl eframe::App for LibraryApp {
             if !self.notice.is_empty() { ui.label(&self.notice); }
         });
         while let Ok(transfer) = self.transfer_receiver.try_recv() {
-            self.notice = transfer.message;
+            if transfer.conversion {
+                self.conversion_status = transfer.message;
+                self.conversion_busy = false;
+            } else {
+                self.notice = transfer.message;
+            }
         }
         if self.last_device_scan.elapsed() >= Duration::from_secs(2) {
             self.devices = detect_ebook_devices();
@@ -1503,15 +1514,27 @@ fn conversion_window(ctx: &egui::Context, app: &mut LibraryApp) {
                 }
                 if ui
                     .add_enabled(
-                        app.conversion_source.is_some(),
+                        app.conversion_source.is_some() && !app.conversion_busy,
                         egui::Button::new("Convertir ahora")
                             .fill(GREEN)
                             .stroke(Stroke::NONE),
                     )
                     .clicked()
                 {
-                    if let Some(source) = app.conversion_source.as_ref() {
-                        app.conversion_status = convert_book(source, &app.conversion_format);
+                    if let Some(source) = app.conversion_source.clone() {
+                        let format = app.conversion_format.clone();
+                        let sender = app.transfer_sender.clone();
+                        let ctx = ctx.clone();
+                        app.conversion_status = "Conversión en curso…".into();
+                        app.conversion_busy = true;
+                        std::thread::spawn(move || {
+                            let message = convert_book(&source, &format);
+                            let _ = sender.send(TransferResult {
+                                message,
+                                conversion: true,
+                            });
+                            ctx.request_repaint();
+                        });
                     }
                 }
             });
@@ -1549,55 +1572,10 @@ fn find_ebook_converter() -> Option<PathBuf> {
         })
 }
 
-fn conversion_output_path(source: &PathBuf, format: &str) -> PathBuf {
-    let mut output = source.clone();
-    output.set_extension(format);
-    let mut candidate = output.clone();
-    let mut number = 2u32;
-    while candidate.exists() {
-        candidate = output.with_file_name(format!(
-            "{}.{}",
-            source
-                .file_stem()
-                .and_then(|stem| stem.to_str())
-                .unwrap_or("libro"),
-            format
-        ));
-        candidate.set_file_name(format!(
-            "{}.{}.{}",
-            source
-                .file_stem()
-                .and_then(|stem| stem.to_str())
-                .unwrap_or("libro"),
-            number,
-            format
-        ));
-        number += 1;
-    }
-    candidate
-}
-
 fn convert_book(source: &PathBuf, format: &str) -> String {
-    let Some(converter) = find_ebook_converter() else {
-        return "No se encontró Calibre. Instala Calibre o añade ebook-convert al PATH.".to_owned();
-    };
-    let output = conversion_output_path(source, format);
-    match Command::new(converter).arg(source).arg(&output).output() {
-        Ok(result) if result.status.success() => {
-            format!("Convertido correctamente: {}", output.display())
-        }
-        Ok(result) => {
-            let error = String::from_utf8_lossy(&result.stderr).trim().to_owned();
-            if error.is_empty() {
-                format!("No se pudo convertir. Código de salida: {}", result.status)
-            } else {
-                format!(
-                    "No se pudo convertir: {}",
-                    error.lines().next().unwrap_or("error desconocido")
-                )
-            }
-        }
-        Err(error) => format!("No se pudo iniciar el conversor: {error}"),
+    match transfer::convert_file(source, format, find_ebook_converter().as_deref()) {
+        Ok(path) => format!("Convertido y verificado: {}", path.display()),
+        Err(error) => format!("No se pudo convertir: {error}"),
     }
 }
 
@@ -1696,10 +1674,7 @@ fn screenshot_argument() -> Result<Option<PathBuf>, String> {
 
 #[cfg(test)]
 mod tests {
-    use super::{
-        automatic_topic, classify_with_fallback, conversion_output_path, device_profile,
-        is_supported_book, Book,
-    };
+    use super::{automatic_topic, classify_with_fallback, device_profile, is_supported_book, Book};
 
     fn book(title: &str, description: &str) -> Book {
         Book {
@@ -1719,16 +1694,6 @@ mod tests {
         assert_eq!(
             automatic_topic(&book("Notas", "un VIAJE entre planetas")),
             "Ciencia"
-        );
-    }
-
-    #[test]
-    fn conversion_output_uses_requested_extension() {
-        let output =
-            conversion_output_path(&std::path::PathBuf::from(r"C:\Books\manual.epub"), "mobi");
-        assert_eq!(
-            output.extension().and_then(|extension| extension.to_str()),
-            Some("mobi")
         );
     }
 

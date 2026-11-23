@@ -123,6 +123,46 @@ pub fn send(
         return Err("El lector ya no está disponible".into());
     }
     fs::create_dir_all(destination).map_err(|e| e.to_string())?;
+    publish(source, title, format, destination, converter)
+}
+
+pub fn convert_file(
+    source: &Path,
+    format: &str,
+    converter: Option<&Path>,
+) -> Result<PathBuf, String> {
+    if !["epub", "mobi", "azw3", "pdf", "txt", "html", "rtf", "fb2"].contains(&format) {
+        return Err("Formato de salida no admitido".into());
+    }
+    let source = fs::canonicalize(source).map_err(|e| e.to_string())?;
+    let destination = source.parent().ok_or("El origen no tiene carpeta")?;
+    publish(
+        &source,
+        source
+            .file_stem()
+            .and_then(|s| s.to_str())
+            .unwrap_or("Libro"),
+        format,
+        destination,
+        converter,
+    )
+}
+
+fn publish(
+    source: &Path,
+    title: &str,
+    format: &str,
+    destination: &Path,
+    converter: Option<&Path>,
+) -> Result<PathBuf, String> {
+    if !source.is_file() {
+        return Err("No se encontró el archivo original".into());
+    }
+    let current = source
+        .extension()
+        .and_then(|s| s.to_str())
+        .unwrap_or("")
+        .to_ascii_lowercase();
     let staging = tempfile::tempdir_in(destination).map_err(|e| e.to_string())?;
     let converted = staging.path().join(format!("conversion.{format}"));
     let input = if current == format {
@@ -187,6 +227,39 @@ pub fn send(
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn manual_conversion_requires_requested_format_and_preserves_input() {
+        let dir = tempfile::tempdir().unwrap();
+        let source = dir.path().join("source.txt");
+        fs::write(&source, b"text").unwrap();
+        assert!(convert_file(&source, "pdf", None).is_err());
+        assert!(convert_file(&source, "../pdf", None).is_err());
+        assert_eq!(fs::read(&source).unwrap(), b"text");
+        let copy = convert_file(&source, "txt", None).unwrap();
+        assert_ne!(copy, source);
+        assert_eq!(fs::read(copy).unwrap(), b"text");
+    }
+    #[cfg(unix)]
+    #[test]
+    fn manual_conversion_publishes_validated_output_without_replacing_previous_conversion() {
+        use std::os::unix::fs::PermissionsExt;
+        let dir = tempfile::tempdir().unwrap();
+        let source = dir.path().join("source.txt");
+        fs::write(&source, b"text").unwrap();
+        let converter = dir.path().join("converter");
+        fs::write(
+            &converter,
+            "#!/bin/sh\nprintf '%%PDF-1.4\\nfixture\\n' > \"$2\"\n",
+        )
+        .unwrap();
+        fs::set_permissions(&converter, fs::Permissions::from_mode(0o700)).unwrap();
+        let first = convert_file(&source, "pdf", Some(&converter)).unwrap();
+        let second = convert_file(&source, "pdf", Some(&converter)).unwrap();
+        assert_ne!(first, second);
+        assert_eq!(first.extension().unwrap(), "pdf");
+        assert_eq!(fs::read(first).unwrap(), fs::read(second).unwrap());
+        assert_eq!(fs::read(source).unwrap(), b"text");
+    }
     #[test]
     fn epub_container_and_mobi_signature_are_checked_before_copying() {
         let dir = tempfile::tempdir().unwrap();
