@@ -380,7 +380,10 @@ impl ReaderView {
                     return;
                 }
                 if let Some(error) = &self.error {
-                    ui.colored_label(egui::Color32::DARK_RED, format!("No se pudo abrir el libro: {error}"));
+                    ui.colored_label(
+                        egui::Color32::DARK_RED,
+                        format!("No se pudo abrir el libro: {error}"),
+                    );
                     return;
                 }
                 // Campos disjuntos: el préstamo inmutable del documento no
@@ -766,7 +769,10 @@ mod tests {
             std::process::id()
         ));
         view.open_path(&ruta, 1, None);
-        assert!(view.open, "la ventana queda visible con indicador de carga/error");
+        assert!(
+            view.open,
+            "la ventana queda visible con indicador de carga/error"
+        );
         assert!(view.document.is_none());
         finish_loading(&mut view);
         assert!(view.error.is_some());
@@ -785,14 +791,20 @@ mod tests {
         );
         assert!(view.open);
         assert_eq!(view.book_id, Some(42));
-        assert!(view.document.is_none(), "la apertura no bloquea la interfaz");
+        assert!(
+            view.document.is_none(),
+            "la apertura no bloquea la interfaz"
+        );
         finish_loading(&mut view);
         assert!(view.error.is_none(), "error: {:?}", view.error);
         let libro = view.document.as_ref().unwrap();
         let ultimo = libro.chapters.len() - 1;
         assert_eq!(view.position.chapter, ultimo);
         assert!(view.position.paragraph < libro.chapters[ultimo].paragraphs.len().max(1));
-        assert!(!view.position_dirty(), "cargar no guarda posición innecesariamente");
+        assert!(
+            !view.position_dirty(),
+            "cargar no guarda posición innecesariamente"
+        );
         let _ = std::fs::remove_file(&ruta_epub);
     }
 
@@ -811,8 +823,10 @@ mod tests {
     #[test]
     fn cerrar_o_sustituir_libro_descarta_resultados_de_cargas_anteriores() {
         let mut view = ReaderView::new();
-        let ruta_epub =
-            std::env::temp_dir().join(format!("mycalibro_reader_replace_{}.epub", std::process::id()));
+        let ruta_epub = std::env::temp_dir().join(format!(
+            "mycalibro_reader_replace_{}.epub",
+            std::process::id()
+        ));
         std::fs::write(&ruta_epub, crate::reader_epub::tests::epub_de_prueba()).unwrap();
         view.open_path(&ruta_epub, 10, None);
         let first_job = view.load_job;
