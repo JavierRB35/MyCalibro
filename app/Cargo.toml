@@ -16,8 +16,11 @@ tempfile = "3"
 zip = { version = "2", default-features = false, features = ["deflate"] }
 sha2 = "0.10"
 rusqlite = { version = "0.32", features = ["bundled"] }
+quick-xml = "0.41"
 
 [target.'cfg(windows)'.dependencies]
 eframe = { version = "0.31", default-features = false, features = ["wgpu"] }
 keyring = { version = "3.6", features = ["windows-native"] }
 wgpu = { version = "24", default-features = false, features = ["dx12", "wgsl"] }
+
+windows = { version = "0.58", features = ["Data_Pdf", "Storage", "Storage_Streams", "Foundation", "Win32_System_WinRT"] }

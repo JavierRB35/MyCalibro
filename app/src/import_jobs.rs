@@ -32,6 +32,7 @@ impl Metadata {
                 ),
                 identifiers: record.identifiers.clone(),
                 cover: None,
+                ..Default::default()
             },
             cover_source: record.cover.clone(),
         }
@@ -100,7 +101,29 @@ pub fn prepare(
     if !request.path.is_file() {
         return Err("No se encontró el archivo de origen".into());
     }
-    let (mut metadata, mut warning) = match request.metadata.clone() {
+    let mut embedded_cover = None;
+    let mut embedded_warning = None;
+    let native = if request.metadata.is_none()
+        && request
+            .path
+            .extension()
+            .is_some_and(|e| e.eq_ignore_ascii_case("epub"))
+    {
+        match crate::book_metadata::read_epub(&request.path) {
+            Ok(embedded) => {
+                embedded_cover = embedded.cover;
+                embedded_warning = embedded.warning;
+                Some(embedded.metadata)
+            }
+            Err(error) => {
+                embedded_warning = Some(format!("Lectura EPUB nativa: {error}"));
+                None
+            }
+        }
+    } else {
+        None
+    };
+    let (mut metadata, mut warning) = match request.metadata.clone().or(native) {
         Some(metadata) => (metadata, None),
         None => match read_metadata(&request.path) {
             Ok(fields) => (Metadata::from_fields(fields), None),
@@ -110,7 +133,18 @@ pub fn prepare(
             ),
         },
     };
+    if let Some(extra) = embedded_warning {
+        warning = Some(match warning {
+            Some(w) => format!("{w}. {extra}"),
+            None => extra,
+        });
+    }
     if metadata.title.trim().is_empty() {
+        let message = "Título ausente: se muestra el nombre del archivo";
+        warning = Some(match warning {
+            Some(w) => format!("{w}. {message}"),
+            None => message.into(),
+        });
         metadata.title = request
             .path
             .file_stem()
@@ -130,6 +164,13 @@ pub fn prepare(
     )?;
     if let Some(source) = &metadata.cover_source {
         match crate::book_metadata::preserve_cover(source, root, request.book_id) {
+            Ok(cover) => metadata.bibliography.cover = Some(cover),
+            Err(error) => warning = Some(format!("Portada no copiada: {error}")),
+        }
+    }
+    if let Some((bytes, extension)) = embedded_cover {
+        match crate::book_metadata::preserve_cover_bytes(&bytes, &extension, root, request.book_id)
+        {
             Ok(cover) => metadata.bibliography.cover = Some(cover),
             Err(error) => warning = Some(format!("Portada no copiada: {error}")),
         }

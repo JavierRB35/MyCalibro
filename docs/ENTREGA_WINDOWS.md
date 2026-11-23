@@ -54,15 +54,20 @@ integrada; compilar el instalador no acredita sus flujos.
 | [Comprobación de B en Windows real](https://github.com/JavierRB35/MyCalibro/issues/1#issuecomment-7099328433), instalador f765fb3 | Instalación aislada, ventana visible, catálogo intacto y desinstalación con datos preservados. B completó manualmente los pasos tras detectar un fallo de captura de ExitCode en el script, posteriormente corregido. Valida ese artefacto P0, no funciones posteriores. |
 | [Run 45161919605](https://github.com/JavierRB35/MyCalibro/actions/runs/45161919605), 8c57e95 | Pruebas Windows, incluida credencial ficticia nativa, y construcción correctas. Arranque falló porque faltaba habilitar dx12 en wgpu. |
 | [Run 45163682512](https://github.com/JavierRB35/MyCalibro/actions/runs/45163682512), e301d4c | Todos los pasos correctos: pruebas, release, NSIS, instalación, ventana capturada, catálogo intacto y desinstalación con datos preservados. SHA-256 del instalador: `3d19395d8a56e7cdc6a505d3badea2832f7b14e655e5db95e42ae379c3877238`. |
+| [Run 45170386951](https://github.com/JavierRB35/MyCalibro/actions/runs/45170386951), 65f99e5 | 67/67 pruebas Windows, incluida renderización nativa de PDF real de dos páginas, release, instalador y smoke correctos. Incluye almacenamiento, respaldo y asistente/Calibre integrados. SHA-256 del instalador: `7df442d14682efa4545c9a9d3a00f7419d9eb41da92eedbadd537332e4214f09`. [Artefacto y evidencias](https://github.com/JavierRB35/MyCalibro/actions/runs/45170386951/artifacts/14816517765). No acredita todavía conexión visual del lector ni análisis IA. |
+
+Las PR [#3](https://github.com/JavierRB35/MyCalibro/pull/3) y
+[#4](https://github.com/JavierRB35/MyCalibro/pull/4) están fusionadas tras revisión
+de B: biblioteca híbrida, respaldo/restauración e importación revisada desde
+archivos, carpetas y Calibre. El backend PDF nativo ya se ejecutó en Windows;
+`pdf_view.rs` aporta una ventana independiente pendiente de conectar a las fichas.
 
 ## Pendientes para declarar finalización
 
-- Revisión e integración de [PR #3](https://github.com/JavierRB35/MyCalibro/pull/3):
-  almacenamiento híbrido, preferencias y respaldo/restauración. Pruebas Linux
-  registradas en el PR; revisión Windows y funcional de B pendiente.
-- [PR #4](https://github.com/JavierRB35/MyCalibro/pull/4): backend Calibre de solo
-  lectura, con tres pruebas de origen intacto. Falta revisión e integración con el asistente.
-- Conectar y comprobar el asistente de importación, el lector EPUB/PDF y la IA con
+- Revisión e integración de [PR #5](https://github.com/JavierRB35/MyCalibro/pull/5)
+  (metadatos/portada EPUB nativos) y [PR #6](https://github.com/JavierRB35/MyCalibro/pull/6)
+  (recuperación/exportación JSON que conserva recursos administrados relativos).
+- Conectar y comprobar el lector EPUB/PDF y el análisis IA por libro con
   consentimiento revocable. Módulos aislados o pruebas unitarias no acreditan el flujo completo.
 - Ejecutar la validación del instalador sobre el candidato integrado, registrar
   sus resultados y publicar la versión de entrega. No hay evidencia de hardware USB

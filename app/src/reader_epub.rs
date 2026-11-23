@@ -93,11 +93,13 @@ impl EpubDocument {
         Self::from_bytes(&data)
     }
 
+    #[allow(dead_code)] // consumido por pruebas y futura vista de capítulos
     pub fn chapter_count(&self) -> usize {
         self.chapters.len()
     }
 
     /// Texto plano continuo de un capítulo (para pruebas y para la vista).
+    #[allow(dead_code)]
     pub fn plain_text(&self, chapter: usize) -> Option<String> {
         self.chapters
             .get(chapter)
@@ -110,42 +112,6 @@ impl EpubDocument {
             chapter: 0,
             paragraph: 0,
         }
-    }
-
-    /// Avanza a la posición siguiente dentro de los límites del libro;
-    /// devuelve false si ya estaba al final.
-    pub fn advance(&self, position: &mut ReadingPosition) -> bool {
-        if position.chapter >= self.chapters.len() {
-            return false;
-        }
-        let total = self.chapters[position.chapter].paragraphs.len();
-        if position.paragraph + 1 < total {
-            position.paragraph += 1;
-            return true;
-        }
-        if position.chapter + 1 < self.chapters.len() {
-            position.chapter += 1;
-            position.paragraph = 0;
-            return true;
-        }
-        false
-    }
-
-    /// Retrocede a la posición anterior; devuelve false si ya estaba al inicio.
-    pub fn rewind(&self, position: &mut ReadingPosition) -> bool {
-        if position.paragraph > 0 {
-            position.paragraph -= 1;
-            return true;
-        }
-        if position.chapter > 0 {
-            position.chapter -= 1;
-            position.paragraph = self.chapters[position.chapter]
-                .paragraphs
-                .len()
-                .saturating_sub(1);
-            return true;
-        }
-        false
     }
 
     /// Ajusta una posición leída de disco a los límites reales del libro
@@ -496,13 +462,13 @@ fn decodificar_entidades(texto: &str) -> String {
 }
 
 #[cfg(test)]
-mod tests {
+pub(crate) mod tests {
     use super::*;
     use std::io::Write;
 
     /// EPUB mínimo válido generado en memoria: mimetype (sin compresión,
     /// primera entrada), container.xml, OPF con dos capítulos.
-    fn epub_de_prueba() -> Vec<u8> {
+    pub(crate) fn epub_de_prueba() -> Vec<u8> {
         let mut buffer = std::io::Cursor::new(Vec::new());
         {
             let mut zip = zip::ZipWriter::new(&mut buffer);
@@ -614,58 +580,16 @@ mod tests {
     }
 
     #[test]
-    fn la_navegacion_avanza_retrocede_y_se_ajusta_a_los_limites() {
+    fn la_posicion_inicial_y_el_ajuste_a_limites_son_correctos() {
         let libro = EpubDocument::from_bytes(&epub_de_prueba()).unwrap();
-        let mut posicion = EpubDocument::start_position();
+        // La navegación por páginas vive en reader_view; aquí se valida el
+        // punto de partida y el ajuste de posiciones guardadas.
         assert_eq!(
-            posicion,
+            EpubDocument::start_position(),
             ReadingPosition {
                 chapter: 0,
                 paragraph: 0
             }
-        );
-        assert!(libro.advance(&mut posicion));
-        assert_eq!(
-            posicion,
-            ReadingPosition {
-                chapter: 0,
-                paragraph: 1
-            }
-        );
-        assert!(libro.advance(&mut posicion));
-        assert_eq!(
-            posicion,
-            ReadingPosition {
-                chapter: 1,
-                paragraph: 0
-            },
-            "pasa al capítulo siguiente"
-        );
-        assert!(libro.advance(&mut posicion), "último párrafo del libro");
-        assert_eq!(
-            posicion,
-            ReadingPosition {
-                chapter: 1,
-                paragraph: 1
-            }
-        );
-        assert!(!libro.advance(&mut posicion), "fin del libro");
-        assert!(libro.rewind(&mut posicion));
-        assert_eq!(
-            posicion,
-            ReadingPosition {
-                chapter: 1,
-                paragraph: 0
-            }
-        );
-        assert!(libro.rewind(&mut posicion));
-        assert_eq!(
-            posicion,
-            ReadingPosition {
-                chapter: 0,
-                paragraph: 1
-            },
-            "vuelve al capítulo anterior"
         );
         // Posición imposible (archivo cambiado) se ajusta sin caer fuera.
         let ajustada = libro.clamp(ReadingPosition {
