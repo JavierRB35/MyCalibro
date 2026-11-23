@@ -1,4 +1,4 @@
-name: Library list layout PR checks
+name: Library list UI pull-request checks
 on:
   pull_request:
     paths:
@@ -28,6 +28,9 @@ jobs:
       - name: Validate scroll viewport geometry
         working-directory: app
         run: cargo test --locked tests::library_list_uses_available_height_instead_of_one_row -- --exact
+      - name: Validate card click changes the selected book
+        working-directory: app
+        run: cargo test --locked tests::clicking_book_card_outside_draggable_title_updates_details_selection -- --exact
       - name: Check Windows integration
         working-directory: app
         run: cargo check --locked
