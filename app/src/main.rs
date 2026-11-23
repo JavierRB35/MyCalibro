@@ -1,4 +1,7 @@
+mod backup;
+mod library_tools;
 mod persistence;
+mod storage;
 mod transfer;
 
 use eframe::egui::{self, Color32, RichText, Stroke, Vec2};
@@ -31,6 +34,29 @@ struct Book {
     topic: String,
     #[serde(default)]
     file_path: Option<String>,
+    #[serde(default)]
+    files: Vec<storage::StoredFile>,
+}
+
+impl Book {
+    fn file_paths(&self, root: &std::path::Path) -> Vec<PathBuf> {
+        let mut paths: Vec<PathBuf> = self
+            .files
+            .iter()
+            .filter_map(|file| file.resolve(root).ok())
+            .collect();
+        if let Some(path) = &self.file_path {
+            let legacy = PathBuf::from(path);
+            if !paths.contains(&legacy) {
+                paths.push(legacy);
+            }
+        }
+        paths
+    }
+
+    fn primary_path(&self, root: &std::path::Path) -> Option<PathBuf> {
+        self.file_paths(root).into_iter().next()
+    }
 }
 
 #[derive(Default)]
@@ -71,6 +97,7 @@ impl Draft {
                 .collect(),
             topic: String::new(),
             file_path: None,
+            files: Vec::new(),
         }
     }
 }
@@ -108,6 +135,7 @@ struct LibraryApp {
     library_generation: u64,
     confirm_exit: bool,
     discard_on_exit: bool,
+    library_tools: library_tools::LibraryTools,
     screenshot_path: Option<PathBuf>,
     frame_count: u32,
     screenshot_requested: bool,
@@ -152,6 +180,7 @@ impl LibraryApp {
             notice: String::new(),
             catalog,
             storage_error,
+            library_tools: library_tools::LibraryTools::new(&library_folder),
             library_folder,
             library_generation: 0,
             confirm_exit: false,
@@ -203,6 +232,7 @@ impl LibraryApp {
                     Ok(()) => "Biblioteca abierta".into(),
                     Err(error) => format!("Abierta, pero no se pudo recordar la carpeta: {error}"),
                 };
+                self.library_tools = library_tools::LibraryTools::new(&folder);
                 self.library_folder = folder;
                 self.library_generation = self.library_generation.wrapping_add(1);
                 self.storage_error = None;
@@ -267,6 +297,10 @@ impl LibraryApp {
         if self.storage_error.is_some() {
             return;
         }
+        if let Some(error) = &self.library_tools.preferences_error {
+            self.notice = error.clone();
+            return;
+        }
         if !is_supported_book(&path) {
             self.notice = format!(
                 "No reconozco el formato de {}",
@@ -274,12 +308,18 @@ impl LibraryApp {
             );
             return;
         }
-        let source = path.to_string_lossy().to_string();
-        if self
-            .books
-            .iter()
-            .any(|book| book.file_path.as_deref() == Some(source.as_str()))
-        {
+        let source = match std::fs::canonicalize(&path) {
+            Ok(path) => path,
+            Err(error) => {
+                self.notice = format!("Archivo inaccesible: {error}");
+                return;
+            }
+        };
+        if self.books.iter().any(|book| {
+            book.file_paths(&self.library_folder)
+                .iter()
+                .any(|p| std::fs::canonicalize(p).ok().as_ref() == Some(&source))
+        }) {
             self.notice = "Ese libro ya está en la biblioteca".to_owned();
             return;
         }
@@ -302,6 +342,22 @@ impl LibraryApp {
         let Some(id) = self.next_book_id() else {
             return;
         };
+        let stored = match storage::import_file(
+            &source,
+            &self.library_folder,
+            id,
+            metadata.get("author").map(String::as_str).unwrap_or(""),
+            &title,
+            self.library_tools.preferences.import_mode,
+            self.library_tools.preferences.layout,
+            None,
+        ) {
+            Ok(file) => file,
+            Err(error) => {
+                self.notice = error;
+                return;
+            }
+        };
         let book = Book {
             id,
             title,
@@ -319,7 +375,8 @@ impl LibraryApp {
                 })
                 .unwrap_or_default(),
             topic: String::new(),
-            file_path: Some(source),
+            file_path: None,
+            files: vec![stored],
         };
         self.books.push(book);
         self.selected = Some(id);
@@ -373,7 +430,7 @@ impl LibraryApp {
         let Some(book) = self.books.iter().find(|book| book.id == book_id).cloned() else {
             return;
         };
-        let Some(source) = book.file_path.as_ref().map(PathBuf::from) else {
+        let Some(source) = book.primary_path(&self.library_folder) else {
             self.notice =
                 "Importa primero el archivo del libro para poder enviarlo al lector".to_owned();
             return;
@@ -425,6 +482,23 @@ impl LibraryApp {
 
 impl eframe::App for LibraryApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
+        if self.library_tools.busy() && ctx.input(|i| i.viewport().close_requested()) {
+            ctx.send_viewport_cmd(egui::ViewportCommand::CancelClose);
+            self.notice = "Espere a que termine la copia o restauración antes de cerrar".into();
+        }
+        if let Some(restored) = self.library_tools.show(
+            ctx,
+            &self.library_folder,
+            &self.books,
+            self.storage_error.is_none(),
+        ) {
+            let status = self.library_tools.status().to_owned();
+            // A failed autosave during background restoration must not discard pending edits.
+            if self.storage_error.is_none() {
+                self.open_library(restored);
+            }
+            self.notice = status;
+        }
         if ctx.input(|i| i.viewport().close_requested())
             && self.storage_error.is_some()
             && self.catalog.is_some()
@@ -466,7 +540,8 @@ impl eframe::App for LibraryApp {
                 }
             }
             // Do not abandon unsaved edits when switching libraries.
-            let can_switch = self.storage_error.is_none() || self.catalog.is_none();
+            let can_switch = (self.storage_error.is_none() || self.catalog.is_none()) && !self.library_tools.busy();
+            if ui.button("Biblioteca y copias…").clicked() { self.library_tools.open=true; }
             if ui.add_enabled(can_switch, egui::Button::new("Abrir carpeta de biblioteca…")).clicked() {
                 if let Some(folder) = rfd::FileDialog::new().pick_folder() { self.open_library(folder); }
             }
@@ -1073,6 +1148,22 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
                         );
                         ui.add_space(12.0);
                         let book = &mut app.books[index];
+                        egui::CollapsingHeader::new("Archivos y almacenamiento").default_open(true).show(ui, |ui| {
+                            for file in &book.files {
+                                let mode=match file.mode {storage::StorageMode::Managed=>"Administrado",storage::StorageMode::Linked=>"Vinculado"};
+                                ui.label(RichText::new(format!("{mode}: {}",file.path.display())).size(10.0));
+                                match file.resolve(&app.library_folder) {
+                                    Ok(path) if path.is_file()=>(),
+                                    Ok(_)=>{ui.colored_label(Color32::DARK_RED,"Archivo no disponible; se conserva la ficha");},
+                                    Err(error)=>{ui.colored_label(Color32::DARK_RED,error);},
+                                }
+                            }
+                            if let Some(path)=&book.file_path {
+                                ui.label(RichText::new(format!("Vinculado (catálogo antiguo): {path}")).size(10.0));
+                                if !std::path::Path::new(path).is_file(){ui.colored_label(Color32::DARK_RED,"Archivo no disponible; se conserva la ficha");}
+                            }
+                            if book.files.is_empty() && book.file_path.is_none(){ui.label("Ficha sin archivo asociado");}
+                        });
                         changed |= ui
                             .add(
                                 egui::TextEdit::singleline(&mut book.title)
@@ -1593,6 +1684,18 @@ fn find_ebook_converter() -> Option<PathBuf> {
 
 fn convert_book(source: &PathBuf, format: &str) -> String {
     match transfer::convert_file(source, format, find_ebook_converter().as_deref()) {
+        Ok(path)
+            if source
+                .extension()
+                .and_then(|s| s.to_str())
+                .is_some_and(|s| s.eq_ignore_ascii_case(format)) =>
+        {
+            format!(
+                "Copia verificada; ya estaba en {}: {}",
+                format.to_uppercase(),
+                path.display()
+            )
+        }
         Ok(path) => format!("Convertido y verificado: {}", path.display()),
         Err(error) => format!("No se pudo convertir: {error}"),
     }
@@ -1729,6 +1832,7 @@ mod tests {
             tags: Vec::new(),
             topic: String::new(),
             file_path: None,
+            files: Vec::new(),
         }
     }
 
