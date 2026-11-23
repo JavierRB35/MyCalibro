@@ -555,25 +555,39 @@ fn decodificar_entidades(texto: &str) -> String {
     for (entidad, valor) in comunes {
         resultado = resultado.replace(entidad, valor);
     }
-    // Numéricas decimales y hexadecimales.
-    while let Some(pos) = resultado.find("&#") {
-        let desde = &resultado[pos + 2..];
-        let (valor, consumo) =
-            if let Some(hex) = desde.strip_prefix('x').or_else(|| desde.strip_prefix('X')) {
-                let digits: String = hex.chars().take_while(|c| c.is_ascii_hexdigit()).collect();
-                (u32::from_str_radix(&digits, 16).ok(), 1 + digits.len())
+    // Sustituye solo entidades numéricas terminadas por ';': un número
+    // incompleto o fuera de rango se conserva literal, sin panic ni truncado.
+    let mut decoded = String::with_capacity(resultado.len());
+    let mut remaining = resultado.as_str();
+    while let Some(start) = remaining.find("&#") {
+        decoded.push_str(&remaining[..start]);
+        let after = &remaining[start + 2..];
+        let (radix, offset, digits_start) =
+            if let Some(hex) = after.strip_prefix('x').or_else(|| after.strip_prefix('X')) {
+                (16, 1, hex)
             } else {
-                let digits: String = desde.chars().take_while(|c| c.is_ascii_digit()).collect();
-                (digits.parse::<u32>().ok(), digits.len())
+                (10, 0, after)
             };
-        match valor.and_then(char::from_u32) {
-            Some(ch) if consumo > 0 => {
-                resultado.replace_range(pos..pos + 2 + consumo + 1, &ch.to_string());
-            }
-            _ => break, // entidad desconocida o mal formada: se deja literal
+        let digits: String = digits_start
+            .chars()
+            .take_while(|c| if radix == 16 { c.is_ascii_hexdigit() } else { c.is_ascii_digit() })
+            .collect();
+        let marker = offset + digits.len();
+        let replacement = if !digits.is_empty() && after.as_bytes().get(marker) == Some(&b';') {
+            u32::from_str_radix(&digits, radix).ok().and_then(char::from_u32)
+        } else {
+            None
+        };
+        if let Some(ch) = replacement {
+            decoded.push(ch);
+            remaining = &after[marker + 1..];
+        } else {
+            decoded.push_str("&#");
+            remaining = after;
         }
     }
-    resultado
+    decoded.push_str(remaining);
+    decoded
 }
 
 #[cfg(test)]
@@ -728,6 +742,10 @@ pub(crate) mod tests {
         );
         // Fuera de rango para un carácter válido: se conserva literal.
         assert_eq!(decodificar_entidades("&#999999999;"), "&#999999999;");
+        assert_eq!(decodificar_entidades("&#65"), "&#65");
+        assert_eq!(decodificar_entidades("&#x41"), "&#x41");
+        assert_eq!(decodificar_entidades("A &#65x B &#66; C"), "A &#65x B B C");
+        assert_eq!(decodificar_entidades("&#x1F600;"), "😀");
     }
 
     #[test]
