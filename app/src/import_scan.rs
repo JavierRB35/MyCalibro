@@ -126,10 +126,26 @@ pub enum SuggestedAction {
 /// los candidatos con el catálogo. Solo lectura; los errores puntuales se
 /// registran y no abortan el lote.
 pub fn scan_paths(inputs: &[PathBuf], catalog: &[CatalogItem]) -> ScanOutcome {
+    scan_paths_with_progress(inputs, catalog, &mut |_, _| true)
+}
+
+/// Igual que [`scan_paths`], notificando progreso real durante el recorrido:
+/// `(archivos_vistos, candidatos_encontrados)`. El callback devuelve si el
+/// escaneo debe continuar; al devolver false se detiene y devuelve lo
+/// acumulado hasta ese momento. Pensado para llamarse desde un hilo
+/// trabajador con cancelación cooperativa y sin bloquear la interfaz
+/// (PROD-010).
+pub fn scan_paths_with_progress(
+    inputs: &[PathBuf],
+    catalog: &[CatalogItem],
+    progress: &mut dyn FnMut(usize, usize) -> bool,
+) -> ScanOutcome {
     let mut outcome = ScanOutcome::default();
     let mut seen: BTreeSet<String> = BTreeSet::new();
     for input in inputs {
-        collect_candidates(input, &mut outcome, &mut seen);
+        if !collect_candidates(input, &mut outcome, &mut seen, progress) {
+            return outcome; // cancelado: se entrega lo acumulado
+        }
     }
     outcome
         .reviews
@@ -198,10 +214,17 @@ fn catalog_refs(catalog: &[CatalogItem]) -> Vec<CatalogRef<'_>> {
 /// No sigue enlaces simbólicos de directorio (evita ciclos) y no repite
 /// archivos ya vistos en el mismo lote, aunque se alcancen por rutas
 /// equivalentes (relativas, mayúsculas distintas o segmentos «..»).
-fn collect_candidates(input: &Path, outcome: &mut ScanOutcome, seen: &mut BTreeSet<String>) {
+/// Notifica progreso tras cada archivo procesado; devolver false desde el
+/// callback detiene el recorrido de forma cooperativa.
+fn collect_candidates(
+    input: &Path,
+    outcome: &mut ScanOutcome,
+    seen: &mut BTreeSet<String>,
+    progress: &mut dyn FnMut(usize, usize) -> bool,
+) -> bool {
     let key = path_key(input);
     if !seen.insert(key) {
-        return;
+        return true;
     }
     let meta = match std::fs::symlink_metadata(input) {
         Ok(meta) => meta,
@@ -210,7 +233,7 @@ fn collect_candidates(input: &Path, outcome: &mut ScanOutcome, seen: &mut BTreeS
                 path: input.to_path_buf(),
                 message: error.to_string(),
             });
-            return;
+            return true;
         }
     };
     if meta.is_file() {
@@ -228,7 +251,7 @@ fn collect_candidates(input: &Path, outcome: &mut ScanOutcome, seen: &mut BTreeS
                 suggested_action: SuggestedAction::Import,
             });
         }
-        return;
+        return progress(outcome.files_seen, outcome.reviews.len());
     }
     if meta.is_dir() {
         let entries = match std::fs::read_dir(input) {
@@ -238,12 +261,16 @@ fn collect_candidates(input: &Path, outcome: &mut ScanOutcome, seen: &mut BTreeS
                     path: input.to_path_buf(),
                     message: error.to_string(),
                 });
-                return;
+                return true;
             }
         };
         for entry in entries {
             match entry {
-                Ok(entry) => collect_candidates(&entry.path(), outcome, seen),
+                Ok(entry) => {
+                    if !collect_candidates(&entry.path(), outcome, seen, progress) {
+                        return false;
+                    }
+                }
                 Err(error) => outcome.errors.push(ScanError {
                     path: input.to_path_buf(),
                     message: error.to_string(),
@@ -251,6 +278,7 @@ fn collect_candidates(input: &Path, outcome: &mut ScanOutcome, seen: &mut BTreeS
             }
         }
     }
+    true
 }
 
 /// Contrasta un candidato con el catálogo y devuelve todas las coincidencias
@@ -486,6 +514,57 @@ mod tests {
             "un solo candidato aunque haya tres rutas equivalentes"
         );
         assert_eq!(outcome.errors.len(), 0);
+        std::fs::remove_dir_all(&base).unwrap();
+    }
+
+    #[test]
+    fn el_progreso_se_notifica_incrementalmente_y_coincide_con_el_resultado() {
+        let base = std::env::temp_dir().join(format!("mycalibro_prog_{}", std::process::id()));
+        std::fs::create_dir_all(&base).unwrap();
+        std::fs::write(base.join("a.epub"), b"x").unwrap();
+        std::fs::write(base.join("b.pdf"), b"y").unwrap();
+        std::fs::write(base.join("c.txt"), b"z").unwrap();
+        std::fs::write(base.join("d.png"), b"w").unwrap();
+        let mut eventos: Vec<(usize, usize)> = Vec::new();
+        let outcome = scan_paths_with_progress(&[base.clone()], &[], &mut |files, candidates| {
+            eventos.push((files, candidates));
+            true
+        });
+        assert!(
+            !eventos.is_empty(),
+            "debe haber al menos un evento de progreso"
+        );
+        let (ultimo_files, ultimo_candidatos) = *eventos.last().unwrap();
+        assert_eq!(ultimo_files, outcome.files_seen);
+        assert_eq!(ultimo_candidatos, outcome.reviews.len());
+        // Monótono no decreciente en ambas componentes.
+        assert!(eventos
+            .windows(2)
+            .all(|ventana| ventana[0].0 <= ventana[1].0 && ventana[0].1 <= ventana[1].1));
+        std::fs::remove_dir_all(&base).unwrap();
+    }
+
+    #[test]
+    fn el_escaneo_se_detiene_de_forma_cooperativa_al_devolver_false() {
+        let base = std::env::temp_dir().join(format!("mycalibro_cancel_{}", std::process::id()));
+        std::fs::create_dir_all(&base).unwrap();
+        for nombre in ["a.epub", "b.epub", "c.epub", "d.epub", "e.epub", "f.epub"] {
+            std::fs::write(base.join(nombre), b"x").unwrap();
+        }
+        let mut llamadas = 0;
+        let outcome = scan_paths_with_progress(&[base.clone()], &[], &mut |files, _| {
+            llamadas += 1;
+            files < 2 // cancelar después del segundo archivo
+        });
+        assert!(
+            llamadas < 6,
+            "el recorrido se detiene antes de terminar: {llamadas} llamadas"
+        );
+        assert!(
+            outcome.files_seen < 6,
+            "no se llegaron a ver todos los archivos"
+        );
+        assert!(outcome.errors.is_empty());
         std::fs::remove_dir_all(&base).unwrap();
     }
 
