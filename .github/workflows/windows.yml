@@ -1,0 +1,59 @@
+name: Windows candidate verification
+on:
+  workflow_dispatch:
+    inputs:
+      run_tests:
+        description: 'Run tests (disable only when this exact source already has recorded Windows test evidence)'
+        type: boolean
+        default: true
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: app
+      - name: Format and tests on candidate
+        if: github.event_name != 'workflow_dispatch' || inputs.run_tests
+        working-directory: app
+        run: |
+          cargo fmt --check
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cargo test --locked
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Build candidate
+        working-directory: app
+        run: cargo build --release --locked
+      - name: Install packaging tool
+        run: choco install nsis --yes --no-progress
+      - name: Build installer
+        run: |
+          New-Item -ItemType Directory -Path dist -Force | Out-Null
+          $version = (Select-String -Path app/Cargo.toml -Pattern '^version = "([^"]+)"').Matches.Groups[1].Value
+          & "${env:ProgramFiles(x86)}\NSIS\makensis.exe" "/DVERSION=$version" packaging/windows.nsi
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Get-FileHash dist/*.exe -Algorithm SHA256 | Format-List | Out-File dist/SHA256.txt
+      - name: Verify installation, window startup and uninstall data preservation
+        run: |
+          $installer = (Get-ChildItem dist/*-setup.exe | Select-Object -First 1).FullName
+          ./scripts/windows-smoke.ps1 -Installer $installer -EvidenceDirectory "$env:RUNNER_TEMP/MyCalibro-smoke"
+      - name: Upload candidate and evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MyCalibro-Windows-${{ github.sha }}
+          path: |
+            dist/
+            ${{ runner.temp }}/MyCalibro-smoke/
+          if-no-files-found: error
