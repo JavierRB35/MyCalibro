@@ -1,5 +1,6 @@
 mod backup;
 mod library_tools;
+mod pdf_backend;
 mod persistence;
 mod storage;
 mod transfer;
