@@ -45,24 +45,35 @@
 - **Estado de implementación:** pendiente; la aplicación actual no incorpora un lector EPUB/PDF. Esta decisión actualiza el alcance, no el código.
 
 ## PROD-005 — Alcance de la inteligencia artificial
+- **Fecha de apertura y aprobación:** 2026-11-23.
+- **Estado:** APROBADA por el propietario.
+- **Alternativa seleccionada:** **B: IA para organizar la biblioteca y analizar cada libro, bajo demanda**.
+- **Comportamiento vinculante (organización):** conservar y ampliar la clasificación por temas y etiquetas, normalización y enriquecimiento de metadatos y detección asistida de duplicados.
+- **Comportamiento vinculante (por libro):** proporcionar funciones separadas del lector para obtener argumento/resumen, realizar análisis y formular preguntas sobre un libro cuando exista contenido disponible para procesar de manera autorizada. Identificar cuándo la respuesta se basa solo en metadatos y cuándo se ha examinado el texto; fundamentar las afirmaciones sobre contenido en pasajes verificables si se dispone de ellos.
+- **Límites funcionales:** no se aprueban por PROD-005 consultas sobre varios libros a la vez, búsqueda semántica global, análisis transversal de toda la biblioteca ni una interfaz de IA dentro del lector básico de PROD-004.
+- **Privacidad y seguridad:** el tratamiento del texto deberá respetar una política de consentimiento aún pendiente (PROD-006); no enviar automáticamente libros completos a servicios externos, no inventar citas y gestionar los errores de extracción/red con transparencia.
+- **Coherencia con el producto existente:** el código actual ya contiene clasificación por metadatos con Gemini y alternativa Groq; eso no equivale a tener implementados resúmenes, argumentarios ni preguntas fundamentadas en el texto.
+- **Estado de implementación:** decisión documental; las funcionalidades adicionales quedan pendientes de diseño, ejecución y verificación.
+
+## PROD-006 — Privacidad y tratamiento del contenido con IA
 - **Fecha de apertura:** 2026-11-23.
 - **Estado:** PENDIENTE DE ELECCIÓN.
-- **Pregunta:** ¿Hasta dónde debe llegar la IA de MyCalibro **fuera del lector básico aprobado en PROD-004**?
+- **Pregunta:** ¿Qué autorización debe exigir MyCalibro antes de transmitir a proveedores externos fragmentos o contenido de un libro para responder preguntas y generar análisis?
 
-| Opción | Funcionalidades previstas | Alcance y coste |
+| Opción | Política propuesta | Consecuencias |
 | --- | --- | --- |
-| A. IA para organizar | Clasificación temática y etiquetas, normalización y mejora de fichas bibliográficas, detección asistida de duplicados | Menor complejidad; sin análisis del contenido de los libros |
-| B. IA por libro, bajo demanda | Todo A, más resumen/argumento, análisis y preguntas sobre el contenido del libro cuando pueda extraerse con permiso; respuestas fundamentadas en pasajes verificables | Requiere extracción de texto, manejo de límites y transparencia sobre qué se ha procesado; no modifica la interfaz del lector |
-| C. IA para libros y biblioteca completa | Todo B, más consultas que crucen varios libros, búsqueda semántica y organización/recomendaciones de la colección | Mayor complejidad de indexación, privacidad y costes; se materializaría en un módulo de consulta separado del lector |
+| A. Consentimiento por consulta | Pedir autorización expresa para enviar contenido cada vez que se solicite un análisis o pregunta que requiera texto externo | Mayor control, pero más confirmaciones |
+| B. Consentimiento por libro revocable | El usuario habilita el análisis externo para cada libro una vez, puede revocarlo, y se le muestra qué proveedor y tipo de datos se procesan | Equilibrio entre privacidad y comodidad; requiere persistir permisos y controles claros |
+| C. Contenido exclusivamente local | No enviar texto del libro a servicios externos; consultas sobre contenido solo con procesamiento local compatible | Máxima restricción de salida de contenido, pero mayor coste técnico y requisitos del equipo |
 
-**Recomendación no aprobada:** B si se prioriza utilidad por libro con complejidad acotada; C si el objetivo es análisis transversal de toda la colección. En cualquier opción, solo enviar a servicios externos la información autorizada, distinguir metadatos de contenido realmente leído y evitar referencias ficticias.
+**Recomendación para el debate (no aprobada):** B, con consentimiento claro y revocable, minimización de fragmentos transmitidos, indicación del proveedor utilizado y separación entre el tratamiento de metadatos y el de texto completo. No almacenar claves ni textos privados en GitHub; no dar por supuesto que todo libro puede procesarse o enviarse a terceros.
 
-**Pendiente:** elegir A, B o C. La clasificación Gemini→Groq que existe actualmente no se interpreta como prueba de las capacidades futuras.
+**Aclaración:** esta decisión afecta al **contenido del libro**. El comportamiento actual de clasificación de metadatos con Gemini/Groq no se modifica por abrir PROD-006; su configuración y transparencia deberán revisarse al implementar la política acordada.
 
 ## Pendientes de debates posteriores
 - Detalle de importación puntual desde Calibre: campos, duplicados, política de copia/vínculo y recuperación (PROD-003, aprobada).
 - Detalles de implementación del lector básico EPUB/PDF, navegación, visualización y última posición (PROD-004, aprobada).
-- Alcance de IA para organización, libros o biblioteca completa (PROD-005, abierta) y controles de privacidad.
+- IA para organización y análisis de cada libro (PROD-005, aprobada); privacidad y consentimiento sobre contenido (PROD-006, abierta).
 - Plataformas (Windows / otras), instalación y actualizaciones.
 - Copia y restauración, sincronización y dispositivos.
 
@@ -73,4 +84,5 @@
 | PROD-002 | 2026-11-23 | Aprobada | Opción C: almacenamiento híbrido (archivos administrados y vinculados) |
 | PROD-003 | 2026-11-23 | Aprobada | Opción A: importación puntual sin sincronización posterior con Calibre |
 | PROD-004 | 2026-11-23 | Aprobada | Opción A: lector básico EPUB/PDF, navegación, visualización y posición |
-| PROD-005 | 2026-11-23 | Pendiente | Alcance de IA fuera del lector básico |
+| PROD-005 | 2026-11-23 | Aprobada | Opción B: IA para organización y análisis por libro bajo demanda |
+| PROD-006 | 2026-11-23 | Pendiente | Consentimiento y tratamiento de textos de libros por IA |
