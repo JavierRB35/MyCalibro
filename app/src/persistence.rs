@@ -130,11 +130,28 @@ impl Catalog {
     }
 }
 
-/// Copy a validated legacy catalog or recovery snapshot into an EMPTY directory.
-/// External book references stay untouched. This is not a full book backup.
+/// Recover a catalogue and its managed references into an EMPTY directory.
+/// External references stay untouched. Auxiliary state is not a full backup.
 pub fn recover_into(source: &Path, destination: &Path) -> Result<(), String> {
     let bytes = fs::read(source).map_err(|e| e.to_string())?;
     let books = decode(&bytes)?;
+    recover_books_into(
+        &books,
+        source.parent().ok_or("Catálogo sin carpeta")?,
+        destination,
+    )
+}
+
+/// Export pending in-memory edits without breaking relative managed references.
+/// A failure may leave verified copies in the new folder, but never publishes an
+/// incomplete catalogue or removes anything from the source library.
+pub fn recover_books_into(
+    books: &[Book],
+    source_root: &Path,
+    destination: &Path,
+) -> Result<(), String> {
+    use crate::storage::{self, StorageMode};
+    decode(&serde_json::to_vec(books).map_err(|e| e.to_string())?)?;
     if fs::read_dir(destination)
         .map_err(|e| e.to_string())?
         .next()
@@ -143,7 +160,36 @@ pub fn recover_into(source: &Path, destination: &Path) -> Result<(), String> {
         return Err("La recuperación requiere una carpeta vacía; no se sobrescribió nada".into());
     }
     let (mut catalog, _) = Catalog::open(destination)?;
-    catalog.save(&books)
+    let mut copied = std::collections::HashSet::new();
+    for book in books {
+        for file in book.files.iter().chain(book.bibliography.cover.iter()) {
+            if file.mode != StorageMode::Managed {
+                continue;
+            }
+            let source = file.resolve(source_root)?;
+            let target = storage::safe_join(destination, &file.path)?;
+            let hash = if copied.insert(file.path.clone()) {
+                fs::create_dir_all(target.parent().ok_or("Archivo sin carpeta")?)
+                    .map_err(|e| e.to_string())?;
+                storage::copy_new(&source, &target)?
+            } else {
+                storage::hash_file(&target)?
+            };
+            if !file.sha256.is_empty() && hash != file.sha256 {
+                return Err(format!(
+                    "El archivo administrado cambió: {}. No se publicó el catálogo recuperado",
+                    file.path.display()
+                ));
+            }
+        }
+    }
+    let counter_path = storage::safe_join(source_root, Path::new("next-book-id.json"))?;
+    if let Some(counter) = read_optional(&counter_path)? {
+        serde_json::from_slice::<u64>(&counter)
+            .map_err(|e| format!("Contador de origen ilegible: {e}"))?;
+        atomic_write(&destination.join("next-book-id.json"), &counter)?;
+    }
+    catalog.save(books)
 }
 
 pub fn default_folder() -> Result<PathBuf, String> {
@@ -185,6 +231,82 @@ mod tests {
     fn books() -> Vec<Book> {
         decode(br#"[{"id":1,"title":"Libro","author":"A","year":"","description":"","tags":[]}]"#)
             .unwrap()
+    }
+
+    #[test]
+    fn recovery_preserves_managed_relative_files_covers_and_external_references() {
+        let root = tempfile::tempdir().unwrap();
+        let external = tempfile::tempdir().unwrap();
+        let destination = tempfile::tempdir().unwrap();
+        let source = external.path().join("original.txt");
+        fs::write(&source, b"original text").unwrap();
+        let mut original = books();
+        original[0].files.push(
+            crate::storage::import_file(
+                &source,
+                root.path(),
+                1,
+                "A",
+                "Libro",
+                crate::storage::StorageMode::Managed,
+                crate::storage::Layout::Preserve,
+                None,
+            )
+            .unwrap(),
+        );
+        original[0].file_path = Some(source.to_string_lossy().into_owned());
+        original[0].bibliography.cover =
+            Some(crate::book_metadata::preserve_cover(&source, root.path(), 1).unwrap());
+        let snapshot = root.path().join("library.previous.json");
+        fs::write(&snapshot, serde_json::to_vec(&original).unwrap()).unwrap();
+        fs::write(
+            root.path().join("library.json"),
+            b"corrupt current catalogue",
+        )
+        .unwrap();
+        fs::write(root.path().join("next-book-id.json"), b"50").unwrap();
+        recover_into(&snapshot, destination.path()).unwrap();
+        let (mut catalog, recovered) = Catalog::open(destination.path()).unwrap();
+        assert_eq!(recovered[0].file_path, original[0].file_path);
+        for file in recovered[0]
+            .files
+            .iter()
+            .chain(recovered[0].bibliography.cover.iter())
+        {
+            assert_eq!(
+                fs::read(file.resolve(destination.path()).unwrap()).unwrap(),
+                b"original text"
+            );
+        }
+        assert_eq!(catalog.allocate_id(&recovered).unwrap(), 50);
+        assert_eq!(
+            fs::read(root.path().join("library.json")).unwrap(),
+            b"corrupt current catalogue"
+        );
+        assert_eq!(fs::read(source).unwrap(), b"original text");
+    }
+
+    #[test]
+    fn recovery_never_publishes_catalogue_when_a_managed_file_is_missing_or_changed() {
+        let root = tempfile::tempdir().unwrap();
+        let destination = tempfile::tempdir().unwrap();
+        let mut original = books();
+        original[0].files.push(crate::storage::StoredFile {
+            path: "books/missing.txt".into(),
+            mode: crate::storage::StorageMode::Managed,
+            sha256: "expected".into(),
+        });
+        assert!(recover_books_into(&original, root.path(), destination.path()).is_err());
+        assert!(!destination.path().join("library.json").exists());
+        let second = tempfile::tempdir().unwrap();
+        fs::create_dir(root.path().join("books")).unwrap();
+        fs::write(root.path().join("books/missing.txt"), b"changed").unwrap();
+        assert!(recover_books_into(&original, root.path(), second.path()).is_err());
+        assert!(!second.path().join("library.json").exists());
+        assert_eq!(
+            fs::read(root.path().join("books/missing.txt")).unwrap(),
+            b"changed"
+        );
     }
 
     #[test]

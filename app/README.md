@@ -26,7 +26,7 @@ El guardado utiliza un temporal en el mismo volumen, sincronización a disco y r
 
 Un JSON ilegible, un error de lectura o un bloqueo impiden editar y guardar. Los errores de guardado permanecen visibles; permiten reintentar o exportar los cambios pendientes a otra carpeta vacía. El cierre avisa cuando hay cambios sin guardar. No se cargan ejemplos en sustitución de datos dañados.
 
-Para recuperar una versión anterior o importar el antiguo `app/library.json`, use «Recuperar/importar catálogo antiguo», elija el JSON y una carpeta vacía. Se valida antes de escribir y se preserva el origen. Esta operación recupera el catálogo y sus referencias; **no es la copia completa de libros prevista en PROD-008**.
+Para recuperar una versión anterior o importar el antiguo `app/library.json`, use «Recuperar/importar catálogo antiguo», elija el JSON y una carpeta vacía. Se valida antes de escribir y se preserva el origen. Esta operación copia y verifica también los archivos administrados y las portadas referenciadas, tomando como origen la carpeta donde está el JSON. Los vínculos externos mantienen sus rutas. El catálogo nuevo se publica solo cuando terminan las copias; los originales se conservan. La exportación de cambios pendientes utiliza el mismo procedimiento y ambas operaciones se ejecutan en segundo plano. Si falla, pueden quedar copias parciales en el destino, sin catálogo publicado; para reintentar elija otra carpeta vacía. No recupera preferencias ni estado auxiliar: para eso utilice el respaldo completo de PROD-008.
 
 ## Envío a lectores
 

@@ -13,6 +13,7 @@ enum Outcome {
     Backup(backup::BackupReport),
     Verified(Vec<String>),
     Restored(backup::BackupReport),
+    Exported(PathBuf),
 }
 
 pub struct LibraryTools {
@@ -24,6 +25,34 @@ pub struct LibraryTools {
 }
 
 impl LibraryTools {
+    pub fn recover_catalog(&mut self, ctx: &egui::Context, source: PathBuf, destination: PathBuf) {
+        if self.busy() {
+            return;
+        }
+        self.open = true;
+        self.start(ctx,move || {
+            crate::persistence::recover_into(&source,&destination)?;
+            Ok(Outcome::Restored(backup::BackupReport {path:destination,exclusions:vec!["Recuperación de catálogo y recursos administrados; no incluye preferencias ni estado auxiliar. Los vínculos externos conservan su origen".into()]}))
+        });
+    }
+
+    pub fn export_pending(
+        &mut self,
+        ctx: &egui::Context,
+        books: Vec<Book>,
+        root: PathBuf,
+        destination: PathBuf,
+    ) {
+        if self.busy() {
+            return;
+        }
+        self.open = true;
+        self.start(ctx, move || {
+            crate::persistence::recover_books_into(&books, &root, &destination)?;
+            Ok(Outcome::Exported(destination))
+        });
+    }
+
     pub fn new(root: &Path) -> Self {
         let (preferences, preferences_error) = match Preferences::load(root) {
             Ok(p) => (p, None),
@@ -81,6 +110,7 @@ impl LibraryTools {
                     self.status = report_text("Restauración creada", &report);
                     restored = Some(report.path);
                 }
+                Ok(Outcome::Exported(path))=>self.status=format!("Cambios pendientes y recursos administrados exportados a {}. Origen conservado; vínculos externos sin copiar",path.display()),
                 Err(e) => self.status = format!("No se completó la operación: {e}"),
             }
         }
