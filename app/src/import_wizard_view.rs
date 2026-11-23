@@ -37,6 +37,12 @@ pub struct ImportWizardView {
     rx: Option<Receiver<WorkerMsg>>,
     plan: Option<ImportPlan>,
     mensaje: Option<String>,
+    /// Contexto del lote para evitar varias ventanas solapadas.
+    pub mode_label: Option<String>,
+    pub calibre_banner: Option<String>,
+    pub calibre_records: Vec<String>,
+    pub calibre_warnings: Vec<String>,
+    close_requested: bool,
     /// Bandera de cancelación cooperativa: el trabajador la consulta en cada
     /// tick de progreso y aborta el recorrido cuanto antes (hallazgo del
     /// AGENTE A: cerrar el canal solo hace que el resultado se descarte).
@@ -51,6 +57,11 @@ impl ImportWizardView {
             rx: None,
             plan: None,
             mensaje: None,
+            mode_label: None,
+            calibre_banner: None,
+            calibre_records: Vec::new(),
+            calibre_warnings: Vec::new(),
+            close_requested: false,
             cancel: Arc::new(AtomicBool::new(false)),
         }
     }
@@ -58,6 +69,11 @@ impl ImportWizardView {
     /// Plan confirmado por el usuario, listo para que el backend lo ejecute.
     pub fn take_plan(&mut self) -> Option<ImportPlan> {
         self.plan.take()
+    }
+
+    /// Permite a la aplicación retirar el asistente sin realizar escrituras.
+    pub fn take_close_requested(&mut self) -> bool {
+        std::mem::take(&mut self.close_requested)
     }
 
     /// Añade archivos elegidos con el diálogo del sistema (solo en fase Idle).
@@ -155,13 +171,51 @@ impl ImportWizardView {
     pub fn show(&mut self, ctx: &egui::Context, catalog: &[CatalogItem]) {
         self.poll(ctx);
         egui::Window::new("Importar libros")
-            .default_width(760.0)
-            .default_height(520.0)
+            .default_width(900.0)
+            .default_height(620.0)
             .collapsible(false)
-            .show(ctx, |ui| match self.wizard.phase {
-                Phase::Idle => self.draw_idle(ui, catalog),
-                Phase::Scanning => self.draw_scanning(ui),
-                Phase::Reviewing => self.draw_review(ui),
+            .show(ctx, |ui| {
+                if let Some(mode) = &self.mode_label {
+                    ui.weak(mode);
+                }
+                if let Some(banner) = &self.calibre_banner {
+                    ui.strong(banner);
+                }
+                if !self.calibre_warnings.is_empty() {
+                    egui::CollapsingHeader::new(format!(
+                        "Avisos Calibre: {} (no impiden importar los archivos disponibles)",
+                        self.calibre_warnings.len()
+                    ))
+                    .show(ui, |ui| {
+                        egui::ScrollArea::vertical().max_height(120.0).show(ui, |ui| {
+                            for warning in &self.calibre_warnings {
+                                ui.weak(warning);
+                            }
+                        });
+                    });
+                }
+                if !self.calibre_records.is_empty() {
+                    egui::CollapsingHeader::new("Registros y metadatos originales de Calibre")
+                        .show(ui, |ui| {
+                            egui::ScrollArea::vertical().max_height(120.0).show(ui, |ui| {
+                                for record in &self.calibre_records {
+                                    ui.label(record);
+                                }
+                            });
+                        });
+                }
+                if ui.button("Cancelar y cerrar sin importar").clicked() {
+                    self.cancel.store(true, Ordering::Relaxed);
+                    self.rx = None;
+                    self.close_requested = true;
+                    return;
+                }
+                ui.separator();
+                match self.wizard.phase {
+                    Phase::Idle => self.draw_idle(ui, catalog),
+                    Phase::Scanning => self.draw_scanning(ui),
+                    Phase::Reviewing => self.draw_review(ui),
+                }
             });
         if let Some(mensaje) = &self.mensaje {
             let mensaje = mensaje.clone();
