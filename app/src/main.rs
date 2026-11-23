@@ -1,4 +1,5 @@
 mod backup;
+mod book_metadata;
 mod calibre_import;
 mod import_flow;
 mod import_jobs;
@@ -38,6 +39,8 @@ struct Book {
     file_path: Option<String>,
     #[serde(default)]
     files: Vec<storage::StoredFile>,
+    #[serde(default)]
+    bibliography: book_metadata::Bibliography,
 }
 
 impl Book {
@@ -100,6 +103,7 @@ impl Draft {
             topic: String::new(),
             file_path: None,
             files: Vec::new(),
+            bibliography: Default::default(),
         }
     }
 }
@@ -918,6 +922,7 @@ fn main_panel(ui: &mut egui::Ui, app: &mut LibraryApp) {
                     app.adding = true;
                 }
                 if ui.add_enabled(!app.import_flow.active(), egui::Button::new("Importar libros…")).clicked() { app.begin_import(Vec::new()); }
+                if ui.add_enabled(!app.import_flow.active(), egui::Button::new("Desde Calibre…")).clicked() { app.begin_calibre_import(); }
                 if !app.notice.is_empty() {
                     ui.label(RichText::new(&app.notice).size(11.0).color(MUTED));
                 }
@@ -1748,6 +1753,7 @@ mod tests {
             topic: String::new(),
             file_path: None,
             files: Vec::new(),
+            bibliography: Default::default(),
         }
     }
 

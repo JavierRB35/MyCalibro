@@ -2,6 +2,7 @@
 use crate::{import_jobs, import_scan, import_wizard, import_wizard_view, Book, LibraryApp};
 use eframe::egui;
 use std::{
+    collections::{BTreeMap, BTreeSet},
     path::PathBuf,
     sync::{
         atomic::{AtomicBool, Ordering},
@@ -93,6 +94,72 @@ mod tests {
         assert!(apply_prepared(&mut books, prepare(&request)).is_err());
         assert_eq!(serde_json::to_vec(&books).unwrap(), before);
     }
+
+    #[test]
+    fn calibre_record_cover_and_identifiers_survive_import_backup_restore() {
+        let origin = tempfile::tempdir().unwrap();
+        let source = origin.path().join("book.txt");
+        fs::write(&source, b"original").unwrap();
+        let cover = origin.path().join("cover.jpg");
+        fs::write(&cover, b"original cover").unwrap();
+        let record = crate::calibre_import::CalibreRecord {
+            calibre_id: 7,
+            title: "Registro original".into(),
+            author: "Autor original".into(),
+            year: "2022".into(),
+            description: "Descripción".into(),
+            tags: vec!["Etiqueta".into()],
+            identifiers: BTreeMap::from([("isbn".into(), "123456".into())]),
+            formats: vec![source.clone()],
+            cover: Some(cover.clone()),
+        };
+        let root = tempfile::tempdir().unwrap();
+        let (mut catalog, mut books) = Catalog::open(root.path()).unwrap();
+        let request = import_jobs::ImportRequest {
+            book_id: catalog.allocate_id(&books).unwrap(),
+            associate: false,
+            path: source.clone(),
+            source_base: Some(origin.path().into()),
+            metadata: Some(import_jobs::Metadata::from_calibre(&record)),
+        };
+        let prepared =
+            import_jobs::prepare(&request, root.path(), &Preferences::default(), &|_| {
+                panic!("must retain Calibre record")
+            })
+            .unwrap();
+        apply_prepared(&mut books, prepared).unwrap();
+        catalog.save(&books).unwrap();
+        let output = tempfile::tempdir().unwrap();
+        let snapshot = crate::backup::create(
+            root.path(),
+            &serde_json::to_vec(&books).unwrap(),
+            output.path(),
+            true,
+        )
+        .unwrap();
+        let restored = crate::backup::restore(&snapshot.path, output.path()).unwrap();
+        let (_, restored_books) = Catalog::open(&restored.path).unwrap();
+        assert_eq!(restored_books[0].title, record.title);
+        assert_eq!(
+            restored_books[0].bibliography.identifiers,
+            record.identifiers
+        );
+        assert_eq!(
+            fs::read(
+                restored_books[0]
+                    .bibliography
+                    .cover
+                    .as_ref()
+                    .unwrap()
+                    .resolve(&restored.path)
+                    .unwrap()
+            )
+            .unwrap(),
+            b"original cover"
+        );
+        assert_eq!(fs::read(source).unwrap(), b"original");
+        assert_eq!(fs::read(cover).unwrap(), b"original cover");
+    }
 }
 
 #[derive(Default)]
@@ -104,11 +171,15 @@ pub struct ImportFlow {
     progress: (usize, usize),
     pub results: Vec<String>,
     results_open: bool,
+    calibre_receiver: Option<mpsc::Receiver<Result<crate::calibre_import::CalibreScan, String>>>,
+    calibre_sources: BTreeMap<PathBuf, crate::calibre_import::CalibreRecord>,
+    calibre_root: Option<PathBuf>,
+    new_groups: BTreeSet<u64>,
 }
 
 impl ImportFlow {
     pub fn busy(&self) -> bool {
-        self.receiver.is_some()
+        self.receiver.is_some() || self.calibre_receiver.is_some()
     }
     pub fn active(&self) -> bool {
         self.busy() || self.wizard.is_some()
@@ -122,6 +193,8 @@ fn metadata(book: &Book) -> import_jobs::Metadata {
         year: book.year.clone(),
         description: book.description.clone(),
         tags: book.tags.clone(),
+        bibliography: book.bibliography.clone(),
+        cover_source: None,
     }
 }
 
@@ -160,12 +233,35 @@ fn apply_prepared(
             topic: String::new(),
             file_path: None,
             files: vec![prepared.file],
+            bibliography: m.bibliography,
         });
     }
     Ok(id)
 }
 
 impl LibraryApp {
+    pub fn begin_calibre_import(&mut self) {
+        if self.storage_error.is_some() || self.library_tools.busy() || self.import_flow.active() {
+            return;
+        }
+        if let Some(root) = rfd::FileDialog::new()
+            .set_title("Biblioteca Calibre que contiene metadata.db")
+            .pick_folder()
+        {
+            self.begin_import(Vec::new());
+            if self.import_flow.wizard.is_none() {
+                return;
+            }
+            self.import_flow.wizard = None;
+            self.import_flow.calibre_root = Some(root.clone());
+            let (tx, rx) = mpsc::channel();
+            self.import_flow.calibre_receiver = Some(rx);
+            std::thread::spawn(move || {
+                let _ = tx.send(crate::calibre_import::read_library(&root));
+            });
+        }
+    }
+
     pub fn begin_import(&mut self, paths: Vec<PathBuf>) {
         if self.storage_error.is_some() || self.library_tools.busy() || self.import_flow.active() {
             return;
@@ -175,6 +271,9 @@ impl LibraryApp {
             return;
         }
         let mut view = import_wizard_view::ImportWizardView::new();
+        self.import_flow.results.clear();
+        self.import_flow.calibre_sources.clear();
+        self.import_flow.calibre_root = None;
         view.wizard.inputs = paths;
         self.import_flow.wizard = Some(view);
         self.import_flow.generation = self.library_generation;
@@ -214,14 +313,28 @@ impl LibraryApp {
             return;
         }
         let mut requests = Vec::new();
+        let mut groups = BTreeMap::new();
+        self.import_flow.new_groups.clear();
         for entry in plan.entries {
+            let record = self.import_flow.calibre_sources.get(&entry.path).cloned();
             let (id, associate, supplied) = match entry.decision {
                 import_wizard::Decision::Skip => continue,
                 import_wizard::Decision::Import => {
-                    let Some(id) = self.next_book_id() else {
-                        return;
-                    };
-                    (id, false, None)
+                    let id =
+                        if let Some(id) = record.as_ref().and_then(|r| groups.get(&r.calibre_id)) {
+                            *id
+                        } else {
+                            let Some(id) = self.next_book_id() else {
+                                return;
+                            };
+                            if let Some(record) = &record {
+                                groups.insert(record.calibre_id, id);
+                                self.import_flow.new_groups.insert(id);
+                            }
+                            id
+                        };
+                    let supplied = record.as_ref().map(import_jobs::Metadata::from_calibre);
+                    (id, false, supplied)
                 }
                 import_wizard::Decision::AssociateFormat => {
                     let Some(book) = self
@@ -236,17 +349,18 @@ impl LibraryApp {
                     (book.id, true, Some(metadata(book)))
                 }
             };
-            let source_base = self
-                .import_flow
-                .wizard
-                .as_ref()
-                .and_then(|view| {
-                    view.wizard
-                        .inputs
-                        .iter()
-                        .find(|base| base.is_dir() && entry.path.starts_with(base))
-                })
-                .cloned();
+            let source_base = self.import_flow.calibre_root.clone().or_else(|| {
+                self.import_flow
+                    .wizard
+                    .as_ref()
+                    .and_then(|view| {
+                        view.wizard
+                            .inputs
+                            .iter()
+                            .find(|base| base.is_dir() && entry.path.starts_with(base))
+                    })
+                    .cloned()
+            });
             requests.push(import_jobs::ImportRequest {
                 book_id: id,
                 associate,
@@ -256,7 +370,9 @@ impl LibraryApp {
             });
         }
         self.import_flow.wizard = None;
-        self.import_flow.results = vec![format!("Omitidos por decisión: {}", plan.to_skip)];
+        self.import_flow
+            .results
+            .push(format!("Omitidos por decisión: {}", plan.to_skip));
         self.import_flow.results_open = true;
         self.import_flow.progress = (0, requests.len());
         self.import_flow.cancel = Arc::new(AtomicBool::new(false));
@@ -281,6 +397,35 @@ impl LibraryApp {
     }
 
     pub fn import_ui(&mut self, ctx: &egui::Context) {
+        if let Some(result) = self
+            .import_flow
+            .calibre_receiver
+            .as_ref()
+            .and_then(|rx| rx.try_recv().ok())
+        {
+            self.import_flow.calibre_receiver = None;
+            match result {
+                Ok(scan) => {
+                    self.import_flow.results = scan.warnings;
+                    self.import_flow.results_open = !self.import_flow.results.is_empty();
+                    let mut view = import_wizard_view::ImportWizardView::new();
+                    for record in scan.records {
+                        for path in &record.formats {
+                            view.wizard.inputs.push(path.clone());
+                            self.import_flow
+                                .calibre_sources
+                                .insert(path.clone(), record.clone());
+                        }
+                    }
+                    if view.wizard.inputs.is_empty() {
+                        self.notice="Calibre no contiene formatos accesibles para importar; consulte los avisos".into();
+                    } else {
+                        self.import_flow.wizard = Some(view);
+                    }
+                }
+                Err(error) => self.notice = format!("No se pudo leer Calibre: {error}"),
+            }
+        }
         let events: Vec<_> = self
             .import_flow
             .receiver
@@ -301,7 +446,15 @@ impl LibraryApp {
                     for outcome in outcomes {
                         let label = outcome.source.display().to_string();
                         match outcome.result {
-                            Ok(prepared) => {
+                            Ok(mut prepared) => {
+                                // Group only formats from the same reviewed Calibre record.
+                                // A failed first format must not prevent a later successful one.
+                                if !prepared.associate
+                                    && self.import_flow.new_groups.contains(&prepared.book_id)
+                                    && self.books.iter().any(|b| b.id == prepared.book_id)
+                                {
+                                    prepared.associate = true;
+                                }
                                 let warning = prepared.warning.clone();
                                 match apply_prepared(&mut self.books, prepared) {
                                     Ok(id) => {
@@ -349,6 +502,13 @@ impl LibraryApp {
                 ui.label(
                     "Se conservan los originales. La confirmación del plan inicia la importación.",
                 );
+                if !self.import_flow.calibre_sources.is_empty() {
+                    ui.label("Calibre: los formatos de un mismo registro se incorporan a una única ficha. Asociar a una ficha existente conserva sus metadatos.");
+                    egui::CollapsingHeader::new("Registros Calibre y metadatos originales").show(ui,|ui| {
+                        let mut seen=BTreeSet::new();
+                        egui::ScrollArea::vertical().max_height(160.0).show(ui,|ui| {for record in self.import_flow.calibre_sources.values() {if seen.insert(record.calibre_id) {ui.label(format!("{} · {} · {} · {} formatos",record.title,record.author,record.year,record.formats.len()));}}});
+                    });
+                }
                 close = ui.button("Cerrar asistente sin importar").clicked();
             });
             if close {
@@ -363,6 +523,7 @@ impl LibraryApp {
         if self.import_flow.busy() {
             ctx.request_repaint_after(std::time::Duration::from_millis(100));
             egui::Window::new("Importando archivos").collapsible(false).show(ctx, |ui| {
+                if self.import_flow.calibre_receiver.is_some() {ui.spinner();ui.label("Leyendo una copia aislada de metadata.db; Calibre no se modifica");return;}
                 let (done,total)=self.import_flow.progress;
                 ui.label(format!("Procesados {done} de {total}"));
                 ui.add(egui::ProgressBar::new(done as f32 / total.max(1) as f32));

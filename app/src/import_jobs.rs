@@ -13,11 +13,42 @@ pub struct Metadata {
     pub year: String,
     pub description: String,
     pub tags: Vec<String>,
+    pub bibliography: crate::book_metadata::Bibliography,
+    pub cover_source: Option<PathBuf>,
 }
 
 impl Metadata {
-    fn from_fields(fields: HashMap<String, String>) -> Self {
+    pub fn from_calibre(record: &crate::calibre_import::CalibreRecord) -> Self {
         Self {
+            title: record.title.clone(),
+            author: record.author.clone(),
+            year: record.year.clone(),
+            description: record.description.clone(),
+            tags: record.tags.clone(),
+            bibliography: crate::book_metadata::Bibliography {
+                source: format!(
+                    "Calibre, registro {} (importación puntual)",
+                    record.calibre_id
+                ),
+                identifiers: record.identifiers.clone(),
+                cover: None,
+            },
+            cover_source: record.cover.clone(),
+        }
+    }
+    fn from_fields(fields: HashMap<String, String>) -> Self {
+        let has_fields = !fields.is_empty();
+        Self {
+            bibliography: crate::book_metadata::Bibliography {
+                source: if has_fields {
+                    "Metadatos incrustados (ebook-meta)"
+                } else {
+                    "Nombre del archivo; metadatos no disponibles"
+                }
+                .into(),
+                ..Default::default()
+            },
+            cover_source: None,
             title: fields.get("title").cloned().unwrap_or_default(),
             author: fields.get("author").cloned().unwrap_or_default(),
             year: fields.get("year").cloned().unwrap_or_default(),
@@ -69,7 +100,7 @@ pub fn prepare(
     if !request.path.is_file() {
         return Err("No se encontró el archivo de origen".into());
     }
-    let (mut metadata, warning) = match request.metadata.clone() {
+    let (mut metadata, mut warning) = match request.metadata.clone() {
         Some(metadata) => (metadata, None),
         None => match read_metadata(&request.path) {
             Ok(fields) => (Metadata::from_fields(fields), None),
@@ -97,6 +128,12 @@ pub fn prepare(
         preferences.layout,
         request.source_base.as_deref(),
     )?;
+    if let Some(source) = &metadata.cover_source {
+        match crate::book_metadata::preserve_cover(source, root, request.book_id) {
+            Ok(cover) => metadata.bibliography.cover = Some(cover),
+            Err(error) => warning = Some(format!("Portada no copiada: {error}")),
+        }
+    }
     Ok(PreparedImport {
         book_id: request.book_id,
         associate: request.associate,
@@ -196,6 +233,7 @@ mod tests {
                 year: "2020".into(),
                 description: "Original description".into(),
                 tags: vec!["Original tag".into()],
+                ..Default::default()
             }),
             ..request(source.clone(), 42)
         };
