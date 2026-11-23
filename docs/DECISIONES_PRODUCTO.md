@@ -101,26 +101,37 @@
 - **Estado de implementación:** pendiente; el código actual sigue referenciando archivos externos y no dispone todavía de un almacén administrado con esas dos políticas.
 
 ## PROD-010 — Importación masiva y control de duplicados
+- **Fecha de apertura y aprobación:** 2026-11-23.
+- **Estado:** APROBADA por el propietario.
+- **Alternativa seleccionada:** **B: asistente de importación masiva con revisión de duplicados**.
+- **Comportamiento vinculante:** admitir selección y arrastre de múltiples archivos y carpetas, exploración recursiva de ubicaciones autorizadas, vista previa del lote, progreso y registro de resultados y errores. Ante posibles coincidencias, ofrecer al usuario opciones para importar, omitir o asociar un nuevo formato a un libro ya registrado.
+- **Detección de duplicados:** contrastar cuando estén disponibles rutas, huellas de contenido, metadatos bibliográficos e identificadores, dejando explícito el grado de certeza. Una coincidencia de título/autor no es suficiente para fusionar dos fichas o ediciones distintas.
+- **Seguridad e integridad:** no fusionar fichas ni borrar o sobrescribir archivos automáticamente por mera sospecha de duplicado. Respetar los originales; garantizar que una importación parcial o fallida no deje el catálogo ilegible. Evitar bloqueo de la interfaz en operaciones de lote y permitir informar el progreso real.
+- **Compatibilidad:** la importación puntual desde Calibre (PROD-003) deberá poder acogerse a las mismas reglas de validación y revisión; el almacenamiento administrado/vinculado (PROD-002) y la organización de carpetas configurable (PROD-009) se aplicarán conforme a las opciones del usuario.
+- **Límites no decididos:** umbrales de similitud, algoritmos concretos, formato de identificadores, gestión de ISBN compartidos entre ediciones, acciones por defecto y diseño exacto del asistente. Se definirán y probarán antes de implementar fusiones.
+- **Estado de implementación:** pendiente; el código actual no dispone de asistente masivo con análisis y revisión bibliográfica de duplicados.
+
+## PROD-011 — Metadatos bibliográficos y portadas
 - **Fecha de apertura:** 2026-11-23.
 - **Estado:** PENDIENTE DE ELECCIÓN.
-- **Pregunta:** ¿Qué nivel de control debe tener MyCalibro al importar carpetas o colecciones grandes, especialmente cuando encuentre libros existentes con distintos nombres o formatos?
+- **Pregunta:** ¿Cómo debe obtener, completar y actualizar MyCalibro la información bibliográfica de cada libro (autor, título, serie, ISBN, editorial, idioma, fecha, sinopsis, portada, etc.)?
 
-| Opción | Funcionamiento propuesto | Ventaja y riesgo |
+| Opción | Funcionamiento propuesto | Balance |
 | --- | --- | --- |
-| A. Importación sencilla | Arrastrar/seleccionar archivos y carpetas; importar todos los archivos legibles, advirtiendo coincidencias exactas por ruta | Implementación más sencilla, pero acumula duplicados y fichas redundantes |
-| B. Asistente de importación con revisión | Importación recursiva de carpetas y lotes con progreso, vista previa, detección de posibles duplicados por hash, metadatos e identificadores disponibles; el usuario decide incorporar, omitir o asociar un formato a un libro existente | Equilibra automatización y seguridad, evita fusiones destructivas |
-| C. Deduplicación y fusión automáticas | Todo B, más reglas automáticas para consolidar libros y metadatos coincidentes sin intervención ordinaria, con posibilidad de deshacer | Mayor automatización, pero riesgo de fusionar ediciones u obras distintas y perder información si se aplica erróneamente |
+| A. Metadatos locales y edición manual | Leer metadatos incrustados en los archivos y permitir completar/corregir campos y portadas a mano | Control pleno, pero más trabajo para el usuario |
+| B. Enriquecimiento asistido con revisión | Todo A, más búsquedas en fuentes externas fiables y propuestas de portada/campos con procedencia identificable, vista comparativa y aceptación del usuario antes de reemplazar valores | Equilibrio de automatización, calidad y trazabilidad |
+| C. Enriquecimiento automático continuo | Todo B, con búsqueda y actualización por lotes en segundo plano según reglas predefinidas, sin confirmar cada coincidencia ordinaria | Agiliza colecciones extensas, pero aumenta riesgos de atribuciones incorrectas y cambios no deseados |
 
-**Recomendación técnica, NO aprobada:** B. Una coincidencia de título/autor no prueba identidad de edición; ISBN/identificadores y hashes se usarán con cautela. El usuario debe conservar control sobre fusiones y originales. Compatibilidad con la importación **puntual** desde Calibre (PROD-003), el almacenamiento híbrido (PROD-002) y la organización configurable (PROD-009).
+**Recomendación técnica para el debate (no aprobada):** B. La exactitud de ISBN, autor, edición e idioma es esencial para controlar duplicados y conservar distintas ediciones. Se recomienda mantener la procedencia de cada dato y permitir deshacer cambios, diferenciar portadas originales de las descargadas y respetar licencias y límites de proveedores. No sobrescribir información existente solo porque otro proveedor ofrezca una coincidencia superficial.
 
-**Requisitos transversales para cualquier elección:** importación no bloqueante, errores y progreso verificables, ausencia de borrados de origen, persistencia segura del catálogo y recuperación ante fallos. El diseño detallado de los metadatos enriquecidos se debatirá después.
+**Pendiente:** elegir A, B o C. El objetivo de enriquecer metadatos mediante IA (PROD-005) ya está aprobado a nivel general, pero no impone de forma implícita descarga de portadas, proveedores externos específicos ni una política de sobrescritura.
 
 ## Pendientes de debates posteriores
 - Detalle de importación puntual desde Calibre: campos, duplicados, política de copia/vínculo y recuperación (PROD-003, aprobada).
 - Detalles de implementación del lector básico EPUB/PDF, navegación, visualización y última posición (PROD-004, aprobada).
 - IA para organización y análisis de cada libro (PROD-005, aprobada); consentimiento revocable por libro para envío de contenido (PROD-006, aprobada).
 - MyCalibro exclusivamente Windows y biblioteca en carpeta elegida (opcionalmente sincronizada con Drive) según PROD-007; copia completa y configurable aprobada en PROD-008; instalación y actualizaciones.
-- Organización física configurable de libros administrados (PROD-009, aprobada); importación masiva y control de duplicados (PROD-010, abierta); políticas de respaldo/restauración y compatibilidad con dispositivos de lectura.
+- Organización física configurable de libros administrados (PROD-009, aprobada); importación masiva con revisión de duplicados (PROD-010, aprobada); metadatos y portadas (PROD-011, abierta); políticas de respaldo/restauración y compatibilidad con dispositivos de lectura.
 
 ## Historial de decisiones
 | ID | Fecha | Estado | Resultado |
@@ -134,4 +145,5 @@
 | PROD-007 | 2026-11-23 | Aprobada, corregida | Opción A: MyCalibro solo Windows, con biblioteca en carpeta configurable, incluso sincronizada con Drive; sin integración con otras aplicaciones |
 | PROD-008 | 2026-11-23 | Aprobada | Opción C: copia de seguridad completa y configurable con integridad y restauración segura |
 | PROD-009 | 2026-11-23 | Aprobada | Opción C: estructura física configurable y organización lógica independiente |
-| PROD-010 | 2026-11-23 | Pendiente | Importación masiva y tratamiento de posibles duplicados |
+| PROD-010 | 2026-11-23 | Aprobada | Opción B: importación por lotes con revisión humana de posibles duplicados |
+| PROD-011 | 2026-11-23 | Pendiente | Obtención, enriquecimiento y actualización de metadatos y portadas |
