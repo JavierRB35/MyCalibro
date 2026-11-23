@@ -302,26 +302,34 @@ impl LibraryApp {
             .iter()
             .flat_map(|book| {
                 let paths = book.file_paths(&self.library_folder);
-                if paths.is_empty() {
-                    vec![import_scan::CatalogItem::new(
-                        book.id,
-                        &book.title,
-                        &book.author,
-                        None,
-                    )]
+                let paths: Vec<_> = if paths.is_empty() {
+                    vec![None]
                 } else {
-                    paths
-                        .into_iter()
-                        .map(|path| {
-                            import_scan::CatalogItem::new(
-                                book.id,
-                                &book.title,
-                                &book.author,
-                                Some(path.to_string_lossy().into_owned()),
-                            )
-                        })
-                        .collect()
-                }
+                    paths.into_iter().map(Some).collect()
+                };
+                paths
+                    .into_iter()
+                    .map(|path| {
+                        let mut item = import_scan::CatalogItem::new(
+                            book.id,
+                            &book.title,
+                            &book.author,
+                            path.as_ref().map(|p| p.to_string_lossy().into_owned()),
+                        );
+                        item.identifiers = book.bibliography.identifiers.clone();
+                        if let Some(path) = path {
+                            item.sha256 = book
+                                .files
+                                .iter()
+                                .find(|f| {
+                                    f.resolve(&self.library_folder).ok().as_ref() == Some(&path)
+                                })
+                                .map(|f| f.sha256.clone())
+                                .unwrap_or_default();
+                        }
+                        item
+                    })
+                    .collect::<Vec<_>>()
             })
             .collect()
     }
@@ -430,6 +438,14 @@ impl LibraryApp {
                     for record in scan.records {
                         for path in &record.formats {
                             view.wizard.inputs.push(path.clone());
+                            view.metadata.insert(
+                                path.clone(),
+                                import_scan::IncomingMetadata {
+                                    title: record.title.clone(),
+                                    author: record.author.clone(),
+                                    identifiers: record.identifiers.clone(),
+                                },
+                            );
                             self.import_flow
                                 .calibre_sources
                                 .insert(path.clone(), record.clone());

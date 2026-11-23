@@ -19,7 +19,7 @@ use std::time::Duration;
 use eframe::egui;
 
 use crate::import_scan::{
-    scan_paths_with_progress, CatalogItem, DuplicateMatch, MatchKind, ScanOutcome,
+    scan_paths_with_metadata, CatalogItem, DuplicateMatch, MatchKind, ScanOutcome,
 };
 use crate::import_wizard::{Decision, ImportPlan, ImportWizard, Phase, Summary};
 
@@ -32,6 +32,8 @@ enum WorkerMsg {
 /// Estado de la vista del asistente, incluida la comunicación con el hilo.
 pub struct ImportWizardView {
     pub wizard: ImportWizard,
+    pub metadata:
+        std::collections::BTreeMap<std::path::PathBuf, crate::import_scan::IncomingMetadata>,
     rx: Option<Receiver<WorkerMsg>>,
     plan: Option<ImportPlan>,
     mensaje: Option<String>,
@@ -45,6 +47,7 @@ impl ImportWizardView {
     pub fn new() -> Self {
         Self {
             wizard: ImportWizard::new(),
+            metadata: Default::default(),
             rx: None,
             plan: None,
             mensaje: None,
@@ -101,16 +104,18 @@ impl ImportWizardView {
         let cancel = Arc::clone(&self.cancel);
         let inputs = self.wizard.inputs.clone();
         let catalog = catalog.to_vec();
+        let metadata = self.metadata.clone();
         self.wizard.start_scan(inputs.clone());
         thread::spawn(move || {
-            let result = scan_paths_with_progress(&inputs, &catalog, &mut |files, candidates| {
-                let cancelado = cancel.load(Ordering::Relaxed);
-                if !cancelado {
-                    // Un error al enviar solo significa que se soltó el canal.
-                    let _ = tx.send(WorkerMsg::Progress { files, candidates });
-                }
-                !cancelado // cooperativo: detiene el recorrido en cuanto marque
-            });
+            let result =
+                scan_paths_with_metadata(&inputs, &catalog, &metadata, &mut |files, candidates| {
+                    let cancelado = cancel.load(Ordering::Relaxed);
+                    if !cancelado {
+                        // Un error al enviar solo significa que se soltó el canal.
+                        let _ = tx.send(WorkerMsg::Progress { files, candidates });
+                    }
+                    !cancelado // cooperativo: detiene el recorrido en cuanto marque
+                });
             if !cancel.load(Ordering::Relaxed) {
                 let _ = tx.send(WorkerMsg::Done(Box::new(result)));
             }
@@ -390,6 +395,8 @@ fn aviso_coincidencia(coincidencia: &DuplicateMatch) -> (egui::Color32, String) 
         }
     );
     match coincidencia.kind {
+        MatchKind::ExactContent=>(egui::Color32::DARK_RED,format!("Huella SHA-256 idéntica al archivo registrado de {libro}. Revisa si deseas conservar otra copia.")),
+        MatchKind::BibliographicIdentifier=>(egui::Color32::from_rgb(172,106,0),format!("Identificador bibliográfico compartido con {libro}. Puede ser otra edición: no se fusionará automáticamente.")),
         MatchKind::ExactPath => (
             egui::Color32::DARK_RED,
             format!(

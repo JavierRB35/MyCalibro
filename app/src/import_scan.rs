@@ -10,7 +10,7 @@
 //! tocar `app/src/main.rs`. La integración se limitará a un `mod import_scan;`
 //! y a convertir `Book` en `CatalogItem` desde la interfaz.
 
-use std::collections::BTreeSet;
+use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
 
 /// Extensiones reconocidas como libro. Mantiene la misma lista que
@@ -35,6 +35,15 @@ pub struct CatalogItem {
     pub title: String,
     pub author: String,
     pub path: Option<String>,
+    pub sha256: String,
+    pub identifiers: BTreeMap<String, String>,
+}
+
+#[derive(Clone, Debug, Default)]
+pub struct IncomingMetadata {
+    pub title: String,
+    pub author: String,
+    pub identifiers: BTreeMap<String, String>,
 }
 
 impl CatalogItem {
@@ -49,6 +58,8 @@ impl CatalogItem {
             title: title.into(),
             author: author.into(),
             path,
+            sha256: String::new(),
+            identifiers: BTreeMap::new(),
         }
     }
 }
@@ -98,6 +109,8 @@ pub struct DuplicateMatch {
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum MatchKind {
+    ExactContent,
+    BibliographicIdentifier,
     /// La ruta del candidato coincide exactamente con la registrada.
     ExactPath,
     /// Mismo nombre base de archivo (con extensión igual o distinta) en otra carpeta.
@@ -141,6 +154,15 @@ pub fn scan_paths_with_progress(
     catalog: &[CatalogItem],
     progress: &mut dyn FnMut(usize, usize) -> bool,
 ) -> ScanOutcome {
+    scan_paths_with_metadata(inputs, catalog, &BTreeMap::new(), progress)
+}
+
+pub fn scan_paths_with_metadata(
+    inputs: &[PathBuf],
+    catalog: &[CatalogItem],
+    metadata: &BTreeMap<PathBuf, IncomingMetadata>,
+    progress: &mut dyn FnMut(usize, usize) -> bool,
+) -> ScanOutcome {
     let mut outcome = ScanOutcome::default();
     let mut seen: BTreeSet<String> = BTreeSet::new();
     for input in inputs {
@@ -152,8 +174,16 @@ pub fn scan_paths_with_progress(
         .reviews
         .sort_by(|a, b| a.candidate.path.cmp(&b.candidate.path));
     let refs = catalog_refs(catalog);
+    let total = outcome.reviews.len();
     for review in &mut outcome.reviews {
-        review.matches = analyze_candidate(&review.candidate.path, &refs);
+        if !progress(outcome.files_seen, total) {
+            break;
+        }
+        review.matches = analyze_candidate(
+            &review.candidate.path,
+            &refs,
+            metadata.get(&review.candidate.path),
+        );
         review.suggested_action = suggested_action(&review.candidate.path, &review.matches);
     }
     outcome
@@ -168,7 +198,7 @@ pub fn review_candidate(path: &Path, catalog: &[CatalogItem]) -> CandidateReview
         size_bytes: std::fs::metadata(path).map(|meta| meta.len()).unwrap_or(0),
     };
     let refs = catalog_refs(catalog);
-    let matches = analyze_candidate(path, &refs);
+    let matches = analyze_candidate(path, &refs, None);
     let suggested_action = suggested_action(path, &matches);
     CandidateReview {
         candidate,
@@ -285,18 +315,81 @@ fn collect_candidates(
 
 /// Contrasta un candidato con el catálogo y devuelve todas las coincidencias
 /// encontradas, cada una con su grado de certeza.
-fn analyze_candidate(path: &Path, catalog: &[CatalogRef]) -> Vec<DuplicateMatch> {
+fn analyze_candidate(
+    path: &Path,
+    catalog: &[CatalogRef],
+    supplied: Option<&IncomingMetadata>,
+) -> Vec<DuplicateMatch> {
     let mut matches = Vec::new();
+    if catalog.is_empty() {
+        return matches;
+    }
     let candidate_key = path_key(path);
     let stem = candidate_stem(path);
     let candidate_stem_lower = stem.to_lowercase();
     // En el patrón «Título - Autor», la parte del título va antes del guion.
-    let (candidate_title, candidate_author) = match stem.split_once(" - ") {
+    let (mut candidate_title, mut candidate_author) = match stem.split_once(" - ") {
         Some((title, author)) => (title.trim().to_owned(), author.trim().to_owned()),
         None => (stem.clone(), String::new()),
     };
+    let native = if supplied.is_none()
+        && path
+            .extension()
+            .is_some_and(|e| e.eq_ignore_ascii_case("epub"))
+    {
+        crate::book_metadata::read_epub(path)
+            .ok()
+            .map(|e| IncomingMetadata {
+                title: e.metadata.title,
+                author: e.metadata.author,
+                identifiers: e.metadata.bibliography.identifiers,
+            })
+    } else {
+        None
+    };
+    let metadata = supplied.or(native.as_ref());
+    if let Some(meta) = metadata {
+        if !meta.title.is_empty() {
+            candidate_title = meta.title.clone();
+        }
+        if !meta.author.is_empty() {
+            candidate_author = meta.author.clone();
+        }
+    }
+    let hash = if catalog.iter().any(|r| !r.item.sha256.is_empty()) {
+        crate::storage::hash_file(path).ok()
+    } else {
+        None
+    };
     for r in catalog {
         let item = r.item;
+        let evidence = if hash
+            .as_ref()
+            .is_some_and(|hash| !item.sha256.is_empty() && hash == &item.sha256)
+        {
+            Some((MatchKind::ExactContent, Certainty::High))
+        } else if metadata.is_some_and(|m| {
+            m.identifiers.iter().any(|(scheme, value)| {
+                item.identifiers.iter().any(|(other_scheme, other_value)| {
+                    identifiers_match(scheme, value, other_scheme, other_value)
+                })
+            })
+        }) {
+            Some((MatchKind::BibliographicIdentifier, Certainty::Medium))
+        } else {
+            None
+        };
+        if let Some((kind, certainty)) = evidence {
+            matches.push(DuplicateMatch {
+                catalog_id: item.id,
+                title: item.title.clone(),
+                author: item.author.clone(),
+                path: item.path.clone(),
+                kind,
+                certainty,
+            });
+            continue;
+        }
         if let Some(existing) = item.path.as_deref() {
             // La igualdad de rutas es canónica e insensible a mayúsculas
             // (path_key), no una comparación literal de cadenas.
@@ -311,10 +404,7 @@ fn analyze_candidate(path: &Path, catalog: &[CatalogRef]) -> Vec<DuplicateMatch>
                 });
                 continue;
             }
-            let existing_stem = Path::new(existing)
-                .file_stem()
-                .map(|stem| stem.to_string_lossy().to_lowercase())
-                .unwrap_or_default();
+            let existing_stem = candidate_stem(Path::new(existing)).to_lowercase();
             if !candidate_stem_lower.is_empty() && candidate_stem_lower == existing_stem {
                 matches.push(DuplicateMatch {
                     catalog_id: item.id,
@@ -349,7 +439,7 @@ fn suggested_action(candidate_path: &Path, matches: &[DuplicateMatch]) -> Sugges
     let strongest = matches.iter().max_by_key(|m| m.certainty);
     match strongest {
         Some(DuplicateMatch {
-            kind: MatchKind::ExactPath,
+            kind: MatchKind::ExactPath | MatchKind::ExactContent,
             ..
         }) => SuggestedAction::Skip,
         Some(DuplicateMatch {
@@ -378,6 +468,29 @@ fn suggested_action(candidate_path: &Path, matches: &[DuplicateMatch]) -> Sugges
         }
         Some(_) | None => SuggestedAction::Import,
     }
+}
+
+// Identifier equality is evidence to review, never authority to merge editions.
+fn identifiers_match(scheme: &str, value: &str, other_scheme: &str, other_value: &str) -> bool {
+    let normalize_id = |key: &str, v: &str| {
+        let isbn = key.to_ascii_lowercase().contains("isbn")
+            || v.to_ascii_lowercase().starts_with("urn:isbn:");
+        if isbn {
+            (
+                "isbn".to_owned(),
+                v.to_ascii_lowercase()
+                    .trim_start_matches("urn:isbn:")
+                    .chars()
+                    .filter(|c| c.is_ascii_digit() || *c == 'x')
+                    .collect::<String>(),
+            )
+        } else {
+            (key.to_ascii_lowercase(), v.trim().to_ascii_lowercase())
+        }
+    };
+    let a = normalize_id(scheme, value);
+    let b = normalize_id(other_scheme, other_value);
+    !a.1.is_empty() && a == b
 }
 
 fn titles_similar(a: &str, b: &str) -> bool {
@@ -440,7 +553,10 @@ fn dice_similarity(a: &str, b: &str) -> f32 {
 }
 
 fn candidate_stem(path: &Path) -> String {
-    path.file_stem()
+    // Catalogues may contain Windows paths even when inspected on another host.
+    let normalized = path.to_string_lossy().replace('\\', "/");
+    Path::new(&normalized)
+        .file_stem()
         .map(|stem| stem.to_string_lossy().to_string())
         .unwrap_or_default()
 }
@@ -461,6 +577,66 @@ mod tests {
         ]
     }
 
+    #[test]
+    fn embedded_metadata_is_compared_independently_of_filename() {
+        use std::io::Write;
+        let dir = tempfile::tempdir().unwrap();
+        let path = dir.path().join("opaque.epub");
+        let mut zip = zip::ZipWriter::new(std::fs::File::create(&path).unwrap());
+        for (name,content) in [("META-INF/container.xml","<container><rootfile full-path='content.opf'/></container>"),("content.opf","<package><metadata><title>Real title</title><creator>Real author</creator><identifier scheme='isbn'>978-1234567890</identifier></metadata><manifest/></package>")] {
+            zip.start_file(name,zip::write::SimpleFileOptions::default()).unwrap();zip.write_all(content.as_bytes()).unwrap();
+        }
+        zip.finish().unwrap();
+        let item = CatalogItem::new(9, "Real title", "Real author", None);
+        assert_eq!(
+            review_candidate(&path, &[item.clone()]).matches[0].kind,
+            MatchKind::TitleAuthorSimilar
+        );
+        let mut item = item;
+        item.title = "Other edition".into();
+        item.identifiers
+            .insert("isbn".into(), "9781234567890".into());
+        assert_eq!(
+            review_candidate(&path, &[item]).matches[0].kind,
+            MatchKind::BibliographicIdentifier
+        );
+    }
+    #[test]
+    fn identical_bytes_with_different_names_are_high_certainty_without_merging() {
+        let dir = tempfile::tempdir().unwrap();
+        let source = dir.path().join("different.txt");
+        std::fs::write(&source, b"same content").unwrap();
+        let mut item = CatalogItem::new(7, "Another title", "Author", None);
+        item.sha256 = crate::storage::hash_file(&source).unwrap();
+        let review = review_candidate(&source, &[item]);
+        assert_eq!(review.matches[0].kind, MatchKind::ExactContent);
+        assert_eq!(review.suggested_action, SuggestedAction::Skip);
+        assert_eq!(std::fs::read(source).unwrap(), b"same content");
+    }
+    #[test]
+    fn supplied_calibre_isbn_is_reviewable_but_never_merges_editions() {
+        let dir = tempfile::tempdir().unwrap();
+        let source = dir.path().join("opaque.txt");
+        std::fs::write(&source, b"other edition").unwrap();
+        let mut item = CatalogItem::new(7, "Different title", "Other author", None);
+        item.identifiers
+            .insert("ISBN".into(), "978-1234567890".into());
+        let incoming = IncomingMetadata {
+            identifiers: BTreeMap::from([("isbn".into(), "9781234567890".into())]),
+            ..Default::default()
+        };
+        let outcome = scan_paths_with_metadata(
+            &[source.clone()],
+            &[item],
+            &BTreeMap::from([(source, incoming)]),
+            &mut |_, _| true,
+        );
+        assert_eq!(
+            outcome.reviews[0].matches[0].kind,
+            MatchKind::BibliographicIdentifier
+        );
+        assert_eq!(outcome.reviews[0].suggested_action, SuggestedAction::Import);
+    }
     #[test]
     fn reconoce_extensiones_soportadas_y_descarta_las_demas() {
         assert!(is_supported_book(Path::new("libro.EPUB")));
