@@ -91,26 +91,36 @@
 - **Estado de implementación:** pendiente; la aplicación actual carece de una función operativa de backup/restauración. Esta decisión es exclusivamente documental.
 
 ## PROD-009 — Organización física de los libros administrados
+- **Fecha de apertura y aprobación:** 2026-11-23.
+- **Estado:** APROBADA por el propietario.
+- **Alternativa seleccionada:** **C: organización física configurable**.
+- **Comportamiento vinculante:** los libros **administrados** por MyCalibro podrán guardarse bajo una organización automática por autor/obra con nombres coherentes, o conservando nombres y estructura de origen, según una política elegida por el usuario. La organización lógica del catálogo (etiquetas, colecciones y demás atributos) será independiente de la ubicación física.
+- **Seguridad de archivos:** los libros **vinculados externamente** no se moverán ni renombrarán automáticamente. Para reorganizar o trasladar libros administrados se deberá ofrecer una operación segura, con detección de conflictos de nombres, validación del destino y conservación de datos. No modificar archivos originales externos por el mero hecho de importarlos.
+- **Relación con PROD-002, PROD-007 y PROD-008:** debe funcionar con almacenamiento híbrido, con la carpeta de biblioteca configurada por el usuario (incluida una sincronizada por terceros con Google Drive), y con respaldo/restauración coherentes tras cambios de rutas o nombres. Evitar usar rutas físicas como identificadores permanentes de libro.
+- **Cuestiones de implementación pendientes:** política predeterminada, estructura exacta, normalización de caracteres/nombres, tratamiento de múltiples ediciones o formatos, límites de rutas de Windows, opción de cambio de política y previsualización de movimientos. Ninguna elección técnica adicional se considera aprobada de forma implícita.
+- **Estado de implementación:** pendiente; el código actual sigue referenciando archivos externos y no dispone todavía de un almacén administrado con esas dos políticas.
+
+## PROD-010 — Importación masiva y control de duplicados
 - **Fecha de apertura:** 2026-11-23.
 - **Estado:** PENDIENTE DE ELECCIÓN.
-- **Pregunta:** ¿Cómo debe organizar MyCalibro los archivos que administra dentro de la carpeta de biblioteca seleccionada por el usuario?
+- **Pregunta:** ¿Qué nivel de control debe tener MyCalibro al importar carpetas o colecciones grandes, especialmente cuando encuentre libros existentes con distintos nombres o formatos?
 
-| Opción | Funcionamiento | Ventajas y costes |
+| Opción | Funcionamiento propuesto | Ventaja y riesgo |
 | --- | --- | --- |
-| A. Conservar estructura y nombres | Mantener, dentro de la biblioteca administrada, los nombres y subcarpetas de origen cuando sea posible; el catálogo ofrece organización lógica | Menor intervención sobre archivos, pero nombres heterogéneos y potenciales conflictos |
-| B. Organización automática | Al incorporar un libro administrado, ordenarlo en carpetas por autor/obra y con nombres coherentes, preservando el original externo | Biblioteca física ordenada y navegable, pero requiere resolver colisiones, cambios de metadatos y nombres |
-| C. Organización configurable | Ofrecer una estructura administrada ordenada o conservar nombres/estructura según una política configurable; el catálogo maneja etiquetas/colecciones sin depender de la ruta física | Mayor flexibilidad y compatibilidad con bibliotecas existentes, con más reglas de migración y pruebas |
+| A. Importación sencilla | Arrastrar/seleccionar archivos y carpetas; importar todos los archivos legibles, advirtiendo coincidencias exactas por ruta | Implementación más sencilla, pero acumula duplicados y fichas redundantes |
+| B. Asistente de importación con revisión | Importación recursiva de carpetas y lotes con progreso, vista previa, detección de posibles duplicados por hash, metadatos e identificadores disponibles; el usuario decide incorporar, omitir o asociar un formato a un libro existente | Equilibra automatización y seguridad, evita fusiones destructivas |
+| C. Deduplicación y fusión automáticas | Todo B, más reglas automáticas para consolidar libros y metadatos coincidentes sin intervención ordinaria, con posibilidad de deshacer | Mayor automatización, pero riesgo de fusionar ediciones u obras distintas y perder información si se aplica erróneamente |
 
-**Recomendación técnica (no aprobada):** C con un identificador estable por libro y con carpetas configurables. Los libros solo **vinculados externamente** nunca se reorganizarán ni renombrarán de forma automática. Cualquier cambio de política o traslado deberá ofrecer previsualización, evitar colisiones y preservar datos; no comprometer las copias de seguridad de PROD-008.
+**Recomendación técnica, NO aprobada:** B. Una coincidencia de título/autor no prueba identidad de edición; ISBN/identificadores y hashes se usarán con cautela. El usuario debe conservar control sobre fusiones y originales. Compatibilidad con la importación **puntual** desde Calibre (PROD-003), el almacenamiento híbrido (PROD-002) y la organización configurable (PROD-009).
 
-**Nota:** esta decisión se refiere a la organización física del almacenamiento administrado, no al diseño de colecciones o filtros en la interfaz; esos aspectos se concretarán posteriormente.
+**Requisitos transversales para cualquier elección:** importación no bloqueante, errores y progreso verificables, ausencia de borrados de origen, persistencia segura del catálogo y recuperación ante fallos. El diseño detallado de los metadatos enriquecidos se debatirá después.
 
 ## Pendientes de debates posteriores
 - Detalle de importación puntual desde Calibre: campos, duplicados, política de copia/vínculo y recuperación (PROD-003, aprobada).
 - Detalles de implementación del lector básico EPUB/PDF, navegación, visualización y última posición (PROD-004, aprobada).
 - IA para organización y análisis de cada libro (PROD-005, aprobada); consentimiento revocable por libro para envío de contenido (PROD-006, aprobada).
 - MyCalibro exclusivamente Windows y biblioteca en carpeta elegida (opcionalmente sincronizada con Drive) según PROD-007; copia completa y configurable aprobada en PROD-008; instalación y actualizaciones.
-- Organización física de libros administrados (PROD-009, abierta), políticas de respaldo y restauración, manejo de carpetas sincronizadas por terceros y compatibilidad con dispositivos de lectura.
+- Organización física configurable de libros administrados (PROD-009, aprobada); importación masiva y control de duplicados (PROD-010, abierta); políticas de respaldo/restauración y compatibilidad con dispositivos de lectura.
 
 ## Historial de decisiones
 | ID | Fecha | Estado | Resultado |
@@ -123,4 +133,5 @@
 | PROD-006 | 2026-11-23 | Aprobada | Opción B: consentimiento por libro, revocable, antes de enviar texto a IA externa |
 | PROD-007 | 2026-11-23 | Aprobada, corregida | Opción A: MyCalibro solo Windows, con biblioteca en carpeta configurable, incluso sincronizada con Drive; sin integración con otras aplicaciones |
 | PROD-008 | 2026-11-23 | Aprobada | Opción C: copia de seguridad completa y configurable con integridad y restauración segura |
-| PROD-009 | 2026-11-23 | Pendiente | Organización física de los archivos administrados en la biblioteca |
+| PROD-009 | 2026-11-23 | Aprobada | Opción C: estructura física configurable y organización lógica independiente |
+| PROD-010 | 2026-11-23 | Pendiente | Importación masiva y tratamiento de posibles duplicados |
