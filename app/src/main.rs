@@ -7,6 +7,7 @@ mod import_scan;
 mod import_wizard;
 mod import_wizard_view;
 mod library_tools;
+mod pdf_backend;
 mod persistence;
 mod storage;
 mod transfer;
