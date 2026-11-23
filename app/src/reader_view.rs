@@ -15,7 +15,10 @@
 //! almacenamiento. Los errores de apertura se muestran tal cual; nunca se
 //! simula contenido.
 
-use std::path::Path;
+use std::path::{Path, PathBuf};
+use std::sync::mpsc::{self, Receiver, TryRecvError};
+use std::thread;
+use std::time::Duration;
 
 use eframe::egui;
 
@@ -109,6 +112,15 @@ impl ReaderTheme {
     }
 }
 
+/// Resultado de una carga que llega desde un hilo trabajador. El ID evita
+/// mostrar otro libro aunque un trabajo antiguo termine tras un cambio.
+struct LoadResult {
+    job_id: u64,
+    book_id: u64,
+    saved: Option<ReadingPosition>,
+    document: Result<EpubDocument, String>,
+}
+
 /// Estado completo de la vista del lector.
 pub struct ReaderView {
     pub document: Option<EpubDocument>,
@@ -121,6 +133,8 @@ pub struct ReaderView {
     pub error: Option<String>,
     /// La posición cambió desde la última persistencia.
     position_dirty: bool,
+    load_rx: Option<Receiver<LoadResult>>,
+    load_job: u64,
 }
 
 impl ReaderView {
@@ -134,37 +148,93 @@ impl ReaderView {
             open: false,
             error: None,
             position_dirty: false,
+            load_rx: None,
+            load_job: 0,
         }
     }
 
-    /// Abre un EPUB para el libro indicado. Si hay posición guardada se
-    /// recupera ajustada a los límites reales del archivo (puede haber
-    /// cambiado desde la última sesión); si no, se empieza por el principio.
-    /// En caso de error se registra tal cual y no se abre nada.
+    /// Encola la apertura de un EPUB y vuelve de inmediato: la lectura del
+    /// archivo, ZIP y capítulos ocurre en un trabajador, nunca en el hilo GUI.
+    /// La posición se recupera solo al completar la carga del libro correcto.
     pub fn open_path(&mut self, path: &Path, book_id: u64, saved: Option<ReadingPosition>) {
-        match EpubDocument::from_path(path) {
-            Ok(document) => {
-                self.position = match saved {
-                    Some(saved) => document.clamp(saved),
-                    None => EpubDocument::start_position(),
-                };
-                self.document = Some(document);
-                self.book_id = Some(book_id);
-                self.error = None;
-                self.open = true;
+        self.load_job = self.load_job.wrapping_add(1);
+        let job_id = self.load_job;
+        self.document = None;
+        self.book_id = Some(book_id);
+        self.position = EpubDocument::start_position();
+        self.position_dirty = false;
+        self.error = None;
+        self.open = true;
+
+        let (tx, rx) = mpsc::channel();
+        self.load_rx = Some(rx); // descarta el receptor de la carga anterior
+        let path: PathBuf = path.to_path_buf();
+        thread::spawn(move || {
+            let document = EpubDocument::from_path(&path);
+            let _ = tx.send(LoadResult {
+                job_id,
+                book_id,
+                saved,
+                document,
+            });
+        });
+    }
+
+    /// Consume el resultado sin bloquear. Si se cerró/cambió el libro, el
+    /// receptor antiguo se descarta: un worker tardío no puede abrirlo.
+    fn poll_loading(&mut self, ctx: &egui::Context) {
+        let Some(rx) = self.load_rx.as_ref() else {
+            return;
+        };
+        match rx.try_recv() {
+            Ok(loaded) => {
+                self.load_rx = None;
+                if !self.open
+                    || loaded.job_id != self.load_job
+                    || self.book_id != Some(loaded.book_id)
+                {
+                    return;
+                }
+                match loaded.document {
+                    Ok(document) => {
+                        self.position = loaded
+                            .saved
+                            .map(|pos| document.clamp(pos))
+                            .unwrap_or_else(EpubDocument::start_position);
+                        self.document = Some(document);
+                        self.error = None;
+                    }
+                    Err(error) => {
+                        self.document = None;
+                        self.error = Some(error);
+                    }
+                }
                 self.position_dirty = false;
+                ctx.request_repaint();
             }
-            Err(error) => {
-                self.error = Some(error);
-                self.open = false;
+            Err(TryRecvError::Empty) => {
+                // Estado indeterminado honesto: no inventamos porcentajes
+                // ni fases que el parser todavía no informa.
+                ctx.request_repaint_after(Duration::from_millis(100));
+            }
+            Err(TryRecvError::Disconnected) => {
+                self.load_rx = None;
                 self.document = None;
-                self.book_id = None;
+                self.error = Some("La carga EPUB se interrumpió antes de terminar".into());
+                ctx.request_repaint();
             }
         }
     }
 
+    /// Cancela la visualización de cualquier carga en curso. Los trabajos
+    /// no tocan UI ni archivos originales; el resultado tardío se descarta.
     pub fn close(&mut self) {
         self.open = false;
+        self.load_job = self.load_job.wrapping_add(1);
+        self.load_rx = None;
+        self.document = None;
+        self.book_id = None;
+        self.position_dirty = false;
     }
 
     // Los métodos de navegación siguientes son la API de estado para los
@@ -293,8 +363,7 @@ impl ReaderView {
         if !self.open {
             return;
         }
-        // Local para no prestar self.open durante todo el builder (el
-        // closure necesita campos de self para la navegación).
+        self.poll_loading(ctx);
         let mut open = self.open;
         egui::Window::new("Lector")
             .open(&mut open)
@@ -302,6 +371,21 @@ impl ReaderView {
             .default_height(700.0)
             .collapsible(false)
             .show(ctx, |ui| {
+                if self.load_rx.is_some() {
+                    ui.horizontal(|ui| {
+                        ui.spinner();
+                        ui.label("Cargando EPUB y preparando capítulos…");
+                    });
+                    ui.weak("La lectura continúa cuando termine; puedes cerrar esta ventana.");
+                    return;
+                }
+                if let Some(error) = &self.error {
+                    ui.colored_label(
+                        egui::Color32::DARK_RED,
+                        format!("No se pudo abrir el libro: {error}"),
+                    );
+                    return;
+                }
                 // Campos disjuntos: el préstamo inmutable del documento no
                 // choca con la mutación de posición/escala/tema de los
                 // botones.
@@ -322,7 +406,14 @@ impl ReaderView {
                 ui.separator();
                 Self::draw_footer(ui, document, position, *font_scale, *theme, position_dirty);
             });
-        self.open = open;
+        if !open {
+            // Un cierre manual no debe perder una posición recién cambiada:
+            // main llama a take_position() después de show() en este fotograma.
+            self.open = false;
+            self.load_job = self.load_job.wrapping_add(1);
+            self.load_rx = None;
+            // Conservar documento/book_id/position_dirty hasta take_position().
+        }
     }
 
     fn draw_header(
@@ -657,21 +748,36 @@ mod tests {
         assert!(!view.next_chapter(), "último capítulo");
     }
 
+    /// Espera solo en tests: la app real consulta el canal sin bloquear al dibujar.
+    fn finish_loading(view: &mut ReaderView) {
+        let ctx = egui::Context::default();
+        for _ in 0..200 {
+            view.poll_loading(&ctx);
+            if view.load_rx.is_none() {
+                return;
+            }
+            std::thread::sleep(Duration::from_millis(10));
+        }
+        panic!("la carga EPUB de prueba no terminó");
+    }
+
     #[test]
-    fn apertura_con_epub_real_recupera_posicion_guardada_ajustada() {
+    fn apertura_asincrona_recupera_posicion_y_muestra_error_real() {
         let mut view = ReaderView::new();
-        // Archivo inexistente: error honesto, nada abierto.
         let ruta = std::env::temp_dir().join(format!(
             "mycalibro_reader_fallo_{}.epub",
             std::process::id()
         ));
         view.open_path(&ruta, 1, None);
+        assert!(
+            view.open,
+            "la ventana queda visible con indicador de carga/error"
+        );
+        assert!(view.document.is_none());
+        finish_loading(&mut view);
         assert!(view.error.is_some());
-        assert!(!view.open);
         assert!(view.document.is_none());
 
-        // EPUB real de prueba (generado por las pruebas de reader_epub):
-        // posición imposible se ajusta a los límites reales del archivo.
         let ruta_epub =
             std::env::temp_dir().join(format!("mycalibro_reader_ok_{}.epub", std::process::id()));
         std::fs::write(&ruta_epub, crate::reader_epub::tests::epub_de_prueba()).unwrap();
@@ -683,16 +789,67 @@ mod tests {
                 paragraph: 99,
             }),
         );
-        assert!(view.error.is_none(), "error: {:?}", view.error);
         assert!(view.open);
         assert_eq!(view.book_id, Some(42));
+        assert!(
+            view.document.is_none(),
+            "la apertura no bloquea la interfaz"
+        );
+        finish_loading(&mut view);
+        assert!(view.error.is_none(), "error: {:?}", view.error);
         let libro = view.document.as_ref().unwrap();
         let ultimo = libro.chapters.len() - 1;
-        assert_eq!(
-            view.position.chapter, ultimo,
-            "posición imposible ajustada al último capítulo"
-        );
+        assert_eq!(view.position.chapter, ultimo);
         assert!(view.position.paragraph < libro.chapters[ultimo].paragraphs.len().max(1));
+        assert!(
+            !view.position_dirty(),
+            "cargar no guarda posición innecesariamente"
+        );
+        let _ = std::fs::remove_file(&ruta_epub);
+    }
+
+    #[test]
+    fn cerrar_ventana_no_invalida_una_posicion_aun_pendiente_de_guardado() {
+        let mut view = lector_abierto();
+        assert!(view.next_page());
+        view.open = false; // equivalente al cierre con X sin cambiar biblioteca
+        assert_eq!(view.take_position().map(|x| x.0), Some(7));
+        assert!(view.take_position().is_none());
+        view.close(); // el cambio real de biblioteca descarta el documento
+        assert!(view.book_id.is_none());
+        assert!(view.document.is_none());
+    }
+
+    #[test]
+    fn cerrar_o_sustituir_libro_descarta_resultados_de_cargas_anteriores() {
+        let mut view = ReaderView::new();
+        let ruta_epub = std::env::temp_dir().join(format!(
+            "mycalibro_reader_replace_{}.epub",
+            std::process::id()
+        ));
+        std::fs::write(&ruta_epub, crate::reader_epub::tests::epub_de_prueba()).unwrap();
+        view.open_path(&ruta_epub, 10, None);
+        let first_job = view.load_job;
+        // Cambiar el libro invalida el receptor de la carga anterior.
+        view.open_path(Path::new("invalid-epub-file-missing.epub"), 11, None);
+        assert_ne!(view.load_job, first_job);
+        finish_loading(&mut view);
+        assert_eq!(view.book_id, Some(11));
+        assert!(view.error.is_some());
+        assert!(view.document.is_none());
+        // El worker del libro 10 puede terminar pero no puede reabrirlo.
+        std::thread::sleep(Duration::from_millis(20));
+        view.poll_loading(&egui::Context::default());
+        assert_eq!(view.book_id, Some(11));
+        view.open_path(&ruta_epub, 12, None);
+        view.close();
+        assert!(!view.open);
+        assert!(view.load_rx.is_none());
+        assert!(view.document.is_none());
+        assert!(view.book_id.is_none());
+        std::thread::sleep(Duration::from_millis(20));
+        view.poll_loading(&egui::Context::default());
+        assert!(view.book_id.is_none());
         let _ = std::fs::remove_file(&ruta_epub);
     }
 

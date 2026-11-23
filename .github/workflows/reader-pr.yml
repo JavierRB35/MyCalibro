@@ -1,0 +1,33 @@
+name: EPUB reader pull-request checks
+on:
+  pull_request:
+    paths:
+      - 'app/src/reader_view.rs'
+      - '.github/workflows/reader-pr.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reader:
+    runs-on: windows-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: app
+          cache-on-failure: true
+      - name: Check formatting
+        working-directory: app
+        run: cargo fmt --check
+      - name: Test EPUB reader view
+        working-directory: app
+        run: cargo test --locked reader_view::tests -- --test-threads=1
+      - name: Check integrated Windows build
+        working-directory: app
+        run: cargo check --locked
