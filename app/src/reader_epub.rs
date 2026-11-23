@@ -496,13 +496,13 @@ fn decodificar_entidades(texto: &str) -> String {
 }
 
 #[cfg(test)]
-mod tests {
+pub(crate) mod tests {
     use super::*;
     use std::io::Write;
 
     /// EPUB mínimo válido generado en memoria: mimetype (sin compresión,
     /// primera entrada), container.xml, OPF con dos capítulos.
-    fn epub_de_prueba() -> Vec<u8> {
+    pub(crate) fn epub_de_prueba() -> Vec<u8> {
         let mut buffer = std::io::Cursor::new(Vec::new());
         {
             let mut zip = zip::ZipWriter::new(&mut buffer);
