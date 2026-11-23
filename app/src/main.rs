@@ -1,5 +1,6 @@
 mod ai_consent;
 mod ai_consent_view;
+mod ai_provider;
 mod analysis_backend;
 mod analysis_flow;
 mod analysis_text;
@@ -129,7 +130,12 @@ struct EbookDevice {
 struct AiTaskResult {
     library_generation: u64,
     book_id: u64,
-    result: Result<(String, Vec<String>), String>,
+    result: Result<(String, Vec<String>, &'static str), String>,
+}
+
+struct ApiTestResult {
+    provider: &'static str,
+    result: Result<u128, String>,
 }
 
 struct TransferResult {
@@ -166,6 +172,10 @@ struct LibraryApp {
     classify_provider: String,
     api_key_input: String,
     ai_status: String,
+    api_test_status: String,
+    api_test_busy: Option<&'static str>,
+    api_test_sender: mpsc::Sender<ApiTestResult>,
+    api_test_receiver: mpsc::Receiver<ApiTestResult>,
     task_sender: mpsc::Sender<AiTaskResult>,
     task_receiver: mpsc::Receiver<AiTaskResult>,
     devices: Vec<EbookDevice>,
@@ -194,6 +204,7 @@ impl LibraryApp {
         };
         let selected = books.first().map(|book| book.id);
         let (task_sender, task_receiver) = mpsc::channel();
+        let (api_test_sender, api_test_receiver) = mpsc::channel();
         let (transfer_sender, transfer_receiver) = mpsc::channel();
         let mut aux_files = auxiliary_state::StateFiles::default();
         let positions = aux_files.load(&library_folder, reading_positions::FILE_NAME);
@@ -228,6 +239,10 @@ impl LibraryApp {
             classify_provider: "Gemini".to_owned(),
             api_key_input: load_api_key("Gemini"),
             ai_status: String::new(),
+            api_test_status: String::new(),
+            api_test_busy: None,
+            api_test_sender,
+            api_test_receiver,
             task_sender,
             task_receiver,
             devices: detect_ebook_devices(),
@@ -456,7 +471,7 @@ impl LibraryApp {
         let sender = self.task_sender.clone();
         let library_generation = self.library_generation;
         self.ai_status = format!(
-            "Clasificando «{}» con Gemini; Groq queda como alternativa…",
+            "Clasificando «{}» (Gemini primero; Groq como respaldo si está configurado)…",
             book.title
         );
         std::thread::spawn(move || {
@@ -494,13 +509,50 @@ impl LibraryApp {
         });
     }
 
+    fn start_api_test(&mut self, provider: &'static str, ctx: egui::Context) {
+        if self.api_test_busy.is_some() {
+            return;
+        }
+        let key = load_api_key(provider);
+        if key.trim().is_empty() {
+            self.api_test_status = format!("Guarda primero una clave de {provider}");
+            return;
+        }
+        self.api_test_busy = Some(provider);
+        self.api_test_status = format!("Comprobando {provider} sin enviar ningún libro…");
+        let tx = self.api_test_sender.clone();
+        std::thread::spawn(move || {
+            let result = ai_provider::test_connection(provider, &key);
+            let _ = tx.send(ApiTestResult { provider, result });
+            ctx.request_repaint();
+        });
+    }
+
+    fn receive_api_tests(&mut self) {
+        while let Ok(response) = self.api_test_receiver.try_recv() {
+            self.api_test_busy = None;
+            let model = if response.provider == "Gemini" {
+                ai_provider::GEMINI_MODEL
+            } else {
+                ai_provider::GROQ_MODEL
+            };
+            self.api_test_status = match response.result {
+                Ok(milliseconds) => format!(
+                    "{} ({model}): conexión y generación correctas ({} ms)",
+                    response.provider, milliseconds
+                ),
+                Err(error) => format!("{}: {error}", response.provider),
+            };
+        }
+    }
+
     fn receive_classifications(&mut self) {
         while let Ok(task) = self.task_receiver.try_recv() {
             if task.library_generation != self.library_generation {
                 continue;
             }
             match task.result {
-                Ok((topic, tags)) => {
+                Ok((topic, tags, provider)) => {
                     if let Some(book) = self.books.iter_mut().find(|book| book.id == task.book_id) {
                         book.topic = topic;
                         for tag in tags {
@@ -513,7 +565,7 @@ impl LibraryApp {
                             }
                         }
                         self.ai_status = format!(
-                            "Clasificación y etiquetas actualizadas para «{}»",
+                            "Clasificación y etiquetas actualizadas con {provider} para «{}»",
                             book.title
                         );
                         self.save();
@@ -563,6 +615,7 @@ impl eframe::App for LibraryApp {
             self.save_library_data();
         }
         self.analysis_ui(ctx);
+        self.receive_api_tests();
         if (self.library_tools.busy() || self.import_flow.busy())
             && ctx.input(|i| i.viewport().close_requested())
         {
@@ -1556,6 +1609,23 @@ fn ai_settings_window(ctx: &egui::Context, app: &mut LibraryApp) {
             ui.add_space(8.0);
             ui.label(RichText::new("La clave queda en el almacén de credenciales de este equipo y no se guarda en el archivo de la biblioteca.").size(11.0).color(MUTED));
             if !app.ai_status.is_empty() { ui.label(RichText::new(&app.ai_status).size(11.0).color(GREEN)); }
+            ui.add_space(8.0);
+            ui.label("Comprobar cada proveedor sin modificar libros:");
+            ui.horizontal(|ui| {
+                let available = app.api_test_busy.is_none();
+                if ui.add_enabled(available, egui::Button::new("Probar Gemini")).clicked() {
+                    app.start_api_test("Gemini", ctx.clone());
+                }
+                if ui.add_enabled(available, egui::Button::new("Probar Groq")).clicked() {
+                    app.start_api_test("Groq", ctx.clone());
+                }
+                if app.api_test_busy.is_some() {
+                    ui.spinner();
+                }
+            });
+            if !app.api_test_status.is_empty() {
+                ui.label(RichText::new(&app.api_test_status).size(11.0));
+            }
             ui.add_space(10.0);
             ui.horizontal(|ui| {
                 if ui.button("Cerrar").clicked() { app.settings_open = false; }
@@ -1697,14 +1767,14 @@ fn classify_with_fallback(
     book: &Book,
     gemini_key: &str,
     groq_key: &str,
-) -> Result<(String, Vec<String>), String> {
+) -> Result<(String, Vec<String>, &'static str), String> {
     if !gemini_key.is_empty() {
         match classify_with_ai(book, "Gemini", gemini_key) {
-            Ok(result) => return Ok(result),
+            Ok((topic, tags)) => return Ok((topic, tags, "Gemini")),
             Err(gemini_error) => {
                 if !groq_key.is_empty() {
                     match classify_with_ai(book, "Groq", groq_key) {
-                        Ok(result) => return Ok(result),
+                        Ok((topic, tags)) => return Ok((topic, tags, "Groq")),
                         Err(groq_error) => {
                             return Err(format!(
                                 "Gemini falló ({gemini_error}); Groq también falló ({groq_error})"
@@ -1720,9 +1790,11 @@ fn classify_with_fallback(
     }
 
     if !groq_key.is_empty() {
-        return classify_with_ai(book, "Groq", groq_key).map_err(|groq_error| {
-            format!("Gemini no tiene clave configurada; Groq falló ({groq_error})")
-        });
+        return classify_with_ai(book, "Groq", groq_key)
+            .map(|(topic, tags)| (topic, tags, "Groq"))
+            .map_err(|groq_error| {
+                format!("Gemini no tiene clave configurada; Groq falló ({groq_error})")
+            });
     }
 
     Err("No hay claves de Gemini ni Groq configuradas".to_owned())
@@ -1740,22 +1812,35 @@ fn classify_with_ai(
         .build()
         .map_err(|error| error.to_string())?;
     let content = if provider == "Gemini" {
-        let response = client.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent")
+        let response = client
+            .post(ai_provider::gemini_endpoint())
             .header("x-goog-api-key", api_key)
-            .json(&json!({"contents":[{"parts":[{"text":prompt}]}],"generationConfig":{"responseMimeType":"application/json"}}))
-            .send().and_then(reqwest::blocking::Response::error_for_status).map_err(|error| error.to_string())?
-            .json::<Value>().map_err(|error| error.to_string())?;
-        response["candidates"][0]["content"]["parts"][0]["text"]
+            .json(&json!({
+                "contents": [{"parts": [{"text": prompt}]}],
+                "generationConfig": {"responseMimeType": "application/json"}
+            }))
+            .send()
+            .map_err(|error| error.to_string())?;
+        let body = ai_provider::read_json_response(response, "Gemini", ai_provider::GEMINI_MODEL)?;
+        body["candidates"][0]["content"]["parts"][0]["text"]
             .as_str()
             .ok_or("Gemini no devolvió una clasificación")?
             .to_owned()
     } else {
-        let response = client.post("https://api.groq.com/openai/v1/chat/completions")
+        let response = client
+            .post("https://api.groq.com/openai/v1/chat/completions")
             .bearer_auth(api_key)
-            .json(&json!({"model":"openai/gpt-oss-20b","messages":[{"role":"user","content":prompt}],"response_format":{"type":"json_object"}}))
-            .send().and_then(reqwest::blocking::Response::error_for_status).map_err(|error| error.to_string())?
-            .json::<Value>().map_err(|error| error.to_string())?;
-        response["choices"][0]["message"]["content"]
+            .json(&json!({
+                "model": ai_provider::GROQ_MODEL,
+                "messages": [{"role": "user", "content": prompt}],
+                "response_format": ai_provider::groq_classification_format(),
+                "reasoning_effort": "low",
+                "max_completion_tokens": 500
+            }))
+            .send()
+            .map_err(|error| error.to_string())?;
+        let body = ai_provider::read_json_response(response, "Groq", ai_provider::GROQ_MODEL)?;
+        body["choices"][0]["message"]["content"]
             .as_str()
             .ok_or("Groq no devolvió una clasificación")?
             .to_owned()
