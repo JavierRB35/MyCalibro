@@ -24,6 +24,8 @@ try {
     $env:LOCALAPPDATA = $dataRoot
     $screenshot = Join-Path $evidenceRoot 'installed-window.png'
     $appProcess = Start-Process -FilePath $executable -ArgumentList "--screenshot `"$screenshot`"" -PassThru -RedirectStandardError (Join-Path $evidenceRoot 'stderr.log')
+    # Retain the process handle before waiting; otherwise PowerShell may report a null ExitCode.
+    $null = $appProcess.Handle
     if (-not $appProcess.WaitForExit(60000)) { $appProcess.Kill(); throw 'Installed application did not finish the screenshot test in 60 seconds' }
     if ($appProcess.ExitCode -ne 0) { throw "Application exited $($appProcess.ExitCode); inspect stderr.log" }
     if (-not (Test-Path $screenshot) -or (Get-Item $screenshot).Length -eq 0) { throw 'The installed application did not produce a window screenshot' }

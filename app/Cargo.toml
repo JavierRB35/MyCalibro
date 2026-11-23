@@ -18,3 +18,4 @@ zip = { version = "2", default-features = false, features = ["deflate"] }
 [target.'cfg(windows)'.dependencies]
 eframe = { version = "0.31", default-features = false, features = ["wgpu"] }
 keyring = { version = "3.6", features = ["windows-native"] }
+wgpu = { version = "24", default-features = false, features = ["dx12", "wgsl"] }

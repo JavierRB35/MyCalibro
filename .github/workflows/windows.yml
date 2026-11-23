@@ -24,6 +24,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: app
+          cache-on-failure: true
       - name: Format and tests on candidate
         if: github.event_name != 'workflow_dispatch' || inputs.run_tests
         working-directory: app
