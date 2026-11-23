@@ -25,3 +25,14 @@ Para recuperar una versión anterior o importar el antiguo `app/library.json`, u
 Las copias compatibles conservan extensión y bytes (por ejemplo, PDF sigue siendo `.pdf` en Kindle). Las conversiones requieren Calibre y se preparan en un directorio temporal. Se comprueban salida no vacía, firma del formato y, para EPUB, contenedor ZIP con `mimetype` y `META-INF/container.xml`. Las copias se comparan byte a byte antes de publicarlas. La publicación no sobrescribe nombres existentes, incluso ante colisiones concurrentes.
 
 Estas verificaciones detectan errores de formato y copia; no certifican renderizado completo, DRM ni compatibilidad del firmware. No se afirma validación física USB/MTP sin pruebas reales del dispositivo.
+
+
+## Almacenamiento híbrido y respaldo completo
+
+En «Biblioteca y copias» se configura la importación vinculada (predeterminada) o administrada. La administrada copia sin mover el original y usa rutas relativas a la biblioteca. Puede conservar nombres/estructura del origen o crear carpetas por autor/obra; los cambios de política afectan a nuevas importaciones. El backend acepta la carpeta base para conservar subcarpetas en lotes. Las coincidencias de nombre nunca sustituyen contenido diferente. El catálogo antiguo sigue siendo compatible mediante `file_path`; los formatos nuevos se guardan en `files`, con tipo de almacenamiento y SHA-256.
+
+«Crear copia» genera una carpeta independiente, fuera de la biblioteca, con catálogo, archivos administrados, preferencias y manifiesto SHA-256. Se puede incluir los externos accesibles; cualquier exclusión queda visible y registrada. Un archivo administrado ausente o alterado aborta el respaldo. Las claves IA siguen en el almacén del sistema y no se respaldan.
+
+«Verificar copia» comprueba manifiesto, tamaños, huellas y referencias. «Restaurar» crea siempre una subcarpeta nueva en el destino, valida antes de abrirla y conserva tanto la biblioteca actual como los originales. Los externos incluidos se recuperan bajo `external/` y sus vínculos apuntan a las copias recuperadas; los excluidos mantienen sus rutas anteriores. La distinción administrado/vinculado se conserva.
+
+Las copias son manuales y no se eliminan automáticamente. No hay todavía programador ni política automática de retención. La biblioteca debe permanecer disponible durante la operación. El respaldo no es una sincronización entre equipos.

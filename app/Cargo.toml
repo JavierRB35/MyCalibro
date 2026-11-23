@@ -14,3 +14,4 @@ reqwest = { version = "0.12", default-features = false, features = ["blocking", 
 keyring = "3.6"
 tempfile = "3"
 zip = { version = "2", default-features = false, features = ["deflate"] }
+sha2 = "0.10"
